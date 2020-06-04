@@ -36,6 +36,13 @@ public class Current_level_manager : MonoBehaviour
         
     }
 
+    public void Start()
+    {
+        Debug.Log("The level name is: " + theLev.levelName);
+        Debug.Log("The level theme is: " + theLev.levelTheme);
+        Debug.Log("The difficulty is: " + theLev.levelDifficulty);
+        Debug.Log("The number of the level is: " + theLev.levelNum);
+    }
     void Update()
     {
         currentTimer();
@@ -45,16 +52,21 @@ public class Current_level_manager : MonoBehaviour
 
     /*
      ******************************************
-     *FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     *****************************************
+     *
+     !!!!!!!!!!!!!!!FUNCTIONS!!!!!!!!!!!!!!!!!!!
+     * 
+     ******************************************
      */
+
+    //Timer for each level. 
     public void currentTimer()
     {
-
         elapsedTime += Time.deltaTime;
         currentTime = TimeSpan.FromSeconds(elapsedTime);
         string currentTimestr = "Current Time: " + currentTime.ToString("mm':'ss");
         currentTimeText.text = currentTimestr;
+
+        //Implement the check for num Stars available here.
     
     }
 }

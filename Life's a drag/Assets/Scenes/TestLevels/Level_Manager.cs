@@ -27,4 +27,5 @@ public class Level_Manager : ScriptableObject
     //Objective for the level.
     public string objective;
 
+    
 }
