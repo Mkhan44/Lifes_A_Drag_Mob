@@ -11,9 +11,6 @@ public class Level_Manager : ScriptableObject
     public string levelDifficulty;
     public int levelNum;
 
-    //Tells the level how many regular items will be needed to spawn in.
-    public int nonComboItemsToSpawn;
-
     //Number of combo items needed to complete the level.
     public int numComboItems;
 
@@ -27,5 +24,9 @@ public class Level_Manager : ScriptableObject
     //Objective for the level.
     public string objective;
 
-    
+    //List of gameobjects (May change this depending on how performance goes later on)
+    public List<GameObject> itemsNeeded = new List<GameObject>();
+
+    //Tells the game which combo items will be needed.
+    public List<Combo_Item> comboItemsNeeded = new List<Combo_Item>();
 }
