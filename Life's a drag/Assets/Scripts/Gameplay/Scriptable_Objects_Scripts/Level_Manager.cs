@@ -11,9 +11,6 @@ public class Level_Manager : ScriptableObject
     public string levelDifficulty;
     public int levelNum;
 
-    //Number of combo items needed to complete the level.
-    public int numComboItems;
-
     //If level has been cleared, show the player their best time on the UI.
     public float bestTime;
 
@@ -24,8 +21,7 @@ public class Level_Manager : ScriptableObject
     //Objective for the level.
     public string objective;
 
-    //List of gameobjects (May change this depending on how performance goes later on)
-    public List<GameObject> itemsNeeded = new List<GameObject>();
+    public List<Required_Item> requiredItems = new List<Required_Item>();
 
     //Tells the game which combo items will be needed.
     public List<Combo_Item> comboItemsNeeded = new List<Combo_Item>();

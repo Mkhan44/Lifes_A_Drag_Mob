@@ -7,6 +7,10 @@ public class Current_level_manager : MonoBehaviour
 {
     public Level_Manager theLev;
 
+    //How many items we need to complete the level.
+    private int itemsLeft;
+
+    public Text numItemsLeftText;
     public Text bestTimeText;
     public Text currentTimeText;
     public Text timeForStarsText;
@@ -45,14 +49,26 @@ public class Current_level_manager : MonoBehaviour
         Debug.Log("The number of the level is: " + theLev.levelNum);
         */
 
-        for (int i = 0; i < theLev.itemsNeeded.Count; i++)
+        for (int i = 0; i < theLev.requiredItems.Count; i++)
         {
-            Instantiate(theLev.itemsNeeded[i], transform.position, transform.rotation);
+            Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos,0), Quaternion.identity);
         }
 
-        combine(theLev.itemsNeeded[2].gameObject.name, theLev.itemsNeeded[1].gameObject.name);
-        Debug.Log("Item 1 is: " + theLev.itemsNeeded[0].gameObject.name);
-        Debug.Log("Item 2 is: " + theLev.itemsNeeded[1].gameObject.name);
+      //  combine(theLev.requiredItems[2].item.gameObject.name, theLev.requiredItems[2].item.gameObject.name);
+
+        //Calculate how many items are needed to complete the level.
+        //The total number of combo items + the number of regular items that are not
+        //materials for a combo item.
+        int numRegItems = 0;
+        for (int j = 0; j < theLev.comboItemsNeeded.Count; j++)
+        {
+            if (!(theLev.requiredItems[j].item.gameObject.name == theLev.comboItemsNeeded[j].mat1 || theLev.requiredItems[j].item.gameObject.name == theLev.comboItemsNeeded[j].mat2))
+            {
+                numRegItems += 1;
+            }
+        }
+        itemsLeft = (theLev.comboItemsNeeded.Count + numRegItems);
+        numItemsLeftText.text = "Items left: " + itemsLeft;
     }
     void Update()
     {

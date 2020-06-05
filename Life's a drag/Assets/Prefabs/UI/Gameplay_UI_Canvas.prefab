@@ -979,7 +979,7 @@ GameObject:
   - component: {fileID: 4439956528638587278}
   - component: {fileID: 8685329190674253221}
   m_Layer: 5
-  m_Name: Items_Left_Text (1)
+  m_Name: Combo_Area_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1044,7 +1044,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Combination Area
+  m_Text: "       \tItem 1   Item 2     Result"
 --- !u!1 &2739791000961043687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,6 +1167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theLev: {fileID: 11400000, guid: c0895ec1261ef3b49b3cf2ca13aadd7f, type: 2}
+  numItemsLeftText: {fileID: 3660772874419268092}
   bestTimeText: {fileID: 1605441500589831567}
   currentTimeText: {fileID: 1605441500081237300}
   timeForStarsText: {fileID: 1605441499255434697}
