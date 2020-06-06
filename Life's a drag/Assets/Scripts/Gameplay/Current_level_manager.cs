@@ -8,7 +8,7 @@ public class Current_level_manager : MonoBehaviour
     public Level_Manager theLev;
 
     //How many items we need to complete the level.
-    private int itemsLeft;
+    public int itemsLeft;
 
     public Text numItemsLeftText;
     public Text bestTimeText;

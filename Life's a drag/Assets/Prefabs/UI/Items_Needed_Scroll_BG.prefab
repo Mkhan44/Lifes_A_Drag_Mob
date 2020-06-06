@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1016707374380559194}
   - component: {fileID: 1016707374380559196}
   - component: {fileID: 1016707374380559197}
+  - component: {fileID: 8447271428725180410}
   m_Layer: 9
   m_Name: Items_Needed_Collider
   m_TagString: Untagged
@@ -108,6 +109,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.66, y: 2.03}
   m_EdgeRadius: 0
+--- !u!114 &8447271428725180410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016707374380559195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b36d93c5a8b93b44913e975fbb62195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelManagerInstance: {fileID: 0}
+  requiredItemNames: []
+  comboItemNames: []
 --- !u!1 &1016707374831888501
 GameObject:
   m_ObjectHideFlags: 0
