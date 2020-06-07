@@ -6,8 +6,10 @@ public class Draggable_Item_Needed : MonoBehaviour
 {
     private Vector3 screenPoint;
     private Vector3 offset;
-    private Vector3 initialPos;
-   
+    public Vector3 initialPos;
+    public Vector3 initialScale;
+    public Vector3 boxScale;
+    
 
     void Awake()
     {

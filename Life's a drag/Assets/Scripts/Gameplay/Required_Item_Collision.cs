@@ -7,9 +7,11 @@ public class Required_Item_Collision : MonoBehaviour
     bool collided = false;
     public GameObject levelManagerInstance;
     string tagToCompare = "";
-   
+    bool isMat;
+    public string objectName;
     public List<string> requiredItemNames = new List<string>();
     public List<string> comboItemNames = new List<string>();
+    public List<string> matItemNames = new List<string>();
 
     void Start()
     {
@@ -17,22 +19,7 @@ public class Required_Item_Collision : MonoBehaviour
     }
     void Update()
     {
-        /*
-
-        if ((!Input.GetMouseButton(0)) && collided)
-        {
-            for()
-            if (tagToCompare == "Item1")
-            {
-                    
-            }
-
-            else
-            {
-                Debug.Log("No, that doesn't belong in Item1's slot!");
-            }
-        }
-         */
+        tryItem();
     }
 
     /*
@@ -63,6 +50,9 @@ public class Required_Item_Collision : MonoBehaviour
                 if (( currentRegItemName == levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[k].mat1) ||
                     (currentRegItemName == levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[k].mat2))
                 {
+                    //This is a material, and therefore we will add it to the list.
+                    matItemNames.Add(currentRegItemName);
+
                    // Debug.Log("The item: " + levelManagerInstance.GetComponent<Current_level_manager>().theLev.requiredItems[i].item.gameObject.name + " was excluded from the list because it's a material for a combo item.");
                     break;
                 }
@@ -82,30 +72,106 @@ public class Required_Item_Collision : MonoBehaviour
            // Debug.Log("The item: " + levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[j].theItem.gameObject.name + " was added to the list.");
         }
 
-        /*
-        for (int deb = 0; deb < requiredItemNames.Count; deb++ )
+
+        for(int a = 0; a < matItemNames.Count; a++)
         {
-            Debug.Log(requiredItemNames[deb]);
-            for (int debs = 0; debs < comboItemNames.Count; debs++ )
+            Debug.Log(matItemNames[a]);
+        }
+
+        for (int b = 0; b < requiredItemNames.Count; b++)
+        {
+            Debug.Log(requiredItemNames[b]);
+        }
+       
+       
+    }
+
+    //Attempting to see if an item is required to complete the level. If it is, de-activate the item and send a message to the level manager.
+    //If not, put the item back to it's initial position (Unless it's a ComboItem) , and give an error message on the LevelManager side.
+    void tryItem()
+    {
+        if ((!Input.GetMouseButton(0)) && collided)
+        {
+            if (tagToCompare == "RequiredItem")
             {
-                Debug.Log("The final item list for Combo items is: " + comboItemNames[debs]);
+                
+                for (int i = 0; i < requiredItemNames.Count; i++)
+                {
+                    if (objectName != requiredItemNames[i])
+                    {
+                        for (int j = 0; j < comboItemNames.Count; j++)
+                        {
+                            if (objectName == comboItemNames[j])
+                            {
+                                isItAMat();
+                                Debug.Log("The item put in the field was: " + objectName + " And the combo item it matched with was " + comboItemNames[j]);
+                                levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat);
+                                objectName = "";
+                                tagToCompare = "";
+                                break;
+                            }
+                        }
+                        isItAMat();
+                        if(isMat)
+                        {
+                            Debug.Log("The item put in the field was: " + objectName + " And it's a material. ");
+                            levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat);
+                            objectName = "";
+                            tagToCompare = "";
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        isItAMat();
+                        Debug.Log("The item put in the field was: " + objectName + " And the REGULAR item it matched with was " + requiredItemNames[i]);
+                        levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat);
+                        objectName = "";
+                        tagToCompare = "";
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                isMat = false;
+                levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat);
             }
         }
-       */
-       
+        isMat = false;
+    }
+
+    //Finds out whether or not the 
+    void isItAMat()
+    {
+        for(int i = 0; i < matItemNames.Count; i++)
+        {
+            if(objectName == matItemNames[i])
+            {
+                Debug.Log("It's a material!");
+                isMat = true;
+                break;
+            }
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        string tempName = "";
         collided = true;
 
         tagToCompare = other.tag;
+        tempName = (other.gameObject.name);
+        objectName = tempName.Replace("(Clone)", "");
+        Debug.Log("Object's name is: " + objectName);
         Debug.Log("Tag we got is: " + tagToCompare);
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         tagToCompare = "";
+        objectName = "";
         collided = false;
         // Debug.Log("We left the collision!");
     }

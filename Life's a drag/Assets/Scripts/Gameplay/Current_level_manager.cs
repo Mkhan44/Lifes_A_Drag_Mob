@@ -120,4 +120,42 @@ public class Current_level_manager : MonoBehaviour
             }
         }
     }
+
+    /* This function is called from the Required_item_collision class. The item's name is passed here.
+     * De-activate the item, lower the item's left count by 1, and if it was the final item: We'll call
+     * the level complete function. (To be added)
+     * Also, we will need to highlight that picture when we implement the pictures of the items into the scrolling UI to indicate
+     * that it has been found.
+     */
+    public void gotItem(string theName, string theTag, bool isMat)
+    {
+        string instanceName;
+        instanceName = theName + "(Clone)";
+        GameObject theInstance;
+        theInstance = GameObject.Find(instanceName);
+        if(theTag == "RequiredItem" && !isMat)
+        {
+            //theInstance.SetActive(false);
+            Destroy(theInstance);
+            itemsLeft--;
+        }
+        else if(theTag == "RequiredItem" && isMat)
+        {
+            Debug.Log("The item is not a required item for level completion! It's also a material.");
+            theInstance.transform.position = theInstance.GetComponent<Draggable_Item_Needed>().initialPos;
+        }
+        else
+        {
+            Debug.Log("The item is not a required item for level completion!");
+            theInstance.transform.position = theInstance.GetComponent<Draggable_Item_Needed>().initialPos;
+        }
+       
+
+        numItemsLeftText.text = "Items left: " + itemsLeft;
+            if (itemsLeft == 0)
+            {
+                Debug.Log("You found all the items!");
+                //Call level Complete function! (TO BE ADDED)
+            }
+    }
 }
