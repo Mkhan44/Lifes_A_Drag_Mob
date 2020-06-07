@@ -50,10 +50,10 @@ public class Required_Item_Collision : MonoBehaviour
         {
             currentRegItemName = levelManagerInstance.GetComponent<Current_level_manager>().theLev.requiredItems[i].item.gameObject.name;
             
-            for (int k = 0; k < countCombo; k++)
+            for (int j = 0; j < countCombo; j++)
             {
-                if (( currentRegItemName == levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[k].mat1) ||
-                    (currentRegItemName == levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[k].mat2))
+                if (( currentRegItemName == levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[j].mat1) ||
+                    (currentRegItemName == levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[j].mat2))
                 {
                     //This is a material, and therefore we will add it to the list.
                     matItemNames.Add(currentRegItemName);
@@ -70,14 +70,14 @@ public class Required_Item_Collision : MonoBehaviour
             }
 
         }
-        for (int j = 0; j < countCombo; j++)
+        for (int k = 0; k < countCombo; k++)
         {
-            currentComboItemName = levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[j].theItem.gameObject.name;
+            currentComboItemName = levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[k].theItem.gameObject.name;
             comboItemNames.Add(currentComboItemName);
            // Debug.Log("The item: " + levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[j].theItem.gameObject.name + " was added to the list.");
         }
 
-
+        /*
         for(int a = 0; a < matItemNames.Count; a++)
         {
             Debug.Log(matItemNames[a]);
@@ -87,6 +87,7 @@ public class Required_Item_Collision : MonoBehaviour
         {
             Debug.Log(requiredItemNames[b]);
         }
+         */
        
        
     }

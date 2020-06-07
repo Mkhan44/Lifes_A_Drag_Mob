@@ -16,6 +16,7 @@ public class Current_level_manager : MonoBehaviour
     public Text timeForStarsText;
     public Text objectiveText;
     private TimeSpan currentTime;
+    public Text levelCompleteText;
     //Use this bool for when we clear the level.
     private bool timerRunning;
     private float elapsedTime;
@@ -23,6 +24,9 @@ public class Current_level_manager : MonoBehaviour
     //Combine box references.
     public GameObject combineBox1;
     public GameObject combineBox2;
+
+    //Level completed variables.
+    bool levelComplete = false;
     
     public void Awake()
     {
@@ -51,7 +55,7 @@ public class Current_level_manager : MonoBehaviour
         Debug.Log("The difficulty is: " + theLev.levelDifficulty);
         Debug.Log("The number of the level is: " + theLev.levelNum);
         */
-
+        levelCompleteText.enabled = false;
         for (int i = 0; i < theLev.requiredItems.Count; i++)
         {
             Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos,0), Quaternion.identity);
@@ -73,12 +77,16 @@ public class Current_level_manager : MonoBehaviour
     }
     void Update()
     {
-        currentTimer();
-       
+        if (!levelComplete)
+        {
+            currentTimer();
+        }
+   
     }
 
     void FixedUpdate()
     {
+      
         checkCombineStatus();
     }
 
@@ -127,14 +135,19 @@ public class Current_level_manager : MonoBehaviour
         item1 = GameObject.Find(instanceName);
         item2 = GameObject.Find(instanceName2);
 
+        string mat1;
+        string mat2;
 
         for (int i = 0; i < theLev.comboItemsNeeded.Count; i++)
         {
-            if ((firstItemName == theLev.comboItemsNeeded[i].mat1 || firstItemName == theLev.comboItemsNeeded[i].mat2) && (secondItemName == theLev.comboItemsNeeded[i].mat1) || (secondItemName == theLev.comboItemsNeeded[i].mat2))
+            mat1 = theLev.comboItemsNeeded[i].mat1;
+            mat2 = theLev.comboItemsNeeded[i].mat2;
+
+            if ((firstItemName == mat1 || firstItemName == mat2) && (secondItemName == mat1 || secondItemName == mat2))
             {
                
                 //Combo successful!
-                Debug.Log("Combo successful!");
+                //Debug.Log("Combo successful!");
                 Destroy(item1);
                 Destroy(item2);
                 Instantiate(theLev.comboItemsNeeded[i].theItem, transform.position, transform.rotation);
@@ -187,6 +200,8 @@ public class Current_level_manager : MonoBehaviour
             if (itemsLeft == 0)
             {
                 Debug.Log("You found all the items!");
+                levelComplete = true;
+                levelCompleteText.enabled = true;
                 //Call level Complete function! (TO BE ADDED)
             }
     }
