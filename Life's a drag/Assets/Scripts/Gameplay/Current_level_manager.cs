@@ -20,6 +20,9 @@ public class Current_level_manager : MonoBehaviour
     private bool timerRunning;
     private float elapsedTime;
     
+    //Combine box references.
+    public GameObject combineBox1;
+    public GameObject combineBox2;
     
     public void Awake()
     {
@@ -54,8 +57,6 @@ public class Current_level_manager : MonoBehaviour
             Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos,0), Quaternion.identity);
         }
 
-      //  combine(theLev.requiredItems[2].item.gameObject.name, theLev.requiredItems[2].item.gameObject.name);
-
         //Calculate how many items are needed to complete the level.
         //The total number of combo items + the number of regular items that are not
         //materials for a combo item.
@@ -74,6 +75,11 @@ public class Current_level_manager : MonoBehaviour
     {
         currentTimer();
        
+    }
+
+    void FixedUpdate()
+    {
+        checkCombineStatus();
     }
 
 
@@ -97,25 +103,51 @@ public class Current_level_manager : MonoBehaviour
     
     }
 
+    public void checkCombineStatus() 
+    {
+
+        if ((!Input.GetMouseButton(0)) && combineBox1.GetComponent<Combine_Collision>().collided && combineBox2.GetComponent<Combine_Collision>().collided)
+        {
+            combine(combineBox1.GetComponent<Combine_Collision>().objectName, combineBox2.GetComponent<Combine_Collision>().objectName);
+        }
+    }
+    
+
     //Combo Manager. We'll check if the combo works based on string comparison with GameObject names that are in the combo area.
     //If the combo is successful, instantiate the comboItem and de-activate the 2 materials. If not, put materials back in their
     //Initial positions.
     public void combine(string firstItemName, string secondItemName)
     {
+        string instanceName;
+        instanceName = firstItemName + "(Clone)";
+        string instanceName2;
+        instanceName2 = secondItemName + "(Clone)";
+        GameObject item1;
+        GameObject item2;
+        item1 = GameObject.Find(instanceName);
+        item2 = GameObject.Find(instanceName2);
+
+
         for (int i = 0; i < theLev.comboItemsNeeded.Count; i++)
         {
             if ((firstItemName == theLev.comboItemsNeeded[i].mat1 || firstItemName == theLev.comboItemsNeeded[i].mat2) && (secondItemName == theLev.comboItemsNeeded[i].mat1) || (secondItemName == theLev.comboItemsNeeded[i].mat2))
             {
+               
                 //Combo successful!
                 Debug.Log("Combo successful!");
+                Destroy(item1);
+                Destroy(item2);
                 Instantiate(theLev.comboItemsNeeded[i].theItem, transform.position, transform.rotation);
                 break;
             }
            
-            if(i == theLev.comboItemsNeeded.Count)
+            //if(i == theLev.comboItemsNeeded.Count)
+            else
             {
                 //Item combo failed, try again!
                 Debug.Log("Combo failed!");
+                item1.transform.position = item1.GetComponent<Draggable_Item_Needed>().initialPos;
+                item2.transform.position = item2.GetComponent<Draggable_Item_Needed>().initialPos;
                 break;
             }
         }

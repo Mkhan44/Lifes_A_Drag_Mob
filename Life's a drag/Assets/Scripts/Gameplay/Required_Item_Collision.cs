@@ -19,6 +19,11 @@ public class Required_Item_Collision : MonoBehaviour
     }
     void Update()
     {
+        
+    }
+
+    void FixedUpdate()
+    {
         tryItem();
     }
 
@@ -136,6 +141,8 @@ public class Required_Item_Collision : MonoBehaviour
             {
                 isMat = false;
                 levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat);
+                objectName = "";
+                tagToCompare = "";
             }
         }
         isMat = false;
