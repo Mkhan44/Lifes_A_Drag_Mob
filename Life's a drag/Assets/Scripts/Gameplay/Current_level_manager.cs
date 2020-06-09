@@ -55,6 +55,8 @@ public class Current_level_manager : MonoBehaviour
         Debug.Log("The difficulty is: " + theLev.levelDifficulty);
         Debug.Log("The number of the level is: " + theLev.levelNum);
         */
+
+
         levelCompleteText.enabled = false;
         for (int i = 0; i < theLev.requiredItems.Count; i++)
         {
@@ -88,6 +90,7 @@ public class Current_level_manager : MonoBehaviour
     {
       
         checkCombineStatus();
+       // snapItem();
     }
 
 
@@ -111,13 +114,15 @@ public class Current_level_manager : MonoBehaviour
     
     }
 
+  
     public void checkCombineStatus() 
     {
-
+        
         if ((!Input.GetMouseButton(0)) && combineBox1.GetComponent<Combine_Collision>().collided && combineBox2.GetComponent<Combine_Collision>().collided)
         {
             combine(combineBox1.GetComponent<Combine_Collision>().objectName, combineBox2.GetComponent<Combine_Collision>().objectName);
         }
+         
     }
     
 
@@ -147,14 +152,13 @@ public class Current_level_manager : MonoBehaviour
             {
                
                 //Combo successful!
-                //Debug.Log("Combo successful!");
+                Debug.Log("Combo successful!");
                 Destroy(item1);
                 Destroy(item2);
                 Instantiate(theLev.comboItemsNeeded[i].theItem, transform.position, transform.rotation);
                 break;
             }
            
-            //if(i == theLev.comboItemsNeeded.Count)
             else
             {
                 //Item combo failed, try again!
@@ -164,6 +168,7 @@ public class Current_level_manager : MonoBehaviour
                 break;
             }
         }
+
     }
 
     /* This function is called from the Required_item_collision class. The item's name is passed here.

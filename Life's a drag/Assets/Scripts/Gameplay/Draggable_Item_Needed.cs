@@ -8,12 +8,11 @@ public class Draggable_Item_Needed : MonoBehaviour
     private Vector3 offset;
     public Vector3 initialPos;
     public Vector3 initialScale;
-    public Vector3 boxScale;
-    
 
     void Awake()
     {
         initialPos = gameObject.transform.position;
+        initialScale = new Vector3 (transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
     void Update()
     {
@@ -23,6 +22,7 @@ public class Draggable_Item_Needed : MonoBehaviour
     {
         screenPoint = Camera.main.WorldToScreenPoint(transform.position);
         offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+        //transform.localScale = new Vector3(0.5f, 0.5f, 1f);
     }
 
     void OnMouseDrag()
@@ -37,6 +37,8 @@ public class Draggable_Item_Needed : MonoBehaviour
 
     void OnMouseUp()
     {
-       
+        //transform.localScale = initialScale;
+       //transform.position = Combine_Collision.centerCollide;
+        
     }
 }
