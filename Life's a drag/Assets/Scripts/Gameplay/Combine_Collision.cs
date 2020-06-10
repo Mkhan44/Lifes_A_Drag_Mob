@@ -11,14 +11,16 @@ public class Combine_Collision : MonoBehaviour
     public bool boxFilled = false;
     public GameObject tempObject;
     public Vector3 centerCollide;
-
+    public bool isResult;
 
     void Start()
     {
+        if(gameObject.tag == "ResultArea")
+        {
+            isResult = true;
+        }
         centerCollide = transform.GetComponent<BoxCollider2D>().bounds.center;
         Debug.Log("The center of the collider is: " + centerCollide);
-        //Temp storage for the gameobject variable.
-       // tempObject = this.gameObject;
     }
 
     void FixedUpdate()
@@ -26,7 +28,7 @@ public class Combine_Collision : MonoBehaviour
         //Ensures that only 1 item can be in a combo box at any given time.
         if(numCollisions > 1)
         {
-            tempObject.transform.position = tempObject.GetComponent<Draggable_Item_Needed>().initialPos;
+            tempObject.transform.position = tempObject.GetComponent<Draggable_Item>().initialPos;
         }
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -41,7 +43,14 @@ public class Combine_Collision : MonoBehaviour
             collided = true;
             tagToCompare = other.tag;
             tempName = (other.gameObject.name);
-            objectName = tempName.Replace("(Clone)", "");
+            if (tagToCompare == "RequiredItem")
+            {
+                objectName = tempName.Replace("(Clone)", "");
+            }
+            else
+            {
+                objectName = tempName;
+            }
             Debug.Log("Object's name is: " + objectName);
             Debug.Log("Tag we got is: " + tagToCompare);
             Debug.Log("Collided is now: " + collided);
@@ -89,7 +98,7 @@ public class Combine_Collision : MonoBehaviour
         //Turn the item back to it's original scale.
         if(other != null)
         {
-            other.transform.localScale = other.GetComponent<Draggable_Item_Needed>().initialScale;
+            other.transform.localScale = other.GetComponent<Draggable_Item>().initialScale;
         }
         
 

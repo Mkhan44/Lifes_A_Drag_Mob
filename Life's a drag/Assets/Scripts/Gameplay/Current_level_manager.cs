@@ -24,6 +24,8 @@ public class Current_level_manager : MonoBehaviour
     //Combine box references.
     public GameObject combineBox1;
     public GameObject combineBox2;
+    public GameObject resultBox;
+    bool resultFilled = false;
 
     //Level completed variables.
     bool levelComplete = false;
@@ -88,9 +90,7 @@ public class Current_level_manager : MonoBehaviour
 
     void FixedUpdate()
     {
-      
         checkCombineStatus();
-       // snapItem();
     }
 
 
@@ -120,8 +120,25 @@ public class Current_level_manager : MonoBehaviour
         
         if ((!Input.GetMouseButton(0)) && combineBox1.GetComponent<Combine_Collision>().collided && combineBox2.GetComponent<Combine_Collision>().collided)
         {
-            combine(combineBox1.GetComponent<Combine_Collision>().objectName, combineBox2.GetComponent<Combine_Collision>().objectName);
+            if(resultFilled)
+            {
+                Debug.Log("Can't combine items, need to clear result area first!");
+                //take out the item from the result box!
+                resultBox.GetComponent<Combine_Collision>().tempObject.transform.position = resultBox.GetComponent<Combine_Collision>().tempObject.GetComponent<Draggable_Item>().initialPos;
+            }
+            else
+            {
+                combine(combineBox1.GetComponent<Combine_Collision>().objectName, combineBox2.GetComponent<Combine_Collision>().objectName, combineBox1.GetComponent<Combine_Collision>().tagToCompare, combineBox2.GetComponent<Combine_Collision>().tagToCompare);
+            }
+            
         }
+
+        if(resultBox.GetComponent<Combine_Collision>().collided)
+        {
+            resultFilled = true;
+        }
+        else
+            resultFilled = false;
          
     }
     
@@ -129,12 +146,30 @@ public class Current_level_manager : MonoBehaviour
     //Combo Manager. We'll check if the combo works based on string comparison with GameObject names that are in the combo area.
     //If the combo is successful, instantiate the comboItem and de-activate the 2 materials. If not, put materials back in their
     //Initial positions.
-    public void combine(string firstItemName, string secondItemName)
+    public void combine(string firstItemName, string secondItemName, string tagToCompare1, string tagToCompare2)
     {
         string instanceName;
-        instanceName = firstItemName + "(Clone)";
+        if (tagToCompare1 == "RequiredItem")
+        {
+            instanceName = firstItemName + "(Clone)";
+        }
+        else
+        {
+            instanceName = firstItemName;
+        }
+
+
         string instanceName2;
-        instanceName2 = secondItemName + "(Clone)";
+        if (tagToCompare2 == "RequiredItem")
+        {
+            instanceName2 = secondItemName + "(Clone)";
+        }
+        else
+        {
+            instanceName2 = secondItemName;
+        }
+
+
         GameObject item1;
         GameObject item2;
         item1 = GameObject.Find(instanceName);
@@ -155,7 +190,7 @@ public class Current_level_manager : MonoBehaviour
                 Debug.Log("Combo successful!");
                 Destroy(item1);
                 Destroy(item2);
-                Instantiate(theLev.comboItemsNeeded[i].theItem, transform.position, transform.rotation);
+                Instantiate(theLev.comboItemsNeeded[i].theItem, new Vector3(2.4f,-3.5f,0f), transform.rotation);
                 break;
             }
            
@@ -163,8 +198,8 @@ public class Current_level_manager : MonoBehaviour
             {
                 //Item combo failed, try again!
                 Debug.Log("Combo failed!");
-                item1.transform.position = item1.GetComponent<Draggable_Item_Needed>().initialPos;
-                item2.transform.position = item2.GetComponent<Draggable_Item_Needed>().initialPos;
+                item1.transform.position = item1.GetComponent<Draggable_Item>().initialPos;
+                item2.transform.position = item2.GetComponent<Draggable_Item>().initialPos;
                 break;
             }
         }
@@ -180,7 +215,16 @@ public class Current_level_manager : MonoBehaviour
     public void gotItem(string theName, string theTag, bool isMat)
     {
         string instanceName;
-        instanceName = theName + "(Clone)";
+        if(theTag == "RequiredItem")
+        {
+            instanceName = theName + "(Clone)";
+        }
+        else
+        {
+            instanceName = theName;
+        }
+
+
         GameObject theInstance;
         theInstance = GameObject.Find(instanceName);
         if(theTag == "RequiredItem" && !isMat)
@@ -192,12 +236,12 @@ public class Current_level_manager : MonoBehaviour
         else if(theTag == "RequiredItem" && isMat)
         {
             Debug.Log("The item is not a required item for level completion! It's also a material.");
-            theInstance.transform.position = theInstance.GetComponent<Draggable_Item_Needed>().initialPos;
+            theInstance.transform.position = theInstance.GetComponent<Draggable_Item>().initialPos;
         }
         else
         {
-            Debug.Log("The item is not a required item for level completion!");
-            theInstance.transform.position = theInstance.GetComponent<Draggable_Item_Needed>().initialPos;
+            Debug.Log("This is a background item!");
+            theInstance.transform.position = theInstance.GetComponent<Draggable_Item>().initialPos;
         }
        
 

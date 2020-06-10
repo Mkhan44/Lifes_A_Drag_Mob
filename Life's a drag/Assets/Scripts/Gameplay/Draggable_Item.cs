@@ -2,16 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Draggable_Item_Needed : MonoBehaviour
+public class Draggable_Item : MonoBehaviour
 {
     private Vector3 screenPoint;
     private Vector3 offset;
     public Vector3 initialPos;
     public Vector3 initialScale;
 
+
     void Awake()
     {
         initialPos = gameObject.transform.position;
+        if (initialPos == new Vector3(2.4f, -3.5f, 0f))
+        {
+            initialPos = new Vector3(0.0f, 0.0f, 0.0f);
+        }
         initialScale = new Vector3 (transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
     void Update()
