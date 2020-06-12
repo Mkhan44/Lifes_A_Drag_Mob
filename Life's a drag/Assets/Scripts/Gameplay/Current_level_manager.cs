@@ -63,7 +63,12 @@ public class Current_level_manager : MonoBehaviour
         nextLevelButton.SetActive(false);
         for (int i = 0; i < theLev.requiredItems.Count; i++)
         {
-            Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos,0), Quaternion.identity);
+            Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos, 0), Quaternion.identity);
+            //STILL NEED LOGIC IN THIS IF STATEMENT SO THE USER DOESN'T SEE OBJECTS HIDDEN BEHIND ANIMATIONS OR WHAT NOT AT THE START.
+            if(theLev.requiredItems[i].isHidden)
+            {
+                Debug.Log(theLev.requiredItems[i].item.name + " is invisible!");
+            }
         }
 
         //Calculate how many items are needed to complete the level.

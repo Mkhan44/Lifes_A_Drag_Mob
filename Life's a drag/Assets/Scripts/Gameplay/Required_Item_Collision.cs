@@ -61,12 +61,13 @@ public class Required_Item_Collision : MonoBehaviour
                    // Debug.Log("The item: " + levelManagerInstance.GetComponent<Current_level_manager>().theLev.requiredItems[i].item.gameObject.name + " was excluded from the list because it's a material for a combo item.");
                     break;
                 }
-                else
+                if(j == countCombo-1)
                 {
                     requiredItemNames.Add(currentRegItemName);
-                  //  Debug.Log("The item: " + levelManagerInstance.GetComponent<Current_level_manager>().theLev.requiredItems[i].item.gameObject.name + " was ADDED to the list because it's NOT a material for a combo item.");
-                    break;
+                    //  Debug.Log("The item: " + levelManagerInstance.GetComponent<Current_level_manager>().theLev.requiredItems[i].item.gameObject.name + " was ADDED to the list because it's NOT a material for a combo item.");
                 }
+                    
+                
             }
 
         }
@@ -89,6 +90,7 @@ public class Required_Item_Collision : MonoBehaviour
         }
          */
        
+
        
     }
 

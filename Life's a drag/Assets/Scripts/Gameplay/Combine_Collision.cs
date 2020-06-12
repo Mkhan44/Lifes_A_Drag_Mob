@@ -75,8 +75,12 @@ public class Combine_Collision : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
+       if(!Input.GetMouseButton(0))
+       {
+           Debug.Log("Mouse isn't held down so grow the item!");
+          StartCoroutine(grow(other));
+       }
        
-        StartCoroutine(grow(other));
 
         numCollisions -= 1;
         if(numCollisions == 0)
@@ -85,8 +89,8 @@ public class Combine_Collision : MonoBehaviour
             objectName = "";
             collided = false;
             boxFilled = false;
-            Debug.Log(boxFilled);
-            Debug.Log("We left the collision!");
+           // Debug.Log(boxFilled);
+           // Debug.Log("We left the collision!");
         }
 
     }

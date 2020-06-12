@@ -27,7 +27,7 @@ public class Draggable_Item : MonoBehaviour
     {
         screenPoint = Camera.main.WorldToScreenPoint(transform.position);
         offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-        //transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        transform.localScale = new Vector3(0.5f, 0.5f, 1f);
     }
 
     void OnMouseDrag()
@@ -42,7 +42,11 @@ public class Draggable_Item : MonoBehaviour
 
     void OnMouseUp()
     {
-        //transform.localScale = initialScale;
+        if(gameObject.transform.position.y > -2.85f)
+        {
+            transform.localScale = initialScale;
+        }
+        
        //transform.position = Combine_Collision.centerCollide;
         
     }
