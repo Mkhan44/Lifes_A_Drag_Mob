@@ -114,7 +114,7 @@ public class Combine_Collision : MonoBehaviour
         //Decrease the item's size so it fits into the box. May have to make this dynamic based on the item.
         if (other != null)
         {
-            other.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+            other.transform.localScale = new Vector3((other.GetComponent<Draggable_Item>().initialScale.x - 0.2f), (other.GetComponent<Draggable_Item>().initialScale.y - 0.2f), 1f);
         }
     }
        
