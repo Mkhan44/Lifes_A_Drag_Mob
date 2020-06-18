@@ -8,6 +8,8 @@ public class Current_level_manager : MonoBehaviour
 {
     public Level_Manager theLev;
 
+    List<int> numInvis = new List<int>();
+    List<GameObject> invisObjects = new List<GameObject>();
     //How many items we need to complete the level.
     public int itemsLeft;
 
@@ -54,41 +56,9 @@ public class Current_level_manager : MonoBehaviour
 
     public void Start()
     {
-        nextSceneName = theLev.levelDifficulty + "_" + theLev.levelTheme + "_" + theLev.levelNum.ToString();
+        initializeLevel();
 
-       // Debug.Log(nextSceneName);
-
-
-        levelCompleteText.enabled = false;
-        nextLevelButton.SetActive(false);
-        for (int i = 0; i < theLev.requiredItems.Count; i++)
-        {
-            Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos, 0), Quaternion.identity);
-            //STILL NEED LOGIC IN THIS IF STATEMENT SO THE USER DOESN'T SEE OBJECTS HIDDEN BEHIND ANIMATIONS OR WHAT NOT AT THE START.
-            if(theLev.requiredItems[i].isHidden)
-            {
-                Debug.Log(theLev.requiredItems[i].item.name + " is invisible!");
-            }
-        }
-
-        //Calculate how many items are needed to complete the level.
-        //The total number of combo items + the number of regular items that are not
-        //materials for a combo item.
-        int numMats = 0;
-        for (int j = 0; j < theLev.comboItemsNeeded.Count; j++)
-        {
-            for (int k = 0; k < theLev.requiredItems.Count; k++ )
-            {
-                if ((theLev.requiredItems[k].item.gameObject.name == theLev.comboItemsNeeded[j].mat1 || theLev.requiredItems[k].item.gameObject.name == theLev.comboItemsNeeded[j].mat2))
-                {
-                    numMats += 1;
-                }
-            }
-               
-        }
-        Debug.Log(numMats);
-        itemsLeft = (theLev.comboItemsNeeded.Count + (theLev.requiredItems.Count - numMats));
-        numItemsLeftText.text = "Items left: " + itemsLeft;
+       
     }
     void Update()
     {
@@ -112,6 +82,71 @@ public class Current_level_manager : MonoBehaviour
      * 
      ******************************************
      */
+
+    //Spawn in items, get the scene name, etc.
+    public void initializeLevel()
+    {
+        //Might be plus 1...? Since we need the NEXT scene name. 
+        //IF YOU HAVE A PROBLEM GETTING TO THE NEXT SCENE DOUBLE CHECK THIS!!!!!
+        nextSceneName = theLev.levelDifficulty + "_" + theLev.levelTheme + "_" + theLev.levelNum.ToString();
+
+        // Debug.Log(nextSceneName);
+
+
+        levelCompleteText.enabled = false;
+        nextLevelButton.SetActive(false);
+
+        //Spawn in the items for the level.
+        for (int i = 0; i < theLev.requiredItems.Count; i++)
+        {
+            if (theLev.requiredItems[i].zRot > 0)
+            {
+                Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos, 0), Quaternion.Euler(0f, 0f, theLev.requiredItems[i].zRot));
+            }
+            else
+            {
+                Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos, 0), Quaternion.identity);
+            }
+            //STILL NEED LOGIC IN THIS IF STATEMENT SO THE USER DOESN'T SEE OBJECTS HIDDEN BEHIND ANIMATIONS OR WHAT NOT AT THE START.
+            if (theLev.requiredItems[i].isHidden)
+            {
+                Debug.Log(theLev.requiredItems[i].item.name + " is invisible!");
+                numInvis.Add(i);
+            }
+        }
+
+        //Calculate how many items are needed to complete the level.
+        //The total number of combo items + the number of regular items that are not
+        //materials for a combo item.
+        int numMats = 0;
+        for (int j = 0; j < theLev.comboItemsNeeded.Count; j++)
+        {
+            for (int k = 0; k < theLev.requiredItems.Count; k++)
+            {
+                if ((theLev.requiredItems[k].item.gameObject.name == theLev.comboItemsNeeded[j].mat1 || theLev.requiredItems[k].item.gameObject.name == theLev.comboItemsNeeded[j].mat2))
+                {
+                    numMats += 1;
+                }
+            }
+
+        }
+
+        //Make all items that need to be invisible not show up.
+        string tempName;
+        GameObject tempObject;
+        for (int k = 0; k < numInvis.Count; k++)
+        {
+            tempName = theLev.requiredItems[numInvis[k]].item.gameObject.name + "(Clone)";
+            tempObject = GameObject.Find(tempName);
+            invisObjects.Add(tempObject);
+            invisObjects[k].SetActive(false);
+        }
+      //  Debug.Log(numMats);
+        itemsLeft = (theLev.comboItemsNeeded.Count + (theLev.requiredItems.Count - numMats));
+        numItemsLeftText.text = "Items left: " + itemsLeft;
+    }
+
+
 
     //Timer for each level. 
     public void currentTimer()
@@ -153,6 +188,14 @@ public class Current_level_manager : MonoBehaviour
          
     }
     
+    //Turns on invisible items that are needed.
+    public void turnOn()
+    {
+        for (int k = 0; k < numInvis.Count; k++)
+        {
+            invisObjects[k].SetActive(true);
+        }  
+    }
 
     //Combo Manager. We'll check if the combo works based on string comparison with GameObject names that are in the combo area.
     //If the combo is successful, instantiate the comboItem and de-activate the 2 materials. If not, put materials back in their
