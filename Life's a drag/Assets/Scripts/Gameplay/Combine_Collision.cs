@@ -33,7 +33,7 @@ public class Combine_Collision : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-
+       
         StartCoroutine(shrink(other));
 
         numCollisions += 1;
@@ -54,6 +54,22 @@ public class Combine_Collision : MonoBehaviour
             Debug.Log("Object's name is: " + objectName);
             Debug.Log("Tag we got is: " + tagToCompare);
             Debug.Log("Collided is now: " + collided);
+
+            /*
+            float tempX;
+            float tempY;
+            float tempPosX;
+            float tempPosY;
+
+
+
+            tempPosX = other.gameObject.transform.position.x;
+            tempPosY = other.gameObject.transform.position.y;
+            tempX = other.gameObject.transform.localScale.x;
+            tempY = other.gameObject.transform.localScale.y;
+            Debug.Log("The item's x scale is: " + tempX + " y scale is: " + tempY);
+            Debug.Log("The item's x position is: " + tempPosX + " y position is: " + tempPosY);
+             */
         }
       
         tempObject = other.gameObject;
@@ -114,7 +130,8 @@ public class Combine_Collision : MonoBehaviour
         //Decrease the item's size so it fits into the box. May have to make this dynamic based on the item.
         if (other != null)
         {
-            other.transform.localScale = new Vector3((other.GetComponent<Draggable_Item>().initialScale.x - 0.2f), (other.GetComponent<Draggable_Item>().initialScale.y - 0.2f), 1f);
+            other.transform.localScale = other.GetComponent<Draggable_Item>().shrinkScale;
+           // other.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         }
     }
        

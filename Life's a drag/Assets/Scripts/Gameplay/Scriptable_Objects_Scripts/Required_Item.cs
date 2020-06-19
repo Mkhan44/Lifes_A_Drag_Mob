@@ -13,4 +13,7 @@ public class Required_Item : ScriptableObject
     //These will tell the game where in the map to spawn the item on startup.
     public float xPos;
     public float yPos;
+
+    //Rotation on Z for items that need to be flipped in any way.
+    public float zRot = 0f;
 }
