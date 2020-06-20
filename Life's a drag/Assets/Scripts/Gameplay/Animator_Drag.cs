@@ -53,7 +53,7 @@ public class Animator_Drag : MonoBehaviour
 
         if(mouseDistance < 1)
         {
-            animator.SetFloat("Test", 0.2f);
+            animator.SetBool("IsOpen", true);
             if (!aniFin)
             {
                 StartCoroutine(aniDone());
@@ -61,7 +61,6 @@ public class Animator_Drag : MonoBehaviour
             }
           
         }
-       // animator.SetFloat("Test", 0.0f);
     }
 
     IEnumerator aniDone()
