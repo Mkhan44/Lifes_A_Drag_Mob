@@ -168,13 +168,52 @@ public class Current_level_manager : MonoBehaviour
         {
             if(resultFilled)
             {
-                Debug.Log("Can't combine items, need to clear result area first!");
                 //take out the item from the result box!
-                resultBox.GetComponent<Combine_Collision>().tempObject.transform.position = resultBox.GetComponent<Combine_Collision>().tempObject.GetComponent<Draggable_Item>().initialPos;
+                Debug.Log("Can't combine items, need to clear result area first!");
+
+
+                string tempName = resultBox.GetComponent<Combine_Collision>().tempObject.gameObject.name.Replace("(Clone)" , "");
+               // Debug.Log(tempName);
+                for (int i = 0; i < theLev.comboItemsNeeded.Count; i++ )
+                {
+                    if (tempName == theLev.comboItemsNeeded[i].name)
+                    {
+                        resultBox.GetComponent<Combine_Collision>().tempObject.transform.position = theLev.comboItemsNeeded[i].initialPos;
+                        break;
+                    }
+                    //If we get past the last item, then it has to be either a required item or a draggable item, so just throw it to the initial position.
+                    if(i == theLev.comboItemsNeeded.Count-1)
+                    {
+                        resultBox.GetComponent<Combine_Collision>().tempObject.transform.position = resultBox.GetComponent<Combine_Collision>().tempObject.GetComponent<Draggable_Item>().initialPos;
+                    }
+                }
+                    
             }
             else
             {
-                combine(combineBox1.GetComponent<Combine_Collision>().objectName, combineBox2.GetComponent<Combine_Collision>().objectName, combineBox1.GetComponent<Combine_Collision>().tagToCompare, combineBox2.GetComponent<Combine_Collision>().tagToCompare);
+                if (combineBox1.GetComponent<Combine_Collision>().objectName == combineBox2.GetComponent<Combine_Collision>().objectName)
+                {
+                    Debug.Log("Yo, double collision of the same item!");
+                    string tempName = combineBox1.GetComponent<Combine_Collision>().tempObject.gameObject.name.Replace("(Clone)", "");
+                    for (int i = 0; i < theLev.comboItemsNeeded.Count; i++)
+                    {
+                        if (tempName == theLev.comboItemsNeeded[i].name)
+                        {
+                            combineBox1.GetComponent<Combine_Collision>().tempObject.transform.position = theLev.comboItemsNeeded[i].initialPos;
+                            break;
+                        }
+                        //If we get past the last item, then it has to be either a required item or a draggable item, so just throw it to the initial position.
+                        if (i == theLev.comboItemsNeeded.Count - 1)
+                        {
+                            combineBox1.GetComponent<Combine_Collision>().tempObject.transform.position = combineBox1.GetComponent<Combine_Collision>().tempObject.GetComponent<Draggable_Item>().initialPos;
+                        }
+                    }
+                }
+                else
+                {
+                    combine(combineBox1.GetComponent<Combine_Collision>().objectName, combineBox2.GetComponent<Combine_Collision>().objectName, combineBox1.GetComponent<Combine_Collision>().tagToCompare, combineBox2.GetComponent<Combine_Collision>().tagToCompare);
+                }
+               
             }
             
         }
@@ -244,7 +283,7 @@ public class Current_level_manager : MonoBehaviour
                 Debug.Log("Combo successful!");
                 Destroy(item1);
                 Destroy(item2);
-                Instantiate(theLev.comboItemsNeeded[i].theItem, new Vector3(2.4f,-3.5f,0f), transform.rotation);
+                Instantiate(theLev.comboItemsNeeded[i].theItem, new Vector3(2.4f,-3.5f,0f), Quaternion.Euler(0f, 0f, 0f));
                 break;
             }
            
