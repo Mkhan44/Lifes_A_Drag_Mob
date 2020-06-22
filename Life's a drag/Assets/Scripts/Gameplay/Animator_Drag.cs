@@ -53,7 +53,7 @@ public class Animator_Drag : MonoBehaviour
 
         if(mouseDistance < 1)
         {
-            animator.SetBool("IsOpen", true);
+            animator.SetBool("DoAnimation", true);
             if (!aniFin)
             {
                 StartCoroutine(aniDone());
