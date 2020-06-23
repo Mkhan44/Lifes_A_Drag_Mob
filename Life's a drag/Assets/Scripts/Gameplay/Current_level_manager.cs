@@ -88,9 +88,9 @@ public class Current_level_manager : MonoBehaviour
     {
         //Might be plus 1...? Since we need the NEXT scene name. 
         //IF YOU HAVE A PROBLEM GETTING TO THE NEXT SCENE DOUBLE CHECK THIS!!!!!
-        nextSceneName = theLev.levelDifficulty + "_" + theLev.levelTheme + "_" + theLev.levelNum.ToString();
+        nextSceneName = theLev.levelDifficulty + "_" + theLev.levelTheme + "_" + (theLev.levelNum + 1).ToString();
 
-        // Debug.Log(nextSceneName);
+        Debug.Log(nextSceneName);
 
 
         levelCompleteText.enabled = false;
@@ -351,10 +351,13 @@ public class Current_level_manager : MonoBehaviour
         //Make the level up buttons visible. Make a pop up that shows your best time, etc.
         levelComplete = true;
         levelCompleteText.enabled = true;
+
+        /*
         if(DoesSceneExist(nextSceneName))
         {
            nextLevelButton.SetActive(true);
         }
+         */
 
         //Test code for seeing if level progression works.
         nextLevelButton.SetActive(true);
@@ -369,9 +372,16 @@ public class Current_level_manager : MonoBehaviour
 
    public void loadNextLevel()
     {
-        string tempLoad = "testlevel2";
-
-        SceneManager.LoadScene(tempLoad);
+       string tempLoad = "testlevel2";
+       if(DoesSceneExist(nextSceneName))
+       {
+           SceneManager.LoadScene(nextSceneName);
+       }
+       else
+       {
+           SceneManager.LoadScene(tempLoad);
+       }
+       
 
         //Use this code for the real game.
        //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv

@@ -25,4 +25,7 @@ public class Level_Manager : ScriptableObject
 
     //Tells the game which combo items will be needed.
     public List<Combo_Item> comboItemsNeeded = new List<Combo_Item>();
+
+    //How long to wait for an animation to play before the item appears. In stages with multiple animations maybe we want to turn this into a list? Idk yet.
+    public  float aniSecondsToWait;
 }

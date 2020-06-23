@@ -65,8 +65,18 @@ public class Animator_Drag : MonoBehaviour
 
     IEnumerator aniDone()
     {
-        //Hardcoded time to wait, will need a way to know how long to wait on a level per level basis in the future.
-        yield return new WaitForSeconds(0.4f);
+        
+
+        //Use this code below to figure out how long to wait before spawning the new item.
+        if(levelManager.GetComponent<Current_level_manager>().theLev.aniSecondsToWait > 0)
+        {
+            yield return new WaitForSeconds(levelManager.GetComponent<Current_level_manager>().theLev.aniSecondsToWait);
+        }
+        else
+        {
+            yield return new WaitForSeconds(3.0f);
+        }
+       
 
         levelManager.GetComponent<Current_level_manager>().turnOn();
     }
