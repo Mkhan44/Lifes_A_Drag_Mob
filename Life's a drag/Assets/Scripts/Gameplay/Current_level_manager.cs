@@ -25,7 +25,16 @@ public class Current_level_manager : MonoBehaviour
     string starsKey;
     int bestStars;
     float bestTime;
-   
+    string totalStarsObtainedKey;
+    int totalStars;
+
+    //References to scriptableObject stuff so we don't hafta keep referencing the object itself.
+    float timeFor3Stars;
+    float timeFor2Stars;
+    TimeSpan timeForStarsFormat;
+    string timeForStarsStr;
+    int numStarsPassed;
+
     //Use this bool for when we clear the level.
     private bool timerRunning;
     private float elapsedTime;
@@ -44,20 +53,13 @@ public class Current_level_manager : MonoBehaviour
     public void Awake()
     {
         elapsedTime = 0f;
-
-        currentTimeText.text = "Current Time: 00:00";
-        timeForStarsText.text = "***: " + theLev.timeForThreeStars.ToString();
-        objectiveText.text = "Objective: " + theLev.objective;
-         
     }
 
     public void Start()
     {
-
-
         initializeLevel();
+       // Time.timeScale = 100;
 
-       
     }
     void Update()
     {
@@ -85,12 +87,21 @@ public class Current_level_manager : MonoBehaviour
     //Spawn in items, get the scene name, etc.
     public void initializeLevel()
     {
+        //Displaying the initial top UI timers and objective.
+        timeFor2Stars = theLev.timeForTwoStars;
+        timeFor3Stars = theLev.timeForThreeStars;
+
+        currentTimeText.text = "Current Time: 00:00";
+        objectiveText.text = "Objective: " + theLev.objective;
+
+        timeForStarsFormat = TimeSpan.FromSeconds(timeFor3Stars);
+        timeForStarsStr = "***: " + timeForStarsFormat.ToString("mm':'ss");
+        timeForStarsText.text = timeForStarsStr;
+
+
         //Might be plus 1...? Since we need the NEXT scene name. 
         //IF YOU HAVE A PROBLEM GETTING TO THE NEXT SCENE DOUBLE CHECK THIS!!!!!
         nextSceneName = theLev.levelDifficulty + "_" + theLev.levelTheme + "_" + (theLev.levelNum + 1).ToString();
-
-        //Debug.Log(nextSceneName);
-
 
         //
         // **********************************************************************************
@@ -98,18 +109,31 @@ public class Current_level_manager : MonoBehaviour
         // **********************************************************************************
         // PLAYERPREFS STUFF FOR LOADING UP BEST SCORES AND WHAT NOT.
 
+        TimeSpan bestTimeFormat;
+        string bestTimeStr;
+
+
         //Don't change this variable once we have solidifed it. It will break all playerPrefs if we do.
         bestTimeKey = theLev.name + "_Best_Time";
         //Debug.Log(bestTimeKey);
         starsKey = theLev.name + "_Best_Stars";
         //Debug.Log(starsKey);
+        bestStars = PlayerPrefs.GetInt(starsKey);
+        Debug.Log("Best stars for this level is: " + bestStars);
+
+        //This key is universal for all levels. Meaning that it should hold a total throughout all levels in the game.
+        totalStarsObtainedKey = "Total_Stars_Obtained";
+        totalStars = PlayerPrefs.GetInt(totalStarsObtainedKey);
+        Debug.Log("Total stars the player has is: " + totalStars);
         
 
         if(PlayerPrefs.GetFloat(bestTimeKey) != 0)
         {
             Debug.Log("We found something! it is: " + PlayerPrefs.GetFloat(bestTimeKey).ToString());
             bestTime = PlayerPrefs.GetFloat(bestTimeKey);
-            bestTimeText.text = "Best time: " + bestTime;
+            bestTimeFormat = TimeSpan.FromSeconds(bestTime);
+            bestTimeStr = "Best time: " + bestTimeFormat.ToString("mm':'ss");
+            bestTimeText.text = bestTimeStr;
         }
         else
         {
@@ -117,15 +141,13 @@ public class Current_level_manager : MonoBehaviour
             bestTime = 999f;
         }
 
-       
-  
-
+        // PLAYERPREFS STUFF FOR LOADING UP BEST SCORES AND WHAT NOT.
         //
         // **********************************************************************************
         // **********************************************************************************
         // **********************************************************************************
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        // PLAYERPREFS STUFF FOR LOADING UP BEST SCORES AND WHAT NOT.
+     
 
         levelCompleteText.enabled = false;
         nextLevelButton.SetActive(false);
@@ -185,13 +207,35 @@ public class Current_level_manager : MonoBehaviour
     //Timer for each level. 
     public void currentTimer()
     {
-        elapsedTime += Time.deltaTime;
-        currentTime = TimeSpan.FromSeconds(elapsedTime);
-        string currentTimestr = "Current Time: " + currentTime.ToString("mm':'ss");
-        currentTimeText.text = currentTimestr;
+        if(elapsedTime < 3599f)
+        {
+            elapsedTime += Time.deltaTime;
+            currentTime = TimeSpan.FromSeconds(elapsedTime);
+            string currentTimestr = "Current Time: " + currentTime.ToString("mm':'ss");
+            currentTimeText.text = currentTimestr;
+        }
+        else
+        {
+            currentTimeText.text = "Current Time: 59:99"; 
+        }
+      
+
 
         //Implement the check for num Stars available here.
-    
+        if (elapsedTime > (timeFor3Stars + 1) && numStarsPassed == 0)
+        {
+            timeForStarsFormat = TimeSpan.FromSeconds(timeFor2Stars);
+            timeForStarsStr = "** : " + timeForStarsFormat.ToString("mm':'ss");
+            timeForStarsText.text = timeForStarsStr;
+            numStarsPassed = 1;
+        }
+
+        if(elapsedTime > (timeFor2Stars + 1) && numStarsPassed == 1)
+        {
+            timeForStarsText.text = "* : 59:99";
+            numStarsPassed++;
+        }
+
     }
 
   
@@ -398,7 +442,98 @@ public class Current_level_manager : MonoBehaviour
            
         }
 
-        Debug.Log("The best time after completing the level is: " + PlayerPrefs.GetFloat(bestTimeKey).ToString());
+
+        //Calculate the amount of stars a player gets for beating the level.
+        //If it's their first time getting x amount of stars, increase the 'record' for this level.
+        //Also, if it's the firs time they're receiving the stars, increase their grand total that
+        //persists throughout the game. Player will be able to see this later.
+        if (elapsedTime < timeFor3Stars)
+        {
+            Debug.Log("You got 3 stars!");
+            switch(bestStars) {
+                case 0:
+                    {
+                        PlayerPrefs.SetInt(starsKey, (bestStars + 3));
+                        PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 3));
+                        break;
+                    }
+                case 1:
+                    {
+                        PlayerPrefs.SetInt(starsKey, (bestStars + 2));
+                        PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 2));
+                        break;
+                    }
+                case 2:
+                    {
+                        PlayerPrefs.SetInt(starsKey, (bestStars + 1));
+                        PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 1));
+                        break;
+                    }
+                default:
+                    {
+                    Debug.Log("You already have 3 stars for this level. Good job!");
+                    break;
+                    }
+            }
+        }
+        else if (elapsedTime < timeFor2Stars)
+        {
+            Debug.Log("You got 2 stars, try for three!");
+            switch (bestStars)
+            {
+                case 0:
+                    {
+                        PlayerPrefs.SetInt(starsKey, (bestStars + 2));
+                        PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 2));
+                        break;
+                    }
+                case 1:
+                    {
+                        PlayerPrefs.SetInt(starsKey, (bestStars + 1));
+                        PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 1));
+                        break;
+                    }
+                case 2:
+                    {
+                        Debug.Log("You have 2 stars on this level already. Good job!");
+                        break;
+                    }
+                default:
+                    {
+                        Debug.Log("You already have 3 stars for this level. Good job!");
+                        break;
+                    }
+            }
+        }
+        else
+        {
+                switch (bestStars)
+                {
+                    case 0:
+                        {
+                            PlayerPrefs.SetInt(starsKey, (bestStars + 1));
+                            PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 1));
+                            break;
+                        }
+                    case 1:
+                        {
+                            Debug.Log("You cleared this level, try harder to get more stars!");
+                            break;
+                        }
+                    case 2:
+                        {
+                            Debug.Log("You have 2 stars on this level already. Good job!");
+                            break;
+                        }
+                    default:
+                        {
+                            Debug.Log("You already have 3 stars for this level. Good job!");
+                            break;
+                        }
+                }
+        }
+        
+       // Debug.Log("The best time after completing the level is: " + PlayerPrefs.GetFloat(bestTimeKey).ToString());
 
 
         /*
@@ -406,6 +541,10 @@ public class Current_level_manager : MonoBehaviour
         *****************************************
         *****************************************
         PLAYERPREF RELATED STUFF FOR SAVING GAME DATA.
+         *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+         *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+         *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+         *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         */
 
         /*

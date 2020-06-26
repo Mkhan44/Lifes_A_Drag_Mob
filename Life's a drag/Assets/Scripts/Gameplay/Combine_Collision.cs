@@ -20,7 +20,7 @@ public class Combine_Collision : MonoBehaviour
             isResult = true;
         }
         centerCollide = transform.GetComponent<BoxCollider2D>().bounds.center;
-        Debug.Log("The center of the collider is: " + centerCollide);
+        //Debug.Log("The center of the collider is: " + centerCollide);
     }
 
     void FixedUpdate()
