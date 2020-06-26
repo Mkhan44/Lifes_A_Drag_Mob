@@ -19,6 +19,12 @@ public class Current_level_manager : MonoBehaviour
     public Text timeForStarsText;
     public Text objectiveText;
     private TimeSpan currentTime;
+
+    //PlayerPrefs keys for each level.
+    string bestTimeKey;
+    string starsKey;
+    int bestStars;
+    float bestTime;
    
     //Use this bool for when we clear the level.
     private bool timerRunning;
@@ -39,15 +45,6 @@ public class Current_level_manager : MonoBehaviour
     {
         elapsedTime = 0f;
 
-        if(theLev.bestTime > 0)
-        {
-            bestTimeText.text = "Best time: " + theLev.bestTime.ToString();
-        }
-        else 
-        {
-            bestTimeText.text = "Best Time: N/A";
-        }
-
         currentTimeText.text = "Current Time: 00:00";
         timeForStarsText.text = "***: " + theLev.timeForThreeStars.ToString();
         objectiveText.text = "Objective: " + theLev.objective;
@@ -56,6 +53,8 @@ public class Current_level_manager : MonoBehaviour
 
     public void Start()
     {
+
+
         initializeLevel();
 
        
@@ -90,8 +89,43 @@ public class Current_level_manager : MonoBehaviour
         //IF YOU HAVE A PROBLEM GETTING TO THE NEXT SCENE DOUBLE CHECK THIS!!!!!
         nextSceneName = theLev.levelDifficulty + "_" + theLev.levelTheme + "_" + (theLev.levelNum + 1).ToString();
 
-        Debug.Log(nextSceneName);
+        //Debug.Log(nextSceneName);
 
+
+        //
+        // **********************************************************************************
+        // **********************************************************************************
+        // **********************************************************************************
+        // PLAYERPREFS STUFF FOR LOADING UP BEST SCORES AND WHAT NOT.
+
+        //Don't change this variable once we have solidifed it. It will break all playerPrefs if we do.
+        bestTimeKey = theLev.name + "_Best_Time";
+        //Debug.Log(bestTimeKey);
+        starsKey = theLev.name + "_Best_Stars";
+        //Debug.Log(starsKey);
+        
+
+        if(PlayerPrefs.GetFloat(bestTimeKey) != 0)
+        {
+            Debug.Log("We found something! it is: " + PlayerPrefs.GetFloat(bestTimeKey).ToString());
+            bestTime = PlayerPrefs.GetFloat(bestTimeKey);
+            bestTimeText.text = "Best time: " + bestTime;
+        }
+        else
+        {
+            bestTimeText.text = "Best time: N/A";
+            bestTime = 999f;
+        }
+
+       
+  
+
+        //
+        // **********************************************************************************
+        // **********************************************************************************
+        // **********************************************************************************
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // PLAYERPREFS STUFF FOR LOADING UP BEST SCORES AND WHAT NOT.
 
         levelCompleteText.enabled = false;
         nextLevelButton.SetActive(false);
@@ -110,7 +144,7 @@ public class Current_level_manager : MonoBehaviour
             //STILL NEED LOGIC IN THIS IF STATEMENT SO THE USER DOESN'T SEE OBJECTS HIDDEN BEHIND ANIMATIONS OR WHAT NOT AT THE START.
             if (theLev.requiredItems[i].isHidden)
             {
-                Debug.Log(theLev.requiredItems[i].item.name + " is invisible!");
+                //Debug.Log(theLev.requiredItems[i].item.name + " is invisible!");
                 numInvis.Add(i);
             }
         }
@@ -351,6 +385,28 @@ public class Current_level_manager : MonoBehaviour
         //Make the level up buttons visible. Make a pop up that shows your best time, etc.
         levelComplete = true;
         levelCompleteText.enabled = true;
+
+        /*
+         *****************************************
+         *****************************************
+         *****************************************
+         PLAYERPREF RELATED STUFF FOR SAVING GAME DATA.
+         */
+        if (elapsedTime < bestTime)
+        {
+            PlayerPrefs.SetFloat(bestTimeKey, elapsedTime);
+           
+        }
+
+        Debug.Log("The best time after completing the level is: " + PlayerPrefs.GetFloat(bestTimeKey).ToString());
+
+
+        /*
+        *****************************************
+        *****************************************
+        *****************************************
+        PLAYERPREF RELATED STUFF FOR SAVING GAME DATA.
+        */
 
         /*
         if(DoesSceneExist(nextSceneName))
