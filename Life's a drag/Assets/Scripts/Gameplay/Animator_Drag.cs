@@ -46,12 +46,11 @@ public class Animator_Drag : MonoBehaviour
 
         //Based on the level, we'll need to know whether to compare the x coordinates or the y coordinates of the mouse position.
         mouseDragEnd = Input.mousePosition;
-       // Debug.Log("mouseDragEnd posy = " + mouseDragEnd.y);
         //mouseDistance = Mathf.Abs(mouseDragEnd.x - mouseDragStart.x);
-        mouseDistance =(mouseDragEnd.y - mouseDragStart.y);
-       // Debug.Log("Differencet in posy = " + mouseDistance);
+        mouseDistance = Mathf.Abs(mouseDragEnd.y - mouseDragStart.y);
+        //Debug.Log("Difference in posy = " + mouseDistance);
 
-        if(mouseDistance < 1)
+        if(mouseDistance > 7)
         {
             animator.SetBool("DoAnimation", true);
             if (!aniFin)

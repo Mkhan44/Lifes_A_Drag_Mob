@@ -163,10 +163,11 @@ public class Current_level_manager : MonoBehaviour
             {
                 Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos, 0), Quaternion.identity);
             }
-            //STILL NEED LOGIC IN THIS IF STATEMENT SO THE USER DOESN'T SEE OBJECTS HIDDEN BEHIND ANIMATIONS OR WHAT NOT AT THE START.
+           
+
             if (theLev.requiredItems[i].isHidden)
             {
-                //Debug.Log(theLev.requiredItems[i].item.name + " is invisible!");
+                Debug.Log(theLev.requiredItems[i].item.name + " is invisible!");
                 numInvis.Add(i);
             }
         }
@@ -409,6 +410,8 @@ public class Current_level_manager : MonoBehaviour
             Debug.Log("The item is not a required item for level completion! It's also a material.");
             theInstance.transform.position = theInstance.GetComponent<Draggable_Item>().initialPos;
         }
+
+            //Check if item is combo item AND if item is mat.
         else
         {
             Debug.Log("This is a background item!");
