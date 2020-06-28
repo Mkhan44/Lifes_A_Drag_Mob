@@ -8,6 +8,7 @@ public class Required_Item_Collision : MonoBehaviour
     public GameObject levelManagerInstance;
     string tagToCompare = "";
     bool isMat;
+    bool isCombo;
     public string objectName;
     public List<string> requiredItemNames = new List<string>();
     public List<string> comboItemNames = new List<string>();
@@ -74,7 +75,15 @@ public class Required_Item_Collision : MonoBehaviour
         for (int k = 0; k < countCombo; k++)
         {
             currentComboItemName = levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[k].theItem.gameObject.name;
-            comboItemNames.Add(currentComboItemName);
+            if(!(levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[k].isAlsoMat))
+            {
+                comboItemNames.Add(currentComboItemName);
+            }
+            else
+            {
+                matItemNames.Add(currentComboItemName);
+            }
+           
            // Debug.Log("The item: " + levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[j].theItem.gameObject.name + " was added to the list.");
         }
 
@@ -98,6 +107,8 @@ public class Required_Item_Collision : MonoBehaviour
     //If not, put the item back to it's initial position (Unless it's a ComboItem) , and give an error message on the LevelManager side.
     void tryItem()
     {
+       
+
         if ((!Input.GetMouseButton(0)) && collided)
         {
             if (tagToCompare == "RequiredItem")
@@ -113,7 +124,7 @@ public class Required_Item_Collision : MonoBehaviour
                             {
                                 isItAMat();
                                 Debug.Log("The item put in the field was: " + objectName + " And the combo item it matched with was " + comboItemNames[j]);
-                                levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat);
+                                levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat, isCombo);
                                 objectName = "";
                                 tagToCompare = "";
                                 break;
@@ -123,7 +134,7 @@ public class Required_Item_Collision : MonoBehaviour
                         if(isMat)
                         {
                             Debug.Log("The item put in the field was: " + objectName + " And it's a material. ");
-                            levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat);
+                            levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat, isCombo);
                             objectName = "";
                             tagToCompare = "";
                             break;
@@ -133,7 +144,7 @@ public class Required_Item_Collision : MonoBehaviour
                     {
                         isItAMat();
                         Debug.Log("The item put in the field was: " + objectName + " And the REGULAR item it matched with was " + requiredItemNames[i]);
-                        levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat);
+                        levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat, isCombo);
                         objectName = "";
                         tagToCompare = "";
                         break;
@@ -143,24 +154,33 @@ public class Required_Item_Collision : MonoBehaviour
             else
             {
                 isMat = false;
-                levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat);
+                levelManagerInstance.GetComponent<Current_level_manager>().gotItem(objectName, tagToCompare, isMat, isCombo);
                 objectName = "";
                 tagToCompare = "";
             }
         }
         isMat = false;
+        isCombo = false;
     }
 
-    //Finds out whether or not the 
+    //Finds out whether or not the item is a material
     void isItAMat()
     {
         for(int i = 0; i < matItemNames.Count; i++)
         {
             if(objectName == matItemNames[i])
             {
-                Debug.Log("It's a material!");
+                //Debug.Log("It's a material!");
                 isMat = true;
-                break;
+                for (int j = 0; j < levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded.Count; j++ )
+                {
+                    if(levelManagerInstance.GetComponent<Current_level_manager>().theLev.comboItemsNeeded[j].name == objectName)
+                    {
+                        isCombo = true;
+                        break;
+                    }
+                }
+                    break;
             }
         }
 

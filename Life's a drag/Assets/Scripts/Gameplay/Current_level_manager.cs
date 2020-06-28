@@ -28,6 +28,10 @@ public class Current_level_manager : MonoBehaviour
     string totalStarsObtainedKey;
     int totalStars;
 
+    //Temp text variables.
+    public Text bestStarsText;
+    public Text totalStarsText;
+
     //References to scriptableObject stuff so we don't hafta keep referencing the object itself.
     float timeFor3Stars;
     float timeFor2Stars;
@@ -103,6 +107,8 @@ public class Current_level_manager : MonoBehaviour
         //IF YOU HAVE A PROBLEM GETTING TO THE NEXT SCENE DOUBLE CHECK THIS!!!!!
         nextSceneName = theLev.levelDifficulty + "_" + theLev.levelTheme + "_" + (theLev.levelNum + 1).ToString();
 
+        Debug.Log(nextSceneName);
+
         //
         // **********************************************************************************
         // **********************************************************************************
@@ -119,11 +125,13 @@ public class Current_level_manager : MonoBehaviour
         starsKey = theLev.name + "_Best_Stars";
         //Debug.Log(starsKey);
         bestStars = PlayerPrefs.GetInt(starsKey);
+        bestStarsText.text = "Best stars this level: " + bestStars;
         Debug.Log("Best stars for this level is: " + bestStars);
 
         //This key is universal for all levels. Meaning that it should hold a total throughout all levels in the game.
         totalStarsObtainedKey = "Total_Stars_Obtained";
         totalStars = PlayerPrefs.GetInt(totalStarsObtainedKey);
+        totalStarsText.text = "Total stars in game: " + totalStars; 
         Debug.Log("Total stars the player has is: " + totalStars);
         
 
@@ -178,8 +186,13 @@ public class Current_level_manager : MonoBehaviour
         int numMats = 0;
         for (int j = 0; j < theLev.comboItemsNeeded.Count; j++)
         {
+            if(theLev.comboItemsNeeded[j].isAlsoMat)
+            {
+                numMats += 1;
+            }
             for (int k = 0; k < theLev.requiredItems.Count; k++)
             {
+                
                 if ((theLev.requiredItems[k].item.gameObject.name == theLev.comboItemsNeeded[j].mat1 || theLev.requiredItems[k].item.gameObject.name == theLev.comboItemsNeeded[j].mat2))
                 {
                     numMats += 1;
@@ -384,7 +397,7 @@ public class Current_level_manager : MonoBehaviour
      * Also, we will need to highlight that picture when we implement the pictures of the items into the scrolling UI to indicate
      * that it has been found.
      */
-    public void gotItem(string theName, string theTag, bool isMat)
+    public void gotItem(string theName, string theTag, bool isMat, bool isCombo)
     {
         string instanceName;
         if(theTag == "RequiredItem")
@@ -405,10 +418,23 @@ public class Current_level_manager : MonoBehaviour
             Destroy(theInstance);
             itemsLeft--;
         }
-        else if(theTag == "RequiredItem" && isMat)
+        else if(theTag == "RequiredItem" && isMat && !isCombo)
         {
             Debug.Log("The item is not a required item for level completion! It's also a material.");
             theInstance.transform.position = theInstance.GetComponent<Draggable_Item>().initialPos;
+        }
+
+        else if(isCombo && isMat)
+        {
+            Debug.Log("It's a combo item and a material.");
+            for(int i = 0; i < theLev.comboItemsNeeded.Count; i++)
+            {
+                if(theLev.comboItemsNeeded[i].name == theName)
+                {
+                    theInstance.transform.position = theLev.comboItemsNeeded[i].initialPos;
+                    break;
+                }
+            }
         }
 
             //Check if item is combo item AND if item is mat.
