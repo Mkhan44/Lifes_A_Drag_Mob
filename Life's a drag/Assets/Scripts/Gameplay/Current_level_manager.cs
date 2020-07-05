@@ -20,6 +20,11 @@ public class Current_level_manager : MonoBehaviour
     public Text objectiveText;
     private TimeSpan currentTime;
 
+
+    //Bottom UI stuff.
+    //public GameObject testImg;
+    Transform bottomUIParent;
+
     //PlayerPrefs keys for each level.
     string bestTimeKey;
     string starsKey;
@@ -201,6 +206,7 @@ public class Current_level_manager : MonoBehaviour
 
         }
 
+
         //Make all items that need to be invisible not show up.
         string tempName;
         GameObject tempObject;
@@ -211,12 +217,36 @@ public class Current_level_manager : MonoBehaviour
             invisObjects.Add(tempObject);
             invisObjects[k].SetActive(false);
         }
-      //  Debug.Log(numMats);
+
+
+        // Debug.Log(numMats);
         itemsLeft = (theLev.comboItemsNeeded.Count + (theLev.requiredItems.Count - numMats));
         numItemsLeftText.text = "Items left: " + itemsLeft;
+
+        //Fill in the bottom UI with items that are needed to complete the level by using Images.
+        //These images will be transparent until the corresponding item is found, then they
+        //will be filled in.
+        bottomUIParent = GameObject.Find("Sprite_Holder").transform;
+        GameObject tempIcon;
+        Image tempImg;
+        Color tempColor;
+
+        if (theLev.icons.Count != 0)
+        {
+            for (int l = 0; l < theLev.icons.Count; l++)
+            {
+                tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
+                tempIcon.transform.SetParent(bottomUIParent, false);
+                tempImg = tempIcon.GetComponent<Image>();
+                tempColor = tempImg.color;
+                tempColor.a = 0.5f;
+                tempImg.color = tempColor;
+             
+               // Debug.Log(theLev.icons[l] + " " + tempIcon.name);
+            }
+        }
+          
     }
-
-
 
     //Timer for each level. 
     public void currentTimer()
@@ -400,9 +430,19 @@ public class Current_level_manager : MonoBehaviour
     public void gotItem(string theName, string theTag, bool isMat, bool isCombo)
     {
         string instanceName;
+        string iconInstanceName = "";
+        GameObject iconInstance;
+        Image tempImg;
+        Color tempColor;
+
         if(theTag == "RequiredItem")
         {
             instanceName = theName + "(Clone)";
+            iconInstanceName = theName + "_Icon" + "(Clone)";
+            if (theLev.icons.Count != 0)
+            {
+                iconInstance = GameObject.Find(iconInstanceName);
+            }
         }
         else
         {
@@ -414,6 +454,16 @@ public class Current_level_manager : MonoBehaviour
         theInstance = GameObject.Find(instanceName);
         if(theTag == "RequiredItem" && !isMat)
         {
+            if(theLev.icons.Count != 0)
+            {
+                iconInstance = GameObject.Find(iconInstanceName);
+                tempImg = iconInstance.GetComponent<Image>();
+                tempColor = tempImg.color;
+                tempColor.a = 1.0f;
+                tempImg.color = tempColor;
+            }
+            
+           // iconInstance.GetComponent<Image>().color.a = 1f;
             //theInstance.SetActive(false);
             Destroy(theInstance);
             itemsLeft--;
