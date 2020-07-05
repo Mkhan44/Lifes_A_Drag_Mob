@@ -10,6 +10,8 @@ public class Current_level_manager : MonoBehaviour
 
     List<int> numInvis = new List<int>();
     List<GameObject> invisObjects = new List<GameObject>();
+    Scene thisScene;
+
     //How many items we need to complete the level.
     public int itemsLeft;
 
@@ -24,6 +26,7 @@ public class Current_level_manager : MonoBehaviour
     //Bottom UI stuff.
     //public GameObject testImg;
     Transform bottomUIParent;
+    public ScrollRect botScrollArea;
 
     //PlayerPrefs keys for each level.
     string bestTimeKey;
@@ -61,6 +64,7 @@ public class Current_level_manager : MonoBehaviour
     public GameObject nextLevelButton;
     public void Awake()
     {
+        thisScene = SceneManager.GetActiveScene();
         elapsedTime = 0f;
     }
 
@@ -245,6 +249,8 @@ public class Current_level_manager : MonoBehaviour
                // Debug.Log(theLev.icons[l] + " " + tempIcon.name);
             }
         }
+
+        ScrollToTop();
           
     }
 
@@ -682,4 +688,20 @@ public class Current_level_manager : MonoBehaviour
 
        return false;
    }
+
+    //For restart button.
+    public void restartScene()
+   {
+       SceneManager.LoadScene(thisScene.name);
+   }
+
+    //Scrolling for bottom UI to reset itself.
+    public void ScrollToTop()
+    {
+        botScrollArea.normalizedPosition = new Vector2(0, 1);
+    }
+    public void ScrollToBottom()
+    {
+        botScrollArea.normalizedPosition = new Vector2(0, 0);
+    }
 }

@@ -1073,6 +1073,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 27991881701354339, guid: f3524f9340928ac46bbd6ee47a026c35,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000091552734
+      objectReference: {fileID: 0}
+    - target: {fileID: 27991881701354339, guid: f3524f9340928ac46bbd6ee47a026c35,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0000038146973
+      objectReference: {fileID: 0}
     - target: {fileID: 568700693194880006, guid: f3524f9340928ac46bbd6ee47a026c35,
         type: 3}
       propertyPath: theLev
@@ -1094,6 +1104,16 @@ PrefabInstance:
       propertyPath: resultBox
       value: 
       objectReference: {fileID: 1942468235}
+    - target: {fileID: 568700693194880006, guid: f3524f9340928ac46bbd6ee47a026c35,
+        type: 3}
+      propertyPath: botScrollArea
+      value: 
+      objectReference: {fileID: 1904853874}
+    - target: {fileID: 7697703910541058351, guid: f3524f9340928ac46bbd6ee47a026c35,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8000005556253711980, guid: f3524f9340928ac46bbd6ee47a026c35,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -1103,6 +1123,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737570568527974065, guid: f3524f9340928ac46bbd6ee47a026c35,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -25.199951
       objectReference: {fileID: 0}
     - target: {fileID: 8737570568716252306, guid: f3524f9340928ac46bbd6ee47a026c35,
         type: 3}
@@ -2239,6 +2264,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2fc26709e1af0849bf8ffeeba075eed, type: 3}
+--- !u!114 &1904853874 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8000005556129238542, guid: f3524f9340928ac46bbd6ee47a026c35,
+    type: 3}
+  m_PrefabInstance: {fileID: 1001643938}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1927243352
 PrefabInstance:
   m_ObjectHideFlags: 0

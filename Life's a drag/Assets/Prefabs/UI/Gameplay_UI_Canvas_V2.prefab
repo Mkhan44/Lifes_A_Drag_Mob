@@ -112,8 +112,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.012465324, y: 0.5523463}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 68, y: -91.48}
-  m_SizeDelta: {x: -581.7852, y: -64.83445}
+  m_AnchoredPosition: {x: 48.829, y: -91.48}
+  m_SizeDelta: {x: -620.1272, y: -64.83445}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8360260006735807400
 CanvasRenderer:
@@ -320,8 +320,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.012465324, y: 0.5523463}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 68, y: -36.589996}
-  m_SizeDelta: {x: -581.7852, y: -64.83445}
+  m_AnchoredPosition: {x: 48.829, y: -36.589996}
+  m_SizeDelta: {x: -620.1272, y: -64.83445}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8314842147975302065
 CanvasRenderer:
@@ -1475,6 +1475,7 @@ GameObject:
   - component: {fileID: 8737570567525579142}
   - component: {fileID: 8737570567525579140}
   - component: {fileID: 8737570567525579143}
+  - component: {fileID: 6384921868641001246}
   m_Layer: 5
   m_Name: Retry_Button
   m_TagString: Untagged
@@ -1499,7 +1500,7 @@ RectTransform:
   m_AnchorMin: {x: 0.74859333, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 22.121094, y: -11}
-  m_SizeDelta: {x: -192.20007, y: 103.07202}
+  m_SizeDelta: {x: -192.20007, y: 100.77243}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8737570567525579140
 CanvasRenderer:
@@ -1538,6 +1539,60 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6384921868641001246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8737570567525579137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 8737570567525579143}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 568700693194880006}
+        m_MethodName: restartScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8737570567766526126
 GameObject:
   m_ObjectHideFlags: 0
