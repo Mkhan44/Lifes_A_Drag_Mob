@@ -9,6 +9,7 @@ public class Draggable_Item : MonoBehaviour
     public Vector3 initialPos;
     public Vector3 initialScale;
     public Vector3 shrinkScale;
+    GameObject levelMan;
 
     enum typeOfObject
     {
@@ -20,6 +21,9 @@ public class Draggable_Item : MonoBehaviour
 
     void Awake()
     {
+        //May want to change this later considering this is hardcoded essentially.
+        levelMan = GameObject.Find("LevelManager");
+
         initialPos = gameObject.transform.position;
         if (initialPos == new Vector3(2.4f, -3.5f, 0f))
         {
@@ -40,18 +44,20 @@ public class Draggable_Item : MonoBehaviour
     }
     void OnMouseDown()
     {
-        screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-        offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-
-        switch(thisItemIs)
+        if(!levelMan.GetComponent<Current_level_manager>().isPaused)
         {
-            case typeOfObject.requiredItem:
-                {
-                    if (transform.localScale.x >= 0.8f && transform.localScale.y >= 0.8f)
+            screenPoint = Camera.main.WorldToScreenPoint(transform.position);
+            offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+
+            switch (thisItemIs)
+            {
+                case typeOfObject.requiredItem:
                     {
-                        shrinkScale = new Vector3((initialScale.x - 0.5f), (initialScale.y - 0.5f), 1f);
-                        transform.localScale = shrinkScale;
-                    }
+                        if (transform.localScale.x >= 0.8f && transform.localScale.y >= 0.8f)
+                        {
+                            shrinkScale = new Vector3((initialScale.x - 0.5f), (initialScale.y - 0.5f), 1f);
+                            transform.localScale = shrinkScale;
+                        }
                         /*
                     else if (transform.localScale.x <= 0.3f && transform.localScale.y <= 0.3f)
                     {
@@ -60,22 +66,22 @@ public class Draggable_Item : MonoBehaviour
                         shrinkScale = initialScale;
                     }
                          */
-                    else
-                    {
-                        //Only shrink a little bit.
-                       shrinkScale = new Vector3((initialScale.x - 0.1f), (initialScale.y - 0.1f), 1f);
-                       transform.localScale = shrinkScale;
+                        else
+                        {
+                            //Only shrink a little bit.
+                            shrinkScale = new Vector3((initialScale.x - 0.1f), (initialScale.y - 0.1f), 1f);
+                            transform.localScale = shrinkScale;
+                        }
+                        break;
                     }
-                    break;
-                }
-            case typeOfObject.backgroundItem:
-                {
-                    //Figure out scales here so we can see how much to shrink it.
-                    if(transform.localScale.x >= 0.8f && transform.localScale.y >= 0.8f)
+                case typeOfObject.backgroundItem:
                     {
-                        shrinkScale = new Vector3((initialScale.x - 0.7f), (initialScale.y - 0.7f), 1f);
-                        transform.localScale = shrinkScale;
-                    }
+                        //Figure out scales here so we can see how much to shrink it.
+                        if (transform.localScale.x >= 0.8f && transform.localScale.y >= 0.8f)
+                        {
+                            shrinkScale = new Vector3((initialScale.x - 0.7f), (initialScale.y - 0.7f), 1f);
+                            transform.localScale = shrinkScale;
+                        }
                         /*
                     else if (transform.localScale.x <= 0.3f && transform.localScale.y <= 0.3f)
                     {
@@ -84,61 +90,70 @@ public class Draggable_Item : MonoBehaviour
                         shrinkScale = initialScale;
                     }
                          */
-                    else
-                    {
-                        //Don't shrink as much...kk.
-                        shrinkScale = new Vector3((initialScale.x - 0.2f), (initialScale.y - 0.2f), 1f);
-                        transform.localScale = shrinkScale;
+                        else
+                        {
+                            //Don't shrink as much...kk.
+                            shrinkScale = new Vector3((initialScale.x - 0.2f), (initialScale.y - 0.2f), 1f);
+                            transform.localScale = shrinkScale;
+                        }
+                        break;
                     }
-                    break;
-                }
-            default:
-                {
-                       break;
-                }
-             
+                default:
+                    {
+                        break;
+                    }
+
+            }
         }
+       
      
         
     }
 
     void OnMouseDrag()
     {
-        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-        curPosition.y = Mathf.Clamp(curPosition.y, -3.75f, 3.4f);
-        curPosition.x = Mathf.Clamp(curPosition.x, -2.55f, 2.55f);
-        transform.position = curPosition;
+        if (!levelMan.GetComponent<Current_level_manager>().isPaused)
+        {
+            Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+            Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+            curPosition.y = Mathf.Clamp(curPosition.y, -3.75f, 3.4f);
+            curPosition.x = Mathf.Clamp(curPosition.x, -2.55f, 2.55f);
+            transform.position = curPosition;
+        }
         
     }
 
     void OnMouseUp()
     {
-        if(gameObject.transform.position.y > -2.85f)
+        if (!levelMan.GetComponent<Current_level_manager>().isPaused)
         {
-            transform.localScale = initialScale;
-        }
-        
-        switch(thisItemIs)
-        {
-            case typeOfObject.requiredItem:
-                {
-                    break;
-                }
-            case typeOfObject.backgroundItem:
-                {
-                    if (transform.position.y > -2.95f)
+            if (gameObject.transform.position.y > -2.85f)
+            {
+                transform.localScale = initialScale;
+            }
+
+            switch (thisItemIs)
+            {
+                case typeOfObject.requiredItem:
                     {
-                        transform.position = initialPos;
+                        break;
                     }
-                    break;
-                }
-            default:
-                {
-                  //  transform.position = initialPos;
-                    break;
-                }
-                
+                case typeOfObject.backgroundItem:
+                    {
+                        if (transform.position.y > -2.95f)
+                        {
+                            transform.position = initialPos;
+                        }
+                        break;
+                    }
+                default:
+                    {
+                        //  transform.position = initialPos;
+                        break;
+                    }
+
+            }
         }
+       
     }
 }

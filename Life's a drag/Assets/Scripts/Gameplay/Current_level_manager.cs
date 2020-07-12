@@ -23,6 +23,10 @@ public class Current_level_manager : MonoBehaviour
     private TimeSpan currentTime;
 
 
+    //Pause menu
+    public GameObject pauseMenuUI;
+    public bool isPaused;
+
     //Bottom UI stuff.
     //public GameObject testImg;
     Transform bottomUIParent;
@@ -76,7 +80,7 @@ public class Current_level_manager : MonoBehaviour
     }
     void Update()
     {
-        if (!levelComplete)
+        if (!levelComplete && !isPaused)
         {
             currentTimer();
         }
@@ -111,6 +115,7 @@ public class Current_level_manager : MonoBehaviour
         timeForStarsStr = "***: " + timeForStarsFormat.ToString("mm':'ss");
         timeForStarsText.text = timeForStarsStr;
 
+        isPaused = false;
 
         //Might be plus 1...? Since we need the NEXT scene name. 
         //IF YOU HAVE A PROBLEM GETTING TO THE NEXT SCENE DOUBLE CHECK THIS!!!!!
@@ -694,6 +699,15 @@ public class Current_level_manager : MonoBehaviour
    {
        SceneManager.LoadScene(thisScene.name);
    }
+
+    //Gives pop-up menu for pausing the game.
+    public void pause()
+    {
+        pauseMenuUI.SetActive(true);
+        isPaused = true;
+        Time.timeScale = 0f;
+        Debug.Log("Game paused.");
+    }
 
     //Scrolling for bottom UI to reset itself.
     public void ScrollToTop()
