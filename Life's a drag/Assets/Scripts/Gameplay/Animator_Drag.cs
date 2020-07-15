@@ -49,17 +49,20 @@ public class Animator_Drag : MonoBehaviour
         //mouseDistance = Mathf.Abs(mouseDragEnd.x - mouseDragStart.x);
         mouseDistance = Mathf.Abs(mouseDragEnd.y - mouseDragStart.y);
         //Debug.Log("Difference in posy = " + mouseDistance);
-
-        if(mouseDistance > 7)
+        if (!levelManager.GetComponent<Current_level_manager>().isPaused)
         {
-            animator.SetBool("DoAnimation", true);
-            if (!aniFin)
+            if (mouseDistance > 7)
             {
-                StartCoroutine(aniDone());
-                aniFin = true;
+                animator.SetBool("DoAnimation", true);
+                if (!aniFin)
+                {
+                    StartCoroutine(aniDone());
+                    aniFin = true;
+                }
+
             }
-          
         }
+        
     }
 
     IEnumerator aniDone()
