@@ -60,6 +60,7 @@ public class Current_level_manager : MonoBehaviour
     public GameObject combineBox2;
     public GameObject resultBox;
     bool resultFilled = false;
+    public GameObject itemGotParticlePrefab;
 
     //Level completed variables.
     bool levelComplete = false;
@@ -324,6 +325,7 @@ public class Current_level_manager : MonoBehaviour
             }
             else
             {
+                //Checking for if 2 of the same item (basically overlapping cause of size) happens.
                 if (combineBox1.GetComponent<Combine_Collision>().objectName == combineBox2.GetComponent<Combine_Collision>().objectName)
                 {
                     Debug.Log("Yo, double collision of the same item!");
@@ -335,7 +337,7 @@ public class Current_level_manager : MonoBehaviour
                             combineBox1.GetComponent<Combine_Collision>().tempObject.transform.position = theLev.comboItemsNeeded[i].initialPos;
                             break;
                         }
-                        //If we get past the last item, then it has to be either a required item or a draggable item, so just throw it to the initial position.
+                        //If we get passed the last item, then it has to be either a required item or a draggable item, so just throw it to the initial position....Nevermind, forgot it could be a freakin' combo item >.>
                         if (i == theLev.comboItemsNeeded.Count - 1)
                         {
                             combineBox1.GetComponent<Combine_Collision>().tempObject.transform.position = combineBox1.GetComponent<Combine_Collision>().tempObject.GetComponent<Draggable_Item>().initialPos;
@@ -424,8 +426,23 @@ public class Current_level_manager : MonoBehaviour
             {
                 //Item combo failed, try again!
                 Debug.Log("Combo failed!");
-                item1.transform.position = item1.GetComponent<Draggable_Item>().initialPos;
-                item2.transform.position = item2.GetComponent<Draggable_Item>().initialPos;
+                if(item1.GetComponent<Draggable_Item>().initialPos != new Vector3(0,0,0))
+                {
+                    item1.transform.position = item1.GetComponent<Draggable_Item>().initialPos;
+                }
+                else
+                {
+                    item1.transform.position = theLev.comboItemsNeeded[i].initialPos;
+                }
+
+                if (item2.GetComponent<Draggable_Item>().initialPos != new Vector3(0, 0, 0))
+                {
+                    item2.transform.position = item2.GetComponent<Draggable_Item>().initialPos;
+                }
+                else
+                {
+                    item2.transform.position = theLev.comboItemsNeeded[i].initialPos;
+                }
                 break;
             }
         }
@@ -472,6 +489,7 @@ public class Current_level_manager : MonoBehaviour
                 tempColor = tempImg.color;
                 tempColor.a = 1.0f;
                 tempImg.color = tempColor;
+                Instantiate(itemGotParticlePrefab, iconInstance.transform);
             }
             
            // iconInstance.GetComponent<Image>().color.a = 1f;
