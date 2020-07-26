@@ -30,7 +30,11 @@ public class Current_level_manager : MonoBehaviour
     //Bottom UI stuff.
     //public GameObject testImg;
     Transform bottomUIParent;
+    Transform zoomedUIParent;
     public ScrollRect botScrollArea;
+    public ScrollRect ZoomedScrollArea;
+    public GameObject shrinkButton;
+    public bool isZoomed;
 
     //PlayerPrefs keys for each level.
     string bestTimeKey;
@@ -117,6 +121,7 @@ public class Current_level_manager : MonoBehaviour
         timeForStarsText.text = timeForStarsStr;
 
         isPaused = false;
+        isZoomed = false;
 
         //Might be plus 1...? Since we need the NEXT scene name. 
         //IF YOU HAVE A PROBLEM GETTING TO THE NEXT SCENE DOUBLE CHECK THIS!!!!!
@@ -237,6 +242,19 @@ public class Current_level_manager : MonoBehaviour
         //These images will be transparent until the corresponding item is found, then they
         //will be filled in.
         bottomUIParent = GameObject.Find("Sprite_Holder").transform;
+        zoomedUIParent = GameObject.Find("Sprite_Holder2").transform;
+
+        //Bottom UI initialization to hide it. Will have to actually hide it instead of just making it transparent.
+        shrinkButton.SetActive(false);
+        GameObject child = ZoomedScrollArea.transform.GetChild(0).gameObject;
+        Image theBG;
+        theBG = child.GetComponent<Image>();
+        Color tempZoomColor;
+        tempZoomColor = theBG.color;
+        tempZoomColor.a = 0.0f;
+        theBG.color = tempZoomColor;
+
+
         GameObject tempIcon;
         Image tempImg;
         Color tempColor;
@@ -247,6 +265,16 @@ public class Current_level_manager : MonoBehaviour
             {
                 tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
                 tempIcon.transform.SetParent(bottomUIParent, false);
+                tempImg = tempIcon.GetComponent<Image>();
+                tempColor = tempImg.color;
+                tempColor.a = 0.5f;
+                tempImg.color = tempColor;
+
+
+                //Update the zoomed in version as well.
+                tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
+                tempIcon.name = tempIcon.name + "2";
+                tempIcon.transform.SetParent(zoomedUIParent, false);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
                 tempColor.a = 0.5f;
@@ -292,6 +320,35 @@ public class Current_level_manager : MonoBehaviour
             numStarsPassed++;
         }
 
+    }
+
+    //Bottom UI zoom and small area functions. 
+    //Gotta make it so that when zoom is in active, player can't affect anything.
+    //Also, make sure that when you zoom out again, the zoomed in version is still being updated in the background when new items are found.
+    public void zoomInActivate()
+    {
+        GameObject child = ZoomedScrollArea.transform.GetChild(0).gameObject;
+        Image tempImg;
+        tempImg = child.GetComponent<Image>();
+        Color tempZoomColor;
+        tempZoomColor = tempImg.color;
+        tempZoomColor.a = 1.0f;
+        tempImg.color = tempZoomColor;
+        //Zoom in is active.
+        isZoomed = true;
+    }
+
+    public void zoomInDeactivate()
+    {
+        GameObject child = ZoomedScrollArea.transform.GetChild(0).gameObject;
+        Image tempImg;
+        tempImg = child.GetComponent<Image>();
+        Color tempZoomColor;
+        tempZoomColor = tempImg.color;
+        tempZoomColor.a = 0.0f;
+        tempImg.color = tempZoomColor;
+        //Zoom in is not active.
+        isZoomed = false;
     }
 
   
@@ -418,7 +475,9 @@ public class Current_level_manager : MonoBehaviour
                 Debug.Log("Combo successful!");
                 Destroy(item1);
                 Destroy(item2);
-                Instantiate(theLev.comboItemsNeeded[i].theItem, new Vector3(2.4f,-3.5f,0f), Quaternion.Euler(0f, 0f, 0f));
+                //Play animation to signify to player where the new item appeared!
+                Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
+                //Instantiate(theLev.comboItemsNeeded[i].theItem, new Vector3(2.4f,-3.5f,0f), Quaternion.Euler(0f, 0f, 0f));
                 break;
             }
            
@@ -490,6 +549,14 @@ public class Current_level_manager : MonoBehaviour
                 tempColor.a = 1.0f;
                 tempImg.color = tempColor;
                 Instantiate(itemGotParticlePrefab, iconInstance.transform);
+
+                //For zoomed in version.
+                iconInstance = GameObject.Find(iconInstanceName + "2");
+                tempImg = iconInstance.GetComponent<Image>();
+                tempColor = tempImg.color;
+                tempColor.a = 1.0f;
+                tempImg.color = tempColor;
+              //  Instantiate(itemGotParticlePrefab, iconInstance.transform);
             }
             
            // iconInstance.GetComponent<Image>().color.a = 1f;
@@ -534,6 +601,11 @@ public class Current_level_manager : MonoBehaviour
     void levelCompleted()
     {
         Debug.Log("You found all the items!");
+
+        //Don't do these 2 lines of code, fix this later!
+        GameObject testScroll = GameObject.Find("Bottom_Scroll_Zoomed");
+        testScroll.SetActive(false);
+
         //Make the level up buttons visible. Make a pop up that shows your best time, etc.
         levelComplete = true;
         levelCompleteText.enabled = true;
@@ -675,6 +747,7 @@ public class Current_level_manager : MonoBehaviour
 
    public void loadNextLevel()
     {
+        Debug.Log("Button clicked.");
        string tempLoad = "testlevel2";
        if(DoesSceneExist(nextSceneName))
        {
@@ -731,9 +804,11 @@ public class Current_level_manager : MonoBehaviour
     public void ScrollToTop()
     {
         botScrollArea.normalizedPosition = new Vector2(0, 1);
+        ZoomedScrollArea.normalizedPosition = new Vector2(0, 1);
     }
     public void ScrollToBottom()
     {
         botScrollArea.normalizedPosition = new Vector2(0, 0);
+        ZoomedScrollArea.normalizedPosition = new Vector2(0, 0);
     }
 }

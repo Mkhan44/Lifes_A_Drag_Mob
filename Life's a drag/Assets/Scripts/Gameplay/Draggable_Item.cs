@@ -16,7 +16,15 @@ public class Draggable_Item : MonoBehaviour
         requiredItem,
         backgroundItem
     }
+    
+    enum DragStatus
+    {
+        canDrag,
+        cantDrag
+    }
 
+
+    DragStatus canWeDrag;
     typeOfObject thisItemIs;
 
     void Awake()
@@ -40,11 +48,12 @@ public class Draggable_Item : MonoBehaviour
     }
     void Update()
     {
-        
+        checkDragStatus();
     }
     void OnMouseDown()
     {
-        if(!levelMan.GetComponent<Current_level_manager>().isPaused)
+        //if(!levelMan.GetComponent<Current_level_manager>().isPaused)
+        if (canWeDrag == DragStatus.canDrag)
         {
             screenPoint = Camera.main.WorldToScreenPoint(transform.position);
             offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
@@ -112,7 +121,7 @@ public class Draggable_Item : MonoBehaviour
 
     void OnMouseDrag()
     {
-        if (!levelMan.GetComponent<Current_level_manager>().isPaused)
+        if (canWeDrag == DragStatus.canDrag)
         {
             Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
             Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
@@ -125,7 +134,7 @@ public class Draggable_Item : MonoBehaviour
 
     void OnMouseUp()
     {
-        if (!levelMan.GetComponent<Current_level_manager>().isPaused)
+        if (canWeDrag == DragStatus.canDrag)
         {
             if (gameObject.transform.position.y > -2.85f)
             {
@@ -155,5 +164,21 @@ public class Draggable_Item : MonoBehaviour
             }
         }
        
+    }
+
+    void checkDragStatus()
+    {
+        if (levelMan.GetComponent<Current_level_manager>().isPaused || levelMan.GetComponent<Current_level_manager>().isZoomed)
+        {
+            canWeDrag = DragStatus.cantDrag;
+          //  Debug.Log("We can't drag!");
+        }
+        else
+        {
+            canWeDrag = DragStatus.canDrag;
+            //Debug.Log("We can drag!");
+        }
+
+        
     }
 }
