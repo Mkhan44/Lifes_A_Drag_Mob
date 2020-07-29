@@ -34,6 +34,7 @@ public class Current_level_manager : MonoBehaviour
     public ScrollRect botScrollArea;
     public ScrollRect ZoomedScrollArea;
     public GameObject shrinkButton;
+    public GameObject expandButton;
     public bool isZoomed;
 
     //PlayerPrefs keys for each level.
@@ -605,6 +606,8 @@ public class Current_level_manager : MonoBehaviour
         //Don't do these 2 lines of code, fix this later!
         GameObject testScroll = GameObject.Find("Bottom_Scroll_Zoomed");
         testScroll.SetActive(false);
+
+        expandButton.SetActive(false);
 
         //Make the level up buttons visible. Make a pop up that shows your best time, etc.
         levelComplete = true;
