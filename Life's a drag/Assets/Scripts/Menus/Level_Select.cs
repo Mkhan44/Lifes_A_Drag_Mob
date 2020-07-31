@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Level_Select : MonoBehaviour
 {
 
-    public static string levelSceneName;
+    public string levelSceneName;
 
     public void setName(string levelName)
     {

@@ -44,6 +44,8 @@ public class Current_level_manager : MonoBehaviour
     float bestTime;
     string totalStarsObtainedKey;
     int totalStars;
+    string totalThemeStarsKey;
+    int totalThemeStars;
 
     //Temp text variables.
     public Text bestStarsText;
@@ -148,6 +150,10 @@ public class Current_level_manager : MonoBehaviour
         bestStars = PlayerPrefs.GetInt(starsKey);
         bestStarsText.text = "Best stars this level: " + bestStars;
         Debug.Log("Best stars for this level is: " + bestStars);
+
+        //For the current theme amount of stars. (office, house, etc.)
+        totalThemeStarsKey = theLev.levelTheme + "_Stars_Obtained";
+        totalThemeStars = PlayerPrefs.GetInt(totalThemeStarsKey);
 
         //This key is universal for all levels. Meaning that it should hold a total throughout all levels in the game.
         totalStarsObtainedKey = "Total_Stars_Obtained";
@@ -638,18 +644,21 @@ public class Current_level_manager : MonoBehaviour
                     {
                         PlayerPrefs.SetInt(starsKey, (bestStars + 3));
                         PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 3));
+                        PlayerPrefs.SetInt(totalThemeStarsKey, (totalThemeStars + 3));
                         break;
                     }
                 case 1:
                     {
                         PlayerPrefs.SetInt(starsKey, (bestStars + 2));
                         PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 2));
+                        PlayerPrefs.SetInt(totalThemeStarsKey, (totalThemeStars + 2));
                         break;
                     }
                 case 2:
                     {
                         PlayerPrefs.SetInt(starsKey, (bestStars + 1));
                         PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 1));
+                        PlayerPrefs.SetInt(totalThemeStarsKey, (totalThemeStars + 1));
                         break;
                     }
                 default:
@@ -668,12 +677,14 @@ public class Current_level_manager : MonoBehaviour
                     {
                         PlayerPrefs.SetInt(starsKey, (bestStars + 2));
                         PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 2));
+                        PlayerPrefs.SetInt(totalThemeStarsKey, (totalThemeStars + 2));
                         break;
                     }
                 case 1:
                     {
                         PlayerPrefs.SetInt(starsKey, (bestStars + 1));
                         PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 1));
+                        PlayerPrefs.SetInt(totalThemeStarsKey, (totalThemeStars + 1));
                         break;
                     }
                 case 2:
@@ -696,6 +707,7 @@ public class Current_level_manager : MonoBehaviour
                         {
                             PlayerPrefs.SetInt(starsKey, (bestStars + 1));
                             PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 1));
+                            PlayerPrefs.SetInt(totalThemeStarsKey, (totalThemeStars + 1));
                             break;
                         }
                     case 1:

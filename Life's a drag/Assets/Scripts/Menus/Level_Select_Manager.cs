@@ -22,6 +22,16 @@ public class Level_Select_Manager : MonoBehaviour
         Debug.Log("Theme is: " + theme);
     }
 
+    public string getTheme()
+    {
+        return theme;
+    }
+
+    public string getDiff()
+    {
+        return difficulty;
+    }
+
     public string getDiffAndTheme()
     {
         string combo;

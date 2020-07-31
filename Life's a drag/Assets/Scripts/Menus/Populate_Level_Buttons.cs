@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class Populate_Level_Buttons : MonoBehaviour
@@ -8,8 +9,9 @@ public class Populate_Level_Buttons : MonoBehaviour
     //Populate this list with the amount of buttons that we will be using
     //This way we can manually control the number of levels in a theme at any given point.
     public List<GameObject> numButtons = new List<GameObject>();
-    public GameObject levelSelectManager;
-
+    public Level_Select_Manager levelSelectManager;
+    public int numThemeStars;
+    public TextMeshProUGUI numStarsText;
     public void Start()
     {
    
@@ -20,6 +22,22 @@ public class Populate_Level_Buttons : MonoBehaviour
         StartCoroutine(waitTime());
     }
     
+
+    //Function to display the number of total stars the player has for this theme.
+    void checkNumThemeStars()
+    {
+        string theme;
+        theme = levelSelectManager.getTheme();
+        string themeStarsKey;
+
+        themeStarsKey = theme + "_Stars_Obtained";
+
+        numThemeStars = PlayerPrefs.GetInt(themeStarsKey);
+
+        numStarsText.text = "Num office stars: " + numThemeStars;
+
+    }
+
     //Cycle through each button in the list, find it's child star picture object, and then populate it with the amount of stars
     //which the player has obtained for that level.
 
@@ -29,13 +47,17 @@ public class Populate_Level_Buttons : MonoBehaviour
         GameObject starChild1;
         GameObject starChild2;
         GameObject starChild3;
+        GameObject starChild4;
         string diffTheme;
         string fullLevName;
         string starsKey;
         int starsObtained;
+        int prevBestStars = 0;
+        int starReq;
+        string themeCompare;
 
         //This string is now in the format of "difficulty_theme_"
-        diffTheme = levelSelectManager.GetComponent<Level_Select_Manager>().getDiffAndTheme();
+        diffTheme = levelSelectManager.getDiffAndTheme();
 
         for(int i = 0; i < numButtons.Count; i++)
         {
@@ -44,6 +66,7 @@ public class Populate_Level_Buttons : MonoBehaviour
             starChild1 = numButtons[i].transform.GetChild(1).gameObject;
             starChild2 = numButtons[i].transform.GetChild(2).gameObject;
             starChild3 = numButtons[i].transform.GetChild(3).gameObject;
+            starChild4 = numButtons[i].transform.GetChild(4).gameObject;
 
             //Get the name of the level, we'll use this + star key to get the amt of stars.
             fullLevName = diffTheme + (i + 1).ToString();
@@ -53,7 +76,7 @@ public class Populate_Level_Buttons : MonoBehaviour
 
             starsObtained = PlayerPrefs.GetInt(starsKey);
 
-           // Debug.Log("The starsKey is: " + starsKey);
+            //Debug.Log("The starsKey is: " + starsKey);
             //Debug.Log("The stars obtained for stage " + (i + 1) + " are: " + starsObtained);
 
             //Swap the image.
@@ -61,7 +84,24 @@ public class Populate_Level_Buttons : MonoBehaviour
             {
                 case 0:
                     {
-                        starChild0.SetActive(true);
+                        //Testing if the level needs to be locked.
+                        if(numButtons[i].GetComponent<Star_Req>().hasRequirement)
+                        {
+                          starReq =  numButtons[i].GetComponent<Star_Req>().requiredStars;
+                            if(numThemeStars < starReq)
+                            {
+                                numButtons[i].GetComponent<Button>().interactable = false;
+                                starChild4.SetActive(true);
+                            }
+                            else
+                            {
+                                starChild0.SetActive(true);
+                            }
+                        }
+                        else
+                        {
+                            starChild0.SetActive(true);
+                        }
                         break;
                     }
                 case 1:
@@ -88,6 +128,7 @@ public class Populate_Level_Buttons : MonoBehaviour
     public IEnumerator waitTime()
     {
         yield return new WaitForSeconds(0.2f);
+        checkNumThemeStars();
         displayStars();
     }
     
