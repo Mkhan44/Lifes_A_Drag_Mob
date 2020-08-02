@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Easy_House_3
+  m_EditorClassIdentifier: 
+  levelName: Dinner is served
+  levelTheme: House
+  levelDifficulty: Easy
+  levelNum: 3
+  bestTime: 0
+  timeForThreeStars: 25
+  timeForTwoStars: 50
+  objective: Enjoy the food!
+  requiredItems:
+  - {fileID: 11400000, guid: 624d8d732d5081a479a99220a3174cda, type: 2}
+  - {fileID: 11400000, guid: 598c72ed63b05594c948e465562d02cb, type: 2}
+  - {fileID: 11400000, guid: 4284f25240947654fbebc6f29cc17a79, type: 2}
+  - {fileID: 11400000, guid: 74ea7a974d4056c46bb9030378f6c881, type: 2}
+  - {fileID: 11400000, guid: 661b073179acb44478b347041eb745a5, type: 2}
+  - {fileID: 11400000, guid: 032774bfb39cd5948bfac9ece519e43a, type: 2}
+  - {fileID: 11400000, guid: b793db10debdbe749b47d1a54465481c, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: 0933a7fc755d33146822e12f9f47d055, type: 2}
+  - {fileID: 11400000, guid: 57720c162a8066448a8e79fe650862ab, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: a75d16625f83a0146a3d88a39fc8d379, type: 3}
+  - {fileID: 5745295521531094116, guid: 78ff67eb52d50664f9379288019d07e6, type: 3}
+  - {fileID: 5745295521531094116, guid: bc8051509c1e197459c7cf2fed161e04, type: 3}
+  - {fileID: 5745295521531094116, guid: fb5fb1837003dd54db470b9013c208d5, type: 3}
+  - {fileID: 5745295521531094116, guid: 387efd0a9f2a2d54690b73eae138fd8b, type: 3}
+  aniSecondsToWait: 0.45

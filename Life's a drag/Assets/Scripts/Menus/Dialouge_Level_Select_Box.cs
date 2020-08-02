@@ -15,7 +15,10 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
     public Text bestTimeText;
     public Text LevelNameText;
     public Level_Select_Manager levelMan;
+
+    Populate_Level_Buttons levelInfo;
     string fullLevName;
+    string levNameDisplay;
     public int levelNumber;
 
 
@@ -37,9 +40,16 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
         string bestTimeKey;
         string bestTimeStr;
         float bestTime;
+        GameObject currentBatchOfLevels;
         TimeSpan bestTimeFormat;
 
         levNameTemp = levelMan.getDiffAndTheme();
+        currentBatchOfLevels = GameObject.Find(levNameTemp + "Levels");
+
+        levelInfo = currentBatchOfLevels.GetComponent<Populate_Level_Buttons>();
+
+
+        levNameDisplay = levelInfo.numButtons[levelNumber - 1].GetComponent<Button_Level_Info>().stageInfo.levelName;
         fullLevName = levNameTemp + levelNumber;
         bestTimeKey = fullLevName + "_Best_Time";
 
@@ -47,7 +57,8 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
         bestTimeFormat = TimeSpan.FromSeconds(bestTime);
         bestTimeStr = "Best time: " + bestTimeFormat.ToString("mm':'ss");
         bestTimeText.text = bestTimeStr;
-        LevelNameText.text = "This is level: " + levelNumber;
+        LevelNameText.text = levNameDisplay;
+       //LevelNameText.text = "This is level: " + levelNumber;
 
     }
 
@@ -60,9 +71,8 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
 
     public IEnumerator waitTime()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         initializeBox();
-        Debug.Log("Full level name is: " + fullLevName);
     }
     
 }

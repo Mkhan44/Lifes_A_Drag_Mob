@@ -52,9 +52,8 @@ public class Populate_Level_Buttons : MonoBehaviour
         string fullLevName;
         string starsKey;
         int starsObtained;
-        int prevBestStars = 0;
         int starReq;
-        string themeCompare;
+       
 
         //This string is now in the format of "difficulty_theme_"
         diffTheme = levelSelectManager.getDiffAndTheme();
@@ -78,16 +77,15 @@ public class Populate_Level_Buttons : MonoBehaviour
 
             //Debug.Log("The starsKey is: " + starsKey);
             //Debug.Log("The stars obtained for stage " + (i + 1) + " are: " + starsObtained);
-
+            starReq = numButtons[i].GetComponent<Button_Level_Info>().stageInfo.starRequirement;
             //Swap the image.
             switch(starsObtained)
             {
                 case 0:
                     {
                         //Testing if the level needs to be locked.
-                        if(numButtons[i].GetComponent<Star_Req>().hasRequirement)
+                        if(starReq > 0)
                         {
-                          starReq =  numButtons[i].GetComponent<Star_Req>().requiredStars;
                             if(numThemeStars < starReq)
                             {
                                 numButtons[i].GetComponent<Button>().interactable = false;
