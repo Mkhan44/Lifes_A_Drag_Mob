@@ -41,4 +41,10 @@ public class Level_Select_Manager : MonoBehaviour
         return combo;
     }
 
+    public void delPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+        Debug.Log("All playerprefs deleted!");
+    }
+
 }
