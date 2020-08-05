@@ -68,6 +68,7 @@ public class Current_level_manager : MonoBehaviour
     public GameObject resultBox;
     bool resultFilled = false;
     public GameObject itemGotParticlePrefab;
+    public GameObject itemSpawnParticlePrefab;
 
     //Level completed variables.
     bool levelComplete = false;
@@ -483,6 +484,7 @@ public class Current_level_manager : MonoBehaviour
                 Destroy(item1);
                 Destroy(item2);
                 //Play animation to signify to player where the new item appeared!
+                Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
                 Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
                 //Instantiate(theLev.comboItemsNeeded[i].theItem, new Vector3(2.4f,-3.5f,0f), Quaternion.Euler(0f, 0f, 0f));
                 break;

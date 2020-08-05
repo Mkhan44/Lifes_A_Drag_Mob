@@ -48,6 +48,7 @@ public class Draggable_Item : MonoBehaviour
     }
     void Update()
     {
+        //May move this later.
         checkDragStatus();
     }
     void OnMouseDown()
@@ -58,13 +59,46 @@ public class Draggable_Item : MonoBehaviour
             screenPoint = Camera.main.WorldToScreenPoint(transform.position);
             offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
 
+            //Literally using the same code atm, may have to switch this up.
             switch (thisItemIs)
             {
                 case typeOfObject.requiredItem:
                     {
-                        if (transform.localScale.x >= 0.8f && transform.localScale.y >= 0.8f)
+
+                        if (transform.localScale.x >= 1.0f && transform.localScale.y >= 1.0f)
                         {
                             shrinkScale = new Vector3((initialScale.x - 0.5f), (initialScale.y - 0.5f), 1f);
+                            transform.localScale = shrinkScale;
+                        }
+                        //Figure out scales here so we can see how much to shrink it.
+                        else if (transform.localScale.x >= 0.5f && transform.localScale.y >= 0.5f)
+                        {
+                            //shrinkScale = new Vector3((initialScale.x - 0.3f), (initialScale.y - 0.3f), 1f);
+                            transform.localScale = shrinkScale;
+                        }
+                        else if (transform.localScale.x < 0.5f && transform.localScale.x >= 0.2f && transform.localScale.y < 0.5f && transform.localScale.y >= 0.2f)
+                        {
+                          //  Debug.Log("We're in else if");
+                            //Barely shrink cause it's already small.
+                            shrinkScale = new Vector3((initialScale.x - 0.05f), (initialScale.y - 0.05f), 1f);
+                            transform.localScale = shrinkScale;
+                        }
+
+                        else
+                        {
+                            Debug.Log("We're in else");
+                            //Don't shrink.
+                            shrinkScale = initialScale;
+                            transform.localScale = shrinkScale;
+
+                            //shrinkScale = new Vector3((initialScale.x - 0.2f), (initialScale.y - 0.2f), 1f);
+                            //transform.localScale = shrinkScale;
+                        }
+
+                        /*
+                        if (transform.localScale.x >= 0.8f && transform.localScale.y >= 0.8f)
+                        {
+                            shrinkScale = new Vector3((initialScale.x - 0.3f), (initialScale.y - 0.3f), 1f);
                             transform.localScale = shrinkScale;
                         }
                         /*
@@ -74,36 +108,47 @@ public class Draggable_Item : MonoBehaviour
                         new Vector3((initialScale.x - 0.1f), (initialScale.y - 0.1f), 1f);
                         shrinkScale = initialScale;
                     }
-                         */
+                         
                         else
                         {
                             //Only shrink a little bit.
                             shrinkScale = new Vector3((initialScale.x - 0.1f), (initialScale.y - 0.1f), 1f);
                             transform.localScale = shrinkScale;
                         }
+                        */
+                        
                         break;
                     }
                 case typeOfObject.backgroundItem:
                     {
-                        //Figure out scales here so we can see how much to shrink it.
-                        if (transform.localScale.x >= 0.8f && transform.localScale.y >= 0.8f)
+                        if (transform.localScale.x >= 1.0f && transform.localScale.y >= 1.0f)
                         {
-                            shrinkScale = new Vector3((initialScale.x - 0.7f), (initialScale.y - 0.7f), 1f);
+                            shrinkScale = new Vector3((initialScale.x - 0.5f), (initialScale.y - 0.5f), 1f);
                             transform.localScale = shrinkScale;
                         }
-                        /*
-                    else if (transform.localScale.x <= 0.3f && transform.localScale.y <= 0.3f)
-                    {
-                        //Barely shrink cause it's already small.
-                        shrinkScale = new Vector3((initialScale.x - 0.1f), (initialScale.y - 0.1f), 1f);
-                        shrinkScale = initialScale;
-                    }
-                         */
+                        //Figure out scales here so we can see how much to shrink it.
+                        else if (transform.localScale.x >= 0.5f && transform.localScale.y >= 0.5f)
+                        {
+                            shrinkScale = new Vector3((initialScale.x - 0.3f), (initialScale.y - 0.3f), 1f);
+                            transform.localScale = shrinkScale;
+                        }
+                        else if (transform.localScale.x < 0.5f && transform.localScale.x >= 0.2f && transform.localScale.y < 0.5f && transform.localScale.y >= 0.2f)
+                        {
+                            //Debug.Log("We're in else if");
+                            //Barely shrink cause it's already small.
+                            shrinkScale = new Vector3((initialScale.x - 0.05f), (initialScale.y - 0.05f), 1f);
+                            transform.localScale = shrinkScale;
+                        }
+                         
                         else
                         {
-                            //Don't shrink as much...kk.
-                            shrinkScale = new Vector3((initialScale.x - 0.2f), (initialScale.y - 0.2f), 1f);
+                           // Debug.Log("We're in else");
+                            //Don't shrink.
+                            shrinkScale = initialScale;
                             transform.localScale = shrinkScale;
+
+                            //shrinkScale = new Vector3((initialScale.x - 0.2f), (initialScale.y - 0.2f), 1f);
+                            //transform.localScale = shrinkScale;
                         }
                         break;
                     }
@@ -111,7 +156,6 @@ public class Draggable_Item : MonoBehaviour
                     {
                         break;
                     }
-
             }
         }
        
