@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 using UnityEngine.SceneManagement;
 public class Current_level_manager : MonoBehaviour
 {
@@ -73,8 +74,9 @@ public class Current_level_manager : MonoBehaviour
     //Level completed variables.
     bool levelComplete = false;
     private string nextSceneName;
-    public Text levelCompleteText;
-    public GameObject nextLevelButton;
+    public GameObject levelCompleteHolder;
+    public TextMeshProUGUI finishTimeEndText;
+
     public void Awake()
     {
         thisScene = SceneManager.GetActiveScene();
@@ -126,6 +128,10 @@ public class Current_level_manager : MonoBehaviour
 
         isPaused = false;
         isZoomed = false;
+
+
+        //Initialize the end level stuff to false.
+        levelCompleteHolder.SetActive(false);
 
         //Might be plus 1...? Since we need the NEXT scene name. 
         //IF YOU HAVE A PROBLEM GETTING TO THE NEXT SCENE DOUBLE CHECK THIS!!!!!
@@ -185,8 +191,7 @@ public class Current_level_manager : MonoBehaviour
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
      
 
-        levelCompleteText.enabled = false;
-        nextLevelButton.SetActive(false);
+      
 
         //Spawn in the items for the level.
         for (int i = 0; i < theLev.requiredItems.Count; i++)
@@ -609,6 +614,14 @@ public class Current_level_manager : MonoBehaviour
 
     void levelCompleted()
     {
+
+        //Temp variables to hold records/stars for end screen text. Will probably use these to call functions when we make this into it's own script.
+        float finishTime;
+        int tempNumStars;
+
+        finishTime = elapsedTime;
+
+
         Debug.Log("You found all the items!");
 
         //Don't do these 2 lines of code, fix this later!
@@ -619,7 +632,7 @@ public class Current_level_manager : MonoBehaviour
 
         //Make the level up buttons visible. Make a pop up that shows your best time, etc.
         levelComplete = true;
-        levelCompleteText.enabled = true;
+      
 
         /*
          *****************************************
@@ -630,8 +643,8 @@ public class Current_level_manager : MonoBehaviour
         if (elapsedTime < bestTime)
         {
             PlayerPrefs.SetFloat(bestTimeKey, elapsedTime);
-           
         }
+
 
 
         //Calculate the amount of stars a player gets for beating the level.
@@ -641,6 +654,7 @@ public class Current_level_manager : MonoBehaviour
         if (elapsedTime < timeFor3Stars)
         {
             Debug.Log("You got 3 stars!");
+            tempNumStars = 3;
             switch(bestStars) {
                 case 0:
                     {
@@ -672,6 +686,7 @@ public class Current_level_manager : MonoBehaviour
         }
         else if (elapsedTime < timeFor2Stars)
         {
+            tempNumStars = 2;
             Debug.Log("You got 2 stars, try for three!");
             switch (bestStars)
             {
@@ -703,6 +718,7 @@ public class Current_level_manager : MonoBehaviour
         }
         else
         {
+                tempNumStars = 1;
                 switch (bestStars)
                 {
                     case 0:
@@ -729,6 +745,7 @@ public class Current_level_manager : MonoBehaviour
                         }
                 }
         }
+
         
        // Debug.Log("The best time after completing the level is: " + PlayerPrefs.GetFloat(bestTimeKey).ToString());
 
@@ -744,15 +761,67 @@ public class Current_level_manager : MonoBehaviour
          *^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         */
 
-        /*
-        if(DoesSceneExist(nextSceneName))
-        {
-           nextLevelButton.SetActive(true);
-        }
-         */
 
-        //Test code for seeing if level progression works.
-        nextLevelButton.SetActive(true);
+        /*
+         ********************************************************
+         Level complete stuff. Will probably move this into it's own script.
+         */
+        levelCompleteHolder.SetActive(true);
+
+        GameObject BGChild = levelCompleteHolder.transform.GetChild(0).gameObject;
+
+        GameObject bannerChild = BGChild.transform.GetChild(0).gameObject;
+        GameObject menuBtnChild = BGChild.transform.GetChild(1).gameObject;
+        GameObject RetryBtnChild = BGChild.transform.GetChild(2).gameObject;
+        GameObject PlayNextBtnChild = BGChild.transform.GetChild(3).gameObject;
+
+
+        GameObject star1 = bannerChild.transform.GetChild(0).gameObject;
+        GameObject star2 = bannerChild.transform.GetChild(1).gameObject;
+        GameObject star3 = bannerChild.transform.GetChild(2).gameObject;
+
+        switch(tempNumStars)
+        {
+            case 1:
+                {
+                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
+                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
+                    Debug.Log("We made it to 1");
+                    Debug.Log(tempNumStars);
+                    break;
+                }
+            case 2:
+                {
+                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
+                    Debug.Log("We made it to 2");
+                    break;
+                }
+            case 3:
+                {
+                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    Debug.Log("We made it to 3");
+                    break;
+                }
+        }
+
+        currentTime = TimeSpan.FromSeconds(finishTime);
+        string finishTimestr = "Finish Time: " + currentTime.ToString("mm':'ss");
+        finishTimeEndText.text = finishTimestr;
+
+        //Prolly do coroutine here to animate stars and what not.
+
+        //Check if we should have the next level button available.
+        if(!DoesSceneExist(nextSceneName))
+        {
+            PlayNextBtnChild.SetActive(false);
+        }
+         
+       
 
         //Test to ensure there is a level after this one. If not; don't let the 'next level' button appear.
         //Have a retry button to restart the scene if the player wants to try again.
@@ -760,6 +829,11 @@ public class Current_level_manager : MonoBehaviour
         //If we implement it, have the player able to share their score to social media from this as well.
         //Save the player's best time if they beat it. 
         //Show animation of how many stars out of 3 the player received.
+
+        /*
+        ********************************************************
+        Level complete stuff. Will probably move this into it's own script.
+        */
     }
 
    public void loadNextLevel()
@@ -828,4 +902,6 @@ public class Current_level_manager : MonoBehaviour
         botScrollArea.normalizedPosition = new Vector2(0, 0);
         ZoomedScrollArea.normalizedPosition = new Vector2(0, 0);
     }
+
+
 }
