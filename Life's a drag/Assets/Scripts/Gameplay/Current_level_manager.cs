@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class Current_level_manager : MonoBehaviour
 {
     public Level_Manager theLev;
+    public Level_Manager nextLev;
 
     List<int> numInvis = new List<int>();
     List<GameObject> invisObjects = new List<GameObject>();
@@ -618,6 +619,7 @@ public class Current_level_manager : MonoBehaviour
         //Temp variables to hold records/stars for end screen text. Will probably use these to call functions when we make this into it's own script.
         float finishTime;
         int tempNumStars;
+        int nextStarReq;
 
         finishTime = elapsedTime;
 
@@ -820,15 +822,47 @@ public class Current_level_manager : MonoBehaviour
         {
             PlayNextBtnChild.SetActive(false);
         }
+
+        totalThemeStars = PlayerPrefs.GetInt(totalThemeStarsKey);
+
+        if (nextLev != null)
+        {
+            nextStarReq = nextLev.starRequirement;
+            if (totalThemeStars < nextStarReq)
+            {
+                PlayNextBtnChild.GetComponent<Button>().interactable = false;
+            }
+            else
+                Debug.Log("Yay, you have enough stars!");
+        }
+        else
+        {
+            Debug.LogWarning("nextLev is null! Is this the final level in this theme?");
+        }
+            
+        
+
+        
+        
          
        
 
-        //Test to ensure there is a level after this one. If not; don't let the 'next level' button appear.
+        //Test to ensure there is a level after this one. If not; don't let the 'next level' button appear. 
+        //DONE!
+
         //Have a retry button to restart the scene if the player wants to try again.
+        //DONE!
+
         //Have a quit to menu button for the player to quit to the menu.
-        //If we implement it, have the player able to share their score to social media from this as well.
-        //Save the player's best time if they beat it. 
+        //DONE!
+
+        //If we implement it, have the player able to share their score to social media from this as well. 
+
+        //Save the player's best time if they beat it.
+        //DONE!
+
         //Show animation of how many stars out of 3 the player received.
+        //SEMI-DONE!
 
         /*
         ********************************************************
