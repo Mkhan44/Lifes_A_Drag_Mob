@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Button_Level_Info : MonoBehaviour
 {
-    public string theme;
-    public bool hasRequirement;
-    public int requiredStars;
+   // public string theme;
+    //public bool hasRequirement;
+    //public int requiredStars;
     public Level_Manager stageInfo;
 
-
+    /*
     public string getTheme()
     {
         return theme;
@@ -22,4 +22,5 @@ public class Button_Level_Info : MonoBehaviour
         }
         return requiredStars;
     }
+     */
 }

@@ -34,7 +34,7 @@ public class Populate_Level_Buttons : MonoBehaviour
 
         numThemeStars = PlayerPrefs.GetInt(themeStarsKey);
 
-        numStarsText.text = "Num office stars: " + numThemeStars;
+        numStarsText.text = "Num " + theme + " stars: " + numThemeStars;
 
     }
 
@@ -125,7 +125,7 @@ public class Populate_Level_Buttons : MonoBehaviour
 
     public IEnumerator waitTime()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         checkNumThemeStars();
         displayStars();
     }
