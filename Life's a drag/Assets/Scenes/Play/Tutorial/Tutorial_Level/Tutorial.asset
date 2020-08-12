@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Tutorial
+  m_EditorClassIdentifier: 
+  levelName: Living Room Relaxation
+  levelTheme: House
+  levelDifficulty: Easy
+  levelNum: 1
+  bestTime: 0
+  timeForThreeStars: 15
+  timeForTwoStars: 30
+  objective: Get comfy!
+  requiredItems:
+  - {fileID: 11400000, guid: e9554a2f28284ec4a9570ccdb734a9f4, type: 2}
+  - {fileID: 11400000, guid: 8191ad0870b47774e9683edf58ed070f, type: 2}
+  - {fileID: 11400000, guid: 70a20f14a06a9814b9f422f6e89890c7, type: 2}
+  - {fileID: 11400000, guid: 1ff5af0ba2e011f468880579e04da32e, type: 2}
+  - {fileID: 11400000, guid: 6a392404fab650c4c8a376ac3277e81c, type: 2}
+  - {fileID: 11400000, guid: d330f00536e36204880e77e4fc52e96f, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: 2a7ae36ed0f6fd844a38ef927faf4a10, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 07383e4a79354b443b6ec90b66dd5d05, type: 3}
+  - {fileID: 5745295521531094116, guid: 8c60ff1e93161a24dafb1bcc7e4c2818, type: 3}
+  - {fileID: 5745295521531094116, guid: dcdaf979a555344458ee90a83ad0af4e, type: 3}
+  - {fileID: 5745295521531094116, guid: 3686035104773734a889b559bb3c6d13, type: 3}
+  - {fileID: 5745295521531094116, guid: 4e4a68a25ca72fa4184fcde90c22d5d1, type: 3}
+  aniSecondsToWait: 0.5
+  starRequirement: 0
