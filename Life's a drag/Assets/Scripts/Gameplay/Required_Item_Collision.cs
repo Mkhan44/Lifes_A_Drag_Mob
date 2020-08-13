@@ -17,6 +17,7 @@ public class Required_Item_Collision : MonoBehaviour
     void Start()
     {
         findItemNames();
+
     }
     void Update()
     {

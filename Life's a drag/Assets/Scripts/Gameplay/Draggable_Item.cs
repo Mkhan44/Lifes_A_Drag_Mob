@@ -212,7 +212,7 @@ public class Draggable_Item : MonoBehaviour
 
     void checkDragStatus()
     {
-        if (levelMan.GetComponent<Current_level_manager>().isPaused || levelMan.GetComponent<Current_level_manager>().isZoomed)
+        if (levelMan.GetComponent<Current_level_manager>().isPaused || levelMan.GetComponent<Current_level_manager>().isZoomed || !levelMan.GetComponent<Current_level_manager>().control)
         {
             canWeDrag = DragStatus.cantDrag;
           //  Debug.Log("We can't drag!");

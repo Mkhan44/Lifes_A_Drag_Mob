@@ -7,8 +7,17 @@ using TMPro;
 using UnityEngine.SceneManagement;
 public class Current_level_manager : MonoBehaviour
 {
+    public enum stageType
+    {
+        normalStage,
+        tutorial,
+        challengeStage
+    }
+
+    public stageType currentState;
     public Level_Manager theLev;
     public Level_Manager nextLev;
+
 
     List<int> numInvis = new List<int>();
     List<GameObject> invisObjects = new List<GameObject>();
@@ -24,6 +33,8 @@ public class Current_level_manager : MonoBehaviour
     public Text objectiveText;
     private TimeSpan currentTime;
 
+    //For tutorial
+    public bool control;
 
     //Pause menu
     public GameObject pauseMenuUI;
@@ -86,7 +97,16 @@ public class Current_level_manager : MonoBehaviour
 
     public void Start()
     {
-        initializeLevel();
+        if (currentState == stageType.tutorial)
+        {
+            initializeTutorial();
+        }
+        else
+        {
+            initializeLevel();
+        }
+
+
        // Time.timeScale = 100;
 
     }
@@ -116,6 +136,8 @@ public class Current_level_manager : MonoBehaviour
     //Spawn in items, get the scene name, etc.
     public void initializeLevel()
     {
+        control = true;
+
         //Displaying the initial top UI timers and objective.
         timeFor2Stars = theLev.timeForTwoStars;
         timeFor3Stars = theLev.timeForThreeStars;
@@ -937,5 +959,131 @@ public class Current_level_manager : MonoBehaviour
         ZoomedScrollArea.normalizedPosition = new Vector2(0, 0);
     }
 
+    /*
+     * TUTORIAL RELATED FUNCTIONS!!!!!!!!!!!!!!!!!!!
+     *************************************************************
+     *************************************************************
+     *************************************************************
+     *************************************************************
+     *************************************************************
+     *************************************************************
+     *************************************************************
+     *************************************************************
+     * TUTORIAL RELATED FUNCTIONS!!!!!!!!!!!!!!!!!!!
+     */
 
+    public void initializeTutorial()
+    {
+
+        control = false;
+        //Displaying the initial top UI timers and objective.
+        timeFor2Stars = theLev.timeForTwoStars;
+        timeFor3Stars = theLev.timeForThreeStars;
+
+        currentTimeText.text = "Current Time: 00:00";
+        objectiveText.text = "Objective: " + theLev.objective;
+
+        timeForStarsFormat = TimeSpan.FromSeconds(timeFor3Stars);
+        timeForStarsStr = "***: " + timeForStarsFormat.ToString("mm':'ss");
+        timeForStarsText.text = timeForStarsStr;
+
+        isPaused = false;
+        isZoomed = false;
+
+
+        //Initialize the end level stuff to false.
+        levelCompleteHolder.SetActive(false);
+
+
+        //Spawn in the items for the level.
+        
+        Instantiate(theLev.requiredItems[0].item, new Vector3(theLev.requiredItems[0].xPos, theLev.requiredItems[0].yPos, 0), Quaternion.Euler(0f, 0f, theLev.requiredItems[0].zRot));
+
+        //Calculate how many items are needed to complete the level.
+        //The total number of combo items + the number of regular items that are not
+        //materials for a combo item.
+        int numMats = 0;
+        for (int j = 0; j < theLev.comboItemsNeeded.Count; j++)
+        {
+            if(theLev.comboItemsNeeded[j].isAlsoMat)
+            {
+                numMats += 1;
+            }
+            for (int k = 0; k < theLev.requiredItems.Count; k++)
+            {
+                
+                if ((theLev.requiredItems[k].item.gameObject.name == theLev.comboItemsNeeded[j].mat1 || theLev.requiredItems[k].item.gameObject.name == theLev.comboItemsNeeded[j].mat2))
+                {
+                    numMats += 1;
+                }
+            }
+
+        }
+
+
+        itemsLeft = (theLev.comboItemsNeeded.Count + (theLev.requiredItems.Count - numMats));
+        numItemsLeftText.text = "Items left: " + itemsLeft;
+
+        //Fill in the bottom UI with items that are needed to complete the level by using Images.
+        //These images will be transparent until the corresponding item is found, then they
+        //will be filled in.
+        bottomUIParent = GameObject.Find("Sprite_Holder").transform;
+        zoomedUIParent = GameObject.Find("Sprite_Holder2").transform;
+
+        //Bottom UI initialization to hide it. Will have to actually hide it instead of just making it transparent.
+        shrinkButton.SetActive(false);
+        GameObject child = ZoomedScrollArea.transform.GetChild(0).gameObject;
+        Image theBG;
+        theBG = child.GetComponent<Image>();
+        Color tempZoomColor;
+        tempZoomColor = theBG.color;
+        tempZoomColor.a = 0.0f;
+        theBG.color = tempZoomColor;
+
+
+        GameObject tempIcon;
+        Image tempImg;
+        Color tempColor;
+
+        if (theLev.icons.Count != 0)
+        {
+            for (int l = 0; l < theLev.icons.Count; l++)
+            {
+                tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
+                tempIcon.transform.SetParent(bottomUIParent, false);
+                tempImg = tempIcon.GetComponent<Image>();
+                tempColor = tempImg.color;
+                tempColor.a = 0.5f;
+                tempImg.color = tempColor;
+
+
+                //Update the zoomed in version as well.
+                tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
+                tempIcon.name = tempIcon.name + "2";
+                tempIcon.transform.SetParent(zoomedUIParent, false);
+                tempImg = tempIcon.GetComponent<Image>();
+                tempColor = tempImg.color;
+                tempColor.a = 0.5f;
+                tempImg.color = tempColor;
+             
+               // Debug.Log(theLev.icons[l] + " " + tempIcon.name);
+            }
+        }
+
+        ScrollToTop();
+          
+    }
+
+    /*
+  * TUTORIAL RELATED FUNCTIONS!!!!!!!!!!!!!!!!!!!
+  *************************************************************
+  *************************************************************
+  *************************************************************
+  *************************************************************
+  *************************************************************
+  *************************************************************
+  *************************************************************
+  *************************************************************
+  * TUTORIAL RELATED FUNCTIONS!!!!!!!!!!!!!!!!!!!
+  */
 }
