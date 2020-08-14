@@ -458,10 +458,19 @@ public class Current_level_manager : MonoBehaviour
     //Turns on invisible items that are needed.
     public void turnOn()
     {
-        for (int k = 0; k < numInvis.Count; k++)
+        if(currentState != stageType.tutorial)
         {
-            invisObjects[k].SetActive(true);
-        }  
+            for (int k = 0; k < numInvis.Count; k++)
+            {
+                invisObjects[k].SetActive(true);
+            }  
+        }
+        else
+        {
+            invisObjects[0].SetActive(true);
+        }
+     
+       
     }
 
     //Combo Manager. We'll check if the combo works based on string comparison with GameObject names that are in the combo area.
@@ -596,6 +605,11 @@ public class Current_level_manager : MonoBehaviour
               //  Instantiate(itemGotParticlePrefab, iconInstance.transform);
             }
             
+            if(currentState == stageType.tutorial)
+            {
+                control = false;
+                gameObject.GetComponent<First_Tutorial>().requirementCompleted();
+            }
            // iconInstance.GetComponent<Image>().color.a = 1f;
             //theInstance.SetActive(false);
             Destroy(theInstance);
@@ -631,7 +645,11 @@ public class Current_level_manager : MonoBehaviour
         numItemsLeftText.text = "Items left: " + itemsLeft;
             if (itemsLeft == 0)
             {
-                levelCompleted();
+                if(currentState != stageType.tutorial)
+                {
+                    levelCompleted();
+                }
+               
             }
     }
 
@@ -862,11 +880,6 @@ public class Current_level_manager : MonoBehaviour
             Debug.LogWarning("nextLev is null! Is this the final level in this theme?");
         }
             
-        
-
-        
-        
-         
        
 
         //Test to ensure there is a level after this one. If not; don't let the 'next level' button appear. 
@@ -974,7 +987,7 @@ public class Current_level_manager : MonoBehaviour
 
     public void initializeTutorial()
     {
-
+        expandButton.SetActive(false);
         control = false;
         //Displaying the initial top UI timers and objective.
         timeFor2Stars = theLev.timeForTwoStars;
@@ -1072,6 +1085,29 @@ public class Current_level_manager : MonoBehaviour
 
         ScrollToTop();
           
+    }
+
+    //For hidden item.
+    public GameObject spawnItem(int num)
+    {
+        GameObject tempObj;
+        tempObj = (GameObject)Instantiate(theLev.requiredItems[num].item, new Vector3(theLev.requiredItems[num].xPos, theLev.requiredItems[num].yPos, 0), Quaternion.identity);
+        invisObjects.Add(tempObj);
+        Debug.Log(invisObjects.Count);
+        Debug.Log(invisObjects[0].name);
+
+        return tempObj;
+    }
+
+    //For combo items.
+    public void spawnItem(int num1, int num2)
+    {
+        expandButton.SetActive(true);
+        GameObject tempObj1;
+        GameObject tempObj2;
+
+        tempObj1 = (GameObject)Instantiate(theLev.requiredItems[num1].item, new Vector3(theLev.requiredItems[num1].xPos, theLev.requiredItems[num1].yPos, 0), Quaternion.identity);
+        tempObj2 = (GameObject)Instantiate(theLev.requiredItems[num2].item, new Vector3(theLev.requiredItems[num2].xPos, theLev.requiredItems[num2].yPos, 0), Quaternion.identity);
     }
 
     /*

@@ -10,7 +10,6 @@ public class Animator_Drag : MonoBehaviour
     private Vector3 mouseDragEnd;
     bool aniFin = false;
     private float mouseDistance;
-
     int counter;
     // Start is called before the first frame update
     void Start()

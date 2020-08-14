@@ -380,7 +380,7 @@ PrefabInstance:
     - target: {fileID: 9218955929394457881, guid: 9182b77b5039ddc45a9cfa4badb82915,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9218955929394457881, guid: 9182b77b5039ddc45a9cfa4badb82915,
         type: 3}
@@ -537,7 +537,7 @@ PrefabInstance:
     - target: {fileID: 9218955929394457881, guid: a9d8ed32188653f45986c280c759bd5e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 9218955929394457881, guid: a9d8ed32188653f45986c280c759bd5e,
         type: 3}
@@ -665,8 +665,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -3.8013, y: -154.7}
-  m_SizeDelta: {x: 435.13736, y: 136.98769}
+  m_AnchoredPosition: {x: -6.8083, y: -840.5}
+  m_SizeDelta: {x: 1065.8445, y: 822.7426}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &839838832
 MonoBehaviour:
@@ -1059,7 +1059,7 @@ PrefabInstance:
     - target: {fileID: 8737570568120227399, guid: f3524f9340928ac46bbd6ee47a026c35,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -45.19999
+      value: -45.199974
       objectReference: {fileID: 0}
     - target: {fileID: 8737570568527974065, guid: f3524f9340928ac46bbd6ee47a026c35,
         type: 3}
@@ -1231,14 +1231,118 @@ MonoBehaviour:
   tapButton: {fileID: 839838832}
   phrases:
   - Welcome to Life's a drag!
-  - In this game, your objective is to find all the items that are needed in the
-    level.
-  - To pick up an item, simply tap on it and hold your finger down.
+  - In this game your objective is to find all the items that are needed in the level.
+  - To pick up an item simply tap on it and hold your finger down.
   - You'll need to bring the items down to the item bank.
   - Let's try it! Collect the item by touching it and dragging it down to the item
     bank!
   - Nice job!
-  requirementChecks: 000000000100
+  - Items won't always be in plain sight. Sometimes you'll need to interact with
+    the environment to find them!
+  - Try dragging on this box to reveal the item, and bring it to the item bank.
+  - Awesome!
+  - Finally we'll talk about combo items.
+  - These are combination boxes. They're used to combine two items into a completely
+    new one!
+  - Simply drag two items into the boxes and if they go together...
+  - Viola! You've made an entirely new item!
+  - 'If you can''t quite make out the items in the item bank: You can click this
+    arrow to expand it.'
+  - Try combining the serving bowl and energy drink together by dragging them to
+    the combo boxes!
+  - Great!
+  - Keep an eye on the timer up here.
+  - Completing the level faster will earn you stars that can be used to unlock more
+    levels!
+  - Those are the basics of         Life's a drag!
+  - 'Enjoy your time playing: And don''t forget to always have fun!'
+  requirementChecks: 0000000001000001000000000000010000000000
+  box: {fileID: 1511764555}
+--- !u!1001 &1087141941
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7662454846418091901, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_Name
+      value: Animated_Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091901, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091902, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091902, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091902, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091902, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091902, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091902, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091902, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091902, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091902, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091902, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091902, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662454846418091903, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66a28f364cf32a74e9403581c8345431,
+        type: 3}
+    - target: {fileID: 7662454846957025540, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+        type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 1001643939}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 104664c9ad15d6b44a312cf59cb9dafb, type: 3}
 --- !u!1 &1125244144 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1863403580815368770, guid: e2fc26709e1af0849bf8ffeeba075eed,
@@ -1436,11 +1540,11 @@ RectTransform:
   m_Father: {fileID: 839838831}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -0.077758, y: -30}
+  m_SizeDelta: {x: 1066, y: 123.25006}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1325621153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1489,7 +1593,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 60.75
+  m_fontSize: 72
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1647,12 +1751,12 @@ PrefabInstance:
     - target: {fileID: 9218955929394457881, guid: 9bcfd3eb86cd84641945653633365ac8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.35
+      value: 1.635
       objectReference: {fileID: 0}
     - target: {fileID: 9218955929394457881, guid: 9bcfd3eb86cd84641945653633365ac8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.23
+      value: -1.146
       objectReference: {fileID: 0}
     - target: {fileID: 9218955929394457881, guid: 9bcfd3eb86cd84641945653633365ac8,
         type: 3}
@@ -1682,7 +1786,7 @@ PrefabInstance:
     - target: {fileID: 9218955929394457881, guid: 9bcfd3eb86cd84641945653633365ac8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9218955929394457881, guid: 9bcfd3eb86cd84641945653633365ac8,
         type: 3}
@@ -1701,6 +1805,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bcfd3eb86cd84641945653633365ac8, type: 3}
+--- !u!1 &1511764555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7662454846418091901, guid: 104664c9ad15d6b44a312cf59cb9dafb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1087141941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &1594961106 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6983826051373897388, guid: c8e4fab3cf772fe44a694fbe33530ece,
@@ -1817,7 +1927,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1691876945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2025,12 +2135,12 @@ PrefabInstance:
     - target: {fileID: 9218955929394457881, guid: a35f56067cbe1364ca523714ad45a728,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.026
+      value: -0.36
       objectReference: {fileID: 0}
     - target: {fileID: 9218955929394457881, guid: a35f56067cbe1364ca523714ad45a728,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.439
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 9218955929394457881, guid: a35f56067cbe1364ca523714ad45a728,
         type: 3}
@@ -2060,7 +2170,7 @@ PrefabInstance:
     - target: {fileID: 9218955929394457881, guid: a35f56067cbe1364ca523714ad45a728,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9218955929394457881, guid: a35f56067cbe1364ca523714ad45a728,
         type: 3}
@@ -2221,7 +2331,7 @@ PrefabInstance:
     - target: {fileID: 9218955929394457881, guid: a46c67111bbd96a4481a7247af57aedf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 9218955929394457881, guid: a46c67111bbd96a4481a7247af57aedf,
         type: 3}
@@ -2295,7 +2405,7 @@ PrefabInstance:
     - target: {fileID: 9218955929394457881, guid: 3b78b37aa1f417b409b880e6bf7f9ace,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 9218955929394457881, guid: 3b78b37aa1f417b409b880e6bf7f9ace,
         type: 3}
@@ -2502,7 +2612,7 @@ PrefabInstance:
     - target: {fileID: 6983826051373897389, guid: c8e4fab3cf772fe44a694fbe33530ece,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6983826051373897389, guid: c8e4fab3cf772fe44a694fbe33530ece,
         type: 3}
