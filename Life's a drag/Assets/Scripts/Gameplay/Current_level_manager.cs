@@ -219,9 +219,9 @@ public class Current_level_manager : MonoBehaviour
         //Spawn in the items for the level.
         for (int i = 0; i < theLev.requiredItems.Count; i++)
         {
-            if (theLev.requiredItems[i].zRot > 0)
+            if (theLev.requiredItems[i].zRot != 0 || theLev.requiredItems[i].yRot !=0)
             {
-                Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos, 0), Quaternion.Euler(0f, 0f, theLev.requiredItems[i].zRot));
+                Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos, 0), Quaternion.Euler(0f, theLev.requiredItems[i].yRot, theLev.requiredItems[i].zRot));
             }
             else
             {

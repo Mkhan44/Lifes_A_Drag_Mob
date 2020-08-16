@@ -16,4 +16,6 @@ public class Required_Item : ScriptableObject
 
     //Rotation on Z for items that need to be flipped in any way.
     public float zRot = 0f;
+
+    public float yRot = 0f;
 }
