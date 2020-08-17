@@ -12,6 +12,9 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     float yClampMax;
     public float xClampMax;
     public float xClampMin;
+    float xInitial;
+    public GameObject nextLoad;
+    public GameObject menuSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +22,7 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         initialPos = gameObject.transform.position;
         yClampMin = gameObject.transform.position.y;
         yClampMax = gameObject.transform.position.y;
+        xInitial = gameObject.transform.position.x;
     }
 
     // Update is called once per frame
@@ -33,12 +37,32 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     }
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = new Vector2 (Mathf.Clamp(Input.mousePosition.x, 80, 250), Mathf.Clamp(Input.mousePosition.y, yClampMin, yClampMax));
+        transform.position = new Vector2 (Mathf.Clamp(Input.mousePosition.x, xInitial, (xInitial+100)), Mathf.Clamp(Input.mousePosition.y, yClampMin, yClampMax));
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.position = initialPos;
+        if(transform.position.x >= (xInitial+90))
+        {
+            Debug.Log("Good enough!");
+            if(nextLoad == null)
+            {
+                Debug.LogWarning("Nothing to load!");
+                transform.position = initialPos;
+            }
+            else
+            {
+                nextLoad.SetActive(true);
+                transform.position = initialPos;
+                menuSlider.SetActive(false);
+            }
+        }
+           
+        else
+        {
+            transform.position = initialPos;
+        }
+        
     }
 
 
