@@ -5,7 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-
+    public Canvas canvas;
+    RectTransform thisTrans;
+    Vector2 deltaStuff;
 
     public Vector3 initialPos;
     public float yClampMin;
@@ -19,10 +21,13 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     // Start is called before the first frame update
     void Start()
     {
-        initialPos = gameObject.transform.position;
-        yClampMin = gameObject.transform.position.y;
-        yClampMax = gameObject.transform.position.y;
-        xInitial = gameObject.transform.position.x;
+        thisTrans = this.GetComponent<RectTransform>();
+        initialPos = thisTrans.anchoredPosition;
+       // initialPos = gameObject.transform.position;
+        yClampMin = initialPos.y;
+        yClampMax = yClampMin;
+        xInitial = initialPos.x;
+        Debug.Log(xInitial);
     }
 
     // Update is called once per frame
@@ -37,30 +42,39 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     }
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = new Vector2 (Mathf.Clamp(Input.mousePosition.x, xInitial, (xInitial+100)), Mathf.Clamp(Input.mousePosition.y, yClampMin, yClampMax));
+        deltaStuff = eventData.delta / canvas.scaleFactor;
+        //Debug.Log(eventData.delta / canvas.scaleFactor);
+       //thisTrans.anchoredPosition = new Vector2 (Mathf.Clamp(Input.mousePosition.x, xInitial, (xInitial+100)), Mathf.Clamp(Input.mousePosition.y, yClampMin, yClampMax));
+
+        //Might want to optimize this more...Not sure yet.
+        thisTrans.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        thisTrans.anchoredPosition = new Vector2 (Mathf.Clamp(thisTrans.anchoredPosition.x, xInitial, (xInitial + 250)) , Mathf.Clamp(thisTrans.anchoredPosition.y, yClampMin, yClampMax)); 
+      
+        Debug.Log(thisTrans.anchoredPosition);
+
+
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(transform.position.x >= (xInitial+90))
+        if(thisTrans.anchoredPosition.x >= (xInitial+240))
         {
             Debug.Log("Good enough!");
             if(nextLoad == null)
             {
                 Debug.LogWarning("Nothing to load!");
-                transform.position = initialPos;
+                thisTrans.anchoredPosition = initialPos;
             }
             else
             {
                 nextLoad.SetActive(true);
-                transform.position = initialPos;
+                thisTrans.anchoredPosition = initialPos;
                 menuSlider.SetActive(false);
             }
-        }
-           
+        } 
         else
         {
-            transform.position = initialPos;
+            thisTrans.anchoredPosition = initialPos;
         }
         
     }

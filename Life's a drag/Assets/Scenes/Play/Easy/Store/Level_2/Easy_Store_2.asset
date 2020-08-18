@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Easy_Store_2
+  m_EditorClassIdentifier: 
+  levelName: Aisle
+  levelTheme: Store
+  levelDifficulty: Easy
+  levelNum: 2
+  bestTime: 0
+  timeForThreeStars: 15
+  timeForTwoStars: 30
+  objective: Get items!
+  requiredItems:
+  - {fileID: 11400000, guid: 34fb2d34e78ccc84c86ab525a5537f53, type: 2}
+  - {fileID: 11400000, guid: a2d8045a36df8844d9f3d691836bcef0, type: 2}
+  - {fileID: 11400000, guid: dece9257991464a449f9cde2fb018c23, type: 2}
+  - {fileID: 11400000, guid: b5cb663134c49f94a8b05ca316682af7, type: 2}
+  - {fileID: 11400000, guid: 7f2df3f2dd0d1f245990a3275a9541e5, type: 2}
+  - {fileID: 11400000, guid: e212fd55be92667439f94cbe11d68c93, type: 2}
+  - {fileID: 11400000, guid: 278d4f4f38964d747a40a9f378792c10, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: 62491b14038d2e546993e3bca214f2a0, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 46719a6979924eb4ba53b3800e1a3130, type: 3}
+  - {fileID: 5745295521531094116, guid: a1130f4d58c01b4478abc8926647c2a1, type: 3}
+  - {fileID: 5745295521531094116, guid: cb784529679ac044084b56c34fab7fdf, type: 3}
+  - {fileID: 5745295521531094116, guid: 369658f02cade964cb5ed2d5b7fd137a, type: 3}
+  - {fileID: 5745295521531094116, guid: fbab1deb01dc09149bc9fd8f5e19c5c6, type: 3}
+  - {fileID: 5745295521531094116, guid: 381270d532ec9694fade48976a62cceb, type: 3}
+  aniSecondsToWait: 0.2
+  starRequirement: 0
