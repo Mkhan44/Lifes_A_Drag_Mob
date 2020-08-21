@@ -69,7 +69,12 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             {
                 nextLoad.SetActive(true);
                 thisTrans.anchoredPosition = initialPos;
-                menuSlider.SetActive(false);
+                //Make it slide out the opposite way.
+                menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x = (menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x * -1);
+                menuSlider.GetComponent<PanelAnimator>().StartAnimOut();
+                StartCoroutine(waitForAni());
+             
+               // menuSlider.SetActive(false);
             }
         } 
         else
@@ -77,6 +82,16 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             thisTrans.anchoredPosition = initialPos;
         }
         
+    }
+
+    public IEnumerator waitForAni()
+    {
+        float timeToWait;
+        timeToWait = menuSlider.GetComponent<PanelAnimator>().outAnimDuration;
+        yield return new WaitForSeconds(timeToWait);
+        //Set it back to the original for next time.
+        menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x = (menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x * -1);
+        menuSlider.GetComponent<RectTransform>().anchoredPosition = menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition; 
     }
 
 
