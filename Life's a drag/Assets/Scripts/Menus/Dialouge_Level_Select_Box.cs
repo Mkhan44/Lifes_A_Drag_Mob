@@ -73,6 +73,7 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         initializeBox();
+        this.GetComponent<PanelAnimator>().StartAnimIn();
     }
     
 }

@@ -11,15 +11,15 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public Vector3 initialPos;
     public float yClampMin;
-    float yClampMax;
+    protected float yClampMax;
     public float xClampMax;
     public float xClampMin;
-    float xInitial;
+    protected float xInitial;
     public GameObject nextLoad;
     public GameObject menuSlider;
 
     // Start is called before the first frame update
-    void Start()
+   protected virtual void Start()
     {
         thisTrans = this.GetComponent<RectTransform>();
         initialPos = thisTrans.anchoredPosition;
@@ -55,11 +55,15 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public virtual void OnEndDrag(PointerEventData eventData)
     {
-        if(thisTrans.anchoredPosition.x >= (xInitial+240))
+        if (thisTrans.anchoredPosition.x >= (xInitial + 240))
         {
+
+
             Debug.Log("Good enough!");
+            slideOut();
+            /*
             if(nextLoad == null)
             {
                 Debug.LogWarning("Nothing to load!");
@@ -67,23 +71,34 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             }
             else
             {
-                nextLoad.SetActive(true);
-                thisTrans.anchoredPosition = initialPos;
-                //Make it slide out the opposite way.
-                menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x = (menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x * -1);
-                menuSlider.GetComponent<PanelAnimator>().StartAnimOut();
-                StartCoroutine(waitForAni());
-             
-               // menuSlider.SetActive(false);
+                //Call this to make the thingy slide out.
+                slideOut();
             }
         } 
         else
         {
             thisTrans.anchoredPosition = initialPos;
+             */
         }
-        
     }
 
+
+    public void slideOut()
+    {
+        if (nextLoad != null)
+        {
+            nextLoad.SetActive(true);
+        }
+
+        thisTrans.anchoredPosition = initialPos;
+        //Make it slide out the opposite way.
+        menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x = (menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x * -1);
+        menuSlider.GetComponent<PanelAnimator>().StartAnimOut();
+        StartCoroutine(waitForAni());
+        gameObject.GetComponent<Button>().onClick.Invoke();
+
+        // menuSlider.SetActive(false);
+    }
     public IEnumerator waitForAni()
     {
         float timeToWait;
@@ -91,8 +106,15 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         yield return new WaitForSeconds(timeToWait);
         //Set it back to the original for next time.
         menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x = (menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x * -1);
-        menuSlider.GetComponent<RectTransform>().anchoredPosition = menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition; 
+        menuSlider.GetComponent<RectTransform>().anchoredPosition = menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition;
+        if(nextLoad != null)
+        {
+            nextLoad.GetComponent<PanelAnimator>().StartAnimIn();
+        }
+        
     }
+
+
 
 
  

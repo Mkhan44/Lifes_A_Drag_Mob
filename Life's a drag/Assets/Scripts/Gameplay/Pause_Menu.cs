@@ -13,7 +13,7 @@ public class Pause_Menu : MonoBehaviour
         Time.timeScale = 1f;
         //Play sound effect here.
         currentLevelMan.GetComponent<Current_level_manager>().isPaused = false;
-        pauseMenuUI.SetActive(false);
+       // pauseMenuUI.SetActive(false);
     }
 
     public void Options()

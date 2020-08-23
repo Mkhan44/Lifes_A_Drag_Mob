@@ -808,8 +808,9 @@ public class Current_level_manager : MonoBehaviour
          ********************************************************
          Level complete stuff. Will probably move this into it's own script.
          */
+   
         levelCompleteHolder.SetActive(true);
-
+        levelCompleteHolder.GetComponent<PanelAnimator>().StartAnimIn();
         GameObject BGChild = levelCompleteHolder.transform.GetChild(0).gameObject;
 
         GameObject bannerChild = BGChild.transform.GetChild(0).gameObject;
@@ -956,6 +957,13 @@ public class Current_level_manager : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         isPaused = true;
+       StartCoroutine(waitPause());
+      
+    }
+
+    IEnumerator waitPause()
+    {
+        yield return new WaitForSeconds(0.3f);
         Time.timeScale = 0f;
         Debug.Log("Game paused.");
     }
