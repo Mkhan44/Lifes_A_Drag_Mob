@@ -891,7 +891,7 @@ public class Current_level_manager : MonoBehaviour
             case 1:
                 {
                     yield return new WaitForSeconds(0.5f);
-                    Instantiate(starParticlePrefab, star1.GetComponent<Transform>().transform.position, Quaternion.identity);
+                    Instantiate(starParticlePrefab, new Vector3 (star1.GetComponent<Transform>().transform.position.x,star1.GetComponent<Transform>().transform.position.y, 0f) , Quaternion.identity);
                     star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
                     yield return new WaitForSeconds(0.5f);
                     star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
@@ -903,10 +903,10 @@ public class Current_level_manager : MonoBehaviour
             case 2:
                 {
                     yield return new WaitForSeconds(0.5f);
-                    Instantiate(starParticlePrefab, star1.GetComponent<Transform>().transform.position, Quaternion.identity);
+                    Instantiate(starParticlePrefab, new Vector3(star1.GetComponent<Transform>().transform.position.x, star1.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
                     star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
                     yield return new WaitForSeconds(0.5f);
-                    Instantiate(starParticlePrefab, star2.GetComponent<Transform>().transform.position, Quaternion.identity);
+                    Instantiate(starParticlePrefab, new Vector3(star2.GetComponent<Transform>().transform.position.x, star2.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
                     star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
                     yield return new WaitForSeconds(0.2f);
                     star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
@@ -916,13 +916,13 @@ public class Current_level_manager : MonoBehaviour
             case 3:
                 {
                     yield return new WaitForSeconds(0.5f);
-                    Instantiate(starParticlePrefab, star1.GetComponent<Transform>().transform.position, Quaternion.identity);
+                    Instantiate(starParticlePrefab, new Vector3(star1.GetComponent<Transform>().transform.position.x, star1.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
                     star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
                     yield return new WaitForSeconds(0.5f);
-                    Instantiate(starParticlePrefab, star2.GetComponent<Transform>().transform.position, Quaternion.identity);
+                    Instantiate(starParticlePrefab, new Vector3(star2.GetComponent<Transform>().transform.position.x, star2.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
                     star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
                     yield return new WaitForSeconds(0.8f);
-                    Instantiate(starParticlePrefab, star3.GetComponent<Transform>().transform.position, Quaternion.identity);
+                    Instantiate(starParticlePrefab, new Vector3(star3.GetComponent<Transform>().transform.position.x, star3.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
                     star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
                     Debug.Log("We made it to 3");
                     break;
