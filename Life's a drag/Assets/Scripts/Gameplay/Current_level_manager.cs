@@ -39,6 +39,8 @@ public class Current_level_manager : MonoBehaviour
     //Pause menu
     public GameObject pauseMenuUI;
     public bool isPaused;
+    public Button pauseButton;
+    public Button retryButton;
 
     //Bottom UI stuff.
     //public GameObject testImg;
@@ -88,7 +90,7 @@ public class Current_level_manager : MonoBehaviour
     private string nextSceneName;
     public GameObject levelCompleteHolder;
     public TextMeshProUGUI finishTimeEndText;
-
+    public GameObject starParticlePrefab;
     public void Awake()
     {
         thisScene = SceneManager.GetActiveScene();
@@ -376,6 +378,7 @@ public class Current_level_manager : MonoBehaviour
 
     public void zoomInDeactivate()
     {
+        /*
         GameObject child = ZoomedScrollArea.transform.GetChild(0).gameObject;
         Image tempImg;
         tempImg = child.GetComponent<Image>();
@@ -384,6 +387,7 @@ public class Current_level_manager : MonoBehaviour
         tempZoomColor.a = 0.0f;
         tempImg.color = tempZoomColor;
         //Zoom in is not active.
+         */
         isZoomed = false;
     }
 
@@ -672,7 +676,8 @@ public class Current_level_manager : MonoBehaviour
 
         expandButton.SetActive(false);
 
-        //Make the level up buttons visible. Make a pop up that shows your best time, etc.
+        pauseButton.interactable = false;
+        retryButton.interactable = false;
         levelComplete = true;
       
 
@@ -823,55 +828,24 @@ public class Current_level_manager : MonoBehaviour
         GameObject star2 = bannerChild.transform.GetChild(1).gameObject;
         GameObject star3 = bannerChild.transform.GetChild(2).gameObject;
 
-        switch(tempNumStars)
-        {
-            case 1:
-                {
-                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
-                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
-                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
-                    Debug.Log("We made it to 1");
-                    Debug.Log(tempNumStars);
-                    break;
-                }
-            case 2:
-                {
-                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
-                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
-                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
-                    Debug.Log("We made it to 2");
-                    break;
-                }
-            case 3:
-                {
-                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
-                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
-                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
-                    Debug.Log("We made it to 3");
-                    break;
-                }
-        }
+        //Disable buttons so that the player can't touch them while star animation is playing.
+        menuBtnChild.GetComponent<Button>().interactable = false;
+        RetryBtnChild.GetComponent<Button>().interactable = false;
+        PlayNextBtnChild.GetComponent<Button>().interactable = false;
 
         currentTime = TimeSpan.FromSeconds(finishTime);
         string finishTimestr = "Finish Time: " + currentTime.ToString("mm':'ss");
         finishTimeEndText.text = finishTimestr;
-
-        //Prolly do coroutine here to animate stars and what not.
-
-        //Check if we should have the next level button available.
-        if(!DoesSceneExist(nextSceneName))
-        {
-            PlayNextBtnChild.SetActive(false);
-        }
+   
 
         totalThemeStars = PlayerPrefs.GetInt(totalThemeStarsKey);
-
+        bool notEnoughStars = false;
         if (nextLev != null)
         {
             nextStarReq = nextLev.starRequirement;
             if (totalThemeStars < nextStarReq)
             {
-                PlayNextBtnChild.GetComponent<Button>().interactable = false;
+                notEnoughStars = true;
             }
             else
                 Debug.Log("Yay, you have enough stars!");
@@ -880,6 +854,10 @@ public class Current_level_manager : MonoBehaviour
         {
             Debug.LogWarning("nextLev is null! Is this the final level in this theme?");
         }
+
+        StartCoroutine(animateStars(star1, star2, star3, tempNumStars, menuBtnChild, RetryBtnChild, PlayNextBtnChild, notEnoughStars));
+      
+       
             
        
 
@@ -906,17 +884,89 @@ public class Current_level_manager : MonoBehaviour
         */
     }
 
+    IEnumerator animateStars(GameObject star1, GameObject star2, GameObject star3, int tempNumStars, GameObject menuButton, GameObject RetryEndBUtton, GameObject PlayNextButton, bool notEnoughStars)
+    {
+        switch (tempNumStars)
+        {
+            case 1:
+                {
+                    yield return new WaitForSeconds(0.5f);
+                    Instantiate(starParticlePrefab, star1.GetComponent<Transform>().transform.position, Quaternion.identity);
+                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    yield return new WaitForSeconds(0.5f);
+                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
+                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
+                    Debug.Log("We made it to 1");
+                    Debug.Log(tempNumStars);
+                    break;
+                }
+            case 2:
+                {
+                    yield return new WaitForSeconds(0.5f);
+                    Instantiate(starParticlePrefab, star1.GetComponent<Transform>().transform.position, Quaternion.identity);
+                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    yield return new WaitForSeconds(0.5f);
+                    Instantiate(starParticlePrefab, star2.GetComponent<Transform>().transform.position, Quaternion.identity);
+                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    yield return new WaitForSeconds(0.2f);
+                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
+                    Debug.Log("We made it to 2");
+                    break;
+                }
+            case 3:
+                {
+                    yield return new WaitForSeconds(0.5f);
+                    Instantiate(starParticlePrefab, star1.GetComponent<Transform>().transform.position, Quaternion.identity);
+                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    yield return new WaitForSeconds(0.5f);
+                    Instantiate(starParticlePrefab, star2.GetComponent<Transform>().transform.position, Quaternion.identity);
+                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    yield return new WaitForSeconds(0.8f);
+                    Instantiate(starParticlePrefab, star3.GetComponent<Transform>().transform.position, Quaternion.identity);
+                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    Debug.Log("We made it to 3");
+                    break;
+                }
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        //Make the buttons work now.
+        if (!notEnoughStars)
+        {
+            PlayNextButton.GetComponent<Button>().interactable = true;
+        }
+
+        //Check if we should have the next level button available.
+        if (!DoesSceneExist(nextSceneName))
+        {
+            PlayNextButton.SetActive(false);
+        }
+        else
+        {
+            PlayNextButton.GetComponent<Button>().interactable = true;
+        }
+
+        menuButton.GetComponent<Button>().interactable = true;
+        RetryEndBUtton.GetComponent<Button>().interactable = true;
+
+     
+
+        //Do something based on the amount of stars.
+    }
+
    public void loadNextLevel()
     {
         Debug.Log("Button clicked.");
-       string tempLoad = "testlevel2";
+       string tempLoad = "Main_Menu";
        if(DoesSceneExist(nextSceneName))
        {
-           SceneManager.LoadScene(nextSceneName);
+           GetComponent<Load_Level>().LoadLevel(nextSceneName);
        }
        else
        {
-           SceneManager.LoadScene(tempLoad);
+           //Kick player back to main menu...This should never happen but failsafe.
+           GetComponent<Load_Level>().LoadLevel(tempLoad);
        }
        
 
@@ -956,8 +1006,10 @@ public class Current_level_manager : MonoBehaviour
     public void pause()
     {
         pauseMenuUI.SetActive(true);
+        retryButton.interactable = false;
+        pauseButton.interactable = false;
         isPaused = true;
-       StartCoroutine(waitPause());
+        StartCoroutine(waitPause());
       
     }
 

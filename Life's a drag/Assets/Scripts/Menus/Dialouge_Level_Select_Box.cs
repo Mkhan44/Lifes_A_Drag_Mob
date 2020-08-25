@@ -66,7 +66,8 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
     {
         string levelToLoad;
         levelToLoad = fullLevName;
-        SceneManager.LoadScene(levelToLoad);
+        levelMan.GetComponent<Load_Level>().LoadLevel(levelToLoad);
+       // SceneManager.LoadScene(levelToLoad);
     }
 
     public IEnumerator waitTime()

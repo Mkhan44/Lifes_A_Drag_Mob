@@ -6,6 +6,18 @@ using UnityEngine.EventSystems;
 
 public class Pause_Menu_Slider : Menu_Slider, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public Pause_Menu pauseRef;
+    public enum typeOfButton
+    {
+        Resume,
+        Options,
+        Main_Menu
+    }
+
+
+    //Let's the game know what button is gonna be dragged.
+    public typeOfButton buttonType;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -34,6 +46,31 @@ public class Pause_Menu_Slider : Menu_Slider, IBeginDragHandler, IDragHandler, I
     {
         base.OnEndDrag(eventData);
         Debug.Log("Overrided!");
+        if (enoughDrag)
+        {
+            switch (buttonType)
+            {
+                case typeOfButton.Resume:
+                    {
+                        pauseRef.Resume();
+                        break;
+                    }
+                case typeOfButton.Options:
+                    {
+                        pauseRef.Options();
+                        break;
+                    }
+                case typeOfButton.Main_Menu:
+                    {
+                        pauseRef.MainMenu();
+                        break;
+                    }
+            }
+            enoughDrag = false;
+        }
+      
+        
+ 
        // throw new System.NotImplementedException();
     }
 }

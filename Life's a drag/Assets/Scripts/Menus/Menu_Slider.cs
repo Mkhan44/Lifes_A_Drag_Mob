@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Canvas canvas;
-    RectTransform thisTrans;
+    protected RectTransform thisTrans;
     Vector2 deltaStuff;
 
     public Vector3 initialPos;
@@ -17,6 +17,7 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     protected float xInitial;
     public GameObject nextLoad;
     public GameObject menuSlider;
+    protected bool enoughDrag;
 
     // Start is called before the first frame update
    protected virtual void Start()
@@ -60,7 +61,7 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         if (thisTrans.anchoredPosition.x >= (xInitial + 240))
         {
 
-
+            enoughDrag = true;
             Debug.Log("Good enough!");
             slideOut();
             /*
@@ -74,12 +75,15 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
                 //Call this to make the thingy slide out.
                 slideOut();
             }
-        } 
+        }
+             */
+        }
         else
         {
             thisTrans.anchoredPosition = initialPos;
-             */
+
         }
+       
     }
 
 

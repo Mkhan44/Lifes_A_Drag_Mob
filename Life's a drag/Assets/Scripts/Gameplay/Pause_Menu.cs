@@ -8,11 +8,14 @@ public class Pause_Menu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
     public GameObject currentLevelMan;
+    public GameObject warningRef;
     public void Resume()
     {
         Time.timeScale = 1f;
         //Play sound effect here.
         currentLevelMan.GetComponent<Current_level_manager>().isPaused = false;
+        currentLevelMan.GetComponent<Current_level_manager>().retryButton.interactable = true;
+        currentLevelMan.GetComponent<Current_level_manager>().pauseButton.interactable = true;
        // pauseMenuUI.SetActive(false);
     }
 
@@ -25,6 +28,7 @@ public class Pause_Menu : MonoBehaviour
 
     public void MainMenu()
     {
+        warningRef.SetActive(true);
         Debug.Log("Return to main menu.");
 
         //Returns the user to the main menu.
@@ -34,7 +38,8 @@ public class Pause_Menu : MonoBehaviour
     public void mainMenuYes()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Main_Menu");
+        currentLevelMan.GetComponent<Load_Level>().LoadLevel("Main_Menu");
+       // SceneManager.LoadScene("Main_Menu");
     }
 
 
