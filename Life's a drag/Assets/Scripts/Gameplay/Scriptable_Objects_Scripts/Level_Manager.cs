@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hellmade.Sound;
 
 [CreateAssetMenu]
 public class Level_Manager : ScriptableObject
@@ -36,4 +37,7 @@ public class Level_Manager : ScriptableObject
 
     //For unlocking in the menus.
     public int starRequirement;
+
+    //Song that will be played in the level.
+    public AudioClip levelMusic;
 }

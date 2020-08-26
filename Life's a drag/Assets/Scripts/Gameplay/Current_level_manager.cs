@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Hellmade.Sound;
 public class Current_level_manager : MonoBehaviour
 {
     public enum stageType
@@ -91,6 +92,14 @@ public class Current_level_manager : MonoBehaviour
     public GameObject levelCompleteHolder;
     public TextMeshProUGUI finishTimeEndText;
     public GameObject starParticlePrefab;
+
+    //Music/Sfx related stuff.
+    public AudioClip levelCompleteTheme;
+    public AudioClip star1Sound;
+    public AudioClip star2Sound;
+    public AudioClip star3Sound;
+    
+
     public void Awake()
     {
         thisScene = SceneManager.GetActiveScene();
@@ -138,6 +147,12 @@ public class Current_level_manager : MonoBehaviour
     //Spawn in items, get the scene name, etc.
     public void initializeLevel()
     {
+        if(theLev.levelMusic != null)
+        {
+            EazySoundManager.StopAllMusic();
+            EazySoundManager.PlayMusic(theLev.levelMusic, 0.5f, true, false, 0.5f, 0.5f);
+        }
+
         control = true;
 
         //Displaying the initial top UI timers and objective.
@@ -154,15 +169,11 @@ public class Current_level_manager : MonoBehaviour
         isPaused = false;
         isZoomed = false;
 
-
-        //Initialize the end level stuff to false.
-        levelCompleteHolder.SetActive(false);
-
         //Might be plus 1...? Since we need the NEXT scene name. 
         //IF YOU HAVE A PROBLEM GETTING TO THE NEXT SCENE DOUBLE CHECK THIS!!!!!
         nextSceneName = theLev.levelDifficulty + "_" + theLev.levelTheme + "_" + (theLev.levelNum + 1).ToString();
 
-        Debug.Log(nextSceneName);
+      //  Debug.Log(nextSceneName);
 
         //
         // **********************************************************************************
@@ -659,7 +670,10 @@ public class Current_level_manager : MonoBehaviour
 
     void levelCompleted()
     {
-
+        if (theLev.levelMusic != null)
+        {
+            EazySoundManager.PlayMusic(levelCompleteTheme, 0.8f, false, false, 0.0f, 1.0f);
+        }
         //Temp variables to hold records/stars for end screen text. Will probably use these to call functions when we make this into it's own script.
         float finishTime;
         int tempNumStars;
@@ -892,6 +906,7 @@ public class Current_level_manager : MonoBehaviour
                 {
                     yield return new WaitForSeconds(0.5f);
                     Instantiate(starParticlePrefab, new Vector3 (star1.GetComponent<Transform>().transform.position.x,star1.GetComponent<Transform>().transform.position.y, 0f) , Quaternion.identity);
+                    EazySoundManager.PlaySound(star1Sound, 0.6f);
                     star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
                     yield return new WaitForSeconds(0.5f);
                     star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
@@ -904,9 +919,11 @@ public class Current_level_manager : MonoBehaviour
                 {
                     yield return new WaitForSeconds(0.5f);
                     Instantiate(starParticlePrefab, new Vector3(star1.GetComponent<Transform>().transform.position.x, star1.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
+                    EazySoundManager.PlaySound(star1Sound, 0.6f);
                     star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
                     yield return new WaitForSeconds(0.5f);
                     Instantiate(starParticlePrefab, new Vector3(star2.GetComponent<Transform>().transform.position.x, star2.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
+                    EazySoundManager.PlaySound(star2Sound, 0.6f);
                     star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
                     yield return new WaitForSeconds(0.2f);
                     star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
@@ -917,12 +934,15 @@ public class Current_level_manager : MonoBehaviour
                 {
                     yield return new WaitForSeconds(0.5f);
                     Instantiate(starParticlePrefab, new Vector3(star1.GetComponent<Transform>().transform.position.x, star1.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
+                    EazySoundManager.PlaySound(star1Sound, 0.6f);
                     star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
                     yield return new WaitForSeconds(0.5f);
                     Instantiate(starParticlePrefab, new Vector3(star2.GetComponent<Transform>().transform.position.x, star2.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
+                    EazySoundManager.PlaySound(star2Sound, 0.6f);
                     star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
                     yield return new WaitForSeconds(0.8f);
                     Instantiate(starParticlePrefab, new Vector3(star3.GetComponent<Transform>().transform.position.x, star3.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
+                    EazySoundManager.PlaySound(star3Sound, 0.6f);
                     star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
                     Debug.Log("We made it to 3");
                     break;
@@ -999,7 +1019,7 @@ public class Current_level_manager : MonoBehaviour
     //For restart button.
     public void restartScene()
    {
-       SceneManager.LoadScene(thisScene.name);
+       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
    }
 
     //Gives pop-up menu for pausing the game.
