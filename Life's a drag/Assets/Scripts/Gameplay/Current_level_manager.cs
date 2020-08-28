@@ -34,6 +34,11 @@ public class Current_level_manager : MonoBehaviour
     public Text objectiveText;
     private TimeSpan currentTime;
 
+    //Top UI stars
+    public GameObject star1;
+    public GameObject star2;
+    public GameObject star3;
+
     //For tutorial
     public bool control;
 
@@ -117,7 +122,6 @@ public class Current_level_manager : MonoBehaviour
             initializeLevel();
         }
 
-
        // Time.timeScale = 100;
 
     }
@@ -163,7 +167,7 @@ public class Current_level_manager : MonoBehaviour
         objectiveText.text = "Objective: " + theLev.objective;
 
         timeForStarsFormat = TimeSpan.FromSeconds(timeFor3Stars);
-        timeForStarsStr = "***: " + timeForStarsFormat.ToString("mm':'ss");
+        timeForStarsStr = "    : " + timeForStarsFormat.ToString("mm':'ss");
         timeForStarsText.text = timeForStarsStr;
 
         isPaused = false;
@@ -358,17 +362,48 @@ public class Current_level_manager : MonoBehaviour
         if (elapsedTime > (timeFor3Stars + 1) && numStarsPassed == 0)
         {
             timeForStarsFormat = TimeSpan.FromSeconds(timeFor2Stars);
-            timeForStarsStr = "** : " + timeForStarsFormat.ToString("mm':'ss");
+            timeForStarsStr = "   :  " + timeForStarsFormat.ToString("mm':'ss");
             timeForStarsText.text = timeForStarsStr;
             numStarsPassed = 1;
         }
 
         if(elapsedTime > (timeFor2Stars + 1) && numStarsPassed == 1)
         {
-            timeForStarsText.text = "* : 59:99";
+            timeForStarsText.text = "   : 59:99";
             numStarsPassed++;
         }
 
+        StartCoroutine(shrinkStar());
+    }
+
+    //Coroutine to shrink the stars.
+    IEnumerator shrinkStar()
+    {
+        float i = 0.0f;
+        float rate = 0.0f;
+
+        if(elapsedTime < timeFor3Stars)
+        {
+            rate = (1.0f / timeFor3Stars) * 1.0f;
+            while (i < 1.0f)
+            {
+                i += Time.deltaTime * rate;
+                star3.transform.localScale = Vector3.Lerp(star1.transform.localScale, new Vector3(0f, 0f, 1f), (i));
+                yield return null;
+            }
+        }
+        else
+        {
+            rate = (1.0f / (timeFor2Stars-timeFor3Stars)) * 1.0f;
+            while (i < 1.0f)
+            {
+                i += Time.deltaTime * rate;
+                star2.transform.localScale = Vector3.Lerp(star1.transform.localScale, new Vector3(0f, 0f, 1f), (i));
+                yield return null;
+            }
+        }
+        
+     
     }
 
     //Bottom UI zoom and small area functions. 
@@ -634,6 +669,7 @@ public class Current_level_manager : MonoBehaviour
         {
             Debug.Log("The item is not a required item for level completion! It's also a material.");
             theInstance.transform.position = theInstance.GetComponent<Draggable_Item>().initialPos;
+            theInstance.transform.localScale = theInstance.GetComponent<Draggable_Item>().initialScale;
         }
 
         else if(isCombo && isMat)
@@ -644,6 +680,7 @@ public class Current_level_manager : MonoBehaviour
                 if(theLev.comboItemsNeeded[i].name == theName)
                 {
                     theInstance.transform.position = theLev.comboItemsNeeded[i].initialPos;
+                    theInstance.transform.localScale = theInstance.GetComponent<Draggable_Item>().initialScale;
                     break;
                 }
             }
@@ -654,6 +691,7 @@ public class Current_level_manager : MonoBehaviour
         {
             Debug.Log("This is a background item!");
             theInstance.transform.position = theInstance.GetComponent<Draggable_Item>().initialPos;
+            theInstance.transform.localScale = theInstance.GetComponent<Draggable_Item>().initialScale;
         }
        
 
@@ -680,6 +718,9 @@ public class Current_level_manager : MonoBehaviour
         int nextStarReq;
 
         finishTime = elapsedTime;
+
+        //Just using this to make it so background objects can't be moved.
+        isPaused = true;
 
 
         Debug.Log("You found all the items!");

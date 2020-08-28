@@ -9,6 +9,8 @@ public class Draggable_Item : MonoBehaviour
     public Vector3 initialPos;
     public Vector3 initialScale;
     public Vector3 shrinkScale;
+    float lerpSpeed = 1.0f;
+    public bool shouldWeLerp;
     GameObject levelMan;
 
     enum typeOfObject
@@ -45,11 +47,25 @@ public class Draggable_Item : MonoBehaviour
             thisItemIs = typeOfObject.backgroundItem;
 
         shrinkScale = new Vector3(0.5f, 0.5f, 1f);
+
+        shouldWeLerp = false;
     }
     void Update()
     {
         //May move this later.
         checkDragStatus();
+
+        if(shouldWeLerp && (this.transform.position != initialPos))
+        {
+            StartCoroutine(rubberBand());
+            canWeDrag = DragStatus.cantDrag;
+        }
+
+        if(this.transform.position == initialPos)
+        {
+            shouldWeLerp = false;
+            canWeDrag = DragStatus.canDrag;
+        }
     }
     void OnMouseDown()
     {
@@ -95,30 +111,9 @@ public class Draggable_Item : MonoBehaviour
                             //transform.localScale = shrinkScale;
                         }
 
-                        /*
-                        if (transform.localScale.x >= 0.8f && transform.localScale.y >= 0.8f)
-                        {
-                            shrinkScale = new Vector3((initialScale.x - 0.3f), (initialScale.y - 0.3f), 1f);
-                            transform.localScale = shrinkScale;
-                        }
-                        /*
-                    else if (transform.localScale.x <= 0.3f && transform.localScale.y <= 0.3f)
-                    {
-                        //Barely shrink cause it's already small.
-                        new Vector3((initialScale.x - 0.1f), (initialScale.y - 0.1f), 1f);
-                        shrinkScale = initialScale;
-                    }
-                         
-                        else
-                        {
-                            //Only shrink a little bit.
-                            shrinkScale = new Vector3((initialScale.x - 0.1f), (initialScale.y - 0.1f), 1f);
-                            transform.localScale = shrinkScale;
-                        }
-                        */
-                        
                         break;
                     }
+
                 case typeOfObject.backgroundItem:
                     {
                         if (transform.localScale.x >= 1.0f && transform.localScale.y >= 1.0f)
@@ -189,13 +184,19 @@ public class Draggable_Item : MonoBehaviour
             {
                 case typeOfObject.requiredItem:
                     {
+                        if (transform.position.y > -2.95f)
+                        {
+                            shouldWeLerp = true;
+                            //transform.position = initialPos;
+                        }
                         break;
                     }
                 case typeOfObject.backgroundItem:
                     {
                         if (transform.position.y > -2.95f)
                         {
-                            transform.position = initialPos;
+                            shouldWeLerp = true;
+                            //transform.position = initialPos;
                         }
                         break;
                     }
@@ -223,6 +224,21 @@ public class Draggable_Item : MonoBehaviour
             //Debug.Log("We can drag!");
         }
 
+        
+    }
+
+   public IEnumerator rubberBand()
+    {
+        float i = 0.0f;
+        float rate = 0.0f;
+
+            rate = (1.0f / 20.0f) * 1.0f;
+            while (i < 1.0f && this.transform.position != initialPos)
+            {
+                i += Time.deltaTime * rate;
+                this.transform.position = Vector3.Lerp(this.transform.position, initialPos, (i));
+                yield return null;
+            }
         
     }
 }

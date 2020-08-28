@@ -55,21 +55,6 @@ public class Combine_Collision : MonoBehaviour
             Debug.Log("Tag we got is: " + tagToCompare);
             Debug.Log("Collided is now: " + collided);
 
-            /*
-            float tempX;
-            float tempY;
-            float tempPosX;
-            float tempPosY;
-
-
-
-            tempPosX = other.gameObject.transform.position.x;
-            tempPosY = other.gameObject.transform.position.y;
-            tempX = other.gameObject.transform.localScale.x;
-            tempY = other.gameObject.transform.localScale.y;
-            Debug.Log("The item's x scale is: " + tempX + " y scale is: " + tempY);
-            Debug.Log("The item's x position is: " + tempPosX + " y position is: " + tempPosY);
-             */
         }
       
         tempObject = other.gameObject;
@@ -93,8 +78,10 @@ public class Combine_Collision : MonoBehaviour
     {
        if(!Input.GetMouseButton(0))
        {
-           Debug.Log("Mouse isn't held down so grow the item!");
+          Debug.Log("Mouse isn't held down so grow the item!");
           StartCoroutine(grow(other));
+          other.GetComponent<Draggable_Item>().shouldWeLerp = true;
+
        }
        
 
