@@ -64,7 +64,7 @@ public class Draggable_Item : MonoBehaviour
         if(this.transform.position == initialPos)
         {
             shouldWeLerp = false;
-            canWeDrag = DragStatus.canDrag;
+            //canWeDrag = DragStatus.canDrag;
         }
     }
     void OnMouseDown()
