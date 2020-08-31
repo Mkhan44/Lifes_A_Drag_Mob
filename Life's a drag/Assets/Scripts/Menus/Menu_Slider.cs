@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Hellmade.Sound;
 public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Canvas canvas;
@@ -18,7 +19,7 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public GameObject nextLoad;
     public GameObject menuSlider;
     protected bool enoughDrag;
-
+    public AudioClip slideSound;
     // Start is called before the first frame update
    protected virtual void Start()
     {
@@ -63,6 +64,10 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
             enoughDrag = true;
             Debug.Log("Good enough!");
+            if (slideSound != null)
+            {
+                EazySoundManager.PlaySound(slideSound);
+            }
             slideOut();
             /*
             if(nextLoad == null)
