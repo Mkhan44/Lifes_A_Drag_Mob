@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 703464}
   - component: {fileID: 703463}
   - component: {fileID: 703462}
+  - component: {fileID: 703465}
   m_Layer: 5
   m_Name: Back_Button
   m_TagString: Untagged
@@ -202,40 +203,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 703463}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1228657448}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1911544934}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1320011733}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &703463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,6 +241,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703460}
   m_CullTransparentMesh: 0
+--- !u!114 &703465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f191204ebb15f664d94b672e072e8cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 1164168151}
+  initialPos: {x: 0, y: 0, z: 0}
+  yClampMin: 0
+  xClampMax: 0
+  xClampMin: 0
+  nextLoad: {fileID: 1727778210}
+  menuSlider: {fileID: 1911544934}
+  slideSound: {fileID: 8300000, guid: b1b3abb399661ff469bcdf654c9ddbcb, type: 3}
 --- !u!1 &30846829
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +550,7 @@ MonoBehaviour:
   xClampMin: 0
   nextLoad: {fileID: 1216288646}
   menuSlider: {fileID: 1727778210}
-  slideSound: {fileID: 0}
+  slideSound: {fileID: 8300000, guid: b1b3abb399661ff469bcdf654c9ddbcb, type: 3}
 --- !u!114 &46946231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3202,7 +3190,7 @@ MonoBehaviour:
   xClampMin: 0
   nextLoad: {fileID: 593598867}
   menuSlider: {fileID: 1727778210}
-  slideSound: {fileID: 0}
+  slideSound: {fileID: 8300000, guid: 103344dcbfc2dce458de3d1653060a18, type: 3}
 --- !u!114 &360521088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5685,6 +5673,7 @@ GameObject:
   - component: {fileID: 683000623}
   - component: {fileID: 683000622}
   - component: {fileID: 683000621}
+  - component: {fileID: 683000624}
   m_Layer: 5
   m_Name: Park_Button
   m_TagString: Untagged
@@ -5755,28 +5744,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1911544934}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1727778210}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 555502836}
         m_MethodName: setTheme
         m_Mode: 5
@@ -5787,17 +5754,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: Park
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1320011733}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &683000622
 MonoBehaviour:
@@ -5836,6 +5792,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683000619}
   m_CullTransparentMesh: 0
+--- !u!114 &683000624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683000619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f191204ebb15f664d94b672e072e8cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 1164168151}
+  initialPos: {x: 0, y: 0, z: 0}
+  yClampMin: 0
+  xClampMax: 0
+  xClampMin: 0
+  nextLoad: {fileID: 1911544934}
+  menuSlider: {fileID: 1727778210}
+  slideSound: {fileID: 8300000, guid: 103344dcbfc2dce458de3d1653060a18, type: 3}
 --- !u!1 &688516668
 GameObject:
   m_ObjectHideFlags: 0
@@ -7385,7 +7361,7 @@ MonoBehaviour:
   xClampMin: 0
   nextLoad: {fileID: 724124000}
   menuSlider: {fileID: 1216288646}
-  slideSound: {fileID: 0}
+  slideSound: {fileID: 8300000, guid: b1b3abb399661ff469bcdf654c9ddbcb, type: 3}
 --- !u!114 &821155612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8239,7 +8215,7 @@ MonoBehaviour:
   xClampMin: 0
   nextLoad: {fileID: 1727778210}
   menuSlider: {fileID: 1216288646}
-  slideSound: {fileID: 0}
+  slideSound: {fileID: 8300000, guid: 103344dcbfc2dce458de3d1653060a18, type: 3}
 --- !u!114 &897462199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12284,7 +12260,7 @@ MonoBehaviour:
   xClampMin: 0
   nextLoad: {fileID: 1727778210}
   menuSlider: {fileID: 593598867}
-  slideSound: {fileID: 0}
+  slideSound: {fileID: 8300000, guid: b1b3abb399661ff469bcdf654c9ddbcb, type: 3}
 --- !u!1 &1294811509
 GameObject:
   m_ObjectHideFlags: 0
@@ -13257,6 +13233,7 @@ GameObject:
   - component: {fileID: 1397927544}
   - component: {fileID: 1397927543}
   - component: {fileID: 1397927542}
+  - component: {fileID: 1397927545}
   m_Layer: 5
   m_Name: Back_Button
   m_TagString: Untagged
@@ -13326,40 +13303,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1397927543}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1228657448}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1422862764}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1320011733}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1397927543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13397,6 +13341,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397927540}
   m_CullTransparentMesh: 0
+--- !u!114 &1397927545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397927540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f191204ebb15f664d94b672e072e8cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 1164168151}
+  initialPos: {x: 0, y: 0, z: 0}
+  yClampMin: 0
+  xClampMax: 0
+  xClampMin: 0
+  nextLoad: {fileID: 1727778210}
+  menuSlider: {fileID: 1422862764}
+  slideSound: {fileID: 8300000, guid: b1b3abb399661ff469bcdf654c9ddbcb, type: 3}
 --- !u!1 &1412062862
 GameObject:
   m_ObjectHideFlags: 0
@@ -19079,6 +19043,7 @@ GameObject:
   - component: {fileID: 1882419967}
   - component: {fileID: 1882419966}
   - component: {fileID: 1882419965}
+  - component: {fileID: 1882419968}
   m_Layer: 5
   m_Name: House_Button
   m_TagString: Untagged
@@ -19149,28 +19114,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1422862764}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1727778210}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 555502836}
         m_MethodName: setTheme
         m_Mode: 5
@@ -19181,17 +19124,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: House
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1320011733}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1882419966
 MonoBehaviour:
@@ -19230,6 +19162,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882419963}
   m_CullTransparentMesh: 0
+--- !u!114 &1882419968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882419963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f191204ebb15f664d94b672e072e8cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 1164168151}
+  initialPos: {x: 0, y: 0, z: 0}
+  yClampMin: 0
+  xClampMax: 0
+  xClampMin: 0
+  nextLoad: {fileID: 1422862764}
+  menuSlider: {fileID: 1727778210}
+  slideSound: {fileID: 8300000, guid: 103344dcbfc2dce458de3d1653060a18, type: 3}
 --- !u!1 &1884042079
 GameObject:
   m_ObjectHideFlags: 0

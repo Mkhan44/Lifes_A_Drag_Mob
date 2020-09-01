@@ -103,6 +103,7 @@ public class Current_level_manager : MonoBehaviour
     public AudioClip star1Sound;
     public AudioClip star2Sound;
     public AudioClip star3Sound;
+    public AudioClip pauseSound;
     
 
     public void Awake()
@@ -1066,6 +1067,10 @@ public class Current_level_manager : MonoBehaviour
     //Gives pop-up menu for pausing the game.
     public void pause()
     {
+        if(pauseSound != null)
+        {
+            EazySoundManager.PlaySound(pauseSound, 0.5f);
+        }
         pauseMenuUI.SetActive(true);
         retryButton.interactable = false;
         pauseButton.interactable = false;
