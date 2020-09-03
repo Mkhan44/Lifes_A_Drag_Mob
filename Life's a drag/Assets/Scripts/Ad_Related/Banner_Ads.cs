@@ -47,6 +47,15 @@ public class Banner_Ads : MonoBehaviour
         
     }
 
+    public void hideBanner()
+    {
+        Advertisement.Banner.Hide();
+    }
+
+    public void showBanner()
+    {
+        Advertisement.Banner.Show(banner);
+    }
     // Update is called once per frame
     void Update()
     {

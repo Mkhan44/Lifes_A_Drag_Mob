@@ -6,6 +6,7 @@ using System;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Hellmade.Sound;
+using UnityEngine.Advertisements;
 public class Current_level_manager : MonoBehaviour
 {
     public enum stageType
@@ -108,7 +109,9 @@ public class Current_level_manager : MonoBehaviour
     //Ad related stuff.
     string levelsTillAdKey = "levelsTillAdPlays";
     int levelsTillAdNum;
-    GameObject adsManager;
+    public GameObject adsManager;
+    public Button shareButton;
+
     public void Awake()
     {
         thisScene = SceneManager.GetActiveScene();
@@ -158,6 +161,11 @@ public class Current_level_manager : MonoBehaviour
     //Spawn in items, get the scene name, etc.
     public void initializeLevel()
     {
+
+        if(adsManager != null)
+        {
+            adsManager.GetComponent<Banner_Ads>().hideBanner();
+        }
         if(theLev.levelMusic != null)
         {
             EazySoundManager.StopAllMusic();
@@ -715,6 +723,7 @@ public class Current_level_manager : MonoBehaviour
 
     void levelCompleted()
     {
+
         if (theLev.levelMusic != null)
         {
             EazySoundManager.PlayMusic(levelCompleteTheme, 0.8f, false, false, 0.0f, 1.0f);
@@ -894,6 +903,7 @@ public class Current_level_manager : MonoBehaviour
         menuBtnChild.GetComponent<Button>().interactable = false;
         RetryBtnChild.GetComponent<Button>().interactable = false;
         PlayNextBtnChild.GetComponent<Button>().interactable = false;
+        shareButton.interactable = false;
 
         currentTime = TimeSpan.FromSeconds(finishTime);
         string finishTimestr = "Finish Time: " + currentTime.ToString("mm':'ss");
@@ -946,7 +956,7 @@ public class Current_level_manager : MonoBehaviour
         */
     }
 
-    IEnumerator animateStars(GameObject star1, GameObject star2, GameObject star3, int tempNumStars, GameObject menuButton, GameObject RetryEndBUtton, GameObject PlayNextButton, bool notEnoughStars)
+    IEnumerator animateStars(GameObject star1, GameObject star2, GameObject star3, int tempNumStars, GameObject menuButton, GameObject RetryEndButton, GameObject PlayNextButton, bool notEnoughStars)
     {
         switch (tempNumStars)
         {
@@ -1016,13 +1026,37 @@ public class Current_level_manager : MonoBehaviour
         }
 
         menuButton.GetComponent<Button>().interactable = true;
-        RetryEndBUtton.GetComponent<Button>().interactable = true;
-
-     
+        RetryEndButton.GetComponent<Button>().interactable = true;
+        shareButton.interactable = true;
 
         //Do something based on the amount of stars.
+
+        if (adsManager != null)
+        {
+            adsManager.GetComponent<Banner_Ads>().showBanner();
+        }
     }
 
+    public void shareButtonClicked()
+    {
+        Debug.Log("Share button clicked.");
+        currentTime = TimeSpan.FromSeconds(elapsedTime);
+        string finishTimestr = currentTime.ToString("mm':'ss");
+
+        if(shareButton != null)
+        {
+            shareButton.GetComponent<Share_Button>().clickShareButton(finishTimestr, theLev.levelName);
+            Debug.Log("Share test");
+        }
+        else
+        {
+            Debug.LogWarning("Share button not found!");
+        }
+        
+
+
+        //finishTimeEndText.text = finishTimestr;
+    }
    public void loadNextLevel()
     {
         if (adsManager != null)
@@ -1034,6 +1068,7 @@ public class Current_level_manager : MonoBehaviour
                 levelsTillAdNum = 0;
             }
         }
+        PlayerPrefs.SetInt(levelsTillAdKey, (levelsTillAdNum + 1));
         Debug.Log("Button clicked.");
        string tempLoad = "Main_Menu";
        if(DoesSceneExist(nextSceneName))
@@ -1076,20 +1111,26 @@ public class Current_level_manager : MonoBehaviour
     //For restart button.
     public void restartScene()
    {
-       if (levelsTillAdNum >= 3)
+       if (adsManager != null)
        {
-           SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-           PlayerPrefs.SetInt(levelsTillAdKey, 0);
-           levelsTillAdNum = 0;
-           adsManager.GetComponent<AdsManager>().playInterstitialAd();
-           Debug.Log("ispaused is: " + isPaused);
+           if (levelsTillAdNum >= 3)
+           {
+
+               PlayerPrefs.SetInt(levelsTillAdKey, 0);
+               levelsTillAdNum = 0;
+               adsManager.GetComponent<AdsManager>().playInterstitialAd();
+               // Debug.Log("ispaused is: " + isPaused);
+               SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+           }
+
+           else
+           {
+               PlayerPrefs.SetInt(levelsTillAdKey, (levelsTillAdNum + 1));
+               SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+               //levelsTillAdNum = 0;
+           }
        }
-       else
-       {
-           PlayerPrefs.SetInt(levelsTillAdKey, (levelsTillAdNum + 1));
-           SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-           //levelsTillAdNum = 0;
-       }
+
       
    }
 

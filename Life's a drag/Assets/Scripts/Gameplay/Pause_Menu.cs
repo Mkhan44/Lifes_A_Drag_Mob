@@ -9,6 +9,8 @@ public class Pause_Menu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject currentLevelMan;
     public GameObject warningRef;
+    string levelsTillAdKey = "levelsTillAdPlays";
+    int levelsTillAdNum;
     public void Resume()
     {
         Time.timeScale = 1f;
@@ -37,6 +39,13 @@ public class Pause_Menu : MonoBehaviour
 
     public void mainMenuYes()
     {
+  /*
+        if(currentLevelMan.GetComponent<Current_level_manager>().adsManager != null)
+        {
+            levelsTillAdNum = PlayerPrefs.GetInt(levelsTillAdKey);
+            PlayerPrefs.SetInt(levelsTillAdKey, (levelsTillAdNum + 1));
+        }
+   */
         Time.timeScale = 1f;
         currentLevelMan.GetComponent<Load_Level>().LoadLevel("Main_Menu");
        // SceneManager.LoadScene("Main_Menu");

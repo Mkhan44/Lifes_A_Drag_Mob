@@ -21,7 +21,15 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
     string levNameDisplay;
     public int levelNumber;
 
-
+    GameObject adsManager;
+    string levelsTillAdKey = "levelsTillAdPlays";
+    int levelsTillAdNum;
+    
+    void Start()
+    {
+        levelsTillAdNum = PlayerPrefs.GetInt(levelsTillAdKey);
+        adsManager = GameObject.Find("AdsManager");
+    }
     void OnEnable()
     {
         StartCoroutine(waitTime());
@@ -64,6 +72,20 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
 
     public void loadLevel()
     {
+        if(adsManager != null)
+        {
+            if (levelsTillAdNum >= 3)
+            {
+                adsManager.GetComponent<AdsManager>().playInterstitialAd();
+                PlayerPrefs.SetInt(levelsTillAdKey, 0);
+                levelsTillAdNum = 0;
+            }
+            else
+            {
+                PlayerPrefs.SetInt(levelsTillAdKey, (levelsTillAdNum + 1));
+            }
+
+        }
         string levelToLoad;
         levelToLoad = fullLevName;
         levelMan.GetComponent<Load_Level>().LoadLevel(levelToLoad);
