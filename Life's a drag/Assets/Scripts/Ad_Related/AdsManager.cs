@@ -4,6 +4,8 @@ using Hellmade.Sound;
 
 public class AdsManager : MonoBehaviour , IUnityAdsListener
 {
+    private string noAdsKey = "noAdsKey";
+
     private string playStoreID = "3633238";
     private string appStoreID = "3633239";
 
@@ -24,6 +26,12 @@ public class AdsManager : MonoBehaviour , IUnityAdsListener
     public static AdsManager instance;
     void Awake()
     {
+        int adsPurchasedCheck;
+
+        adsPurchasedCheck = PlayerPrefs.GetInt(noAdsKey);
+
+        if (adsPurchasedCheck == 0)
+        {
             if (instance == null)
             {
                 instance = this;
@@ -34,6 +42,12 @@ public class AdsManager : MonoBehaviour , IUnityAdsListener
                 return;
             }
             DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+           
 
     }
     void Start()

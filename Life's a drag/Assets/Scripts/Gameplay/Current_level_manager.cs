@@ -105,11 +105,17 @@ public class Current_level_manager : MonoBehaviour
     public AudioClip star3Sound;
     public AudioClip pauseSound;
     
-
+    //Ad related stuff.
+    string levelsTillAdKey = "levelsTillAdPlays";
+    int levelsTillAdNum;
+    GameObject adsManager;
     public void Awake()
     {
         thisScene = SceneManager.GetActiveScene();
         elapsedTime = 0f;
+
+        levelsTillAdNum = PlayerPrefs.GetInt(levelsTillAdKey);
+        adsManager = GameObject.Find("AdsManager");
     }
 
     public void Start()
@@ -1019,6 +1025,15 @@ public class Current_level_manager : MonoBehaviour
 
    public void loadNextLevel()
     {
+        if (adsManager != null)
+        {
+            if(levelsTillAdNum >= 3)
+            {
+                adsManager.GetComponent<AdsManager>().playInterstitialAd();
+                PlayerPrefs.SetInt(levelsTillAdKey, 0);
+                levelsTillAdNum = 0;
+            }
+        }
         Debug.Log("Button clicked.");
        string tempLoad = "Main_Menu";
        if(DoesSceneExist(nextSceneName))
@@ -1061,7 +1076,21 @@ public class Current_level_manager : MonoBehaviour
     //For restart button.
     public void restartScene()
    {
-       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+       if (levelsTillAdNum >= 3)
+       {
+           SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+           PlayerPrefs.SetInt(levelsTillAdKey, 0);
+           levelsTillAdNum = 0;
+           adsManager.GetComponent<AdsManager>().playInterstitialAd();
+           Debug.Log("ispaused is: " + isPaused);
+       }
+       else
+       {
+           PlayerPrefs.SetInt(levelsTillAdKey, (levelsTillAdNum + 1));
+           SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+           //levelsTillAdNum = 0;
+       }
+      
    }
 
     //Gives pop-up menu for pausing the game.
