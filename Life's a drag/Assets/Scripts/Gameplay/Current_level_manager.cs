@@ -400,7 +400,7 @@ public class Current_level_manager : MonoBehaviour
         if(elapsedTime < timeFor3Stars)
         {
             rate = (1.0f / timeFor3Stars) * 1.0f;
-            while (i < 1.0f)
+            while (i < 1.0f && !levelComplete)
             {
                 i += Time.deltaTime * rate;
                 star3.transform.localScale = Vector3.Lerp(star1.transform.localScale, new Vector3(0f, 0f, 1f), (i));
@@ -410,7 +410,7 @@ public class Current_level_manager : MonoBehaviour
         else
         {
             rate = (1.0f / (timeFor2Stars-timeFor3Stars)) * 1.0f;
-            while (i < 1.0f)
+            while (i < 1.0f && !levelComplete)
             {
                 i += Time.deltaTime * rate;
                 star2.transform.localScale = Vector3.Lerp(star1.transform.localScale, new Vector3(0f, 0f, 1f), (i));
@@ -723,7 +723,6 @@ public class Current_level_manager : MonoBehaviour
 
     void levelCompleted()
     {
-
         if (theLev.levelMusic != null)
         {
             EazySoundManager.PlayMusic(levelCompleteTheme, 0.8f, false, false, 0.0f, 1.0f);
