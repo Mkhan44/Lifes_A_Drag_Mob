@@ -56,4 +56,9 @@ public class Level_Select_Manager : MonoBehaviour
         Debug.Log("All playerprefs deleted!");
     }
 
+    public void loadTut()
+    {
+        GetComponent<Load_Level>().LoadLevel("Tutorial");
+    }
+
 }

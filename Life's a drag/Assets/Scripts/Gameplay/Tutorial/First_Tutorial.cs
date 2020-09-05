@@ -63,7 +63,8 @@ public class First_Tutorial : MonoBehaviour
              // currentInstruction = 0;
              // tutorialText.text = phrases[currentInstruction];
              conditionMet = false;
-             SceneManager.LoadScene("Main_Menu");
+             levManager.GetComponent<Load_Level>().LoadLevel("Main_Menu");
+            // SceneManager.LoadScene("Main_Menu");
          }
          else
          {

@@ -64,6 +64,7 @@ public class Pause_Menu_Slider : Menu_Slider, IBeginDragHandler, IDragHandler, I
                 case typeOfButton.Main_Menu:
                     {
                         pauseRef.MainMenu();
+                        gameObject.GetComponent<RectTransform>().anchoredPosition = initialPos;
                         break;
                     }
             }

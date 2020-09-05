@@ -99,7 +99,7 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             nextLoad.SetActive(true);
         }
 
-        thisTrans.anchoredPosition = initialPos;
+        //thisTrans.anchoredPosition = initialPos;
         //Make it slide out the opposite way.
         menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x = (menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x * -1);
         menuSlider.GetComponent<PanelAnimator>().StartAnimOut();
@@ -120,6 +120,7 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         {
             nextLoad.GetComponent<PanelAnimator>().StartAnimIn();
         }
+        thisTrans.anchoredPosition = initialPos;
         
     }
 

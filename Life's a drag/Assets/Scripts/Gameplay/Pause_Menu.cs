@@ -16,20 +16,25 @@ public class Pause_Menu : MonoBehaviour
         Time.timeScale = 1f;
         //Play sound effect here.
         currentLevelMan.GetComponent<Current_level_manager>().isPaused = false;
-        currentLevelMan.GetComponent<Current_level_manager>().retryButton.interactable = true;
-        currentLevelMan.GetComponent<Current_level_manager>().pauseButton.interactable = true;
+        StartCoroutine(waitAni());
        // pauseMenuUI.SetActive(false);
     }
 
     public void Options()
     {
         Debug.Log("Options menu opened.");
-
+        Time.timeScale = 1f;
         //Set options stuff true (should have a back button to get back to main pause menu)
     }
 
     public void MainMenu()
     {
+        
+        if (Time.timeScale > 0f)
+        {
+            Time.timeScale = 0f;
+        }
+         
         warningRef.SetActive(true);
         Debug.Log("Return to main menu.");
 
@@ -51,6 +56,12 @@ public class Pause_Menu : MonoBehaviour
        // SceneManager.LoadScene("Main_Menu");
     }
 
+    IEnumerator waitAni()
+    {
+        yield return new WaitForSeconds(0.3f);
+        currentLevelMan.GetComponent<Current_level_manager>().retryButton.interactable = true;
+        currentLevelMan.GetComponent<Current_level_manager>().pauseButton.interactable = true;
+    }
 
 
 }

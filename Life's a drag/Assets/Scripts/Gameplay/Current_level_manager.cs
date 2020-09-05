@@ -1182,6 +1182,19 @@ public class Current_level_manager : MonoBehaviour
 
     public void initializeTutorial()
     {
+        if (adsManager != null)
+        {
+            adsManager.GetComponent<Banner_Ads>().hideBanner();
+        }
+        if (theLev.levelMusic != null)
+        {
+            EazySoundManager.StopAllMusic();
+            EazySoundManager.PlayMusic(theLev.levelMusic, 0.2f, true, false, 0.5f, 0.5f);
+        }
+
+        pauseButton.interactable = false;
+        retryButton.interactable = false;
+
         expandButton.SetActive(false);
         control = false;
         //Displaying the initial top UI timers and objective.
