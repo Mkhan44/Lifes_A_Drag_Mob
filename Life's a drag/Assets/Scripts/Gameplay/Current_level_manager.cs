@@ -105,6 +105,7 @@ public class Current_level_manager : MonoBehaviour
     public AudioClip star2Sound;
     public AudioClip star3Sound;
     public AudioClip pauseSound;
+    public AudioClip itemGetSound;
     
     //Ad related stuff.
     string levelsTillAdKey = "levelsTillAdPlays";
@@ -654,12 +655,17 @@ public class Current_level_manager : MonoBehaviour
         {
             if(theLev.icons.Count != 0)
             {
+                if (itemGetSound != null)
+                {
+                    EazySoundManager.PlaySound(itemGetSound);
+                }
                 iconInstance = GameObject.Find(iconInstanceName);
                 tempImg = iconInstance.GetComponent<Image>();
                 tempColor = tempImg.color;
                 tempColor.a = 1.0f;
                 tempImg.color = tempColor;
                 Instantiate(itemGotParticlePrefab, iconInstance.transform);
+
 
                 //For zoomed in version.
                 iconInstance = GameObject.Find(iconInstanceName + "2");
