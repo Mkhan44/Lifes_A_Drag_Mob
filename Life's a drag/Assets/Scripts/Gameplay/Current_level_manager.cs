@@ -589,6 +589,7 @@ public class Current_level_manager : MonoBehaviour
                 //Play animation to signify to player where the new item appeared!
                 Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
                 Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
+                pauseButton.interactable = true;
                 //Instantiate(theLev.comboItemsNeeded[i].theItem, new Vector3(2.4f,-3.5f,0f), Quaternion.Euler(0f, 0f, 0f));
                 break;
             }

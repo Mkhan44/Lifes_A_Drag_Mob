@@ -72,6 +72,7 @@ public class Draggable_Item : MonoBehaviour
         //if(!levelMan.GetComponent<Current_level_manager>().isPaused)
         if (canWeDrag == DragStatus.canDrag)
         {
+            levelMan.GetComponent<Current_level_manager>().pauseButton.interactable = false;
             screenPoint = Camera.main.WorldToScreenPoint(transform.position);
             offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
 
@@ -173,6 +174,8 @@ public class Draggable_Item : MonoBehaviour
 
     void OnMouseUp()
     {
+
+        StartCoroutine(waitPause());
         if (canWeDrag == DragStatus.canDrag)
         {
             if (gameObject.transform.position.y > -2.85f)
@@ -241,4 +244,11 @@ public class Draggable_Item : MonoBehaviour
             }
         
     }
+
+    public IEnumerator waitPause()
+   {
+       yield return new WaitForSeconds(0.3f);
+       levelMan.GetComponent<Current_level_manager>().pauseButton.interactable = true;
+
+   }
 }
