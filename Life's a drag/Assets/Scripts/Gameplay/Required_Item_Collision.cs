@@ -14,8 +14,13 @@ public class Required_Item_Collision : MonoBehaviour
     public List<string> comboItemNames = new List<string>();
     public List<string> matItemNames = new List<string>();
 
+    void Awake()
+    {
+        levelManagerInstance = GameObject.Find("LevelManager");
+    }
     void Start()
     {
+       
         findItemNames();
 
     }

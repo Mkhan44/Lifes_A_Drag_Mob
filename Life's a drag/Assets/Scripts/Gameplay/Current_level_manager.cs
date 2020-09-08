@@ -120,6 +120,13 @@ public class Current_level_manager : MonoBehaviour
 
         levelsTillAdNum = PlayerPrefs.GetInt(levelsTillAdKey);
         adsManager = GameObject.Find("AdsManager");
+
+        GameObject tempComb = GameObject.Find("Combo_Area_BG");
+        GameObject tempCombChild = tempComb.transform.GetChild(1).gameObject;
+        combineBox1 = tempCombChild.transform.GetChild(0).gameObject;
+
+        tempCombChild = tempComb.transform.GetChild(2).gameObject;
+        combineBox2 = tempCombChild.transform.GetChild(0).gameObject;
     }
 
     public void Start()
@@ -459,65 +466,35 @@ public class Current_level_manager : MonoBehaviour
         
         if ((!Input.GetMouseButton(0)) && combineBox1.GetComponent<Combine_Collision>().collided && combineBox2.GetComponent<Combine_Collision>().collided)
         {
-            if(resultFilled)
+            //Checking for if 2 of the same item (basically overlapping cause of size) happens.
+            if (combineBox1.GetComponent<Combine_Collision>().objectName == combineBox2.GetComponent<Combine_Collision>().objectName)
             {
-                //take out the item from the result box!
-                Debug.Log("Can't combine items, need to clear result area first!");
-
-
-                string tempName = resultBox.GetComponent<Combine_Collision>().tempObject.gameObject.name.Replace("(Clone)" , "");
-               // Debug.Log(tempName);
-                for (int i = 0; i < theLev.comboItemsNeeded.Count; i++ )
+                Debug.Log("Yo, double collision of the same item!");
+                string tempName = combineBox1.GetComponent<Combine_Collision>().tempObject.gameObject.name.Replace("(Clone)", "");
+                for (int i = 0; i < theLev.comboItemsNeeded.Count; i++)
                 {
                     if (tempName == theLev.comboItemsNeeded[i].name)
                     {
-                        resultBox.GetComponent<Combine_Collision>().tempObject.transform.position = theLev.comboItemsNeeded[i].initialPos;
+                        combineBox1.GetComponent<Combine_Collision>().tempObject.transform.position = theLev.comboItemsNeeded[i].initialPos;
                         break;
                     }
-                    //If we get past the last item, then it has to be either a required item or a draggable item, so just throw it to the initial position.
-                    if(i == theLev.comboItemsNeeded.Count-1)
+                    //If we get passed the last item, then it has to be either a required item or a draggable item, so just throw it to the initial position....Nevermind, forgot it could be a freakin' combo item >.>
+                    if (i == theLev.comboItemsNeeded.Count - 1)
                     {
-                        resultBox.GetComponent<Combine_Collision>().tempObject.transform.position = resultBox.GetComponent<Combine_Collision>().tempObject.GetComponent<Draggable_Item>().initialPos;
+                        combineBox1.GetComponent<Combine_Collision>().tempObject.transform.position = combineBox1.GetComponent<Combine_Collision>().tempObject.GetComponent<Draggable_Item>().initialPos;
                     }
                 }
-                    
             }
             else
             {
-                //Checking for if 2 of the same item (basically overlapping cause of size) happens.
-                if (combineBox1.GetComponent<Combine_Collision>().objectName == combineBox2.GetComponent<Combine_Collision>().objectName)
-                {
-                    Debug.Log("Yo, double collision of the same item!");
-                    string tempName = combineBox1.GetComponent<Combine_Collision>().tempObject.gameObject.name.Replace("(Clone)", "");
-                    for (int i = 0; i < theLev.comboItemsNeeded.Count; i++)
-                    {
-                        if (tempName == theLev.comboItemsNeeded[i].name)
-                        {
-                            combineBox1.GetComponent<Combine_Collision>().tempObject.transform.position = theLev.comboItemsNeeded[i].initialPos;
-                            break;
-                        }
-                        //If we get passed the last item, then it has to be either a required item or a draggable item, so just throw it to the initial position....Nevermind, forgot it could be a freakin' combo item >.>
-                        if (i == theLev.comboItemsNeeded.Count - 1)
-                        {
-                            combineBox1.GetComponent<Combine_Collision>().tempObject.transform.position = combineBox1.GetComponent<Combine_Collision>().tempObject.GetComponent<Draggable_Item>().initialPos;
-                        }
-                    }
-                }
-                else
-                {
-                    combine(combineBox1.GetComponent<Combine_Collision>().objectName, combineBox2.GetComponent<Combine_Collision>().objectName, combineBox1.GetComponent<Combine_Collision>().tagToCompare, combineBox2.GetComponent<Combine_Collision>().tagToCompare);
-                }
-               
+                combine(combineBox1.GetComponent<Combine_Collision>().objectName, combineBox2.GetComponent<Combine_Collision>().objectName, combineBox1.GetComponent<Combine_Collision>().tagToCompare, combineBox2.GetComponent<Combine_Collision>().tagToCompare);
             }
+               
+            
             
         }
 
-        if(resultBox.GetComponent<Combine_Collision>().collided)
-        {
-            resultFilled = true;
-        }
-        else
-            resultFilled = false;
+      
          
     }
     
