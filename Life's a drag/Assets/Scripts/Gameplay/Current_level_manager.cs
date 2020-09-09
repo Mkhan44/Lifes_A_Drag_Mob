@@ -57,6 +57,7 @@ public class Current_level_manager : MonoBehaviour
     public ScrollRect ZoomedScrollArea;
     public GameObject shrinkButton;
     public GameObject expandButton;
+    public GameObject itemRequiredArea;
     public bool isZoomed;
 
     //PlayerPrefs keys for each level.
@@ -118,6 +119,7 @@ public class Current_level_manager : MonoBehaviour
         thisScene = SceneManager.GetActiveScene();
         elapsedTime = 0f;
 
+        //Throw everything below this into a function later to make it easier to read.
         levelsTillAdNum = PlayerPrefs.GetInt(levelsTillAdKey);
         adsManager = GameObject.Find("AdsManager");
 
@@ -127,6 +129,8 @@ public class Current_level_manager : MonoBehaviour
 
         tempCombChild = tempComb.transform.GetChild(2).gameObject;
         combineBox2 = tempCombChild.transform.GetChild(0).gameObject;
+
+        Instantiate(itemRequiredArea, itemRequiredArea.transform.position, itemRequiredArea.transform.rotation);
     }
 
     public void Start()
@@ -190,7 +194,7 @@ public class Current_level_manager : MonoBehaviour
         objectiveText.text = "Objective: " + theLev.objective;
 
         timeForStarsFormat = TimeSpan.FromSeconds(timeFor3Stars);
-        timeForStarsStr = "    : " + timeForStarsFormat.ToString("mm':'ss");
+        timeForStarsStr = ": " + timeForStarsFormat.ToString("mm':'ss");
         timeForStarsText.text = timeForStarsStr;
 
         isPaused = false;
@@ -385,14 +389,14 @@ public class Current_level_manager : MonoBehaviour
         if (elapsedTime > (timeFor3Stars + 1) && numStarsPassed == 0)
         {
             timeForStarsFormat = TimeSpan.FromSeconds(timeFor2Stars);
-            timeForStarsStr = "   :  " + timeForStarsFormat.ToString("mm':'ss");
+            timeForStarsStr = ": " + timeForStarsFormat.ToString("mm':'ss");
             timeForStarsText.text = timeForStarsStr;
             numStarsPassed = 1;
         }
 
         if(elapsedTime > (timeFor2Stars + 1) && numStarsPassed == 1)
         {
-            timeForStarsText.text = "   : 59:99";
+            timeForStarsText.text = ": 59:99";
             numStarsPassed++;
         }
 
