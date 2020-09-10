@@ -50,7 +50,7 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
         //Might want to optimize this more...Not sure yet.
         thisTrans.anchoredPosition += eventData.delta / canvas.scaleFactor;
-        thisTrans.anchoredPosition = new Vector2 (Mathf.Clamp(thisTrans.anchoredPosition.x, xInitial, (xInitial + 250)) , Mathf.Clamp(thisTrans.anchoredPosition.y, yClampMin, yClampMax)); 
+        thisTrans.anchoredPosition = new Vector2 (Mathf.Clamp(thisTrans.anchoredPosition.x, xInitial, (xInitial + 220)) , Mathf.Clamp(thisTrans.anchoredPosition.y, yClampMin, yClampMax)); 
       
         Debug.Log(thisTrans.anchoredPosition);
 
@@ -59,7 +59,7 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public virtual void OnEndDrag(PointerEventData eventData)
     {
-        if (thisTrans.anchoredPosition.x >= (xInitial + 240))
+        if (thisTrans.anchoredPosition.x >= (xInitial + 180))
         {
 
             enoughDrag = true;
