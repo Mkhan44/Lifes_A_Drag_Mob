@@ -610,6 +610,8 @@ public class Current_level_manager : MonoBehaviour
      */
     public void gotItem(string theName, string theTag, bool isMat, bool isCombo)
     {
+        pauseButton.interactable = true;
+
         string instanceName;
         string iconInstanceName = "";
         GameObject iconInstance;
@@ -876,15 +878,15 @@ public class Current_level_manager : MonoBehaviour
         levelCompleteHolder.GetComponent<PanelAnimator>().StartAnimIn();
         GameObject BGChild = levelCompleteHolder.transform.GetChild(0).gameObject;
 
-        GameObject bannerChild = BGChild.transform.GetChild(0).gameObject;
-        GameObject menuBtnChild = BGChild.transform.GetChild(1).gameObject;
-        GameObject RetryBtnChild = BGChild.transform.GetChild(2).gameObject;
-        GameObject PlayNextBtnChild = BGChild.transform.GetChild(3).gameObject;
+      //  GameObject bannerChild = BGChild.transform.GetChild(0).gameObject;
+        GameObject menuBtnChild = BGChild.transform.GetChild(3).gameObject;
+        GameObject RetryBtnChild = BGChild.transform.GetChild(4).gameObject;
+        GameObject PlayNextBtnChild = BGChild.transform.GetChild(5).gameObject;
 
-
-        GameObject star1 = bannerChild.transform.GetChild(0).gameObject;
-        GameObject star2 = bannerChild.transform.GetChild(1).gameObject;
-        GameObject star3 = bannerChild.transform.GetChild(2).gameObject;
+        //star1 = left most star, star2 = right most star, star3 = middle star.
+        GameObject star1 = BGChild.transform.GetChild(0).gameObject;
+        GameObject star2 = BGChild.transform.GetChild(1).gameObject;
+        GameObject star3 = BGChild.transform.GetChild(2).gameObject;
 
         //Disable buttons so that the player can't touch them while star animation is playing.
         menuBtnChild.GetComponent<Button>().interactable = false;
@@ -898,23 +900,28 @@ public class Current_level_manager : MonoBehaviour
    
 
         totalThemeStars = PlayerPrefs.GetInt(totalThemeStarsKey);
-        bool notEnoughStars = false;
+        bool enoughStars = false;
         if (nextLev != null)
         {
             nextStarReq = nextLev.starRequirement;
             if (totalThemeStars < nextStarReq)
             {
-                notEnoughStars = true;
+                enoughStars = false;
+                Debug.Log("The stars needed for the next level are: " + nextStarReq + " You have: " + totalThemeStars);
             }
             else
+            {
+                enoughStars = true;
                 Debug.Log("Yay, you have enough stars!");
+            }
+               
         }
         else
         {
             Debug.LogWarning("nextLev is null! Is this the final level in this theme?");
         }
 
-        StartCoroutine(animateStars(star1, star2, star3, tempNumStars, menuBtnChild, RetryBtnChild, PlayNextBtnChild, notEnoughStars));
+        StartCoroutine(animateStars(star1, star2, star3, tempNumStars, menuBtnChild, RetryBtnChild, PlayNextBtnChild, enoughStars));
       
        
             
@@ -943,7 +950,7 @@ public class Current_level_manager : MonoBehaviour
         */
     }
 
-    IEnumerator animateStars(GameObject star1, GameObject star2, GameObject star3, int tempNumStars, GameObject menuButton, GameObject RetryEndButton, GameObject PlayNextButton, bool notEnoughStars)
+    IEnumerator animateStars(GameObject star1, GameObject star2, GameObject star3, int tempNumStars, GameObject menuButton, GameObject RetryEndButton, GameObject PlayNextButton, bool enoughStars)
     {
         switch (tempNumStars)
         {
@@ -952,10 +959,10 @@ public class Current_level_manager : MonoBehaviour
                     yield return new WaitForSeconds(0.5f);
                     Instantiate(starParticlePrefab, new Vector3 (star1.GetComponent<Transform>().transform.position.x,star1.GetComponent<Transform>().transform.position.y, 0f) , Quaternion.identity);
                     EazySoundManager.PlaySound(star1Sound, 0.6f);
-                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarLeft");
                     yield return new WaitForSeconds(0.5f);
-                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
-                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
+                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarRightBlack");
+                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarMidBlack");
                     Debug.Log("We made it to 1");
                     Debug.Log(tempNumStars);
                     break;
@@ -965,13 +972,13 @@ public class Current_level_manager : MonoBehaviour
                     yield return new WaitForSeconds(0.5f);
                     Instantiate(starParticlePrefab, new Vector3(star1.GetComponent<Transform>().transform.position.x, star1.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
                     EazySoundManager.PlaySound(star1Sound, 0.6f);
-                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarLeft");
                     yield return new WaitForSeconds(0.5f);
                     Instantiate(starParticlePrefab, new Vector3(star2.GetComponent<Transform>().transform.position.x, star2.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
                     EazySoundManager.PlaySound(star2Sound, 0.6f);
-                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarRight");
                     yield return new WaitForSeconds(0.2f);
-                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/EmptyStar");
+                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarMidBlack");
                     Debug.Log("We made it to 2");
                     break;
                 }
@@ -980,15 +987,15 @@ public class Current_level_manager : MonoBehaviour
                     yield return new WaitForSeconds(0.5f);
                     Instantiate(starParticlePrefab, new Vector3(star1.GetComponent<Transform>().transform.position.x, star1.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
                     EazySoundManager.PlaySound(star1Sound, 0.6f);
-                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    star1.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarLeft");
                     yield return new WaitForSeconds(0.5f);
                     Instantiate(starParticlePrefab, new Vector3(star2.GetComponent<Transform>().transform.position.x, star2.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
                     EazySoundManager.PlaySound(star2Sound, 0.6f);
-                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    star2.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarRight");
                     yield return new WaitForSeconds(0.8f);
                     Instantiate(starParticlePrefab, new Vector3(star3.GetComponent<Transform>().transform.position.x, star3.GetComponent<Transform>().transform.position.y, 0f), Quaternion.identity);
                     EazySoundManager.PlaySound(star3Sound, 0.6f);
-                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Beta/Star");
+                    star3.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarMid");
                     Debug.Log("We made it to 3");
                     break;
                 }
@@ -997,11 +1004,6 @@ public class Current_level_manager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         //Make the buttons work now.
-        if (!notEnoughStars)
-        {
-            PlayNextButton.GetComponent<Button>().interactable = true;
-        }
-
         //Check if we should have the next level button available.
         if (!DoesSceneExist(nextSceneName))
         {
@@ -1009,7 +1011,10 @@ public class Current_level_manager : MonoBehaviour
         }
         else
         {
-            PlayNextButton.GetComponent<Button>().interactable = true;
+            if (enoughStars)
+            {
+                PlayNextButton.GetComponent<Button>().interactable = true;
+            }
         }
 
         menuButton.GetComponent<Button>().interactable = true;
