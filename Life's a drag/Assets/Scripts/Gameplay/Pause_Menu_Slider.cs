@@ -8,11 +8,14 @@ using Hellmade.Sound;
 public class Pause_Menu_Slider : Menu_Slider, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Pause_Menu pauseRef;
+    public Level_Select_Manager levelRef;
+    public GameObject dialougeBoxRef;
     public enum typeOfButton
     {
         Resume,
         Options,
-        Main_Menu
+        Main_Menu,
+        Tutorial
     }
 
 
@@ -65,6 +68,12 @@ public class Pause_Menu_Slider : Menu_Slider, IBeginDragHandler, IDragHandler, I
                     {
                         pauseRef.MainMenu();
                         gameObject.GetComponent<RectTransform>().anchoredPosition = initialPos;
+                        break;
+                    }
+                case typeOfButton.Tutorial:
+                    {
+                        dialougeBoxRef.SetActive(true);
+                        Time.timeScale = 0f;
                         break;
                     }
             }

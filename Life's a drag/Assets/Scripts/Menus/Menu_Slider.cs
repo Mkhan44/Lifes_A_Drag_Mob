@@ -20,7 +20,11 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public GameObject menuSlider;
     protected bool enoughDrag;
     public AudioClip slideSound;
-    // Start is called before the first frame update
+
+    protected bool canDrag = true;
+
+    //This will be the variable that determines how far this button can be dragged so we can make different sizes.
+    public float xEnd;
    protected virtual void Start()
     {
         thisTrans = this.GetComponent<RectTransform>();
@@ -30,6 +34,18 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         yClampMax = yClampMin;
         xInitial = initialPos.x;
         Debug.Log(xInitial);
+       if(xEnd == 0)
+       {
+           xEnd = 220f;
+       }
+       if(this.GetComponent<Button>().interactable == false)
+       {
+           canDrag = false;
+       }
+       else
+       {
+           canDrag = true;
+       }
     }
 
     // Update is called once per frame
@@ -44,22 +60,24 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     }
     public void OnDrag(PointerEventData eventData)
     {
-        deltaStuff = eventData.delta / canvas.scaleFactor;
-        //Debug.Log(eventData.delta / canvas.scaleFactor);
-       //thisTrans.anchoredPosition = new Vector2 (Mathf.Clamp(Input.mousePosition.x, xInitial, (xInitial+100)), Mathf.Clamp(Input.mousePosition.y, yClampMin, yClampMax));
+        if(canDrag)
+        {
+            deltaStuff = eventData.delta / canvas.scaleFactor;
+            //Debug.Log(eventData.delta / canvas.scaleFactor);
+            //thisTrans.anchoredPosition = new Vector2 (Mathf.Clamp(Input.mousePosition.x, xInitial, (xInitial+100)), Mathf.Clamp(Input.mousePosition.y, yClampMin, yClampMax));
 
-        //Might want to optimize this more...Not sure yet.
-        thisTrans.anchoredPosition += eventData.delta / canvas.scaleFactor;
-        thisTrans.anchoredPosition = new Vector2 (Mathf.Clamp(thisTrans.anchoredPosition.x, xInitial, (xInitial + 220)) , Mathf.Clamp(thisTrans.anchoredPosition.y, yClampMin, yClampMax)); 
-      
-        Debug.Log(thisTrans.anchoredPosition);
+            //Might want to optimize this more...Not sure yet.
+            thisTrans.anchoredPosition += eventData.delta / canvas.scaleFactor;
+            thisTrans.anchoredPosition = new Vector2(Mathf.Clamp(thisTrans.anchoredPosition.x, xInitial, (xInitial + xEnd)), Mathf.Clamp(thisTrans.anchoredPosition.y, yClampMin, yClampMax));
 
+            Debug.Log(thisTrans.anchoredPosition);
+        }
 
     }
 
     public virtual void OnEndDrag(PointerEventData eventData)
     {
-        if (thisTrans.anchoredPosition.x >= (xInitial + 180))
+        if (thisTrans.anchoredPosition.x >= (xInitial + (xEnd - 40f)))
         {
 
             enoughDrag = true;
@@ -68,7 +86,15 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             {
                 EazySoundManager.PlaySound(slideSound);
             }
-            slideOut();
+            if(menuSlider != null)
+            {
+                slideOut();
+            }
+            else
+            {
+                thisTrans.anchoredPosition = initialPos;
+            }
+          
             /*
             if(nextLoad == null)
             {
