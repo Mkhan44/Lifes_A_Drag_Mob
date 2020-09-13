@@ -18,6 +18,8 @@ public class Level_Select_Manager : MonoBehaviour
         {
             EazySoundManager.PlayMusic(menuMusic, 0.7f, true, false, 0.5f, 0.5f);
         }
+
+        Input.multiTouchEnabled = false;
     }
     public void setDiff(string diff)
     {
