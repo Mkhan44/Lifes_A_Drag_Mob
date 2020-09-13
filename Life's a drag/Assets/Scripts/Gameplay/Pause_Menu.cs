@@ -28,13 +28,7 @@ public class Pause_Menu : MonoBehaviour
     }
 
     public void MainMenu()
-    {
-        
-        if (Time.timeScale > 0f)
-        {
-            Time.timeScale = 0f;
-        }
-         
+    {    
         warningRef.SetActive(true);
         Debug.Log("Return to main menu.");
 

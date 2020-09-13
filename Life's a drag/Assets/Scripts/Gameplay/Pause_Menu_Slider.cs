@@ -15,7 +15,8 @@ public class Pause_Menu_Slider : Menu_Slider, IBeginDragHandler, IDragHandler, I
         Resume,
         Options,
         Main_Menu,
-        Tutorial
+        Tutorial,
+        Play_Level
     }
 
 
@@ -74,6 +75,11 @@ public class Pause_Menu_Slider : Menu_Slider, IBeginDragHandler, IDragHandler, I
                     {
                         dialougeBoxRef.SetActive(true);
                         Time.timeScale = 0f;
+                        break;
+                    }
+                case typeOfButton.Play_Level:
+                    {
+                        dialougeBoxRef.GetComponent<Dialouge_Level_Select_Box>().loadLevel();
                         break;
                     }
             }

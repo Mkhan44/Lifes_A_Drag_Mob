@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
+using TMPro;
 public class Dialouge_Level_Select_Box : MonoBehaviour
 {
     //This script populates info into the dialouge box. This will comprise of:
@@ -13,7 +14,9 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
 
     public Image previewImg;
     public Text bestTimeText;
+    public TextMeshProUGUI bestTimeTMPRO;
     public Text LevelNameText;
+    public TextMeshProUGUI levelNameTMPRO;
     public Level_Select_Manager levelMan;
 
     Populate_Level_Buttons levelInfo;
@@ -64,8 +67,10 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
         bestTime = PlayerPrefs.GetFloat(bestTimeKey);
         bestTimeFormat = TimeSpan.FromSeconds(bestTime);
         bestTimeStr = "Best time: " + bestTimeFormat.ToString("mm':'ss");
-        bestTimeText.text = bestTimeStr;
-        LevelNameText.text = levNameDisplay;
+        bestTimeTMPRO.text = bestTimeStr;
+        levelNameTMPRO.text = levNameDisplay;
+        //bestTimeText.text = bestTimeStr;
+        //LevelNameText.text = levNameDisplay;
        //LevelNameText.text = "This is level: " + levelNumber;
 
     }
@@ -90,6 +95,18 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
         levelToLoad = fullLevName;
         levelMan.GetComponent<Load_Level>().LoadLevel(levelToLoad);
        // SceneManager.LoadScene(levelToLoad);
+    }
+
+    public void amIActive()
+    {
+        if (gameObject.activeSelf == true)
+        {
+            StartCoroutine(waitTime());
+        }
+        else
+        {
+            gameObject.SetActive(true);
+        }
     }
 
     public IEnumerator waitTime()

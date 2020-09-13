@@ -43,11 +43,11 @@ public class Populate_Level_Buttons : MonoBehaviour
 
     public void displayStars()
     {
-        GameObject starChild0;
-        GameObject starChild1;
-        GameObject starChild2;
-        GameObject starChild3;
-        GameObject starChild4;
+        GameObject starLeft;
+        GameObject starMid;
+        GameObject starRight;
+        GameObject lockImg;
+       
         string diffTheme;
         string fullLevName;
         string starsKey;
@@ -61,11 +61,10 @@ public class Populate_Level_Buttons : MonoBehaviour
         for(int i = 0; i < numButtons.Count; i++)
         {
             //This should be equivilant to the star image.
-            starChild0 = numButtons[i].transform.GetChild(0).gameObject;
-            starChild1 = numButtons[i].transform.GetChild(1).gameObject;
-            starChild2 = numButtons[i].transform.GetChild(2).gameObject;
-            starChild3 = numButtons[i].transform.GetChild(3).gameObject;
-            starChild4 = numButtons[i].transform.GetChild(4).gameObject;
+            starLeft = numButtons[i].transform.GetChild(0).gameObject;
+            starMid = numButtons[i].transform.GetChild(1).gameObject;
+            starRight = numButtons[i].transform.GetChild(2).gameObject;
+            lockImg = numButtons[i].transform.GetChild(4).gameObject;
 
             //Get the name of the level, we'll use this + star key to get the amt of stars.
             fullLevName = diffTheme + (i + 1).ToString();
@@ -89,32 +88,37 @@ public class Populate_Level_Buttons : MonoBehaviour
                             if(numThemeStars < starReq)
                             {
                                 numButtons[i].GetComponent<Button>().interactable = false;
-                                starChild4.SetActive(true);
+                                lockImg.SetActive(true);
                             }
                             else
                             {
-                                starChild0.SetActive(true);
+                                numButtons[i].GetComponent<Button>().interactable = true;
+                                lockImg.SetActive(false);
                             }
                         }
                         else
                         {
-                            starChild0.SetActive(true);
+                            numButtons[i].GetComponent<Button>().interactable = true;
+                            lockImg.SetActive(false);
                         }
                         break;
                     }
                 case 1:
                     {
-                        starChild1.SetActive(true);
+                        starLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarLeft");
                         break;
                     }
                 case 2:
                     {
-                        starChild2.SetActive(true);
+                        starLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarLeft");
+                        starRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarRight");
                         break;
                     }
                 case 3:
                     {
-                        starChild3.SetActive(true);
+                        starLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarLeft");
+                        starRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarRight");
+                        starMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarMid");
                         break;
                     }
             }
