@@ -13,13 +13,17 @@ public class Combine_Collision : MonoBehaviour
     public Vector3 centerCollide;
     public bool isResult;
   
+    void Awake()
+    {
+        centerCollide = transform.GetComponent<BoxCollider2D>().bounds.center;
+    }
     void Start()
     {
         if(gameObject.tag == "ResultArea")
         {
             isResult = true;
         }
-        centerCollide = transform.GetComponent<BoxCollider2D>().bounds.center;
+  
         //Debug.Log("The center of the collider is: " + centerCollide);
     }
 
@@ -72,16 +76,16 @@ public class Combine_Collision : MonoBehaviour
     void OnTriggerStay2D(Collider2D other)
     {
         if (boxFilled == true)
-        {
-         
-           
-            other.transform.position = centerCollide;
+        {    
+            if(!Input.GetMouseButton(0))
+            {
+                other.transform.position = centerCollide;
 
-            //The rest of the code in this if statement is to ensure that if the player spam clicks the item while it is in the box, it won't shrink and grow like crazy.
-            other.GetComponent<Draggable_Item>().inBox = true;
-            
-           
+                //The rest of the code in this if statement is to ensure that if the player spam clicks the item while it is in the box, it won't shrink and grow like crazy.
+                other.GetComponent<Draggable_Item>().inBox = true;
              
+            }
+        
         }
         else
         {
