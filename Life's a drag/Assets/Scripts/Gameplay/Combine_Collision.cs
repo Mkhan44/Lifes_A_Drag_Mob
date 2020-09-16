@@ -12,7 +12,7 @@ public class Combine_Collision : MonoBehaviour
     public GameObject tempObject;
     public Vector3 centerCollide;
     public bool isResult;
-
+  
     void Start()
     {
         if(gameObject.tag == "ResultArea")
@@ -30,6 +30,14 @@ public class Combine_Collision : MonoBehaviour
         {
             tempObject.transform.position = tempObject.GetComponent<Draggable_Item>().initialPos;
         }
+
+        /*
+        if ((tempObject != null) && (Input.GetMouseButtonDown(0)) && (tempObject.GetComponent<Draggable_Item>().inBox))
+        {
+           // tempObject.transform.position = tempObject.GetComponent<Draggable_Item>().initialPos;
+           // tempObject.transform.localScale = tempObject.GetComponent<Draggable_Item>().initialScale;
+        }
+         */
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -58,21 +66,22 @@ public class Combine_Collision : MonoBehaviour
         }
       
         tempObject = other.gameObject;
+      
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         if (boxFilled == true)
         {
+         
+           
             other.transform.position = centerCollide;
 
             //The rest of the code in this if statement is to ensure that if the player spam clicks the item while it is in the box, it won't shrink and grow like crazy.
             other.GetComponent<Draggable_Item>().inBox = true;
-            if (Input.GetMouseButtonDown(0) && other.GetComponent<Draggable_Item>().inBox)
-            {
-                other.GetComponent<Draggable_Item>().transform.position = other.GetComponent<Draggable_Item>().initialPos;
-                other.GetComponent<Draggable_Item>().transform.localScale = other.GetComponent<Draggable_Item>().initialScale;
-            }
+            
+           
+             
         }
         else
         {
@@ -84,13 +93,13 @@ public class Combine_Collision : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-       if(!Input.GetMouseButton(0))
-       {
-          Debug.Log("Mouse isn't held down so grow the item!");
-          StartCoroutine(grow(other));
-          other.GetComponent<Draggable_Item>().shouldWeLerp = true;
+        if (!Input.GetMouseButton(0))
+        {
+            Debug.Log("Mouse isn't held down so grow the item!");
+            StartCoroutine(grow(other));
+            other.GetComponent<Draggable_Item>().shouldWeLerp = true;
 
-       }
+        }
        
 
         numCollisions -= 1;
@@ -129,5 +138,4 @@ public class Combine_Collision : MonoBehaviour
            // other.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         }
     }
-       
 }

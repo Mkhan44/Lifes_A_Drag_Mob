@@ -12,6 +12,7 @@ public class Draggable_Item : MonoBehaviour
     float lerpSpeed = 1.0f;
     public bool shouldWeLerp;
     public bool inBox;
+    public bool mouseOnMe; 
     GameObject levelMan;
 
     enum typeOfObject
@@ -69,6 +70,7 @@ public class Draggable_Item : MonoBehaviour
             inBox = false;
             //canWeDrag = DragStatus.canDrag;
         }
+
     }
     void OnMouseDown()
     {
@@ -76,12 +78,14 @@ public class Draggable_Item : MonoBehaviour
         
         if (canWeDrag == DragStatus.canDrag)
         {
-            //This if is to check whether or not the item is already in the box, to avoid spam clicking.
+            //This if is to check whether or not the item is already in the box, to avoid spammage.
+
             if(inBox && Input.GetMouseButtonDown(0))
             {
-                inBox = false;
                 return;
             }
+
+
             levelMan.GetComponent<Current_level_manager>().pauseButton.interactable = false;
             screenPoint = Camera.main.WorldToScreenPoint(transform.position);
             offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
