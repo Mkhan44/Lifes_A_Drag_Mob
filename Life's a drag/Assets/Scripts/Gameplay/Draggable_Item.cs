@@ -11,6 +11,7 @@ public class Draggable_Item : MonoBehaviour
     public Vector3 shrinkScale;
     float lerpSpeed = 1.0f;
     public bool shouldWeLerp;
+    public bool inBox;
     GameObject levelMan;
 
     enum typeOfObject
@@ -49,6 +50,7 @@ public class Draggable_Item : MonoBehaviour
         shrinkScale = new Vector3(0.5f, 0.5f, 1f);
 
         shouldWeLerp = false;
+        inBox = false;
     }
     void Update()
     {
@@ -64,14 +66,22 @@ public class Draggable_Item : MonoBehaviour
         if(this.transform.position == initialPos)
         {
             shouldWeLerp = false;
+            inBox = false;
             //canWeDrag = DragStatus.canDrag;
         }
     }
     void OnMouseDown()
     {
         //if(!levelMan.GetComponent<Current_level_manager>().isPaused)
+        
         if (canWeDrag == DragStatus.canDrag)
         {
+            //This if is to check whether or not the item is already in the box, to avoid spam clicking.
+            if(inBox && Input.GetMouseButtonDown(0))
+            {
+                inBox = false;
+                return;
+            }
             levelMan.GetComponent<Current_level_manager>().pauseButton.interactable = false;
             screenPoint = Camera.main.WorldToScreenPoint(transform.position);
             offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));

@@ -65,6 +65,14 @@ public class Combine_Collision : MonoBehaviour
         if (boxFilled == true)
         {
             other.transform.position = centerCollide;
+
+            //The rest of the code in this if statement is to ensure that if the player spam clicks the item while it is in the box, it won't shrink and grow like crazy.
+            other.GetComponent<Draggable_Item>().inBox = true;
+            if (Input.GetMouseButtonDown(0) && other.GetComponent<Draggable_Item>().inBox)
+            {
+                other.GetComponent<Draggable_Item>().transform.position = other.GetComponent<Draggable_Item>().initialPos;
+                other.GetComponent<Draggable_Item>().transform.localScale = other.GetComponent<Draggable_Item>().initialScale;
+            }
         }
         else
         {
