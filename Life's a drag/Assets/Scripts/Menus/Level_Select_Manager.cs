@@ -60,6 +60,7 @@ public class Level_Select_Manager : MonoBehaviour
 
     public void loadTut()
     {
+        Time.timeScale = 1f;
         GetComponent<Load_Level>().LoadLevel("Tutorial");
     }
 
