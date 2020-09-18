@@ -30,14 +30,20 @@ public class First_Tutorial : MonoBehaviour
     public List<bool> requirementChecks = new List<bool>();
 
     //Images for the tutorial.
-    public Image comboImg1;
-    public Image comboImg2;
+    public Image comboBox1Cursor;
+    public Image comboBox2Cursor;
+    public Image requiredBoxCursor;
+    public Image expandButonCursor;
+    public Image timerCursor;
 
     public GameObject box;
     void Start()  
     {
-        comboImg1.enabled = false;
-        comboImg2.enabled = false;
+        comboBox1Cursor.enabled = false;
+        comboBox2Cursor.enabled = false;
+        requiredBoxCursor.enabled = false;
+        expandButonCursor.enabled = false;
+        timerCursor.enabled = false;
 
         numInstructions = (phrases.Count - 1);
         Debug.Log(numInstructions);
@@ -90,23 +96,54 @@ public class First_Tutorial : MonoBehaviour
              }
          }
 
+     if (currentInstruction == 3)
+     {
+         requiredBoxCursor.enabled = true;
+     }
+     if (currentInstruction == 5)
+     {
+         requiredBoxCursor.enabled = false;
+     }
+
      if(currentInstruction == 10)
      {
-         comboImg1.enabled = true;
-         comboImg2.enabled = true;
+         comboBox1Cursor.enabled = true;
+         comboBox2Cursor.enabled = true;
+     }
+
+     if (currentInstruction == 13)
+     {
+         expandButonCursor.enabled = true;
+         levManager.GetComponent<Current_level_manager>().expandButton.SetActive(true);
+         levManager.GetComponent<Current_level_manager>().expandButton.GetComponent<Button>().interactable = false;
      }
 
      if(currentInstruction == 14)
      {
-         comboImg1.enabled = false;
-         comboImg2.enabled = false;
+         expandButonCursor.enabled = false;
+         
      }
 
-     if(currentInstruction == 13)
+     if(currentInstruction == 15)
      {
-         levManager.GetComponent<Current_level_manager>().expandButton.SetActive(true);
-         levManager.GetComponent<Current_level_manager>().expandButton.GetComponent<Button>().interactable = false;
+        levManager.GetComponent<Current_level_manager>().expandButton.GetComponent<Button>().interactable = false;
+        comboBox1Cursor.enabled = false;
+        comboBox2Cursor.enabled = false;
+     
      }
+
+     if (currentInstruction == 16)
+     {
+         timerCursor.enabled = true;
+
+     }
+
+     if(currentInstruction == 18)
+     {
+         timerCursor.enabled = false;
+     }
+
+
 
          spawnItems();
        
