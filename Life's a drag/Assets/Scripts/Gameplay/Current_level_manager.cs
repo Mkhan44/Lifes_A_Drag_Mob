@@ -1304,6 +1304,7 @@ public class Current_level_manager : MonoBehaviour
     public void spawnItem(int num1, int num2)
     {
         expandButton.SetActive(true);
+        expandButton.GetComponent<Button>().interactable = true;
         GameObject tempObj1;
         GameObject tempObj2;
 

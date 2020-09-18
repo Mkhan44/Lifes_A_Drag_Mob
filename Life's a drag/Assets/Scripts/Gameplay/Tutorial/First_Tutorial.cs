@@ -29,9 +29,16 @@ public class First_Tutorial : MonoBehaviour
     //This should be the same length as that of phrases.
     public List<bool> requirementChecks = new List<bool>();
 
+    //Images for the tutorial.
+    public Image comboImg1;
+    public Image comboImg2;
+
     public GameObject box;
     void Start()  
     {
+        comboImg1.enabled = false;
+        comboImg2.enabled = false;
+
         numInstructions = (phrases.Count - 1);
         Debug.Log(numInstructions);
         currentInstruction = 0;
@@ -82,6 +89,24 @@ public class First_Tutorial : MonoBehaviour
                  tutorialText.text = phrases[currentInstruction];
              }
          }
+
+     if(currentInstruction == 10)
+     {
+         comboImg1.enabled = true;
+         comboImg2.enabled = true;
+     }
+
+     if(currentInstruction == 14)
+     {
+         comboImg1.enabled = false;
+         comboImg2.enabled = false;
+     }
+
+     if(currentInstruction == 13)
+     {
+         levManager.GetComponent<Current_level_manager>().expandButton.SetActive(true);
+         levManager.GetComponent<Current_level_manager>().expandButton.GetComponent<Button>().interactable = false;
+     }
 
          spawnItems();
        

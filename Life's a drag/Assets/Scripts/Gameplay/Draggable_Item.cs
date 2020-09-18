@@ -85,8 +85,11 @@ public class Draggable_Item : MonoBehaviour
                 return;
             }
 
-
-            levelMan.GetComponent<Current_level_manager>().pauseButton.interactable = false;
+            if (levelMan.GetComponent<Current_level_manager>().pauseButton != null)
+            {
+                levelMan.GetComponent<Current_level_manager>().pauseButton.interactable = false;
+            }
+           
             screenPoint = Camera.main.WorldToScreenPoint(transform.position);
             offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
 
