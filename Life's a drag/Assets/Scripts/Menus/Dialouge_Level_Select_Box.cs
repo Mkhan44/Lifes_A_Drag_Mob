@@ -45,8 +45,9 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
 
     public void initializeBox()
     {
-        //Set the preview image here when we have them.
-        //previewImg = ...;
+       
+        string levelDiff = levelMan.getDiff();
+        string levelTheme = levelMan.getTheme();
         string levNameTemp;
         string bestTimeKey;
         string bestTimeStr;
@@ -69,6 +70,13 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
         bestTimeStr = "Best time: " + bestTimeFormat.ToString("mm':'ss");
         bestTimeTMPRO.text = bestTimeStr;
         levelNameTMPRO.text = levNameDisplay;
+
+        if(Resources.Load<Sprite>("Level_ScreenShots/" + levelDiff + "/" + levelTheme + "/" + levelNumber) != null)
+        {
+            previewImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("Level_ScreenShots/" + levelDiff + "/" + levelTheme + "/" + levelNumber);
+        }
+        
+        
         //bestTimeText.text = bestTimeStr;
         //LevelNameText.text = levNameDisplay;
        //LevelNameText.text = "This is level: " + levelNumber;
@@ -111,9 +119,12 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
 
     public IEnumerator waitTime()
     {
+      
         yield return new WaitForSeconds(0.1f);
         initializeBox();
         this.GetComponent<PanelAnimator>().StartAnimIn();
+     
     }
+
     
 }
