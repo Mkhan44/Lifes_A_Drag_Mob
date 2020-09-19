@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Hellmade.Sound;
 public class Load_Level : MonoBehaviour
 {
     public GameObject loadingScreenPanel;
@@ -11,6 +12,7 @@ public class Load_Level : MonoBehaviour
     public TextMeshProUGUI progressText;
   public void LoadLevel(string sceneName)
   {
+      EazySoundManager.StopAll();
       StartCoroutine(loadingScreen(sceneName));
   }
 
@@ -24,9 +26,10 @@ public class Load_Level : MonoBehaviour
       {
           float progress = Mathf.Clamp01(operation.progress / .9f);
          
+          //Round the answer!!!!
 
           slider.value = progress;
-          progressText.text = progress * 100f + "%";
+          progressText.text = Mathf.Round(progress * 100f) + "%";
 
           yield return null;
       }
