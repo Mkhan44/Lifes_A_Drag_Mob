@@ -40,4 +40,7 @@ public class Level_Manager : ScriptableObject
 
     //Song that will be played in the level.
     public AudioClip levelMusic;
+
+    //Volume at which the song will be played.
+    public float musicVolume;
 }

@@ -107,6 +107,8 @@ public class Current_level_manager : MonoBehaviour
     public AudioClip star3Sound;
     public AudioClip pauseSound;
     public AudioClip itemGetSound;
+    public AudioClip combineSound;
+    private float themeVolume;
     
     //Ad related stuff.
     string levelsTillAdKey = "levelsTillAdPlays";
@@ -135,6 +137,18 @@ public class Current_level_manager : MonoBehaviour
 
     public void Start()
     {
+
+        if (theLev.musicVolume == 0f)
+        {
+            themeVolume = 0.5f;
+        }
+        else
+        {
+            themeVolume = theLev.musicVolume;
+        }
+
+        Debug.Log("Theme volume is: " + themeVolume);
+
         if (currentState == stageType.tutorial)
         {
             initializeTutorial();
@@ -181,7 +195,7 @@ public class Current_level_manager : MonoBehaviour
         if(theLev.levelMusic != null)
         {
             EazySoundManager.StopAllMusic();
-            EazySoundManager.PlayMusic(theLev.levelMusic, 0.5f, true, false, 0.5f, 0.5f);
+            EazySoundManager.PlayMusic(theLev.levelMusic, themeVolume, true, false, 0.5f, 0.5f);
         }
 
         control = true;
@@ -570,6 +584,10 @@ public class Current_level_manager : MonoBehaviour
                 //Play animation to signify to player where the new item appeared!
                 Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
                 Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
+                if(combineSound != null)
+                {
+                    EazySoundManager.PlaySound(combineSound);
+                }
                 pauseButton.interactable = true;
                 //Instantiate(theLev.comboItemsNeeded[i].theItem, new Vector3(2.4f,-3.5f,0f), Quaternion.Euler(0f, 0f, 0f));
                 break;
@@ -715,7 +733,7 @@ public class Current_level_manager : MonoBehaviour
     {
         if (theLev.levelMusic != null)
         {
-            EazySoundManager.PlayMusic(levelCompleteTheme, 0.8f, false, false, 0.0f, 1.0f);
+            EazySoundManager.PlayMusic(levelCompleteTheme, 0.5f, false, false, 0.0f, 1.0f);
         }
         //Temp variables to hold records/stars for end screen text. Will probably use these to call functions when we make this into it's own script.
         float finishTime;
@@ -1182,7 +1200,7 @@ public class Current_level_manager : MonoBehaviour
         if (theLev.levelMusic != null)
         {
             EazySoundManager.StopAllMusic();
-            EazySoundManager.PlayMusic(theLev.levelMusic, 0.2f, true, false, 0.5f, 0.5f);
+            EazySoundManager.PlayMusic(theLev.levelMusic, themeVolume, true, false, 0.5f, 0.5f);
         }
 
         pauseButton.interactable = false;
