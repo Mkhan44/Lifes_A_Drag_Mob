@@ -43,4 +43,13 @@ public class Level_Manager : ScriptableObject
 
     //Volume at which the song will be played.
     public float musicVolume;
+
+    //Sound that the animation object will play.
+    public AudioClip levelAniSound;
+
+    //Volume at which the animation SFX will be played.
+    public float sfxVolume;
+
+    //Makes it so the game doesn't stop the SFX early if you want to play the whole clip.
+    public bool dontStopSFXEarly;
 }

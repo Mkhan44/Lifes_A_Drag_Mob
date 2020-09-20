@@ -138,7 +138,7 @@ public class Current_level_manager : MonoBehaviour
     public void Start()
     {
 
-        if (theLev.musicVolume == 0f)
+        if (theLev.musicVolume == 0f || theLev.musicVolume > 1f)
         {
             themeVolume = 0.5f;
         }

@@ -16,7 +16,7 @@ public class Level_Select_Manager : MonoBehaviour
     {
         if(menuMusic != null)
         {
-            EazySoundManager.PlayMusic(menuMusic, 0.7f, true, false, 0.5f, 0.5f);
+            EazySoundManager.PlayMusic(menuMusic, 0.6f, true, false, 0.5f, 0.5f);
         }
 
         Input.multiTouchEnabled = false;
