@@ -61,9 +61,9 @@ public class Populate_Level_Buttons : MonoBehaviour
         for(int i = 0; i < numButtons.Count; i++)
         {
             //This should be equivilant to the star image.
-            starLeft = numButtons[i].transform.GetChild(0).gameObject;
+            starRight = numButtons[i].transform.GetChild(0).gameObject;
             starMid = numButtons[i].transform.GetChild(1).gameObject;
-            starRight = numButtons[i].transform.GetChild(2).gameObject;
+            starLeft = numButtons[i].transform.GetChild(2).gameObject;
             lockImg = numButtons[i].transform.GetChild(4).gameObject;
 
             //Get the name of the level, we'll use this + star key to get the amt of stars.

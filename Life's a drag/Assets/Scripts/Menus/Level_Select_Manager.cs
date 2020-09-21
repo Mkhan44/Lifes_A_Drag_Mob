@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Hellmade.Sound;
-
+using UnityEngine.UI;
 //Use this script to interact with level select buttons and store the names of the difficulty + theme the user picks.
 //This way we can begin forming the string to populate all level select buttons with the stars and what not on the level select screens.
 public class Level_Select_Manager : MonoBehaviour
@@ -11,12 +11,26 @@ public class Level_Select_Manager : MonoBehaviour
     string theme;
     public AudioClip menuMusic;
     public AudioClip soundEffect;
+    public Button noAdsButton;
+    private string noAdsKey = "noAdsKey";
+    void Awake()
+    {
+        if(PlayerPrefs.GetInt(noAdsKey) > 0)
+        {
+            noAdsButton.interactable = false;
+            Debug.Log("You have purchased no ads!");
+        }
+        else
+        {
+            Debug.Log("Hello, you don't have purchased ads.");
+        }
 
+    }
     void Start()
     {
         if(menuMusic != null)
         {
-            EazySoundManager.PlayMusic(menuMusic, 0.6f, true, false, 0.5f, 0.5f);
+            EazySoundManager.PlayMusic(menuMusic, 0.5f, true, false, 0.5f, 0.5f);
         }
 
         Input.multiTouchEnabled = false;

@@ -102,6 +102,7 @@ public class Current_level_manager : MonoBehaviour
 
     //Music/Sfx related stuff.
     public AudioClip levelCompleteTheme;
+    public AudioClip levelCompleteIntro;
     public AudioClip star1Sound;
     public AudioClip star2Sound;
     public AudioClip star3Sound;
@@ -586,7 +587,7 @@ public class Current_level_manager : MonoBehaviour
                 Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
                 if(combineSound != null)
                 {
-                    EazySoundManager.PlaySound(combineSound);
+                    EazySoundManager.PlaySound(combineSound, 0.7f);
                 }
                 pauseButton.interactable = true;
                 //Instantiate(theLev.comboItemsNeeded[i].theItem, new Vector3(2.4f,-3.5f,0f), Quaternion.Euler(0f, 0f, 0f));
@@ -731,9 +732,12 @@ public class Current_level_manager : MonoBehaviour
 
     void levelCompleted()
     {
+        
         if (theLev.levelMusic != null)
         {
-            EazySoundManager.PlayMusic(levelCompleteTheme, 0.5f, false, false, 0.0f, 1.0f);
+           // EazySoundManager.StopAllMusic();
+            EazySoundManager.PlayMusic(levelCompleteIntro, 0.5f, false, false, 0.0f, 0.0f);
+            StartCoroutine(waitforIntro());
         }
         //Temp variables to hold records/stars for end screen text. Will probably use these to call functions when we make this into it's own script.
         float finishTime;
@@ -1047,6 +1051,12 @@ public class Current_level_manager : MonoBehaviour
         }
     }
 
+    IEnumerator waitforIntro()
+    {
+        yield return new WaitForSeconds(2.743f);
+        EazySoundManager.PlayMusic(levelCompleteTheme, 0.5f, true, false, 0.0f, 1.0f);
+    }
+
     public void shareButtonClicked()
     {
         Debug.Log("Share button clicked.");
@@ -1139,6 +1149,10 @@ public class Current_level_manager : MonoBehaviour
                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                //levelsTillAdNum = 0;
            }
+       }
+       else
+       {
+           SceneManager.LoadScene(SceneManager.GetActiveScene().name);
        }
 
       

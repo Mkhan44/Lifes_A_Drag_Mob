@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PurchaseButton : MonoBehaviour
 {
+    public GameObject dialougeBox;
+    public GameObject noAdsButton;
     public enum PurchaseType
     {
         removeAds
