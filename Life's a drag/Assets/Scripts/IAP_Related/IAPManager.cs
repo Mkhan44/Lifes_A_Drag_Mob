@@ -14,7 +14,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
     private static IExtensionProvider m_StoreExtensionProvider;
 
     //Step 1 create your products
-    private string removeAds = "remove_Ads_lifesADrag";
+    private string removeAds = "remove_ads_lifesadrag";
 
 
     //************************** Adjust these methods **************************************

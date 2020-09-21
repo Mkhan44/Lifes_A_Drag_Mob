@@ -76,6 +76,10 @@ public class First_Tutorial : MonoBehaviour
              // currentInstruction = 0;
              // tutorialText.text = phrases[currentInstruction];
              conditionMet = false;
+             if (levManager.GetComponent<Current_level_manager>().adsManager != null)
+             {
+                 levManager.GetComponent<Current_level_manager>().adsManager.GetComponent<Banner_Ads>().showBanner();
+             }
              levManager.GetComponent<Load_Level>().LoadLevel("Main_Menu");
             // SceneManager.LoadScene("Main_Menu");
          }

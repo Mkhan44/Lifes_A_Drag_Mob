@@ -362,7 +362,7 @@ public class Current_level_manager : MonoBehaviour
                 tempIcon.transform.SetParent(bottomUIParent, false);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
-                tempColor.a = 0.5f;
+                tempColor.a = 0.65f;
                 tempImg.color = tempColor;
 
 
@@ -372,7 +372,7 @@ public class Current_level_manager : MonoBehaviour
                 tempIcon.transform.SetParent(zoomedUIParent, false);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
-                tempColor.a = 0.5f;
+                tempColor.a = 0.65f;
                 tempImg.color = tempColor;
              
                // Debug.Log(theLev.icons[l] + " " + tempIcon.name);
