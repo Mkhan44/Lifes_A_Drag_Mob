@@ -70,9 +70,6 @@ public class Current_level_manager : MonoBehaviour
     string totalThemeStarsKey;
     int totalThemeStars;
 
-    //Temp text variables.
-    public Text bestStarsText;
-    public Text totalStarsText;
 
     //References to scriptableObject stuff so we don't hafta keep referencing the object itself.
     float timeFor3Stars;
@@ -116,6 +113,15 @@ public class Current_level_manager : MonoBehaviour
     int levelsTillAdNum;
     public GameObject adsManager;
     public Button shareButton;
+
+
+    //Hint related stuff.
+    public GameObject hintCursorPrefab;
+    List<GameObject> currentObsInPlay = new List<GameObject>();
+    int currentObListNum;
+    string numHintsKey = "remainingHints";
+    int numHintsRemaining;
+    public Button hintButton;
 
     public void Awake()
     {
@@ -212,6 +218,7 @@ public class Current_level_manager : MonoBehaviour
         timeForStarsStr = ": " + timeForStarsFormat.ToString("mm':'ss");
         timeForStarsText.text = timeForStarsStr;
 
+        pauseMenuUI.SetActive(true);
         isPaused = false;
         isZoomed = false;
 
@@ -237,8 +244,8 @@ public class Current_level_manager : MonoBehaviour
         starsKey = theLev.name + "_Best_Stars";
         //Debug.Log(starsKey);
         bestStars = PlayerPrefs.GetInt(starsKey);
-        bestStarsText.text = "Best stars this level: " + bestStars;
-        Debug.Log("Best stars for this level is: " + bestStars);
+      //  bestStarsText.text = "Best stars this level: " + bestStars;
+       // Debug.Log("Best stars for this level is: " + bestStars);
 
         //For the current theme amount of stars. (office, house, etc.)
         totalThemeStarsKey = theLev.levelTheme + "_Stars_Obtained";
@@ -247,13 +254,13 @@ public class Current_level_manager : MonoBehaviour
         //This key is universal for all levels. Meaning that it should hold a total throughout all levels in the game.
         totalStarsObtainedKey = "Total_Stars_Obtained";
         totalStars = PlayerPrefs.GetInt(totalStarsObtainedKey);
-        totalStarsText.text = "Total stars in game: " + totalStars; 
-        Debug.Log("Total stars the player has is: " + totalStars);
+      //  totalStarsText.text = "Total stars in game: " + totalStars; 
+      //  Debug.Log("Total stars the player has is: " + totalStars);
         
 
         if(PlayerPrefs.GetFloat(bestTimeKey) != 0)
         {
-            Debug.Log("We found something! it is: " + PlayerPrefs.GetFloat(bestTimeKey).ToString());
+         //   Debug.Log("We found something! it is: " + PlayerPrefs.GetFloat(bestTimeKey).ToString());
             bestTime = PlayerPrefs.GetFloat(bestTimeKey);
             bestTimeFormat = TimeSpan.FromSeconds(bestTime);
             bestTimeStr = "Best time: " + bestTimeFormat.ToString("mm':'ss");
@@ -271,29 +278,42 @@ public class Current_level_manager : MonoBehaviour
         // **********************************************************************************
         // **********************************************************************************
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-     
 
-      
 
+
+        GameObject tempAddToListObject;
         //Spawn in the items for the level.
         for (int i = 0; i < theLev.requiredItems.Count; i++)
         {
             if (theLev.requiredItems[i].zRot != 0 || theLev.requiredItems[i].yRot !=0)
             {
-                Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos, 0), Quaternion.Euler(0f, theLev.requiredItems[i].yRot, theLev.requiredItems[i].zRot));
+               tempAddToListObject = Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos, 0), Quaternion.Euler(0f, theLev.requiredItems[i].yRot, theLev.requiredItems[i].zRot));
             }
             else
             {
-                Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos, 0), Quaternion.identity);
+               tempAddToListObject = Instantiate(theLev.requiredItems[i].item, new Vector3(theLev.requiredItems[i].xPos, theLev.requiredItems[i].yPos, 0), Quaternion.identity);
             }
-           
+
+            //Add the object we just spawned in into the list of current objects that are in play.
+            currentObsInPlay.Add(tempAddToListObject);
 
             if (theLev.requiredItems[i].isHidden)
             {
-                Debug.Log(theLev.requiredItems[i].item.name + " is invisible!");
+              //  Debug.Log(theLev.requiredItems[i].item.name + " is invisible!");
                 numInvis.Add(i);
             }
         }
+        //Initialize this variable here since we just finished populating the list.
+        currentObListNum = 0;
+        numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
+        Debug.Log("The player has: " + numHintsRemaining + " hints left!");
+
+        /*
+        for (int sk = 0; sk < currentObsInPlay.Count; sk++)
+        {
+            Debug.Log(currentObsInPlay[sk].name);
+        }
+        */
 
         //Calculate how many items are needed to complete the level.
         //The total number of combo items + the number of regular items that are not
@@ -566,6 +586,7 @@ public class Current_level_manager : MonoBehaviour
         GameObject item2;
         item1 = GameObject.Find(instanceName);
         item2 = GameObject.Find(instanceName2);
+        GameObject newItem;
 
         string mat1;
         string mat2;
@@ -580,11 +601,60 @@ public class Current_level_manager : MonoBehaviour
                
                 //Combo successful!
                 Debug.Log("Combo successful!");
-                Destroy(item1);
-                Destroy(item2);
+              
                 //Play animation to signify to player where the new item appeared!
                 Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
-                Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
+                newItem = Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
+
+                //Removing the combo items from the list.
+
+                /*
+                 * Condense this into 1 for loop that's nested maybe.
+                 */
+                for (int j = 0; j < currentObsInPlay.Count; j++)
+                {
+                   
+                    if (j > currentObsInPlay.Count)
+                    {
+                        Debug.LogWarning("trying to access an item that isn't in the list!");
+                        break;
+                    }
+                    if (currentObsInPlay[j].gameObject.name == instanceName)
+                    {
+                        Debug.Log("We removed " + currentObsInPlay[j].gameObject.name + " from the list!");
+                        currentObsInPlay.Remove(currentObsInPlay[j]);
+                        break;
+
+                    }
+                }
+
+                for (int k = 0; k < currentObsInPlay.Count; k++)
+                {
+
+                    if (k > currentObsInPlay.Count)
+                    {
+                        Debug.LogWarning("trying to access an item that isn't in the list!");
+                        break;
+                    }
+                    if (currentObsInPlay[k].gameObject.name == instanceName2)
+                    {
+                        Debug.Log("We removed " + currentObsInPlay[k].gameObject.name + " from the list!");
+                        currentObsInPlay.Remove(currentObsInPlay[k]);
+                        break;
+                    }
+                }
+
+                /*
+               * Condense this into 1 for loop that's nested maybe.
+               */
+
+                //Add the combo item to the list after removing the other 2.
+                currentObsInPlay.Add(newItem);
+
+
+                Destroy(item1);
+                Destroy(item2);
+
                 if(combineSound != null)
                 {
                     EazySoundManager.PlaySound(combineSound, 0.7f);
@@ -677,6 +747,26 @@ public class Current_level_manager : MonoBehaviour
                 tempColor.a = 1.0f;
                 tempImg.color = tempColor;
               //  Instantiate(itemGotParticlePrefab, iconInstance.transform);
+
+                //Remove item from the list of gameobjects for hints.
+                
+                for(int j = 0; j< currentObsInPlay.Count; j++)
+                {
+                    if(j > currentObsInPlay.Count)
+                    {
+                        Debug.LogWarning("trying to access an item that isn't in the list!");
+                        break;
+                    }
+                    if(currentObsInPlay[j].gameObject.name == instanceName)
+                    {
+                        Debug.Log("We removed " + currentObsInPlay[j].gameObject.name + " from the list!");
+                        currentObsInPlay.Remove(currentObsInPlay[j]);
+                        break;  
+                    }
+                    
+                    
+                }
+                 
             }
             
             if(currentState == stageType.tutorial)
@@ -1158,6 +1248,12 @@ public class Current_level_manager : MonoBehaviour
       
    }
 
+    /*
+     ****************************************************************************
+     ****************************************************************************
+     *********************TOP UI RELATED BUTTONS!!!!*****************************
+     */
+
     //Gives pop-up menu for pausing the game.
     public void pause()
     {
@@ -1165,11 +1261,11 @@ public class Current_level_manager : MonoBehaviour
         {
             EazySoundManager.PlaySound(pauseSound, 0.5f);
         }
-        pauseMenuUI.SetActive(true);
+       // pauseMenuUI.SetActive(true);
         retryButton.interactable = false;
         pauseButton.interactable = false;
         isPaused = true;
-        StartCoroutine(waitPause());
+      //  StartCoroutine(waitPause());
       
     }
 
@@ -1177,8 +1273,20 @@ public class Current_level_manager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         Time.timeScale = 0f;
-        Debug.Log("Game paused.");
+        //Debug.Log("Game paused.");
     }
+
+    public void hint()
+    {
+        Debug.Log("Hi!");
+    }
+
+    /*
+     ****************************************************************************
+     ****************************************************************************
+     *********************TOP UI RELATED BUTTONS!!!!*****************************
+     */
+
 
     //Scrolling for bottom UI to reset itself.
     public void ScrollToTop()
@@ -1191,6 +1299,7 @@ public class Current_level_manager : MonoBehaviour
         botScrollArea.normalizedPosition = new Vector2(0, 0);
         ZoomedScrollArea.normalizedPosition = new Vector2(0, 0);
     }
+
 
     /*
      * TUTORIAL RELATED FUNCTIONS!!!!!!!!!!!!!!!!!!!
