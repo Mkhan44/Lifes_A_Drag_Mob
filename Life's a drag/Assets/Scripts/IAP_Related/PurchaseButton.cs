@@ -15,6 +15,7 @@ public class PurchaseButton : MonoBehaviour
 
     private string noAdsKey = "noAdsKey";
 
+    /*
     void Awake()
     {
         switch (purchaseType)
@@ -35,6 +36,7 @@ public class PurchaseButton : MonoBehaviour
 
         }
     }
+     */
     public void clickPurchaseButton()
     {
         switch (purchaseType)

@@ -110,7 +110,7 @@ public class Current_level_manager : MonoBehaviour
     
     //Ad related stuff.
     private string noAdsKey = "noAdsKey";
-    int noAdsNum;
+    public int noAdsNum;
     string levelsTillAdKey = "levelsTillAdPlays";
     int levelsTillAdNum;
     public GameObject adsManager;
@@ -131,7 +131,7 @@ public class Current_level_manager : MonoBehaviour
     public void Awake()
     {
 
-        noAdsNum = PlayerPrefs.GetInt(numHintsKey);
+        noAdsNum = PlayerPrefs.GetInt(noAdsKey);
         thisScene = SceneManager.GetActiveScene();
         elapsedTime = 0f;
 
@@ -205,8 +205,8 @@ public class Current_level_manager : MonoBehaviour
     //Spawn in items, get the scene name, etc.
     public void initializeLevel()
     {
-
-        if(adsManager != null)
+        //Don't check NoAdsNum here because no matter what we want to hide it.
+        if (adsManager != null)
         {
             adsManager.GetComponent<Banner_Ads>().hideBanner();
         }
@@ -216,7 +216,9 @@ public class Current_level_manager : MonoBehaviour
             EazySoundManager.PlayMusic(theLev.levelMusic, themeVolume, true, false, 0.5f, 0.5f);
         }
 
-         PlayerPrefs.SetInt(numHintsKey, 3);
+        //Debug statement for testing hints.
+        // PlayerPrefs.SetInt(numHintsKey, 3);
+
          numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
 
         control = true;
@@ -865,6 +867,7 @@ public class Current_level_manager : MonoBehaviour
 
         pauseButton.interactable = false;
         retryButton.interactable = false;
+        hintButton.interactable = false;
         levelComplete = true;
       
 
@@ -883,7 +886,7 @@ public class Current_level_manager : MonoBehaviour
 
         //Calculate the amount of stars a player gets for beating the level.
         //If it's their first time getting x amount of stars, increase the 'record' for this level.
-        //Also, if it's the firs time they're receiving the stars, increase their grand total that
+        //Also, if it's the first time they're receiving the stars, increase their grand total that
         //persists throughout the game. Player will be able to see this later.
         if (elapsedTime < timeFor3Stars)
         {
@@ -895,6 +898,9 @@ public class Current_level_manager : MonoBehaviour
                         PlayerPrefs.SetInt(starsKey, (bestStars + 3));
                         PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 3));
                         PlayerPrefs.SetInt(totalThemeStarsKey, (totalThemeStars + 3));
+                        //Give player another hint if it's their first time getting 3 stars on this level.
+                        PlayerPrefs.SetInt(numHintsKey, numHintsRemaining + 1);
+                        Debug.Log("It's your first time getting 3 stars, you get 1 hint!");
                         break;
                     }
                 case 1:
@@ -902,6 +908,9 @@ public class Current_level_manager : MonoBehaviour
                         PlayerPrefs.SetInt(starsKey, (bestStars + 2));
                         PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 2));
                         PlayerPrefs.SetInt(totalThemeStarsKey, (totalThemeStars + 2));
+                        //Give player another hint if it's their first time getting 3 stars on this level.
+                        PlayerPrefs.SetInt(numHintsKey, numHintsRemaining + 1);
+                        Debug.Log("It's your first time getting 3 stars, you get 1 hint!");
                         break;
                     }
                 case 2:
@@ -909,6 +918,9 @@ public class Current_level_manager : MonoBehaviour
                         PlayerPrefs.SetInt(starsKey, (bestStars + 1));
                         PlayerPrefs.SetInt(totalStarsObtainedKey, (totalStars + 1));
                         PlayerPrefs.SetInt(totalThemeStarsKey, (totalThemeStars + 1));
+                        //Give player another hint if it's their first time getting 3 stars on this level.
+                        PlayerPrefs.SetInt(numHintsKey, numHintsRemaining + 1);
+                        Debug.Log("It's your first time getting 3 stars, you get 1 hint!");
                         break;
                     }
                 default:
@@ -1151,7 +1163,7 @@ public class Current_level_manager : MonoBehaviour
         //Do something based on the amount of stars.
 
         //If noAds has not been purchased.
-        if (noAdsNum == 0)
+        if (noAdsNum == 0 && adsManager != null)
         {
             adsManager.GetComponent<Banner_Ads>().showBanner();
         }
@@ -1185,7 +1197,7 @@ public class Current_level_manager : MonoBehaviour
     }
    public void loadNextLevel()
     {
-        if (adsManager != null)
+        if (noAdsNum == 0 && adsManager != null)
         {
             if(levelsTillAdNum >= 3)
             {
@@ -1237,7 +1249,7 @@ public class Current_level_manager : MonoBehaviour
     //For restart button.
     public void restartScene()
    {
-       if (noAdsNum == 0)
+       if (noAdsNum == 0 && adsManager != null)
        {
            if (levelsTillAdNum >= 3)
            {
@@ -1359,7 +1371,11 @@ public class Current_level_manager : MonoBehaviour
             //Not enough hints! Gotta let them watch an ad and give 1 hint.
         else
         {
-            adsManager.GetComponent<AdsManager>().playRewardedVideoAd();
+            if(adsManager != null)
+            {
+                adsManager.GetComponent<AdsManager>().playRewardedVideoAd();
+            }
+            
            
         } 
 
@@ -1420,7 +1436,7 @@ public class Current_level_manager : MonoBehaviour
 
     public void initializeTutorial()
     {
-        if (adsManager != null)
+        if (noAdsNum == 0 && adsManager != null)
         {
             adsManager.GetComponent<Banner_Ads>().hideBanner();
         }

@@ -22,6 +22,14 @@ public class Banner_Ads : MonoBehaviour
     float globalVolumePref;
     float MusicVolumePref;
     float SFXVolumePref;
+
+    private string noAdsKey = "noAdsKey";
+    int adsPurchasedCheck;
+
+    void Awake()
+    {
+        adsPurchasedCheck = PlayerPrefs.GetInt(noAdsKey);
+    }
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -40,9 +48,12 @@ public class Banner_Ads : MonoBehaviour
             yield return null;
         }
 
-        Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
-
-        Advertisement.Banner.Show(banner);
+        if(adsPurchasedCheck == 0)
+        {
+            Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+            Advertisement.Banner.Show(banner);
+        }
+       
 
         
     }

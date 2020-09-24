@@ -51,7 +51,7 @@ public class First_Tutorial : MonoBehaviour
         tutorialText.text = phrases[currentInstruction];
         conditionMet = true;
         buttonText = tapButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-
+        levManager.GetComponent<Current_level_manager>().hintButton.interactable = false;
     }
 
     void Update()
@@ -76,7 +76,7 @@ public class First_Tutorial : MonoBehaviour
              // currentInstruction = 0;
              // tutorialText.text = phrases[currentInstruction];
              conditionMet = false;
-             if (levManager.GetComponent<Current_level_manager>().adsManager != null)
+             if (levManager.GetComponent<Current_level_manager>().noAdsNum == 0 && levManager.GetComponent<Current_level_manager>().adsManager != null)
              {
                  levManager.GetComponent<Current_level_manager>().adsManager.GetComponent<Banner_Ads>().showBanner();
              }
@@ -100,6 +100,7 @@ public class First_Tutorial : MonoBehaviour
              }
          }
 
+     //Make these into a switch or something...This is super messy.
      if (currentInstruction == 3)
      {
          requiredBoxCursor.enabled = true;

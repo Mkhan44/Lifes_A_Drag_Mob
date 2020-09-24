@@ -11,6 +11,12 @@ public class Pause_Menu : MonoBehaviour
     public GameObject warningRef;
     string levelsTillAdKey = "levelsTillAdPlays";
     int levelsTillAdNum;
+    int noAdsNumPause;
+
+    public void Start()
+    {
+        noAdsNumPause = currentLevelMan.GetComponent<Current_level_manager>().noAdsNum;
+    }
     public void Resume()
     {
         Time.timeScale = 1f;
@@ -46,7 +52,7 @@ public class Pause_Menu : MonoBehaviour
         }
    */
         Time.timeScale = 1f;
-        if (currentLevelMan.GetComponent<Current_level_manager>().adsManager != null)
+        if (noAdsNumPause == 0 && currentLevelMan.GetComponent<Current_level_manager>().adsManager != null)
         {
            currentLevelMan.GetComponent<Current_level_manager>().adsManager.GetComponent<Banner_Ads>().showBanner();
         }

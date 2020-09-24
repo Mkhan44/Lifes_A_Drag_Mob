@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Purchasing;
 
 
@@ -13,6 +14,8 @@ public class IAPManager : MonoBehaviour, IStoreListener
     private static IStoreController m_StoreController;
     private static IExtensionProvider m_StoreExtensionProvider;
 
+
+    public GameObject noAdsButton;
     //Step 1 create your products
     private string removeAds = "remove_ads_lifesadrag";
 
@@ -53,6 +56,26 @@ public class IAPManager : MonoBehaviour, IStoreListener
             //Need a reference to playerprefs or something to ensure that player now has no ads.
             Debug.Log("Remove ads successful!");
             PlayerPrefs.SetInt(noAdsKey, 1);
+            if(noAdsButton != null)
+            {
+                noAdsButton.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                noAdsButton = GameObject.Find("Remove_Ads_Button");
+                if (noAdsButton != null)
+                {
+                    noAdsButton.GetComponent<Button>().interactable = false;
+                }
+                else
+                {
+                    Debug.LogWarning("Hey, the button isn't assigned!");
+                }
+                
+            }
+            GameObject tempBannerAds = GameObject.Find("AdsManager");
+            tempBannerAds.GetComponent<Banner_Ads>().hideBanner();
+
         }
         else
         {

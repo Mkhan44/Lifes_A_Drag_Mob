@@ -85,7 +85,7 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
 
     public void loadLevel()
     {
-        if(adsManager != null)
+        if(adsManager != null && adsManager.GetComponent<AdsManager>().adsPurchasedCheck == 0)
         {
             if (levelsTillAdNum >= 3)
             {
