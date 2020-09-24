@@ -59,6 +59,7 @@ public class Pause_Menu : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         currentLevelMan.GetComponent<Current_level_manager>().retryButton.interactable = true;
         currentLevelMan.GetComponent<Current_level_manager>().pauseButton.interactable = true;
+        currentLevelMan.GetComponent<Current_level_manager>().hintButton.interactable = true;
     }
 
 

@@ -14,6 +14,7 @@ public class Draggable_Item : MonoBehaviour
     public bool inBox;
     public bool mouseOnMe; 
     GameObject levelMan;
+    GameObject hintArrow;
 
     enum typeOfObject
     {
@@ -74,6 +75,11 @@ public class Draggable_Item : MonoBehaviour
     }
     void OnMouseDown()
     {
+        if(hintArrow != null)
+        {
+            hintArrow.SetActive(false);
+            Debug.Log("Set the arrow to false!");
+        }
         //if(!levelMan.GetComponent<Current_level_manager>().isPaused)
         
         if (canWeDrag == DragStatus.canDrag)
@@ -245,6 +251,23 @@ public class Draggable_Item : MonoBehaviour
         }
 
         
+    }
+
+    public bool testArrowObject()
+    {
+        if(hintArrow == null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void setArrowHint(GameObject arrowPrefab)
+    {
+        hintArrow = arrowPrefab;
     }
 
    public IEnumerator rubberBand()

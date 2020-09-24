@@ -23,6 +23,9 @@ public class AdsManager : MonoBehaviour , IUnityAdsListener
     float MusicVolumePref;
     float SFXVolumePref;
 
+    string numHintsKey = "remainingHints";
+    int numHintsLeft;
+
     public static AdsManager instance;
     void Awake()
     {
@@ -43,10 +46,7 @@ public class AdsManager : MonoBehaviour , IUnityAdsListener
             }
             DontDestroyOnLoad(this);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+      
            
 
     }
@@ -89,6 +89,7 @@ public class AdsManager : MonoBehaviour , IUnityAdsListener
 
     public void playRewardedVideoAd()
     {
+        numHintsLeft = PlayerPrefs.GetInt(numHintsKey);
         if (!Advertisement.IsReady(rewardedVideoAd))
         {
 
@@ -124,6 +125,8 @@ public class AdsManager : MonoBehaviour , IUnityAdsListener
                     if(placementId == rewardedVideoAd)
                     {
                         Debug.Log("Rewarded video!");
+                        
+                        PlayerPrefs.SetInt(numHintsKey, (numHintsLeft + 1));
                     }
                     else if(placementId == interstitialAd)
                     {

@@ -109,6 +109,8 @@ public class Current_level_manager : MonoBehaviour
     private float themeVolume;
     
     //Ad related stuff.
+    private string noAdsKey = "noAdsKey";
+    int noAdsNum;
     string levelsTillAdKey = "levelsTillAdPlays";
     int levelsTillAdNum;
     public GameObject adsManager;
@@ -122,9 +124,14 @@ public class Current_level_manager : MonoBehaviour
     string numHintsKey = "remainingHints";
     int numHintsRemaining;
     public Button hintButton;
-
+    public TextMeshProUGUI hintsLeftText;
+    public TextMeshProUGUI hintPanelText;
+    public GameObject hintPanel;
+   
     public void Awake()
     {
+
+        noAdsNum = PlayerPrefs.GetInt(numHintsKey);
         thisScene = SceneManager.GetActiveScene();
         elapsedTime = 0f;
 
@@ -174,6 +181,10 @@ public class Current_level_manager : MonoBehaviour
         {
             currentTimer();
         }
+        //BAD CODE, RE-REFACTOR THIS...
+        numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
+       // Debug.Log(numHintsRemaining);
+        hintsLeftText.text = "X " + numHintsRemaining.ToString();
    
     }
 
@@ -204,6 +215,9 @@ public class Current_level_manager : MonoBehaviour
             EazySoundManager.StopAllMusic();
             EazySoundManager.PlayMusic(theLev.levelMusic, themeVolume, true, false, 0.5f, 0.5f);
         }
+
+         PlayerPrefs.SetInt(numHintsKey, 3);
+         numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
 
         control = true;
 
@@ -306,7 +320,8 @@ public class Current_level_manager : MonoBehaviour
         //Initialize this variable here since we just finished populating the list.
         currentObListNum = 0;
         numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
-        Debug.Log("The player has: " + numHintsRemaining + " hints left!");
+        hintsLeftText.text = "X " + numHintsRemaining.ToString();
+       // Debug.Log("The player has: " + numHintsRemaining + " hints left!");
 
         /*
         for (int sk = 0; sk < currentObsInPlay.Count; sk++)
@@ -1135,7 +1150,8 @@ public class Current_level_manager : MonoBehaviour
 
         //Do something based on the amount of stars.
 
-        if (adsManager != null)
+        //If noAds has not been purchased.
+        if (noAdsNum == 0)
         {
             adsManager.GetComponent<Banner_Ads>().showBanner();
         }
@@ -1221,7 +1237,7 @@ public class Current_level_manager : MonoBehaviour
     //For restart button.
     public void restartScene()
    {
-       if (adsManager != null)
+       if (noAdsNum == 0)
        {
            if (levelsTillAdNum >= 3)
            {
@@ -1264,6 +1280,7 @@ public class Current_level_manager : MonoBehaviour
        // pauseMenuUI.SetActive(true);
         retryButton.interactable = false;
         pauseButton.interactable = false;
+        hintButton.interactable = false;
         isPaused = true;
       //  StartCoroutine(waitPause());
       
@@ -1278,7 +1295,94 @@ public class Current_level_manager : MonoBehaviour
 
     public void hint()
     {
-        Debug.Log("Hi!");
+
+        hintButton.interactable = false;
+        pauseButton.interactable = false;
+        retryButton.interactable = false;
+        isPaused = true;
+        Time.timeScale = 0f;
+
+        if(numHintsRemaining > 0)
+        {
+            hintPanelText.text = "Would you like to use a hint? (" + numHintsRemaining.ToString() + " remaining)";
+        }
+        else
+        {
+            hintPanelText.text = "You don't have anymore hints. Would you like to watch a video ad to obtain one?";
+        }
+
+        hintPanel.SetActive(true);
+
+    }
+
+    public void hintYes()
+    {
+        Time.timeScale = 1f;
+        //We have enough hints, so let the user use one.
+        if (numHintsRemaining > 0)
+        {
+            if(currentObListNum > currentObsInPlay.Count)
+            {
+                //We went through all the elements, so make this 0 again to restart.
+                currentObListNum = 0;
+            }
+
+            for (int i = currentObListNum; i < currentObsInPlay.Count; i++)
+            {
+                //If the object we're checking does not already have a hint arrow attached to it...Go to next item.
+                if (!currentObsInPlay[i].GetComponent<Draggable_Item>().testArrowObject())
+                {
+                    currentObListNum++;
+                    Debug.Log("Already has an arrow!");
+                }
+                else
+                {
+                    GameObject tempArrow = Instantiate(hintCursorPrefab, currentObsInPlay[i].transform.position, transform.rotation);
+                    //tempArrow.transform.SetParent(GameObject.Find("Gameplay_UI_Canvas_V2").transform,false);
+                    tempArrow.transform.position = currentObsInPlay[i].transform.position;
+                    Vector3 TempPos = tempArrow.transform.position;
+                    TempPos.y = (currentObsInPlay[i].transform.position.y + 1);
+                    tempArrow.transform.position = TempPos;
+                   
+                    //Debug.Log(tempArrow.GetComponent<RectTransform>().anchorMax);
+                    //Debug.Log(currentObsInPlay[i].transform.position);
+                    currentObsInPlay[i].GetComponent<Draggable_Item>().setArrowHint(tempArrow);
+                    currentObListNum++;
+                    PlayerPrefs.SetInt(numHintsKey, (numHintsRemaining - 1));
+                    numHintsRemaining -= 1;
+                    break;
+                }
+            }
+
+               
+        }
+            //Not enough hints! Gotta let them watch an ad and give 1 hint.
+        else
+        {
+            adsManager.GetComponent<AdsManager>().playRewardedVideoAd();
+           
+        } 
+
+        hintButton.interactable = true;
+        pauseButton.interactable = true;
+        retryButton.interactable = true;
+        isPaused = false;
+        hintPanel.SetActive(false);
+    }
+
+    public void hintNo()
+    {
+        Time.timeScale = 1f;
+        hintButton.interactable = true;
+        pauseButton.interactable = true;
+        retryButton.interactable = true;
+        isPaused = false;
+        hintPanel.SetActive(false);
+    }
+
+    IEnumerator waitForAd()
+    {
+        yield return new WaitForSeconds(1.0f);
     }
 
     /*
