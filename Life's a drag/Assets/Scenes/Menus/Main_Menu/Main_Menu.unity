@@ -2109,6 +2109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfo: {fileID: 11400000, guid: f9bea44c78dbb654c80289bc92e10588, type: 2}
+  levManager: {fileID: 0}
+  dialougeBox: {fileID: 107552365}
+  errorText: {fileID: 1527114762}
 --- !u!114 &196865253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2172,27 +2175,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107552365}
-        m_MethodName: amIActive
+      - m_Target: {fileID: 196865250}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 107552365}
-        m_MethodName: levelNum
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &196865255
 MonoBehaviour:
@@ -2813,7 +2805,7 @@ MonoBehaviour:
   - {fileID: 856878597}
   levelSelectManager: {fileID: 555502836}
   numThemeStars: 0
-  numStarsText: {fileID: 1320011735}
+  errorMessageText: {fileID: 0}
 --- !u!1 &246679289
 GameObject:
   m_ObjectHideFlags: 0
@@ -4321,7 +4313,7 @@ RectTransform:
   m_Children:
   - {fileID: 1753604375}
   m_Father: {fileID: 1499883220}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.263, y: 0.09143833}
   m_AnchorMax: {x: 0.638, y: 0.17543833}
@@ -5425,7 +5417,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 134.9
+  m_fontSize: 134.8
   m_fontSizeBase: 150
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5872,7 +5864,7 @@ MonoBehaviour:
   - {fileID: 1475301491}
   levelSelectManager: {fileID: 555502836}
   numThemeStars: 0
-  numStarsText: {fileID: 1320011735}
+  errorMessageText: {fileID: 0}
 --- !u!1 &557048220
 GameObject:
   m_ObjectHideFlags: 0
@@ -7187,6 +7179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfo: {fileID: 11400000, guid: 4879ddcc6b67ed84fad00421584d41be, type: 2}
+  levManager: {fileID: 0}
+  dialougeBox: {fileID: 107552365}
+  errorText: {fileID: 0}
 --- !u!114 &749519584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7250,8 +7245,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107552365}
-        m_MethodName: amIActive
+      - m_Target: {fileID: 749519583}
+        m_MethodName: whatToCall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7260,17 +7255,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 107552365}
-        m_MethodName: levelNum
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &749519586
 MonoBehaviour:
@@ -7894,6 +7878,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfo: {fileID: 11400000, guid: c9d3a3b5d4232c44db80380099482f20, type: 2}
+  levManager: {fileID: 0}
+  dialougeBox: {fileID: 107552365}
+  errorText: {fileID: 0}
 --- !u!114 &856878600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7957,8 +7944,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107552365}
-        m_MethodName: amIActive
+      - m_Target: {fileID: 856878599}
+        m_MethodName: whatToCall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7967,17 +7954,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 107552365}
-        m_MethodName: levelNum
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &856878602
 MonoBehaviour:
@@ -8222,6 +8198,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfo: {fileID: 11400000, guid: 05086b67007969d43b4574b757cca615, type: 2}
+  levManager: {fileID: 0}
+  dialougeBox: {fileID: 107552365}
+  errorText: {fileID: 1527114762}
 --- !u!114 &886860923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8285,8 +8264,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107552365}
-        m_MethodName: amIActive
+      - m_Target: {fileID: 886860922}
+        m_MethodName: whatToCall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8295,17 +8274,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 107552365}
-        m_MethodName: levelNum
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &886860925
 MonoBehaviour:
@@ -9989,6 +9957,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfo: {fileID: 11400000, guid: b036131a261cf9f4989f0b61717b0924, type: 2}
+  levManager: {fileID: 0}
+  dialougeBox: {fileID: 107552365}
+  errorText: {fileID: 0}
 --- !u!114 &1094062410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10052,8 +10023,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107552365}
-        m_MethodName: amIActive
+      - m_Target: {fileID: 1094062409}
+        m_MethodName: whatToCall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10061,18 +10032,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 107552365}
-        m_MethodName: levelNum
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1094062412
 MonoBehaviour:
@@ -11537,6 +11497,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfo: {fileID: 11400000, guid: e2632e6776171a64da33f9630107c359, type: 2}
+  levManager: {fileID: 0}
+  dialougeBox: {fileID: 107552365}
+  errorText: {fileID: 0}
 --- !u!114 &1224117691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11600,8 +11563,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107552365}
-        m_MethodName: amIActive
+      - m_Target: {fileID: 1224117690}
+        m_MethodName: whatToCall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11609,18 +11572,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 107552365}
-        m_MethodName: levelNum
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1224117693
 MonoBehaviour:
@@ -12962,6 +12914,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428196064}
   m_CullTransparentMesh: 0
+--- !u!1 &1439698330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1439698331}
+  - component: {fileID: 1439698333}
+  - component: {fileID: 1439698332}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [Nathaniel_TMP Material + LiberationSans SDF Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1439698331
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439698330}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1527114761}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1439698332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439698330}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 8.5625
+  m_canvasRenderer: {fileID: 1439698333}
+  m_TextComponent: {fileID: 1527114762}
+  m_materialReferenceIndex: 1
+--- !u!222 &1439698333
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439698330}
+  m_CullTransparentMesh: 0
 --- !u!1 &1448398516
 GameObject:
   m_ObjectHideFlags: 0
@@ -13183,6 +13208,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfo: {fileID: 11400000, guid: cc5e9d094b213d54cbf861d5b75575b1, type: 2}
+  levManager: {fileID: 0}
+  dialougeBox: {fileID: 107552365}
+  errorText: {fileID: 0}
 --- !u!114 &1475301494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13246,8 +13274,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107552365}
-        m_MethodName: amIActive
+      - m_Target: {fileID: 1475301493}
+        m_MethodName: whatToCall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13255,18 +13283,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 107552365}
-        m_MethodName: levelNum
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1475301496
 MonoBehaviour:
@@ -13557,6 +13574,7 @@ RectTransform:
   m_Children:
   - {fileID: 1696673582}
   - {fileID: 515899106}
+  - {fileID: 1527114761}
   - {fileID: 1859791546}
   - {fileID: 389023507}
   m_Father: {fileID: 1164168152}
@@ -13653,7 +13671,7 @@ MonoBehaviour:
   - {fileID: 2110548216}
   levelSelectManager: {fileID: 555502836}
   numThemeStars: 0
-  numStarsText: {fileID: 1320011735}
+  errorMessageText: {fileID: 1527114762}
 --- !u!1 &1501164067
 GameObject:
   m_ObjectHideFlags: 0
@@ -13712,6 +13730,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfo: {fileID: 11400000, guid: fd2784f2c1cda7e469b77abe9d27758c, type: 2}
+  levManager: {fileID: 0}
+  dialougeBox: {fileID: 107552365}
+  errorText: {fileID: 0}
 --- !u!114 &1501164070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13775,8 +13796,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107552365}
-        m_MethodName: amIActive
+      - m_Target: {fileID: 1501164069}
+        m_MethodName: whatToCall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13784,18 +13805,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 107552365}
-        m_MethodName: levelNum
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1501164072
 MonoBehaviour:
@@ -14037,6 +14047,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfo: {fileID: 11400000, guid: 918b96e80a3dc844aa003bdc7abe1ff7, type: 2}
+  levManager: {fileID: 0}
+  dialougeBox: {fileID: 107552365}
+  errorText: {fileID: 1527114762}
 --- !u!114 &1518054436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14100,8 +14113,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107552365}
-        m_MethodName: amIActive
+      - m_Target: {fileID: 1518054435}
+        m_MethodName: whatToCall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14109,18 +14122,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 107552365}
-        m_MethodName: levelNum
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1518054438
 MonoBehaviour:
@@ -14231,6 +14233,164 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519040203}
+  m_CullTransparentMesh: 0
+--- !u!1 &1527114760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1527114761}
+  - component: {fileID: 1527114763}
+  - component: {fileID: 1527114762}
+  m_Layer: 5
+  m_Name: Office_Error_Message_Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1527114761
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527114760}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1439698331}
+  m_Father: {fileID: 1499883220}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.025, y: 0.23500001}
+  m_AnchorMax: {x: 0.97, y: 0.40100002}
+  m_AnchoredPosition: {x: -0.35998535, y: 4.3934326}
+  m_SizeDelta: {x: 2.878601, y: 4.3934326}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1527114762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527114760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'You don''t have enough office stars to play this level. You need 555 more. '
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 2aba48de7e63c4c4db9c4b8bfb1b6a22, type: 2}
+  m_sharedMaterial: {fileID: -6695468987189972353, guid: 2aba48de7e63c4c4db9c4b8bfb1b6a22,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4293783021
+  m_fontColor: {r: 0.9294118, g: 0.9294118, b: 0.9294118, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 87.95
+  m_fontSizeBase: 150
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 50
+  m_fontSizeMax: 100
+  m_fontStyle: 0
+  m_textAlignment: 514
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: -1
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_textInfo:
+    textComponent: {fileID: 1527114762}
+    characterCount: 74
+    spriteCount: 0
+    spaceCount: 14
+    wordCount: 14
+    linkCount: 0
+    lineCount: 3
+    pageCount: 1
+    materialCount: 2
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 1439698332}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1527114763
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527114760}
   m_CullTransparentMesh: 0
 --- !u!1 &1554416847
 GameObject:
@@ -16843,6 +17003,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfo: {fileID: 11400000, guid: 3b67e2d7e1acc234eae20ff477092123, type: 2}
+  levManager: {fileID: 0}
+  dialougeBox: {fileID: 107552365}
+  errorText: {fileID: 0}
 --- !u!114 &1759883313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16906,8 +17069,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107552365}
-        m_MethodName: amIActive
+      - m_Target: {fileID: 1759883312}
+        m_MethodName: whatToCall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16915,18 +17078,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 107552365}
-        m_MethodName: levelNum
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1759883315
 MonoBehaviour:
@@ -17906,7 +18058,7 @@ RectTransform:
   m_Children:
   - {fileID: 2081210146}
   m_Father: {fileID: 1499883220}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.015296529, y: 0.39064264}
   m_AnchorMax: {x: 0.978481, y: 0.60935605}
@@ -18056,7 +18208,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -57.059937, y: -239.93495}
+  m_SizeDelta: {x: -57.703735, y: -239.67506}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1874356300
 MonoBehaviour:
@@ -19469,6 +19621,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfo: {fileID: 11400000, guid: f0a2cd0cd98bfbb4490c8bc2d7401ae7, type: 2}
+  levManager: {fileID: 0}
+  dialougeBox: {fileID: 107552365}
+  errorText: {fileID: 1527114762}
 --- !u!114 &2047939999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19532,27 +19687,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107552365}
-        m_MethodName: amIActive
+      - m_Target: {fileID: 2047939996}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 107552365}
-        m_MethodName: levelNum
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2047940001
 MonoBehaviour:
@@ -20023,6 +20167,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfo: {fileID: 11400000, guid: 00952d0e1a2e7824eb0ff5327c9a7372, type: 2}
+  levManager: {fileID: 0}
+  dialougeBox: {fileID: 107552365}
+  errorText: {fileID: 1527114762}
 --- !u!114 &2110548218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20086,27 +20233,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107552365}
-        m_MethodName: amIActive
+      - m_Target: {fileID: 2110548216}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 107552365}
-        m_MethodName: levelNum
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2110548220
 MonoBehaviour:

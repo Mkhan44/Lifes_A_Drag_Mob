@@ -11,10 +11,10 @@ public class Populate_Level_Buttons : MonoBehaviour
     public List<GameObject> numButtons = new List<GameObject>();
     public Level_Select_Manager levelSelectManager;
     public int numThemeStars;
-    public TextMeshProUGUI numStarsText;
+    public TextMeshProUGUI errorMessageText;
     public void Start()
     {
-   
+        errorMessageText.enabled = false;
     }
 
     void OnEnable()
@@ -33,8 +33,6 @@ public class Populate_Level_Buttons : MonoBehaviour
         themeStarsKey = theme + "_Stars_Obtained";
 
         numThemeStars = PlayerPrefs.GetInt(themeStarsKey);
-
-        numStarsText.text = "Num " + theme + " stars: " + numThemeStars;
 
     }
 
@@ -60,6 +58,8 @@ public class Populate_Level_Buttons : MonoBehaviour
 
         for(int i = 0; i < numButtons.Count; i++)
         {
+            numButtons[i].GetComponent<Button_Level_Info>().setNum(i + 1);
+
             //This should be equivilant to the star image.
             starRight = numButtons[i].transform.GetChild(0).gameObject;
             starMid = numButtons[i].transform.GetChild(1).gameObject;
@@ -87,18 +87,19 @@ public class Populate_Level_Buttons : MonoBehaviour
                         {
                             if(numThemeStars < starReq)
                             {
-                                numButtons[i].GetComponent<Button>().interactable = false;
+                                //numButtons[i].GetComponent<Button>().interactable = false;
                                 lockImg.SetActive(true);
+                                numButtons[i].GetComponent<Button_Level_Info>().calculateStarsLeft(starReq - numThemeStars);
                             }
                             else
                             {
-                                numButtons[i].GetComponent<Button>().interactable = true;
+                                //numButtons[i].GetComponent<Button>().interactable = true;
                                 lockImg.SetActive(false);
                             }
                         }
                         else
                         {
-                            numButtons[i].GetComponent<Button>().interactable = true;
+                            //numButtons[i].GetComponent<Button>().interactable = true;
                             lockImg.SetActive(false);
                         }
                         break;
