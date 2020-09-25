@@ -15,7 +15,11 @@ public class Pause_Menu : MonoBehaviour
 
     public void Start()
     {
-        noAdsNumPause = currentLevelMan.GetComponent<Current_level_manager>().noAdsNum;
+        if(currentLevelMan != null)
+        {
+            noAdsNumPause = currentLevelMan.GetComponent<Current_level_manager>().noAdsNum;
+        }
+        
     }
     public void Resume()
     {

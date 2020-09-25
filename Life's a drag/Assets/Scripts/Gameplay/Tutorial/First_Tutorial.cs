@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Hellmade.Sound;   
 public class First_Tutorial : MonoBehaviour
 {
     //Reference to the level manager.
@@ -35,6 +36,7 @@ public class First_Tutorial : MonoBehaviour
     public Image requiredBoxCursor;
     public Image expandButonCursor;
     public Image timerCursor;
+    public Image hintCursor;
 
     public GameObject box;
     void Start()  
@@ -44,6 +46,7 @@ public class First_Tutorial : MonoBehaviour
         requiredBoxCursor.enabled = false;
         expandButonCursor.enabled = false;
         timerCursor.enabled = false;
+        hintCursor.enabled = false;
 
         numInstructions = (phrases.Count - 1);
         Debug.Log(numInstructions);
@@ -76,6 +79,7 @@ public class First_Tutorial : MonoBehaviour
              // currentInstruction = 0;
              // tutorialText.text = phrases[currentInstruction];
              conditionMet = false;
+             EazySoundManager.StopAllMusic();
              if (levManager.GetComponent<Current_level_manager>().noAdsNum == 0 && levManager.GetComponent<Current_level_manager>().adsManager != null)
              {
                  levManager.GetComponent<Current_level_manager>().adsManager.GetComponent<Banner_Ads>().showBanner();
@@ -146,7 +150,14 @@ public class First_Tutorial : MonoBehaviour
      if(currentInstruction == 18)
      {
          timerCursor.enabled = false;
+         hintCursor.enabled = true;
      }
+
+     if (currentInstruction == 21)
+     {
+         hintCursor.enabled = false;
+     }
+
 
 
 
