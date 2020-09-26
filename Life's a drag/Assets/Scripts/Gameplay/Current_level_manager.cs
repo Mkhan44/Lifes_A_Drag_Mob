@@ -217,7 +217,7 @@ public class Current_level_manager : MonoBehaviour
         }
 
         //Debug statement for testing hints.
-        // PlayerPrefs.SetInt(numHintsKey, 3);
+         PlayerPrefs.SetInt(numHintsKey,99);
 
          numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
 
