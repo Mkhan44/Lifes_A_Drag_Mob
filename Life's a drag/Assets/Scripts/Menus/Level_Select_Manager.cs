@@ -12,9 +12,17 @@ public class Level_Select_Manager : MonoBehaviour
     public AudioClip menuMusic;
     public AudioClip soundEffect;
     public Button noAdsButton;
+    public GameObject titleScreen;
+    public GameObject mainMenuScreen;
+
+    public static bool firstTimeInMenu;
+
     private string noAdsKey = "noAdsKey";
     void Awake()
     {
+        //firstTimeInMenu = true;
+        
+       
         if(PlayerPrefs.GetInt(noAdsKey) > 0)
         {
             noAdsButton.interactable = false;
@@ -28,6 +36,19 @@ public class Level_Select_Manager : MonoBehaviour
     }
     void Start()
     {
+        /*
+       if(firstTimeInMenu)
+       {
+           titleScreen.GetComponent<PanelAnimator>().StartAnimIn();
+           firstTimeInMenu = false;
+       }
+       else
+       {
+           mainMenuScreen.SetActive(true);
+           mainMenuScreen.GetComponent<PanelAnimator>().startOffScreen = false;
+       }
+       */
+       
         if(menuMusic != null)
         {
             EazySoundManager.PlayMusic(menuMusic, 0.5f, true, false, 0.5f, 0.5f);
@@ -77,7 +98,6 @@ public class Level_Select_Manager : MonoBehaviour
         Time.timeScale = 1f;
         GetComponent<Load_Level>().LoadLevel("Tutorial");
     }
-
 
 
 }

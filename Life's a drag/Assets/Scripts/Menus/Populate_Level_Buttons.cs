@@ -12,6 +12,8 @@ public class Populate_Level_Buttons : MonoBehaviour
     public Level_Select_Manager levelSelectManager;
     public int numThemeStars;
     public TextMeshProUGUI errorMessageText;
+
+    Coroutine animateRoutine;
     public void Start()
     {
         errorMessageText.enabled = false;
@@ -128,11 +130,46 @@ public class Populate_Level_Buttons : MonoBehaviour
 
     }
 
+    //When a button is clicked, this function is called.
+    public void displayErrorText(int numStarsNeeded, string theme)
+    {
+        if (animateRoutine != null)
+        {
+            StopCoroutine(animateRoutine);
+        }
+        //setTheme();
+        if (errorMessageText != null)
+        {
+            errorMessageText.enabled = true;
+            errorMessageText.text = "You don't have enough " + theme + " stars to play this level. You need " + numStarsNeeded + " more.";
+            errorMessageText.color = new Color32(255, 255, 255, 255);
+            animateRoutine = StartCoroutine(animateText());
+            //Play animation to fade out errorMessageText ...
+        }
+    }
+
     public IEnumerator waitTime()
     {
         yield return new WaitForSeconds(0.1f);
         checkNumThemeStars();
         displayStars();
+    }
+
+    IEnumerator animateText()
+    {
+        float i = 0.0f;
+        float rate = 0.0f;
+        Color32 startColor = new Color32(255, 255, 255, 255);
+        Color32 endColor = new Color32(255, 255, 255, 0);
+
+
+        rate = (1.0f / 4.5f) * 1.0f;
+        while (i < 1.0f)
+        {
+            i += Time.deltaTime * rate;
+            errorMessageText.color = Color32.Lerp(startColor, endColor, (i));
+            yield return null;
+        }
     }
     
 }
