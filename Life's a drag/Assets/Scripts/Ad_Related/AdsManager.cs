@@ -32,9 +32,7 @@ public class AdsManager : MonoBehaviour , IUnityAdsListener
     void Awake()
     {
         adsPurchasedCheck = PlayerPrefs.GetInt(noAdsKey);
-
-        if (adsPurchasedCheck == 0)
-        {
+       
             if (instance == null)
             {
                 instance = this;
@@ -45,7 +43,7 @@ public class AdsManager : MonoBehaviour , IUnityAdsListener
                 return;
             }
             DontDestroyOnLoad(this);
-        }
+       
       
            
 

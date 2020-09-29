@@ -74,7 +74,7 @@ public class Pause_Menu_Slider : Menu_Slider, IBeginDragHandler, IDragHandler, I
                 case typeOfButton.Tutorial:
                     {
                         dialougeBoxRef.SetActive(true);
-                        Time.timeScale = 0f;
+                       // Time.timeScale = 0f;
                         break;
                     }
                 case typeOfButton.Play_Level:

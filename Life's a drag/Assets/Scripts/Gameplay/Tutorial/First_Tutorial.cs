@@ -39,6 +39,13 @@ public class First_Tutorial : MonoBehaviour
     public Image hintCursor;
 
     public GameObject box;
+
+    string numHintsKey = "remainingHints";
+    int numHintsRemaining;
+
+    string firstTimeTutKey = "firstTImeTutKey";
+    int firstTimeTutVal;
+
     void Start()  
     {
         comboBox1Cursor.enabled = false;
@@ -55,6 +62,8 @@ public class First_Tutorial : MonoBehaviour
         conditionMet = true;
         buttonText = tapButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
         levManager.GetComponent<Current_level_manager>().hintButton.interactable = false;
+        numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
+        firstTimeTutVal = PlayerPrefs.GetInt(firstTimeTutKey);
     }
 
     void Update()
@@ -153,12 +162,28 @@ public class First_Tutorial : MonoBehaviour
          hintCursor.enabled = true;
      }
 
+     if(currentInstruction == 20)
+     {
+         if (firstTimeTutVal > 0)
+         {
+             currentInstruction = 21;
+         }
+     }
      if (currentInstruction == 21)
      {
+         if (firstTimeTutVal == 0)
+         {
+             PlayerPrefs.SetInt(numHintsKey, (numHintsRemaining + 5));
+             PlayerPrefs.SetInt(firstTimeTutKey, 1);
+         }
          hintCursor.enabled = false;
      }
 
-
+     //This should only be called if it's your first time viewing the tutorial.
+     if(currentInstruction == 22)
+     {
+         hintCursor.enabled = false;
+     }
 
 
          spawnItems();
