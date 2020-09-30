@@ -18,6 +18,13 @@ public class Level_Select_Manager : MonoBehaviour
     public static bool firstTimeInMenu;
 
     private string noAdsKey = "noAdsKey";
+
+    string totalStarsKey = "Total_Stars_Obtained";
+    int totalStarsVal;
+
+    string demoMessageDispKey = "demoMessage";
+    int demoMsgVal;
+    public GameObject demoPanel;
     void Awake()
     {
         //firstTimeInMenu = true;
@@ -33,9 +40,15 @@ public class Level_Select_Manager : MonoBehaviour
             Debug.Log("Hello, you don't have purchased ads.");
         }
 
+        totalStarsVal = PlayerPrefs.GetInt(totalStarsKey);
+
     }
     void Start()
     {
+        Debug.Log("Total stars are:" + totalStarsVal);
+        demoMsgVal = PlayerPrefs.GetInt(demoMessageDispKey);
+        
+
         /*
        if(firstTimeInMenu)
        {
@@ -48,6 +61,7 @@ public class Level_Select_Manager : MonoBehaviour
            mainMenuScreen.GetComponent<PanelAnimator>().startOffScreen = false;
        }
        */
+        
        
         if(menuMusic != null)
         {
@@ -55,6 +69,12 @@ public class Level_Select_Manager : MonoBehaviour
         }
 
         Input.multiTouchEnabled = false;
+
+        if(totalStarsVal == 27 && demoMsgVal == 0)
+        {
+            demoPanel.SetActive(true);
+        }
+
     }
     public void setDiff(string diff)
     {

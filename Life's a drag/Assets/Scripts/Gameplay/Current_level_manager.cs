@@ -128,6 +128,11 @@ public class Current_level_manager : MonoBehaviour
     public TextMeshProUGUI hintPanelText;
     public GameObject hintPanel;
    
+
+    //FOR DEMO, DELETE AFTER WE FINISH THE DEMO VERSION.
+    string demoMessageDispKey = "demoMessage";
+    int demoMsgVal;
+
     public void Awake()
     {
 
@@ -151,6 +156,9 @@ public class Current_level_manager : MonoBehaviour
 
     public void Start()
     {
+        //FOR DEMO, DELETE AFTER WE FINISH THE DEMO VERSION.
+        demoMsgVal = PlayerPrefs.GetInt(demoMessageDispKey);
+
 
         if (theLev.musicVolume == 0f || theLev.musicVolume > 1f)
         {
@@ -1145,29 +1153,42 @@ public class Current_level_manager : MonoBehaviour
 
         //Make the buttons work now.
         //Check if we should have the next level button available.
-        if (!DoesSceneExist(nextSceneName))
+
+        //TAKE THIS OUT AFTER DEMO.
+        totalStars = PlayerPrefs.GetInt(totalStarsObtainedKey);
+        if (totalStars == 27 && demoMsgVal == 0)
         {
-            PlayNextButton.SetActive(false);
+            //Load main Menu and then congratulate player.
+            GetComponent<Load_Level>().LoadLevel("Main_Menu");
+            
         }
         else
         {
-            if (enoughStars)
+            if (!DoesSceneExist(nextSceneName))
             {
-                PlayNextButton.GetComponent<Button>().interactable = true;
+                PlayNextButton.SetActive(false);
+            }
+            else
+            {
+                if (enoughStars)
+                {
+                    PlayNextButton.GetComponent<Button>().interactable = true;
+                }
+            }
+
+            menuButton.GetComponent<Button>().interactable = true;
+            RetryEndButton.GetComponent<Button>().interactable = true;
+            shareButton.interactable = true;
+
+            //Do something based on the amount of stars.
+
+            //If noAds has not been purchased.
+            if (noAdsNum == 0 && adsManager != null)
+            {
+                adsManager.GetComponent<Banner_Ads>().showBanner();
             }
         }
-
-        menuButton.GetComponent<Button>().interactable = true;
-        RetryEndButton.GetComponent<Button>().interactable = true;
-        shareButton.interactable = true;
-
-        //Do something based on the amount of stars.
-
-        //If noAds has not been purchased.
-        if (noAdsNum == 0 && adsManager != null)
-        {
-            adsManager.GetComponent<Banner_Ads>().showBanner();
-        }
+       
     }
 
     IEnumerator waitforIntro()
