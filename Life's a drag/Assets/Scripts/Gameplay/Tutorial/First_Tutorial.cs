@@ -173,7 +173,15 @@ public class First_Tutorial : MonoBehaviour
      {
          if (firstTimeTutVal == 0)
          {
-             PlayerPrefs.SetInt(numHintsKey, (numHintsRemaining + 5));
+             if(PlayerPrefs.GetInt(numHintsKey) == 999)
+             {
+                 //Do nothing.
+             }
+             else
+             {
+                 PlayerPrefs.SetInt(numHintsKey, (numHintsRemaining + 5));
+             }
+             
              PlayerPrefs.SetInt(firstTimeTutKey, 1);
          }
          hintCursor.enabled = false;

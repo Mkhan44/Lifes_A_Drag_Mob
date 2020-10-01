@@ -17,7 +17,6 @@ public class Stat_Manager : MonoBehaviour
         if (PlayerPrefs.GetInt(firstTimeKey) == 0)
         {
             Debug.Log("Would you like to try the tutorial???");
-            PlayerPrefs.SetInt(firstTimeKey, 1);
             PlayerPrefs.SetFloat("Global_Volume", 1);
             PlayerPrefs.SetFloat("Music_Volume", 1);
             PlayerPrefs.SetFloat("SFX_Volume", 1);

@@ -860,7 +860,7 @@ public class Current_level_manager : MonoBehaviour
         int tempNumStars;
         int nextStarReq;
 
-        finishTime = elapsedTime;
+        finishTime = Mathf.Floor(elapsedTime);
 
         //Just using this to make it so background objects can't be moved.
         isPaused = true;
@@ -886,7 +886,7 @@ public class Current_level_manager : MonoBehaviour
          *****************************************
          PLAYERPREF RELATED STUFF FOR SAVING GAME DATA.
          */
-        if (elapsedTime < bestTime)
+        if (finishTime < bestTime)
         {
             PlayerPrefs.SetFloat(bestTimeKey, elapsedTime);
         }
@@ -897,7 +897,7 @@ public class Current_level_manager : MonoBehaviour
         //If it's their first time getting x amount of stars, increase the 'record' for this level.
         //Also, if it's the first time they're receiving the stars, increase their grand total that
         //persists throughout the game. Player will be able to see this later.
-        if (elapsedTime < timeFor3Stars)
+        if (finishTime <= timeFor3Stars)
         {
             Debug.Log("You got 3 stars!");
             tempNumStars = 3;
@@ -939,7 +939,7 @@ public class Current_level_manager : MonoBehaviour
                     }
             }
         }
-        else if (elapsedTime < timeFor2Stars)
+        else if (finishTime <= timeFor2Stars)
         {
             tempNumStars = 2;
             Debug.Log("You got 2 stars, try for three!");
