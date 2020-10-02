@@ -84,7 +84,7 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             Debug.Log("Good enough!");
             if (slideSound != null)
             {
-                EazySoundManager.PlaySound(slideSound);
+                EazySoundManager.PlaySound(slideSound, 0.7f);
             }
             if(menuSlider != null)
             {

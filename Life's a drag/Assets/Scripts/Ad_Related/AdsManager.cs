@@ -134,6 +134,7 @@ public class AdsManager : MonoBehaviour , IUnityAdsListener
                 }
         }
 
+        globalVolumePref = PlayerPrefs.GetFloat(globalVolumeKey);
         EazySoundManager.GlobalVolume = globalVolumePref;
     }
 

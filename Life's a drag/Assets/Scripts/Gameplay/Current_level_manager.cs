@@ -1481,7 +1481,7 @@ public class Current_level_manager : MonoBehaviour
         objectiveText.text = "Objective: " + theLev.objective;
 
         timeForStarsFormat = TimeSpan.FromSeconds(timeFor3Stars);
-        timeForStarsStr = "***: " + timeForStarsFormat.ToString("mm':'ss");
+        timeForStarsStr = ": " + timeForStarsFormat.ToString("mm':'ss");
         timeForStarsText.text = timeForStarsStr;
 
         isPaused = false;

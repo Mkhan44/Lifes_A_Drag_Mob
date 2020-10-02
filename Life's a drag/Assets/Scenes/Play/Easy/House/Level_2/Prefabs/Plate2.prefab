@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1323071155147298066}
   - component: {fileID: 1242303585808903770}
   m_Layer: 8
-  m_Name: Plate1
+  m_Name: Plate2
   m_TagString: RequiredItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,6 +120,9 @@ MonoBehaviour:
   initialPos: {x: 0, y: 0, z: 0}
   initialScale: {x: 0, y: 0, z: 0}
   shrinkScale: {x: 0, y: 0, z: 0}
+  shouldWeLerp: 0
+  inBox: 0
+  mouseOnMe: 0
 --- !u!61 &1242303585808903770
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -133,7 +136,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.009643078, y: -0.039134413}
+  m_Offset: {x: -0.013195366, y: -0.039134324}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -144,5 +147,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2442153, y: 0.5234028}
+  m_Size: {x: 1.4840183, y: 0.8088821}
   m_EdgeRadius: 0
