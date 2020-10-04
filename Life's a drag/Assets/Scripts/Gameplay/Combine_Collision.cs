@@ -15,7 +15,7 @@ public class Combine_Collision : MonoBehaviour
   
     void Awake()
     {
-        centerCollide = transform.GetComponent<BoxCollider2D>().bounds.center;
+        //setCenter();
     }
     void Start()
     {
@@ -117,6 +117,12 @@ public class Combine_Collision : MonoBehaviour
            // Debug.Log("We left the collision!");
         }
 
+    }
+
+    public void setCenter()
+    {
+
+        centerCollide = transform.GetComponent<BoxCollider2D>().bounds.center;
     }
 
     IEnumerator grow(Collider2D other)

@@ -29,6 +29,7 @@ public class ExtCollider : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
+        parentCenter = parentRef.GetComponent<Combine_Collision>().centerCollide;
         Debug.Log("We found an item!");
         if (Input.GetMouseButtonUp(0))
         {

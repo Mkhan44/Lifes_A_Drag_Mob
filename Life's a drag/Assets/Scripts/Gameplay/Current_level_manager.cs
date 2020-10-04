@@ -127,6 +127,11 @@ public class Current_level_manager : MonoBehaviour
     public TextMeshProUGUI hintsLeftText;
     public TextMeshProUGUI hintPanelText;
     public GameObject hintPanel;
+
+    //For scaling camera.
+    public GameObject cameraView;
+    public GameObject backgroundImage;
+
    
 
     //FOR DEMO, DELETE AFTER WE FINISH THE DEMO VERSION.
@@ -151,7 +156,36 @@ public class Current_level_manager : MonoBehaviour
         tempCombChild = tempComb.transform.GetChild(2).gameObject;
         combineBox2 = tempCombChild.transform.GetChild(0).gameObject;
 
-        Instantiate(itemRequiredArea, itemRequiredArea.transform.position, itemRequiredArea.transform.rotation);
+        backgroundImage = GameObject.Find("BG-01");
+        GameObject tempItemBank = Instantiate(itemRequiredArea, itemRequiredArea.transform.position, itemRequiredArea.transform.rotation);
+        tempItemBank.transform.SetParent(backgroundImage.transform, false);
+
+        //Make this into a function
+        //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+        cameraView = GameObject.Find("Main Camera");
+        float aspectRatio = cameraView.GetComponent<Camera>().aspect;
+
+        
+
+        if(aspectRatio >= 0.4f && aspectRatio <= 0.55f)
+        {
+            //9:18 SCALE THE BG.
+            backgroundImage.transform.localScale = new Vector3(0.882143f, 1f, 1f);
+            backgroundImage.transform.position = new Vector3(-0.0075f, 0f, 0f);
+            combineBox1.GetComponent<Combine_Collision>().setCenter();
+            combineBox2.GetComponent<Combine_Collision>().setCenter();
+        }
+        else
+        {
+            //Has to be 9:16 , don't scale.
+            combineBox1.GetComponent<Combine_Collision>().setCenter();
+            combineBox2.GetComponent<Combine_Collision>().setCenter();
+        }
+        Debug.Log("The aspect ratio is: " + aspectRatio);
+       
+
+        
     }
 
     public void Start()
@@ -321,6 +355,9 @@ public class Current_level_manager : MonoBehaviour
 
             //Add the object we just spawned in into the list of current objects that are in play.
             currentObsInPlay.Add(tempAddToListObject);
+
+
+            tempAddToListObject.transform.SetParent(backgroundImage.transform, false);
 
             if (theLev.requiredItems[i].isHidden)
             {
@@ -632,6 +669,7 @@ public class Current_level_manager : MonoBehaviour
                 Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
                 newItem = Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
 
+                newItem.transform.SetParent(backgroundImage.transform, false);
                 //Removing the combo items from the list.
 
                 /*
