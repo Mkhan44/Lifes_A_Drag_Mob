@@ -1117,7 +1117,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40.85
+  m_fontSize: 28.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1803,7 +1803,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1832,7 +1832,7 @@ MonoBehaviour:
     spaceCount: 2
     wordCount: 4
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -2414,7 +2414,7 @@ RectTransform:
   m_GameObject: {fileID: 3216129671769329264}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9600002, y: 2.9700005, z: 1}
+  m_LocalScale: {x: 1.18, y: 2.9700005, z: 1}
   m_Children:
   - {fileID: 476868914499411920}
   - {fileID: 1575293504713304202}
@@ -3696,7 +3696,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.52000004, y: 0.15626912}
   m_AnchorMax: {x: 0.89800006, y: 0.3987309}
-  m_AnchoredPosition: {x: 1, y: 2.0001373}
+  m_AnchoredPosition: {x: 1, y: 2.000122}
   m_SizeDelta: {x: 0.75891113, y: -0.4467163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8677935682706085534
@@ -4644,7 +4644,7 @@ MonoBehaviour:
     spaceCount: 1
     wordCount: 2
     linkCount: 0
-    lineCount: 2
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -4924,6 +4924,8 @@ MonoBehaviour:
   hintsLeftText: {fileID: 1249304097701337082}
   hintPanelText: {fileID: 3429626319813476905}
   hintPanel: {fileID: 3436191500684275556}
+  cameraView: {fileID: 0}
+  backgroundImage: {fileID: 0}
 --- !u!114 &7668050654743605883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4975,7 +4977,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.119, y: 0.15626912}
   m_AnchorMax: {x: 0.5, y: 0.3987309}
-  m_AnchoredPosition: {x: 1.6199951, y: 2.0001373}
+  m_AnchoredPosition: {x: 1.6199951, y: 2.000122}
   m_SizeDelta: {x: -3.2410889, y: -0.4467163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6947814631927654698
@@ -5178,7 +5180,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7117102, y: 0.30800003}
   m_AnchorMax: {x: 0.794, y: 0.6004891}
-  m_AnchoredPosition: {x: 0.888916, y: 1.4289856}
+  m_AnchoredPosition: {x: 0.888855, y: 1.4289856}
   m_SizeDelta: {x: -1.2000732, y: 0.7724304}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &6699604367867627280
@@ -6780,7 +6782,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.117000006, y: 0.5621153}
   m_AnchorMax: {x: 0.40600002, y: 0.72700006}
-  m_AnchoredPosition: {x: 3.5799866, y: 0.5050049}
+  m_AnchoredPosition: {x: 3.5799942, y: 0.5050049}
   m_SizeDelta: {x: -3.9493408, y: -0.5967407}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8737570567491162347
@@ -7323,7 +7325,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ReferenceResolution: {x: 720, y: 1280}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -7522,6 +7524,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1824997604932649336, guid: 659dcb0777bdbf949997c93a1ede3740,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1851187433702160065, guid: 659dcb0777bdbf949997c93a1ede3740,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2691945359046211753, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
       propertyPath: canvas
@@ -7536,6 +7548,16 @@ PrefabInstance:
         type: 3}
       propertyPath: xEnd
       value: 158.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115645640957436653, guid: 659dcb0777bdbf949997c93a1ede3740,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457319573211553530, guid: 659dcb0777bdbf949997c93a1ede3740,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.9101562
       objectReference: {fileID: 0}
     - target: {fileID: 3760109521032425493, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
@@ -7651,6 +7673,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -1.232666
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931753385319766123, guid: 659dcb0777bdbf949997c93a1ede3740,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5664924246917044325, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
