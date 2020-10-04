@@ -36,12 +36,15 @@ public class Draggable_Item : MonoBehaviour
     {
         //May want to change this later considering this is hardcoded essentially.
         levelMan = GameObject.Find("LevelManager");
+        
+        /*
+        Vector3 tempVec = new Vector3(0f,0f,0f);
 
-        initialPos = gameObject.transform.position;
-        if (initialPos == new Vector3(2.4f, -3.5f, 0f))
+        if(initialPos == tempVec)
         {
-            initialPos = new Vector3(0.0f, 0.0f, 0.0f);
+            initialPos = gameObject.transform.position;
         }
+       */
         initialScale = new Vector3 (transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
         if (gameObject.tag == "RequiredItem")
@@ -53,6 +56,17 @@ public class Draggable_Item : MonoBehaviour
 
         shouldWeLerp = false;
         inBox = false;
+    }
+
+    void Start()
+    {
+        Vector3 tempVec = new Vector3(0f, 0f, 0f);
+
+        if (initialPos == tempVec)
+        {
+            initialPos = gameObject.transform.position;
+        }
+       
     }
     void Update()
     {

@@ -175,12 +175,19 @@ public class Current_level_manager : MonoBehaviour
             backgroundImage.transform.position = new Vector3(-0.0075f, 0f, 0f);
             combineBox1.GetComponent<Combine_Collision>().setCenter();
             combineBox2.GetComponent<Combine_Collision>().setCenter();
+           // combineBox1.GetComponent<Combine_Collision>().centerCollide.x = (combineBox1.GetComponent<Combine_Collision>().centerCollide.x - -0.0075f);
+            combineBox1.GetComponent<Combine_Collision>().centerCollide.x = (0.95f);
+           // combineBox2.GetComponent<Combine_Collision>().centerCollide.x = (combineBox2.GetComponent<Combine_Collision>().centerCollide.x - -0.0075f);
+            combineBox2.GetComponent<Combine_Collision>().centerCollide.x = (1.77f);
+
         }
         else
         {
             //Has to be 9:16 , don't scale.
             combineBox1.GetComponent<Combine_Collision>().setCenter();
             combineBox2.GetComponent<Combine_Collision>().setCenter();
+
+            
         }
         Debug.Log("The aspect ratio is: " + aspectRatio);
        
@@ -358,6 +365,7 @@ public class Current_level_manager : MonoBehaviour
 
 
             tempAddToListObject.transform.SetParent(backgroundImage.transform, false);
+            tempAddToListObject.GetComponent<Draggable_Item>().initialPos = tempAddToListObject.transform.position;
 
             if (theLev.requiredItems[i].isHidden)
             {
@@ -670,6 +678,7 @@ public class Current_level_manager : MonoBehaviour
                 newItem = Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
 
                 newItem.transform.SetParent(backgroundImage.transform, false);
+                newItem.GetComponent<Draggable_Item>().initialPos = newItem.transform.position;
                 //Removing the combo items from the list.
 
                 /*
