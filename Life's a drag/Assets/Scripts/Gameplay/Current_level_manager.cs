@@ -33,7 +33,16 @@ public class Current_level_manager : MonoBehaviour
     public Text currentTimeText;
     public Text timeForStarsText;
     public Text objectiveText;
+
+
     private TimeSpan currentTime;
+
+    //New TMPRO  Ui stuff.
+    public TextMeshProUGUI objectiveTextMesh;
+    public TextMeshProUGUI currentTimeTextMesh;
+    public TextMeshProUGUI bestTimeTextMesh;
+    public TextMeshProUGUI timeForStarsTextMesh;
+    public TextMeshProUGUI numItemsLeftTextMesh;
 
     //Top UI stars
     public GameObject star1;
@@ -157,9 +166,17 @@ public class Current_level_manager : MonoBehaviour
         combineBox2 = tempCombChild.transform.GetChild(0).gameObject;
 
         backgroundImage = GameObject.Find("BG-01");
-        GameObject tempItemBank = Instantiate(itemRequiredArea, itemRequiredArea.transform.position, itemRequiredArea.transform.rotation);
-        tempItemBank.transform.SetParent(backgroundImage.transform, false);
+        if(currentState == stageType.tutorial)
+        {
+           
+        }
+        else
+        {
+            GameObject tempItemBank = Instantiate(itemRequiredArea, itemRequiredArea.transform.position, itemRequiredArea.transform.rotation);
+            tempItemBank.transform.SetParent(backgroundImage.transform, false);
 
+        }
+        
         //Make this into a function
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
@@ -278,11 +295,14 @@ public class Current_level_manager : MonoBehaviour
         timeFor3Stars = theLev.timeForThreeStars;
 
         currentTimeText.text = "Current Time: 00:00";
-        objectiveText.text = "Objective: " + theLev.objective;
+        currentTimeTextMesh.text = "Current Time: 00:00";
+      //  objectiveText.text = "Objective: " + theLev.objective;
+        objectiveTextMesh.text = "Objective: " + theLev.objective;
 
         timeForStarsFormat = TimeSpan.FromSeconds(timeFor3Stars);
         timeForStarsStr = ": " + timeForStarsFormat.ToString("mm':'ss");
-        timeForStarsText.text = timeForStarsStr;
+        //timeForStarsText.text = timeForStarsStr;
+        timeForStarsTextMesh.text = timeForStarsStr;
 
         pauseMenuUI.SetActive(true);
         isPaused = false;
@@ -330,11 +350,13 @@ public class Current_level_manager : MonoBehaviour
             bestTime = PlayerPrefs.GetFloat(bestTimeKey);
             bestTimeFormat = TimeSpan.FromSeconds(bestTime);
             bestTimeStr = "Best time: " + bestTimeFormat.ToString("mm':'ss");
-            bestTimeText.text = bestTimeStr;
+           // bestTimeText.text = bestTimeStr;
+            bestTimeTextMesh.text = bestTimeStr;
         }
         else
         {
-            bestTimeText.text = "Best time: N/A";
+           // bestTimeText.text = "Best time: N/A";
+            bestTimeTextMesh.text = "Best time: N/A";
             bestTime = 999f;
         }
 
@@ -422,7 +444,8 @@ public class Current_level_manager : MonoBehaviour
 
         // Debug.Log(numMats);
         itemsLeft = (theLev.comboItemsNeeded.Count + (theLev.requiredItems.Count - numMats));
-        numItemsLeftText.text = "Items left: " + itemsLeft;
+       // numItemsLeftText.text = "Items left: " + itemsLeft;
+        numItemsLeftTextMesh.text = "Items remaining: " + itemsLeft;
 
         //Fill in the bottom UI with items that are needed to complete the level by using Images.
         //These images will be transparent until the corresponding item is found, then they
@@ -482,11 +505,13 @@ public class Current_level_manager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             currentTime = TimeSpan.FromSeconds(elapsedTime);
             string currentTimestr = "Current Time: " + currentTime.ToString("mm':'ss");
-            currentTimeText.text = currentTimestr;
+          //  currentTimeText.text = currentTimestr;
+            currentTimeTextMesh.text = currentTimestr;
         }
         else
         {
-            currentTimeText.text = "Current Time: 59:99"; 
+          //  currentTimeText.text = "Current Time: 59:99";
+            currentTimeTextMesh.text = "Current Time: 59:99";
         }
       
 
@@ -496,13 +521,15 @@ public class Current_level_manager : MonoBehaviour
         {
             timeForStarsFormat = TimeSpan.FromSeconds(timeFor2Stars);
             timeForStarsStr = ": " + timeForStarsFormat.ToString("mm':'ss");
-            timeForStarsText.text = timeForStarsStr;
+           // timeForStarsText.text = timeForStarsStr;
+            timeForStarsTextMesh.text = timeForStarsStr;
             numStarsPassed = 1;
         }
 
         if(elapsedTime > (timeFor2Stars + 1) && numStarsPassed == 1)
         {
-            timeForStarsText.text = ": 59:99";
+          //  timeForStarsText.text = ": 59:99";
+            timeForStarsTextMesh.text = ": 59:99";
             numStarsPassed++;
         }
 
@@ -677,8 +704,12 @@ public class Current_level_manager : MonoBehaviour
                 Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
                 newItem = Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
 
-                newItem.transform.SetParent(backgroundImage.transform, false);
-                newItem.GetComponent<Draggable_Item>().initialPos = newItem.transform.position;
+                if(currentState != stageType.tutorial)
+                {
+                    newItem.transform.SetParent(backgroundImage.transform, false);
+                    newItem.GetComponent<Draggable_Item>().initialPos = newItem.transform.position;
+                }
+               
                 //Removing the combo items from the list.
 
                 /*
@@ -882,7 +913,8 @@ public class Current_level_manager : MonoBehaviour
         }
        
 
-        numItemsLeftText.text = "Items left: " + itemsLeft;
+       // numItemsLeftText.text = "Items left: " + itemsLeft;
+        numItemsLeftTextMesh.text = "Items remaining: " + itemsLeft;
             if (itemsLeft == 0)
             {
                 if(currentState != stageType.tutorial)
@@ -1524,12 +1556,15 @@ public class Current_level_manager : MonoBehaviour
         timeFor2Stars = theLev.timeForTwoStars;
         timeFor3Stars = theLev.timeForThreeStars;
 
-        currentTimeText.text = "Current Time: 00:00";
-        objectiveText.text = "Objective: " + theLev.objective;
+       // currentTimeText.text = "Current Time: 00:00";
+        currentTimeTextMesh.text = "Current Time: 00:00";
+       // objectiveText.text = "Objective: " + theLev.objective;
+        objectiveTextMesh.text = "Objective: " + theLev.objective;
 
         timeForStarsFormat = TimeSpan.FromSeconds(timeFor3Stars);
         timeForStarsStr = ": " + timeForStarsFormat.ToString("mm':'ss");
-        timeForStarsText.text = timeForStarsStr;
+      //  timeForStarsText.text = timeForStarsStr;
+        timeForStarsTextMesh.text = timeForStarsStr;
 
         isPaused = false;
         isZoomed = false;
@@ -1540,7 +1575,7 @@ public class Current_level_manager : MonoBehaviour
 
 
         //Spawn in the items for the level.
-        
+        //GameObject firstOb;
         Instantiate(theLev.requiredItems[0].item, new Vector3(theLev.requiredItems[0].xPos, theLev.requiredItems[0].yPos, 0), Quaternion.Euler(0f, 0f, theLev.requiredItems[0].zRot));
 
         //Calculate how many items are needed to complete the level.
@@ -1566,7 +1601,8 @@ public class Current_level_manager : MonoBehaviour
 
 
         itemsLeft = (theLev.comboItemsNeeded.Count + (theLev.requiredItems.Count - numMats));
-        numItemsLeftText.text = "Items left: " + itemsLeft;
+        //numItemsLeftText.text = "Items left: " + itemsLeft;
+        numItemsLeftTextMesh.text = "Items remaining: " + itemsLeft;
 
         //Fill in the bottom UI with items that are needed to complete the level by using Images.
         //These images will be transparent until the corresponding item is found, then they

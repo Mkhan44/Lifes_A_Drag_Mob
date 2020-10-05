@@ -93,6 +93,10 @@ public class First_Tutorial : MonoBehaviour
              {
                  levManager.GetComponent<Current_level_manager>().adsManager.GetComponent<Banner_Ads>().showBanner();
              }
+
+             GameObject theHolder = GameObject.Find("Text_Holder");
+             theHolder.SetActive(false);
+
              levManager.GetComponent<Load_Level>().LoadLevel("Main_Menu");
             // SceneManager.LoadScene("Main_Menu");
          }
