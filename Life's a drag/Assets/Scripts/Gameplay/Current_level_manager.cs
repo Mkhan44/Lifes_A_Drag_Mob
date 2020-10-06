@@ -184,7 +184,7 @@ public class Current_level_manager : MonoBehaviour
         float aspectRatio = cameraView.GetComponent<Camera>().aspect;
 
         
-
+        /*
         if(aspectRatio >= 0.4f && aspectRatio <= 0.55f)
         {
             //9:18 SCALE THE BG.
@@ -206,6 +206,9 @@ public class Current_level_manager : MonoBehaviour
 
             
         }
+        */
+        combineBox1.GetComponent<Combine_Collision>().setCenter();
+        combineBox2.GetComponent<Combine_Collision>().setCenter();
         Debug.Log("The aspect ratio is: " + aspectRatio);
        
 
