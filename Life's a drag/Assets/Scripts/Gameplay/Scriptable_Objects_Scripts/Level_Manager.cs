@@ -52,4 +52,13 @@ public class Level_Manager : ScriptableObject
 
     //Makes it so the game doesn't stop the SFX early if you want to play the whole clip.
     public bool dontStopSFXEarly;
+
+
+    /*
+     * For challenge mode
+     * 
+     */
+
+    //Time limit for challenge mode version of the level.
+    public float challengeTimeLimit;
 }

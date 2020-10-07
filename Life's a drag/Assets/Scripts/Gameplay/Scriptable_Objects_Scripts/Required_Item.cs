@@ -18,4 +18,13 @@ public class Required_Item : ScriptableObject
     public float zRot = 0f;
 
     public float yRot = 0f;
+
+    /*
+     * Challenge mode.
+     */
+
+    //3 of the random spawns that this item can appear within the level.
+    public Vector3 spawnPoint1;
+    public Vector3 spawnPoint2;
+    public Vector3 spawnPoint3;
 }

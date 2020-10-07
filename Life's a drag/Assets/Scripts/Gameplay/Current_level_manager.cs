@@ -7,8 +7,12 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Hellmade.Sound;
 using UnityEngine.Advertisements;
+using Random = UnityEngine.Random;
+
+
 public class Current_level_manager : MonoBehaviour
 {
+   
     public enum stageType
     {
         normalStage,
@@ -16,6 +20,7 @@ public class Current_level_manager : MonoBehaviour
         challengeStage
     }
 
+      [Header("Stage Type related stuff")]
     public stageType currentState;
     public Level_Manager theLev;
     public Level_Manager nextLev;
@@ -34,9 +39,9 @@ public class Current_level_manager : MonoBehaviour
     public Text timeForStarsText;
     public Text objectiveText;
 
-
     private TimeSpan currentTime;
 
+     [Header("TMPro UI Stuff")]
     //New TMPRO  Ui stuff.
     public TextMeshProUGUI objectiveTextMesh;
     public TextMeshProUGUI currentTimeTextMesh;
@@ -49,15 +54,29 @@ public class Current_level_manager : MonoBehaviour
     public GameObject star2;
     public GameObject star3;
 
+    //Regular UI holder.
+    public GameObject regularUIHolder;
+
+     [Header("Tutorial")]
     //For tutorial
     public bool control;
 
+     [Header("Challenge Mode")]
+    //For challenge mode.
+    public GameObject challengeUIHolder;
+    public TextMeshProUGUI timeLeftText;
+    float timeLimit;
+    float timeLeft;
+    int rndSeed;
+
+     [Header("Pause Menu")]
     //Pause menu
     public GameObject pauseMenuUI;
     public bool isPaused;
     public Button pauseButton;
     public Button retryButton;
 
+     [Header("Bottom UI stuff")]
     //Bottom UI stuff.
     //public GameObject testImg;
     Transform bottomUIParent;
@@ -69,6 +88,7 @@ public class Current_level_manager : MonoBehaviour
     public GameObject itemRequiredArea;
     public bool isZoomed;
 
+     [Header("PlayerPrefs related")]
     //PlayerPrefs keys for each level.
     string bestTimeKey;
     string starsKey;
@@ -79,7 +99,7 @@ public class Current_level_manager : MonoBehaviour
     string totalThemeStarsKey;
     int totalThemeStars;
 
-
+     [Header("Time & stars needed")]
     //References to scriptableObject stuff so we don't hafta keep referencing the object itself.
     float timeFor3Stars;
     float timeFor2Stars;
@@ -90,7 +110,8 @@ public class Current_level_manager : MonoBehaviour
     //Use this bool for when we clear the level.
     private bool timerRunning;
     private float elapsedTime;
-    
+
+     [Header("Combine Box related")]
     //Combine box references.
     public GameObject combineBox1;
     public GameObject combineBox2;
@@ -99,6 +120,7 @@ public class Current_level_manager : MonoBehaviour
     public GameObject itemGotParticlePrefab;
     public GameObject itemSpawnParticlePrefab;
 
+     [Header("Level completed related")]
     //Level completed variables.
     bool levelComplete = false;
     private string nextSceneName;
@@ -106,6 +128,7 @@ public class Current_level_manager : MonoBehaviour
     public TextMeshProUGUI finishTimeEndText;
     public GameObject starParticlePrefab;
 
+     [Header("Audio Related")]
     //Music/Sfx related stuff.
     public AudioClip levelCompleteTheme;
     public AudioClip levelCompleteIntro;
@@ -116,16 +139,18 @@ public class Current_level_manager : MonoBehaviour
     public AudioClip itemGetSound;
     public AudioClip combineSound;
     private float themeVolume;
+
     
     //Ad related stuff.
     private string noAdsKey = "noAdsKey";
+     [Header("Ad related")]
     public int noAdsNum;
     string levelsTillAdKey = "levelsTillAdPlays";
     int levelsTillAdNum;
     public GameObject adsManager;
     public Button shareButton;
 
-
+     [Header("Hint related")]
     //Hint related stuff.
     public GameObject hintCursorPrefab;
     List<GameObject> currentObsInPlay = new List<GameObject>();
@@ -140,12 +165,6 @@ public class Current_level_manager : MonoBehaviour
     //For scaling camera.
     public GameObject cameraView;
     public GameObject backgroundImage;
-
-   
-
-    //FOR DEMO, DELETE AFTER WE FINISH THE DEMO VERSION.
-    string demoMessageDispKey = "demoMessage";
-    int demoMsgVal;
 
     public void Awake()
     {
@@ -183,33 +202,9 @@ public class Current_level_manager : MonoBehaviour
         cameraView = GameObject.Find("Main Camera");
         float aspectRatio = cameraView.GetComponent<Camera>().aspect;
 
-        
-        /*
-        if(aspectRatio >= 0.4f && aspectRatio <= 0.55f)
-        {
-            //9:18 SCALE THE BG.
-            backgroundImage.transform.localScale = new Vector3(0.882143f, 1f, 1f);
-            backgroundImage.transform.position = new Vector3(-0.0075f, 0f, 0f);
-            combineBox1.GetComponent<Combine_Collision>().setCenter();
-            combineBox2.GetComponent<Combine_Collision>().setCenter();
-           // combineBox1.GetComponent<Combine_Collision>().centerCollide.x = (combineBox1.GetComponent<Combine_Collision>().centerCollide.x - -0.0075f);
-            combineBox1.GetComponent<Combine_Collision>().centerCollide.x = (0.95f);
-           // combineBox2.GetComponent<Combine_Collision>().centerCollide.x = (combineBox2.GetComponent<Combine_Collision>().centerCollide.x - -0.0075f);
-            combineBox2.GetComponent<Combine_Collision>().centerCollide.x = (1.77f);
-
-        }
-        else
-        {
-            //Has to be 9:16 , don't scale.
-            combineBox1.GetComponent<Combine_Collision>().setCenter();
-            combineBox2.GetComponent<Combine_Collision>().setCenter();
-
-            
-        }
-        */
         combineBox1.GetComponent<Combine_Collision>().setCenter();
         combineBox2.GetComponent<Combine_Collision>().setCenter();
-        Debug.Log("The aspect ratio is: " + aspectRatio);
+      //  Debug.Log("The aspect ratio is: " + aspectRatio);
        
 
         
@@ -217,8 +212,7 @@ public class Current_level_manager : MonoBehaviour
 
     public void Start()
     {
-        //FOR DEMO, DELETE AFTER WE FINISH THE DEMO VERSION.
-        demoMsgVal = PlayerPrefs.GetInt(demoMessageDispKey);
+        
 
 
         if (theLev.musicVolume == 0f || theLev.musicVolume > 1f)
@@ -230,15 +224,22 @@ public class Current_level_manager : MonoBehaviour
             themeVolume = theLev.musicVolume;
         }
 
-        Debug.Log("Theme volume is: " + themeVolume);
+        //Debug.Log("Theme volume is: " + themeVolume);
 
-        if (currentState == stageType.tutorial)
+        if (currentState == stageType.normalStage)
         {
-            initializeTutorial();
+            initializeLevel();
+            challengeUIHolder.SetActive(false);
+        }
+        else if(currentState == stageType.challengeStage)
+        {
+            initializeChallenge();
+            regularUIHolder.SetActive(false);
         }
         else
         {
-            initializeLevel();
+            initializeTutorial();
+            challengeUIHolder.SetActive(false);
         }
 
        // Time.timeScale = 100;
@@ -248,12 +249,28 @@ public class Current_level_manager : MonoBehaviour
     {
         if (!levelComplete && !isPaused)
         {
-            currentTimer();
+            if(currentState != stageType.challengeStage)
+            {
+                currentTimer();
+            }
+            else
+            {
+                currentTimerChallenge();
+            }
         }
-        //BAD CODE, RE-REFACTOR THIS...
-        numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
-       // Debug.Log(numHintsRemaining);
-        hintsLeftText.text = "X " + numHintsRemaining.ToString();
+
+        if(currentState == stageType.challengeStage)
+        {
+
+        }
+        else
+        {
+            //BAD CODE, RE-REFACTOR THIS...
+            numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
+            // Debug.Log(numHintsRemaining);
+            hintsLeftText.text = "X " + numHintsRemaining.ToString();
+        }
+      
    
     }
 
@@ -688,6 +705,8 @@ public class Current_level_manager : MonoBehaviour
         item1 = GameObject.Find(instanceName);
         item2 = GameObject.Find(instanceName2);
         GameObject newItem;
+        //Temp just to please the system.
+        newItem = GameObject.Find(instanceName);
 
         string mat1;
         string mat2;
@@ -704,15 +723,49 @@ public class Current_level_manager : MonoBehaviour
                 Debug.Log("Combo successful!");
               
                 //Play animation to signify to player where the new item appeared!
-                Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
-                newItem = Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
 
+                if(currentState == stageType.challengeStage)
+                {
+                    switch(rndSeed)
+                    {
+                        case 1:
+                            {
+                                Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].spawnPoint1, Quaternion.Euler(0f, 0f, 0f));
+                                newItem = Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].spawnPoint1, Quaternion.Euler(0f, 0f, 0f));
+                                newItem.GetComponent<Draggable_Item>().initialPos = theLev.comboItemsNeeded[i].spawnPoint1;
+                                break;
+                            }
+                        case 2:
+                            {
+                                Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].spawnPoint1, Quaternion.Euler(0f, 0f, 0f));
+                                newItem = Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].spawnPoint2, Quaternion.Euler(0f, 0f, 0f));
+                                newItem.GetComponent<Draggable_Item>().initialPos = theLev.comboItemsNeeded[i].spawnPoint2;
+                                break;
+                            }
+                        case 3:
+                            {
+                                Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].spawnPoint1, Quaternion.Euler(0f, 0f, 0f));
+                                newItem = Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].spawnPoint3, Quaternion.Euler(0f, 0f, 0f));
+                                newItem.GetComponent<Draggable_Item>().initialPos = theLev.comboItemsNeeded[i].spawnPoint3;
+                                break;
+                            }
+                           
+                    }
+                   
+                }
+                else
+                {
+                    Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
+                    newItem = Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].initialPos, Quaternion.Euler(0f, 0f, 0f));
+                }
+                
+                /*
                 if(currentState != stageType.tutorial)
                 {
                     newItem.transform.SetParent(backgroundImage.transform, false);
                     newItem.GetComponent<Draggable_Item>().initialPos = newItem.transform.position;
                 }
-               
+               */
                 //Removing the combo items from the list.
 
                 /*
@@ -1236,40 +1289,31 @@ public class Current_level_manager : MonoBehaviour
         //Make the buttons work now.
         //Check if we should have the next level button available.
 
-        //TAKE THIS OUT AFTER DEMO.
-        totalStars = PlayerPrefs.GetInt(totalStarsObtainedKey);
-        if (totalStars == 27 && demoMsgVal == 0)
+     
+        if (!DoesSceneExist(nextSceneName))
         {
-            //Load main Menu and then congratulate player.
-            GetComponent<Load_Level>().LoadLevel("Main_Menu");
-            
+            PlayNextButton.SetActive(false);
         }
         else
         {
-            if (!DoesSceneExist(nextSceneName))
+            if (enoughStars)
             {
-                PlayNextButton.SetActive(false);
-            }
-            else
-            {
-                if (enoughStars)
-                {
-                    PlayNextButton.GetComponent<Button>().interactable = true;
-                }
-            }
-
-            menuButton.GetComponent<Button>().interactable = true;
-            RetryEndButton.GetComponent<Button>().interactable = true;
-            shareButton.interactable = true;
-
-            //Do something based on the amount of stars.
-
-            //If noAds has not been purchased.
-            if (noAdsNum == 0 && adsManager != null)
-            {
-                adsManager.GetComponent<Banner_Ads>().showBanner();
+                PlayNextButton.GetComponent<Button>().interactable = true;
             }
         }
+
+        menuButton.GetComponent<Button>().interactable = true;
+        RetryEndButton.GetComponent<Button>().interactable = true;
+        shareButton.interactable = true;
+
+        //Do something based on the amount of stars.
+
+        //If noAds has not been purchased.
+        if (noAdsNum == 0 && adsManager != null)
+        {
+            adsManager.GetComponent<Banner_Ads>().showBanner();
+        }
+        
        
     }
 
@@ -1693,4 +1737,296 @@ public class Current_level_manager : MonoBehaviour
   *************************************************************
   * TUTORIAL RELATED FUNCTIONS!!!!!!!!!!!!!!!!!!!
   */
+
+
+    /*
+     * CHALLENGE MODE RELATED FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     ***********************************************************************
+     *********************************************************************** 
+     ************************************************************************
+     ************************************************************************
+     * CHALLENGE MODE RELATED FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     */
+
+    public void initializeChallenge()
+    {
+        //Don't check NoAdsNum here because no matter what we want to hide it.
+        if (adsManager != null)
+        {
+            adsManager.GetComponent<Banner_Ads>().hideBanner();
+        }
+        if (theLev.levelMusic != null)
+        {
+            EazySoundManager.StopAllMusic();
+            EazySoundManager.PlayMusic(theLev.levelMusic, themeVolume, true, false, 0.5f, 0.5f);
+        }
+
+        control = true;
+
+        //No hints in challenge mode.
+        numHintsRemaining = 0;
+        hintsLeftText.text = "N/A";
+        
+        //Time limit related stuff.
+        timeLimit = theLev.challengeTimeLimit;
+        timeLeft = timeLimit;
+        TimeSpan timeLeftFormat = TimeSpan.FromSeconds((timeLeft+1));
+        string timeLeftStr = "Time left: " + timeLeftFormat.ToString("mm':'ss");
+
+
+        hintButton.enabled = false;
+        pauseMenuUI.SetActive(true);
+        isPaused = false;
+        isZoomed = false;
+
+        //Might be plus 1...? Since we need the NEXT scene name. 
+        //IF YOU HAVE A PROBLEM GETTING TO THE NEXT SCENE DOUBLE CHECK THIS!!!!!
+        nextSceneName = theLev.levelDifficulty + "_" + theLev.levelTheme + "_" + (theLev.levelNum + 1).ToString();
+
+        //  Debug.Log(nextSceneName);
+
+        //Spawn in the items for the level.
+
+        //Between 1-3.
+        rndSeed = Random.Range(1, 4);
+        Debug.Log("Random seed is: " + rndSeed);
+
+        GameObject tempAddToListObject;
+        switch(rndSeed)
+        {
+                //Spawn in position 1.
+            case 1:
+                {
+                    for (int i = 0; i < theLev.requiredItems.Count; i++)
+                    {
+                        if (theLev.requiredItems[i].zRot != 0 || theLev.requiredItems[i].yRot != 0)
+                        {
+                            tempAddToListObject = Instantiate(theLev.requiredItems[i].item, theLev.requiredItems[i].spawnPoint1, Quaternion.Euler(0f, theLev.requiredItems[i].yRot, theLev.requiredItems[i].zRot));
+                        }
+                        else
+                        {
+                            tempAddToListObject = Instantiate(theLev.requiredItems[i].item, theLev.requiredItems[i].spawnPoint1, Quaternion.identity);
+                        }
+
+                        //Add the object we just spawned in into the list of current objects that are in play.
+                        currentObsInPlay.Add(tempAddToListObject);
+
+
+                        tempAddToListObject.transform.SetParent(backgroundImage.transform, false);
+                        tempAddToListObject.GetComponent<Draggable_Item>().initialPos = tempAddToListObject.transform.position;
+
+                        if (theLev.requiredItems[i].isHidden)
+                        {
+                            //  Debug.Log(theLev.requiredItems[i].item.name + " is invisible!");
+                            numInvis.Add(i);
+                        }
+                    }
+                    break;
+                }
+                //Spawn in position 2.
+            case 2:
+                {
+                    for (int i = 0; i < theLev.requiredItems.Count; i++)
+                    {
+                        if (theLev.requiredItems[i].zRot != 0 || theLev.requiredItems[i].yRot != 0)
+                        {
+                            tempAddToListObject = Instantiate(theLev.requiredItems[i].item, theLev.requiredItems[i].spawnPoint2, Quaternion.Euler(0f, theLev.requiredItems[i].yRot, theLev.requiredItems[i].zRot));
+                        }
+                        else
+                        {
+                            tempAddToListObject = Instantiate(theLev.requiredItems[i].item, theLev.requiredItems[i].spawnPoint2, Quaternion.identity);
+                        }
+
+                        //Add the object we just spawned in into the list of current objects that are in play.
+                        currentObsInPlay.Add(tempAddToListObject);
+
+
+                        tempAddToListObject.transform.SetParent(backgroundImage.transform, false);
+                        tempAddToListObject.GetComponent<Draggable_Item>().initialPos = tempAddToListObject.transform.position;
+
+                        if (theLev.requiredItems[i].isHidden)
+                        {
+                            //  Debug.Log(theLev.requiredItems[i].item.name + " is invisible!");
+                            numInvis.Add(i);
+                        }
+                    }
+                    break;
+                }
+                //Spawn in position 3.
+            case 3:
+                {
+                    for (int i = 0; i < theLev.requiredItems.Count; i++)
+                    {
+                        if (theLev.requiredItems[i].zRot != 0 || theLev.requiredItems[i].yRot != 0)
+                        {
+                            tempAddToListObject = Instantiate(theLev.requiredItems[i].item, theLev.requiredItems[i].spawnPoint3, Quaternion.Euler(0f, theLev.requiredItems[i].yRot, theLev.requiredItems[i].zRot));
+                        }
+                        else
+                        {
+                            tempAddToListObject = Instantiate(theLev.requiredItems[i].item, theLev.requiredItems[i].spawnPoint3, Quaternion.identity);
+                        }
+
+                        //Add the object we just spawned in into the list of current objects that are in play.
+                        currentObsInPlay.Add(tempAddToListObject);
+
+
+                        tempAddToListObject.transform.SetParent(backgroundImage.transform, false);
+                        tempAddToListObject.GetComponent<Draggable_Item>().initialPos = tempAddToListObject.transform.position;
+
+                        if (theLev.requiredItems[i].isHidden)
+                        {
+                            //  Debug.Log(theLev.requiredItems[i].item.name + " is invisible!");
+                            numInvis.Add(i);
+                        }
+                    }
+                    break;
+                }
+                //Something went wrong, might have to kick the player out of the level to avoid a crash.
+            default:
+                {
+                    break;
+                }
+        }
+
+        hintsLeftText.text = "N/A";
+       
+        
+        //Initialize this variable here since we just finished populating the list.
+        currentObListNum = 0;
+
+        //numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
+        
+        // Debug.Log("The player has: " + numHintsRemaining + " hints left!");
+
+        /*
+        for (int sk = 0; sk < currentObsInPlay.Count; sk++)
+        {
+            Debug.Log(currentObsInPlay[sk].name);
+        }
+        */
+
+        //Calculate how many items are needed to complete the level.
+        //The total number of combo items + the number of regular items that are not
+        //materials for a combo item.
+        int numMats = 0;
+        for (int j = 0; j < theLev.comboItemsNeeded.Count; j++)
+        {
+            if (theLev.comboItemsNeeded[j].isAlsoMat)
+            {
+                numMats += 1;
+            }
+            for (int k = 0; k < theLev.requiredItems.Count; k++)
+            {
+
+                if ((theLev.requiredItems[k].item.gameObject.name == theLev.comboItemsNeeded[j].mat1 || theLev.requiredItems[k].item.gameObject.name == theLev.comboItemsNeeded[j].mat2))
+                {
+                    numMats += 1;
+                }
+            }
+
+        }
+
+
+        //Make all items that need to be invisible not show up.
+        string tempName;
+        GameObject tempObject;
+        for (int k = 0; k < numInvis.Count; k++)
+        {
+            tempName = theLev.requiredItems[numInvis[k]].item.gameObject.name + "(Clone)";
+            tempObject = GameObject.Find(tempName);
+            invisObjects.Add(tempObject);
+            invisObjects[k].SetActive(false);
+        }
+
+
+        // Debug.Log(numMats);
+        itemsLeft = (theLev.comboItemsNeeded.Count + (theLev.requiredItems.Count - numMats));
+        // numItemsLeftText.text = "Items left: " + itemsLeft;
+        numItemsLeftTextMesh.text = "Items remaining: " + itemsLeft;
+
+        //Fill in the bottom UI with items that are needed to complete the level by using Images.
+        //These images will be transparent until the corresponding item is found, then they
+        //will be filled in.
+        bottomUIParent = GameObject.Find("Sprite_Holder").transform;
+        zoomedUIParent = GameObject.Find("Sprite_Holder2").transform;
+
+        //Bottom UI initialization to hide it. Will have to actually hide it instead of just making it transparent.
+        shrinkButton.SetActive(false);
+        GameObject child = ZoomedScrollArea.transform.GetChild(0).gameObject;
+        Image theBG;
+        theBG = child.GetComponent<Image>();
+        Color tempZoomColor;
+        tempZoomColor = theBG.color;
+        tempZoomColor.a = 0.0f;
+        theBG.color = tempZoomColor;
+
+
+        GameObject tempIcon;
+        Image tempImg;
+        Color tempColor;
+
+        if (theLev.icons.Count != 0)
+        {
+            for (int l = 0; l < theLev.icons.Count; l++)
+            {
+                tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
+                tempIcon.transform.SetParent(bottomUIParent, false);
+                tempImg = tempIcon.GetComponent<Image>();
+                tempColor = tempImg.color;
+                tempColor.a = 0.65f;
+                tempImg.color = tempColor;
+
+
+                //Update the zoomed in version as well.
+                tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
+                tempIcon.name = tempIcon.name + "2";
+                tempIcon.transform.SetParent(zoomedUIParent, false);
+                tempImg = tempIcon.GetComponent<Image>();
+                tempColor = tempImg.color;
+                tempColor.a = 0.65f;
+                tempImg.color = tempColor;
+
+                // Debug.Log(theLev.icons[l] + " " + tempIcon.name);
+            }
+        }
+
+        ScrollToTop();
+
+    }
+
+    public void currentTimerChallenge()
+    {
+        if(timeLeft < 0f)
+        {
+            //Call game over function.
+            timeLeftText.text = "Time Left: 00:00";
+            Debug.Log("You lose!");
+        }
+        else
+        {
+            if(timeLeft <= (timeLimit/4))
+            {
+                //Red
+                Color32 newColor = new Color32(255, 0, 0, 255);
+                timeLeftText.color = newColor;
+
+            }
+            timeLeft -= 1 * Time.deltaTime;
+            //Account for extra second.
+            currentTime = TimeSpan.FromSeconds((timeLeft+1));
+            string timeLeftStr = "Time Left: " + currentTime.ToString("mm':'ss");
+            timeLeftText.text = timeLeftStr;
+        }
+    }
+
+
+
+    /*
+ * CHALLENGE MODE RELATED FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ ***********************************************************************
+ *********************************************************************** 
+ ************************************************************************
+ ************************************************************************
+ * CHALLENGE MODE RELATED FUNCTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
 }
