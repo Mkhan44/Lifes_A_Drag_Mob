@@ -68,6 +68,9 @@ public class Current_level_manager : MonoBehaviour
     float timeLimit;
     float timeLeft;
     int rndSeed;
+    public GameObject challengeCompleteHolder;
+    public GameObject gameOverScreen;
+    bool gameOverActive;
 
      [Header("Pause Menu")]
     //Pause menu
@@ -120,10 +123,11 @@ public class Current_level_manager : MonoBehaviour
     public GameObject itemGotParticlePrefab;
     public GameObject itemSpawnParticlePrefab;
 
-     [Header("Level completed related")]
+   
     //Level completed variables.
     bool levelComplete = false;
     private string nextSceneName;
+    [Header("Level completed related")]
     public GameObject levelCompleteHolder;
     public TextMeshProUGUI finishTimeEndText;
     public GameObject starParticlePrefab;
@@ -235,6 +239,7 @@ public class Current_level_manager : MonoBehaviour
         {
             initializeChallenge();
             regularUIHolder.SetActive(false);
+          
         }
         else
         {
@@ -1004,8 +1009,8 @@ public class Current_level_manager : MonoBehaviour
         Debug.Log("You found all the items!");
 
         //Don't do these 2 lines of code, fix this later!
-        GameObject testScroll = GameObject.Find("Bottom_Scroll_Zoomed");
-        testScroll.SetActive(false);
+        GameObject botScrollZoom = GameObject.Find("Bottom_Scroll_Zoomed");
+        botScrollZoom.SetActive(false);
 
         expandButton.SetActive(false);
 
@@ -1397,6 +1402,8 @@ public class Current_level_manager : MonoBehaviour
     //For restart button.
     public void restartScene()
    {
+       //Get the type of stage. If it's challenge mode, pass it to something that doesn't get destroyed so when the stage restarts it knows to change stagetype to challenge.
+        //Else, make it just load the level regularly.
        if (noAdsNum == 0 && adsManager != null)
        {
            if (levelsTillAdNum >= 3)
@@ -1761,7 +1768,10 @@ public class Current_level_manager : MonoBehaviour
             EazySoundManager.PlayMusic(theLev.levelMusic, themeVolume, true, false, 0.5f, 0.5f);
         }
 
+        gameOverActive = false;
         control = true;
+
+        objectiveTextMesh.text = "Objective: " + theLev.objective;
 
         //No hints in challenge mode.
         numHintsRemaining = 0;
@@ -1934,6 +1944,8 @@ public class Current_level_manager : MonoBehaviour
         {
             tempName = theLev.requiredItems[numInvis[k]].item.gameObject.name + "(Clone)";
             tempObject = GameObject.Find(tempName);
+            tempObject.GetComponent<Draggable_Item>().initialPos = new Vector3(theLev.requiredItems[numInvis[k]].xPos, theLev.requiredItems[numInvis[k]].yPos, 0f);
+            tempObject.transform.position = tempObject.GetComponent<Draggable_Item>().initialPos;
             invisObjects.Add(tempObject);
             invisObjects[k].SetActive(false);
         }
@@ -1996,11 +2008,14 @@ public class Current_level_manager : MonoBehaviour
 
     public void currentTimerChallenge()
     {
-        if(timeLeft < 0f)
+        if(timeLeft < 0f && !gameOverActive)
         {
             //Call game over function.
+            gameOverActive = true;
             timeLeftText.text = "Time Left: 00:00";
             Debug.Log("You lose!");
+            gameOver();
+
         }
         else
         {
@@ -2017,6 +2032,46 @@ public class Current_level_manager : MonoBehaviour
             string timeLeftStr = "Time Left: " + currentTime.ToString("mm':'ss");
             timeLeftText.text = timeLeftStr;
         }
+    }
+
+    public void gameOver()
+    {
+        isPaused = true;
+        expandButton.SetActive(false);
+        pauseButton.interactable = false;
+        retryButton.interactable = false;
+        hintButton.interactable = false;
+
+        gameOverScreen.SetActive(true);
+        gameOverScreen.GetComponent<PanelAnimator>().StartAnimIn();
+    }
+
+    public void levelCompleteChallenge()
+    {
+
+        if (theLev.levelMusic != null)
+        {
+            // EazySoundManager.StopAllMusic();
+            EazySoundManager.PlayMusic(levelCompleteIntro, 0.5f, false, false, 0.0f, 0.0f);
+            StartCoroutine(waitforIntro());
+        }
+        //Temp variables to hold records/stars for end screen text. Will probably use these to call functions when we make this into it's own script.
+        float finishTime;
+        finishTime = timeLeft;
+
+        //Just using this to make it so background objects can't be moved.
+        isPaused = true;
+
+        //Don't do these 2 lines of code, fix this later!
+        GameObject botScrollZoom = GameObject.Find("Bottom_Scroll_Zoomed");
+        botScrollZoom.SetActive(false);
+
+        expandButton.SetActive(false);
+
+        pauseButton.interactable = false;
+        retryButton.interactable = false;
+        hintButton.interactable = false;
+        levelComplete = true;
     }
 
 
