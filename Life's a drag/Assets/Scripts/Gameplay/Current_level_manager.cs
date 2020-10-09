@@ -70,6 +70,7 @@ public class Current_level_manager : MonoBehaviour
     int rndSeed;
     public GameObject challengeCompleteHolder;
     public GameObject gameOverScreen;
+    public TextMeshProUGUI challengeTimeLeftText;
     bool gameOverActive;
 
      [Header("Pause Menu")]
@@ -172,6 +173,16 @@ public class Current_level_manager : MonoBehaviour
 
     public void Awake()
     {
+        GameObject levelSelector =  GameObject.Find("LevelTypeSelector");
+        if (levelSelector != null)
+        {
+            setLevelType(levelSelector.GetComponent<LevelTypeSelector>().getLevelType());
+        }
+        else
+        {
+            //Just do nothing and go with what's there if it's not specified.
+        }
+      
 
         noAdsNum = PlayerPrefs.GetInt(noAdsKey);
         thisScene = SceneManager.GetActiveScene();
@@ -293,6 +304,30 @@ public class Current_level_manager : MonoBehaviour
      ******************************************
      */
 
+
+
+    public void setLevelType(string levelType)
+    {
+        //If it's normal, normal mode. Challenge, challenge mode, Tut, tutorial level...
+        //Call this in awake.
+
+        if (levelType == "Normal")
+        {
+            currentState = stageType.normalStage;
+        }
+        else if (levelType == "Challenge")
+        {
+            currentState = stageType.challengeStage;
+        }
+        else if (levelType == "Tutorial") 
+        {
+            currentState = stageType.tutorial;
+        }
+        else
+        {
+            currentState = stageType.normalStage;
+        }
+    }
     //Spawn in items, get the scene name, etc.
     public void initializeLevel()
     {
@@ -978,9 +1013,17 @@ public class Current_level_manager : MonoBehaviour
         numItemsLeftTextMesh.text = "Items remaining: " + itemsLeft;
             if (itemsLeft == 0)
             {
-                if(currentState != stageType.tutorial)
+                if(currentState == stageType.normalStage)
                 {
                     levelCompleted();
+                }
+                else if(currentState == stageType.challengeStage)
+                {
+                    levelCompleteChallenge();
+                }
+                else
+                {
+                    //Do nothing if it's tutorial.
                 }
                
             }
@@ -2055,8 +2098,9 @@ public class Current_level_manager : MonoBehaviour
             EazySoundManager.PlayMusic(levelCompleteIntro, 0.5f, false, false, 0.0f, 0.0f);
             StartCoroutine(waitforIntro());
         }
-        //Temp variables to hold records/stars for end screen text. Will probably use these to call functions when we make this into it's own script.
         float finishTime;
+
+        //might want to floor this..? Not sure yet.
         finishTime = timeLeft;
 
         //Just using this to make it so background objects can't be moved.
@@ -2072,6 +2116,60 @@ public class Current_level_manager : MonoBehaviour
         retryButton.interactable = false;
         hintButton.interactable = false;
         levelComplete = true;
+
+        challengeCompleteHolder.SetActive(true);
+        challengeCompleteHolder.GetComponent<PanelAnimator>().StartAnimIn();
+        GameObject BGChild = levelCompleteHolder.transform.GetChild(0).gameObject;
+
+        currentTime = TimeSpan.FromSeconds((timeLeft+1));
+        string timeLeftStr = "Time Left: " + currentTime.ToString("mm':'ss");
+
+        challengeTimeLeftText.text = timeLeftStr;
+
+        /*
+         *****************************************
+         *****************************************
+         *****************************************
+         PLAYERPREF RELATED STUFF FOR SAVING GAME DATA.
+         */
+
+        string bestFinishTimeKey = theLev.name + "_Best_Finish_Time_Left";
+        float bestFinishTime;
+        bestFinishTime = PlayerPrefs.GetFloat(bestFinishTimeKey);
+
+        //You got a better record. Set it!
+        if(timeLeft > bestFinishTime)
+        {
+            PlayerPrefs.SetFloat(bestFinishTimeKey, bestFinishTime);
+        }
+
+        string completedChallengeAlreadyKey = theLev.name + "_Completed";
+        int isItComplete;
+        isItComplete = PlayerPrefs.GetInt(completedChallengeAlreadyKey);
+
+        //We completed the level for the first time, check it off. Use this key later for checking if it's been completed.
+        if(isItComplete == 0)
+        {
+           
+            PlayerPrefs.SetInt(completedChallengeAlreadyKey, 1);
+            isItComplete = PlayerPrefs.GetInt(completedChallengeAlreadyKey);
+            Debug.Log("First time completing the level! Complete is: " + isItComplete);
+        }
+        else
+        {
+            Debug.Log("Hey you already beat this level!");
+        }
+        
+
+
+        /*
+         *****************************************
+         *****************************************
+         *****************************************
+         PLAYERPREF RELATED STUFF FOR SAVING GAME DATA.
+         */
+
+
     }
 
 

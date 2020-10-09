@@ -25,8 +25,11 @@ public class Level_Select_Manager : MonoBehaviour
     string demoMessageDispKey = "demoMessage";
     int demoMsgVal;
     public GameObject demoPanel;
+
+    public GameObject levelTypeSelectorInstance;
     void Awake()
     {
+        levelTypeSelectorInstance = GameObject.Find("LevelTypeSelector");
         //firstTimeInMenu = true;
         
        
@@ -122,6 +125,19 @@ public class Level_Select_Manager : MonoBehaviour
     public void noTut()
     {
         Time.timeScale = 1f;
+    }
+
+    public void setLevelType(string typeString)
+    {
+        if (levelTypeSelectorInstance != null)
+        {
+            levelTypeSelectorInstance.GetComponent<LevelTypeSelector>().setLevelType(typeString);
+        }
+        else
+        {
+            Debug.LogWarning("Level type selector is null!!!");
+        }
+        
     }
 
 
