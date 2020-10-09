@@ -12,8 +12,10 @@ public class Populate_Level_Buttons : MonoBehaviour
     public Level_Select_Manager levelSelectManager;
     public int numThemeStars;
     public TextMeshProUGUI errorMessageText;
+    public TextMeshProUGUI titleText;
 
     Coroutine animateRoutine;
+
     public void Start()
     {
         errorMessageText.enabled = false;
@@ -22,6 +24,7 @@ public class Populate_Level_Buttons : MonoBehaviour
     void OnEnable()
     {
         StartCoroutine(waitTime());
+        Debug.Log("Called coroutine!");
     }
     
 
@@ -41,7 +44,7 @@ public class Populate_Level_Buttons : MonoBehaviour
     //Cycle through each button in the list, find it's child star picture object, and then populate it with the amount of stars
     //which the player has obtained for that level.
 
-    public void displayStars()
+    public void displayLevels()
     {
         GameObject starLeft;
         GameObject starMid;
@@ -64,8 +67,11 @@ public class Populate_Level_Buttons : MonoBehaviour
 
             //This should be equivilant to the star image.
             starRight = numButtons[i].transform.GetChild(0).gameObject;
+            starRight.SetActive(true);
             starMid = numButtons[i].transform.GetChild(1).gameObject;
+            starMid.SetActive(true);
             starLeft = numButtons[i].transform.GetChild(2).gameObject;
+            starLeft.SetActive(true);
             lockImg = numButtons[i].transform.GetChild(4).gameObject;
 
             //Get the name of the level, we'll use this + star key to get the amt of stars.
@@ -130,6 +136,51 @@ public class Populate_Level_Buttons : MonoBehaviour
 
     }
 
+    public void displayLevelsChallenge()
+    {
+        GameObject starLeft;
+        GameObject starMid;
+        GameObject starRight;
+        GameObject lockImg;
+
+        string diffTheme;
+        string fullLevName;
+        string starsKey;
+        int starsObtained;
+        int starReq;
+
+
+        //This string is now in the format of "difficulty_theme_"
+        diffTheme = levelSelectManager.getDiffAndTheme();
+
+        for (int i = 0; i < numButtons.Count; i++)
+        {
+            numButtons[i].GetComponent<Button_Level_Info>().setNum(i + 1);
+
+            //This should be equivilant to the star image.
+            starRight = numButtons[i].transform.GetChild(0).gameObject;
+            starRight.SetActive(false);
+            starMid = numButtons[i].transform.GetChild(1).gameObject;
+            starMid.SetActive(false);
+            starLeft = numButtons[i].transform.GetChild(2).gameObject;
+            starLeft.SetActive(false);
+            lockImg = numButtons[i].transform.GetChild(4).gameObject;
+
+            //Get the name of the level, we'll use this + star key to get the amt of stars.
+            fullLevName = diffTheme + (i + 1).ToString();
+
+            // Debug.Log("The level name is: " + fullLevName);
+            starsKey = fullLevName + "_Best_Stars";
+
+            starsObtained = PlayerPrefs.GetInt(starsKey);
+
+            //Debug.Log("The starsKey is: " + starsKey);
+            //Debug.Log("The stars obtained for stage " + (i + 1) + " are: " + starsObtained);
+            starReq = numButtons[i].GetComponent<Button_Level_Info>().stageInfo.starRequirement;
+
+        }
+    }
+
     //When a button is clicked, this function is called.
     public void displayErrorText(int numStarsNeeded, string theme)
     {
@@ -150,9 +201,26 @@ public class Populate_Level_Buttons : MonoBehaviour
 
     public IEnumerator waitTime()
     {
+        string levType = levelSelectManager.levelTypeSelectorInstance.GetComponent<LevelTypeSelector>().getLevelType();
+      
         yield return new WaitForSeconds(0.1f);
+        string theTheme = levelSelectManager.getTheme();
+        Debug.Log("Theme in coroutine is: " + theTheme);
+
         checkNumThemeStars();
-        displayStars();
+
+        if(levType == "Normal")
+        {
+            titleText.text = theTheme + ": " + "\n" + "Level select";
+            displayLevels();
+        }
+        else
+        {
+            titleText.text = theTheme + ": " + "\n" + "Level select" + "\n" + "(Challenge)";
+            displayLevelsChallenge();
+            //Do a function that makes stars invisible.
+        }
+        
     }
 
     IEnumerator animateText()

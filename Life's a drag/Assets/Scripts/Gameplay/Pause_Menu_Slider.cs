@@ -50,6 +50,11 @@ public class Pause_Menu_Slider : Menu_Slider, IBeginDragHandler, IDragHandler, I
     public override void OnEndDrag(PointerEventData eventData)
     {
         base.OnEndDrag(eventData);
+        if(menuSlider != null)
+        {
+            menuSlider.SetActive(true);
+        }
+    
         Debug.Log("Overrided!");
         if (enoughDrag)
         {

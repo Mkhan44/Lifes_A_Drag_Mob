@@ -142,12 +142,13 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         //Set it back to the original for next time.
         menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x = (menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition.x * -1);
         menuSlider.GetComponent<RectTransform>().anchoredPosition = menuSlider.GetComponent<PanelAnimator>().outAnimEndPosition;
+        thisTrans.anchoredPosition = initialPos;
         if(nextLoad != null)
         {
             nextLoad.GetComponent<PanelAnimator>().StartAnimIn();
+            menuSlider.SetActive(false);
         }
-        thisTrans.anchoredPosition = initialPos;
-        
+       
     }
 
 
