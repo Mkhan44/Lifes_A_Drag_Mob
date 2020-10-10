@@ -83,6 +83,48 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
 
     }
 
+    public void initializeBoxChallenge()
+    {
+
+        string levelDiff = levelMan.getDiff();
+        string levelTheme = levelMan.getTheme();
+        string levNameTemp;
+        string bestFinishTimeKey;
+        string bestTimeStr;
+        float bestTime;
+        GameObject currentBatchOfLevels;
+        TimeSpan bestTimeFormat;
+
+        levNameTemp = levelMan.getDiffAndTheme();
+        currentBatchOfLevels = GameObject.Find(levNameTemp + "Levels");
+
+        levelInfo = currentBatchOfLevels.GetComponent<Populate_Level_Buttons>();
+
+
+        levNameDisplay = levelInfo.numButtons[levelNumber - 1].GetComponent<Button_Level_Info>().stageInfo.levelName + "\n" + "(Challenge)";
+        fullLevName = levNameTemp + levelNumber;
+        bestFinishTimeKey = fullLevName + "_Best_Finish_Time_Left";
+        //Debug.Log(bestFinishTimeKey);
+
+        bestTime = PlayerPrefs.GetFloat(bestFinishTimeKey);
+        bestTimeFormat = TimeSpan.FromSeconds(bestTime);
+        bestTimeStr = "Record: " + bestTimeFormat.ToString("mm':'ss") + " left";
+        bestTimeTMPRO.text = bestTimeStr;
+        levelNameTMPRO.text = levNameDisplay;
+
+        if (Resources.Load<Sprite>("Level_ScreenShots/" + levelDiff + "/" + levelTheme + "/" + levelNumber) != null)
+        {
+            previewImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("Level_ScreenShots/" + levelDiff + "/" + levelTheme + "/" + levelNumber);
+        }
+
+
+        //bestTimeText.text = bestTimeStr;
+        //LevelNameText.text = levNameDisplay;
+        //LevelNameText.text = "This is level: " + levelNumber;
+
+    }
+
+
     public void loadLevel()
     {
         if(adsManager != null && adsManager.GetComponent<AdsManager>().adsPurchasedCheck == 0)
@@ -119,9 +161,22 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
 
     public IEnumerator waitTime()
     {
+        string levType = levelMan.levelTypeSelectorInstance.GetComponent<LevelTypeSelector>().getLevelType();
       
         yield return new WaitForSeconds(0.1f);
-        initializeBox();
+
+        string theTheme = levelMan.getTheme();
+
+        if (levType == "Normal")
+        {
+            initializeBox();
+        }
+        else
+        {
+            initializeBoxChallenge();
+        }
+
+        //initializeBox();
         this.GetComponent<PanelAnimator>().StartAnimIn();
      
     }

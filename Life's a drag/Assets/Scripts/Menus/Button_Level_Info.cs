@@ -79,14 +79,29 @@ public class Button_Level_Info : MonoBehaviour
     //Our onClick() event.
     public void whatToCall()
     {
-        if(starsNeeded > 0)
+        string levelType;
+
+        levelType = levManager.GetComponent<LevelTypeSelector>().getLevelType();
+
+        if(levelType == "Normal")
         {
-            lockedMessage();
+            if (starsNeeded > 0)
+            {
+                lockedMessage();
+            }
+            else
+            {
+                dialougeBoxInfo();
+            }
         }
         else
         {
+            //If(player has enough stars in the theme) , give do dialouge box. Else, print message that they don't have it.
+
             dialougeBoxInfo();
         }
+
+       
     }
     //We have enough stars, spawn in dialouge box.
     public void dialougeBoxInfo()

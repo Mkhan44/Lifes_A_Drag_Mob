@@ -24,7 +24,7 @@ public class Populate_Level_Buttons : MonoBehaviour
     void OnEnable()
     {
         StartCoroutine(waitTime());
-        Debug.Log("Called coroutine!");
+        //Debug.Log("Called coroutine!");
     }
     
 
@@ -205,7 +205,7 @@ public class Populate_Level_Buttons : MonoBehaviour
       
         yield return new WaitForSeconds(0.1f);
         string theTheme = levelSelectManager.getTheme();
-        Debug.Log("Theme in coroutine is: " + theTheme);
+      //  Debug.Log("Theme in coroutine is: " + theTheme);
 
         checkNumThemeStars();
 

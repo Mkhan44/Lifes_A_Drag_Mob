@@ -1019,7 +1019,7 @@ public class Current_level_manager : MonoBehaviour
                 }
                 else if(currentState == stageType.challengeStage)
                 {
-                    levelCompleteChallenge();
+                    levelCompletedChallenge();
                 }
                 else
                 {
@@ -2089,8 +2089,9 @@ public class Current_level_manager : MonoBehaviour
         gameOverScreen.GetComponent<PanelAnimator>().StartAnimIn();
     }
 
-    public void levelCompleteChallenge()
+    public void levelCompletedChallenge()
     {
+        //levelComplete = true;
 
         if (theLev.levelMusic != null)
         {
@@ -2136,11 +2137,13 @@ public class Current_level_manager : MonoBehaviour
         string bestFinishTimeKey = theLev.name + "_Best_Finish_Time_Left";
         float bestFinishTime;
         bestFinishTime = PlayerPrefs.GetFloat(bestFinishTimeKey);
+      
 
         //You got a better record. Set it!
         if(timeLeft > bestFinishTime)
         {
-            PlayerPrefs.SetFloat(bestFinishTimeKey, bestFinishTime);
+            PlayerPrefs.SetFloat(bestFinishTimeKey, timeLeft);
+            //Debug.Log("You got a better time! the time left was: " + timeLeft + " and your other record was: " + bestFinishTime);
         }
 
         string completedChallengeAlreadyKey = theLev.name + "_Completed";
@@ -2153,7 +2156,7 @@ public class Current_level_manager : MonoBehaviour
            
             PlayerPrefs.SetInt(completedChallengeAlreadyKey, 1);
             isItComplete = PlayerPrefs.GetInt(completedChallengeAlreadyKey);
-            Debug.Log("First time completing the level! Complete is: " + isItComplete);
+           // Debug.Log("First time completing the level! Complete is: " + isItComplete);
         }
         else
         {

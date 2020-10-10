@@ -10,13 +10,15 @@ public class Pause_Menu_Slider : Menu_Slider, IBeginDragHandler, IDragHandler, I
     public Pause_Menu pauseRef;
     public Level_Select_Manager levelRef;
     public GameObject dialougeBoxRef;
+    string levelType;
     public enum typeOfButton
     {
         Resume,
         Options,
         Main_Menu,
         Tutorial,
-        Play_Level
+        Play_Level,
+        LvlSelectBack
     }
 
 
@@ -49,13 +51,15 @@ public class Pause_Menu_Slider : Menu_Slider, IBeginDragHandler, IDragHandler, I
 
     public override void OnEndDrag(PointerEventData eventData)
     {
+
+
         base.OnEndDrag(eventData);
         if(menuSlider != null)
         {
             menuSlider.SetActive(true);
         }
     
-        Debug.Log("Overrided!");
+       // Debug.Log("Overrided!");
         if (enoughDrag)
         {
             switch (buttonType)

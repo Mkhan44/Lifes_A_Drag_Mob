@@ -151,6 +151,12 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
        
     }
 
+    public void setNextLoad(string test)
+    {
+        nextLoad = GameObject.Find(test);
+        Debug.Log("Function was called!");
+    }
+
 
 
 
