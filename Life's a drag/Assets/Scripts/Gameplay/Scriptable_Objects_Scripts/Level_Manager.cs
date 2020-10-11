@@ -61,4 +61,8 @@ public class Level_Manager : ScriptableObject
 
     //Time limit for challenge mode version of the level.
     public float challengeTimeLimit;
+
+    [Tooltip("MAKE SURE THAT THIS IS THE SAME FOR ALL LEVELS IN THIS DIFFICULTY!")]
+    //Number of stars in the corresponding theme required to beat this stage.
+    public int challengeStarReq;
 }

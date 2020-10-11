@@ -145,9 +145,8 @@ public class Populate_Level_Buttons : MonoBehaviour
 
         string diffTheme;
         string fullLevName;
-        string starsKey;
-        int starsObtained;
-        int starReq;
+        string completeKey;
+        int completeCheck;
 
 
         //This string is now in the format of "difficulty_theme_"
@@ -166,17 +165,20 @@ public class Populate_Level_Buttons : MonoBehaviour
             starLeft.SetActive(false);
             lockImg = numButtons[i].transform.GetChild(4).gameObject;
 
+            //Probably gonna be GetChild(5) for the 'Clear' image.
+
             //Get the name of the level, we'll use this + star key to get the amt of stars.
             fullLevName = diffTheme + (i + 1).ToString();
 
             // Debug.Log("The level name is: " + fullLevName);
-            starsKey = fullLevName + "_Best_Stars";
+            completeKey = fullLevName + "_Completed";
 
-            starsObtained = PlayerPrefs.GetInt(starsKey);
+            completeCheck = PlayerPrefs.GetInt(completeKey);
+            
+            //Pass to buttonInfo button the value.
+            numButtons[i].GetComponent<Button_Level_Info>().challengeClearCheck(completeCheck);
 
-            //Debug.Log("The starsKey is: " + starsKey);
-            //Debug.Log("The stars obtained for stage " + (i + 1) + " are: " + starsObtained);
-            starReq = numButtons[i].GetComponent<Button_Level_Info>().stageInfo.starRequirement;
+            //If it's cleared, then we need to set the clear image.
 
         }
     }
@@ -193,6 +195,28 @@ public class Populate_Level_Buttons : MonoBehaviour
         {
             errorMessageText.enabled = true;
             errorMessageText.text = "You don't have enough " + theme + " stars to play this level. You need " + numStarsNeeded + " more.";
+            errorMessageText.color = new Color32(255, 255, 255, 255);
+            animateRoutine = StartCoroutine(animateText());
+            //Play animation to fade out errorMessageText ...
+        }
+    }
+
+    //2 ways this text can be displayed:
+    //1. The player does not have enough theme stars to access any of the levels. (i.e. you need at least 16 office stars to unlock easy challenge)
+    //2. The player has not completed the previous tier of challenge levels. (i.e. You have enough stars to UNLOCK the medium office stars, but you have not completed EASY office challenge levels yet.)
+    public void displayChallengeErrorText(int ChallengeNumThemeStarsReq, string theme, int themeStarsTotal)
+    {
+        int neededStars = ChallengeNumThemeStarsReq - themeStarsTotal;
+
+        if (animateRoutine != null)
+        {
+            StopCoroutine(animateRoutine);
+        }
+        //setTheme();
+        if (errorMessageText != null)
+        {
+            errorMessageText.enabled = true;
+            errorMessageText.text = "You don't have enough " + theme + " stars to play these levels. You need " + neededStars + " more.";
             errorMessageText.color = new Color32(255, 255, 255, 255);
             animateRoutine = StartCoroutine(animateText());
             //Play animation to fade out errorMessageText ...

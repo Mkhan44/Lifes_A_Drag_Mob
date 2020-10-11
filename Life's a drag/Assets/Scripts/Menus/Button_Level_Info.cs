@@ -23,6 +23,13 @@ public class Button_Level_Info : MonoBehaviour
     int starsNeeded;
     string whatTheme;
     string whatDiff;
+
+    int numChallengeStarsReq;
+    int themeStarsTotal;
+    string themeStarsTotalKey = "_Stars_Obtained";
+
+    int clearCheck;
+
     Coroutine animateRoutine;
     public void Start()
     {
@@ -30,15 +37,20 @@ public class Button_Level_Info : MonoBehaviour
         if(stageInfo.starRequirement > 0)
         {
             starsRequired = stageInfo.starRequirement;
-            setTheme();
-            setDiff();
-            string findStr = whatDiff + "_" + whatTheme + "_Levels";
-            themePop = GameObject.Find(findStr);
-            if(themePop == null)
-            {
-                Debug.LogWarning("Hey, we didn't find the object for populate level button!");
-            }
         }
+
+        setTheme();
+        setDiff();
+        string findStr = whatDiff + "_" + whatTheme + "_Levels";
+        themePop = GameObject.Find(findStr);
+        if (themePop == null)
+        {
+            Debug.LogWarning("Hey, we didn't find the object for populate level button!");
+        }
+
+        themeStarsTotalKey = stageInfo.levelTheme + themeStarsTotalKey;
+        numChallengeStarsReq = stageInfo.challengeStarReq;
+        themeStarsTotal = PlayerPrefs.GetInt(themeStarsTotalKey);
 
     }
     /*
@@ -80,8 +92,10 @@ public class Button_Level_Info : MonoBehaviour
     public void whatToCall()
     {
         string levelType;
+        Level_Select_Manager tempLvlSelect;
 
-        levelType = levManager.GetComponent<LevelTypeSelector>().getLevelType();
+        tempLvlSelect = levManager.GetComponent<Level_Select_Manager>();
+        levelType = tempLvlSelect.levelTypeSelectorInstance.GetComponent<LevelTypeSelector>().getLevelType();
 
         if(levelType == "Normal")
         {
@@ -96,9 +110,16 @@ public class Button_Level_Info : MonoBehaviour
         }
         else
         {
-            //If(player has enough stars in the theme) , give do dialouge box. Else, print message that they don't have it.
-
-            dialougeBoxInfo();
+            //If(player has enough stars in the theme) , do dialouge box. Else, print message that they don't have it.
+            if(themeStarsTotal < numChallengeStarsReq)
+            {
+                challengeLockedMessage();
+            }
+            else
+            {
+                dialougeBoxInfo();
+            }
+            
         }
 
        
@@ -114,24 +135,27 @@ public class Button_Level_Info : MonoBehaviour
     {
         //Call the function.
         themePop.GetComponent<Populate_Level_Buttons>().displayErrorText(starsNeeded, whatTheme);
-
-        /*
-        if (animateRoutine != null)
-        {
-            StopCoroutine(animateRoutine);
-        }
-        setTheme();
-        if(errorText != null)
-        {
-            errorText.enabled = true;
-            errorText.text = "You don't have enough " + whatTheme + " stars to play this level. You need " + starsNeeded + " more.";
-            errorText.color = new Color32(255, 255, 255, 255);
-            animateRoutine = StartCoroutine(animateText());
-            //Play animation to fade out errortext ...
-        }
-         */
     }
 
+    public void challengeLockedMessage()
+    {
+        //Call the function.
+        themePop.GetComponent<Populate_Level_Buttons>().displayChallengeErrorText(numChallengeStarsReq, whatTheme, themeStarsTotal);
+    }
+
+
+    public void challengeClearCheck(int theCheck)
+    {
+        clearCheck = theCheck;
+        if(clearCheck == 0)
+        {
+            Debug.Log("We didn't clear " + stageInfo.levelName + ".");
+        }
+        else
+        {
+            Debug.Log("We cleared " + stageInfo.levelName + " !");
+        }
+    }
     IEnumerator animateText()
     {
         float i = 0.0f;
