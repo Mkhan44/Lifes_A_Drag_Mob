@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
   m_Name: Easy_Park_4
   m_EditorClassIdentifier: 
-  levelName: Basketball time
+  levelName: Basketball Time
   levelTheme: Park
   levelDifficulty: Easy
   levelNum: 4
@@ -28,6 +28,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b49a3aa1fbda4c24889a676e014d3edb, type: 2}
   - {fileID: 11400000, guid: 2a6d264ace90493479f38e04efa8f7fa, type: 2}
   - {fileID: 11400000, guid: d4aa5caab3a64a34cb39d48b883c2484, type: 2}
+  - {fileID: 11400000, guid: 5194a36354f213049bb50d4c86de9d82, type: 2}
   comboItemsNeeded:
   - {fileID: 11400000, guid: b08aba60f240acc4b8b621b55e7cdd0a, type: 2}
   - {fileID: 11400000, guid: 5687af703abf3f64f95575414997d312, type: 2}
@@ -36,7 +37,14 @@ MonoBehaviour:
   - {fileID: 5745295521531094116, guid: 4a2f49cbf91b3fe419e281a8d85773fa, type: 3}
   - {fileID: 5745295521531094116, guid: bbb3ed446f6ead348bcfac84ca1ca631, type: 3}
   - {fileID: 5745295521531094116, guid: fba21f679bfc9034dafa25eaa423b47a, type: 3}
-  - {fileID: 5745295521531094116, guid: 00e5375a068983142b5b5042a2404d43, type: 3}
+  - {fileID: 5745295521531094116, guid: bbc59085ebb84824ab096a7633feb853, type: 3}
   - {fileID: 5745295521531094116, guid: 3821fd42e4d86774686b092ff6cba0a9, type: 3}
-  aniSecondsToWait: 0.2
+  aniSecondsToWait: 0.7
   starRequirement: 0
+  levelMusic: {fileID: 0}
+  musicVolume: 0
+  levelAniSound: {fileID: 0}
+  sfxVolume: 0
+  dontStopSFXEarly: 0
+  challengeTimeLimit: 50
+  challengeStarReq: 0
