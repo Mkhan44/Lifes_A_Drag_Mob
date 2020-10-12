@@ -777,14 +777,14 @@ public class Current_level_manager : MonoBehaviour
                             }
                         case 2:
                             {
-                                Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].spawnPoint1, Quaternion.Euler(0f, 0f, 0f));
+                                Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].spawnPoint2, Quaternion.Euler(0f, 0f, 0f));
                                 newItem = Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].spawnPoint2, Quaternion.Euler(0f, 0f, 0f));
                                 newItem.GetComponent<Draggable_Item>().initialPos = theLev.comboItemsNeeded[i].spawnPoint2;
                                 break;
                             }
                         case 3:
                             {
-                                Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].spawnPoint1, Quaternion.Euler(0f, 0f, 0f));
+                                Instantiate(itemSpawnParticlePrefab, theLev.comboItemsNeeded[i].spawnPoint3, Quaternion.Euler(0f, 0f, 0f));
                                 newItem = Instantiate(theLev.comboItemsNeeded[i].theItem, theLev.comboItemsNeeded[i].spawnPoint3, Quaternion.Euler(0f, 0f, 0f));
                                 newItem.GetComponent<Draggable_Item>().initialPos = theLev.comboItemsNeeded[i].spawnPoint3;
                                 break;
