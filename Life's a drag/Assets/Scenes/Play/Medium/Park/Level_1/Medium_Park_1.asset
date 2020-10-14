@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Medium_Park_1
+  m_EditorClassIdentifier: 
+  levelName: Barbs
+  levelTheme: Park
+  levelDifficulty: Medium
+  levelNum: 1
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Get to grilling!
+  requiredItems:
+  - {fileID: 11400000, guid: d7f47b048d1990741a4c8471c3a0a23c, type: 2}
+  - {fileID: 11400000, guid: 19b8f8bbbb0f4c342a8196b634219b10, type: 2}
+  - {fileID: 11400000, guid: 2e1e751b6b72c8d498a354086dc25abd, type: 2}
+  - {fileID: 11400000, guid: 5def9e8caf9cf3c4c891967eb48332b2, type: 2}
+  - {fileID: 11400000, guid: bd47043301ee0ee4cbbc7b9f4a2b438e, type: 2}
+  - {fileID: 11400000, guid: 9b418b93f0296ec4883eab21cbd46883, type: 2}
+  - {fileID: 11400000, guid: af860b17de54df54d91776150e423076, type: 2}
+  - {fileID: 11400000, guid: 3c9feced09983f64793f0da19afb485e, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: cbb23bf3638072543a47f787940d6a09, type: 2}
+  - {fileID: 11400000, guid: cd47c109c3972324ebc3270b8933743a, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 232cfeb34fd907e499bb6d911eed066d, type: 3}
+  - {fileID: 5745295521531094116, guid: 2f60a7155a879c8499caef4764e9917d, type: 3}
+  - {fileID: 5745295521531094116, guid: 4b5ce329171586349bcfd334d3e911de, type: 3}
+  - {fileID: 5745295521531094116, guid: a1235a23ebfcee2468a834827ea45c02, type: 3}
+  - {fileID: 5745295521531094116, guid: b976d4e2ae9135549b4197e1730dcb6c, type: 3}
+  - {fileID: 5745295521531094116, guid: 26c624cb487f57640a21411bdc2f084e, type: 3}
+  aniSecondsToWait: 0.15
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: 7a6377eb24c09d94d857a6bf8b108501, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 0
+  challengeStarReq: 0
