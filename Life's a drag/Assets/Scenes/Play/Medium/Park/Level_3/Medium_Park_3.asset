@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Medium_Park_3
+  m_EditorClassIdentifier: 
+  levelName: Fishing in the park
+  levelTheme: Park
+  levelDifficulty: Medium
+  levelNum: 3
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Gather fishing equipment!
+  requiredItems:
+  - {fileID: 11400000, guid: f24560d3ee43cab448c1416b037ae559, type: 2}
+  - {fileID: 11400000, guid: ab57445d95ec09645b069825179bbb08, type: 2}
+  - {fileID: 11400000, guid: 3473e27304fc1ba4697fedef7d3f13bf, type: 2}
+  - {fileID: 11400000, guid: f6892a15832a9c94f9dd2a83f0da4cf7, type: 2}
+  - {fileID: 11400000, guid: 03140b3ec3ad95e4496d06c5ea347c4f, type: 2}
+  - {fileID: 11400000, guid: 2c95d10a8112d9a4c914b59c18cde348, type: 2}
+  - {fileID: 11400000, guid: 4b208a0566f2ce9489ce7e4f535a9403, type: 2}
+  - {fileID: 11400000, guid: 01c141ccf84dc8d49b11a838c8a498c9, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: 4b517633a6cf4c748a9fa6f00ef9fdca, type: 2}
+  - {fileID: 11400000, guid: 5314f305ac5321f4b8145695d66b7a2e, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 8797f80df060af547838d4d0775f69c1, type: 3}
+  - {fileID: 5745295521531094116, guid: 69841f294d6028f46abbaddfc8a51b67, type: 3}
+  - {fileID: 5745295521531094116, guid: 72ca2e1bb80849044849125aff99c01e, type: 3}
+  - {fileID: 5745295521531094116, guid: 0f23ed1a3d5dbdf4eb9f16f4782c8947, type: 3}
+  - {fileID: 5745295521531094116, guid: be5208daa5dd05e4f8bb96aa764fac26, type: 3}
+  - {fileID: 5745295521531094116, guid: fc82618c61bfe8241b67403671a3bab8, type: 3}
+  aniSecondsToWait: 0.15
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: 7a6377eb24c09d94d857a6bf8b108501, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 60
+  challengeStarReq: 0
