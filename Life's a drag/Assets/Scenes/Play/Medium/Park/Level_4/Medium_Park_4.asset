@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Medium_Park_4
+  m_EditorClassIdentifier: 
+  levelName: Kite flying
+  levelTheme: Park
+  levelDifficulty: Medium
+  levelNum: 4
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Fix your kite!
+  requiredItems:
+  - {fileID: 11400000, guid: 1564672ebbdc06845a9691fe208c84d1, type: 2}
+  - {fileID: 11400000, guid: fb8a2f46411789d48be696bafae9c14d, type: 2}
+  - {fileID: 11400000, guid: f7de68cff384c1c43b2a276650ea74c9, type: 2}
+  - {fileID: 11400000, guid: 449bf0a6f43ea3941a311b2405a61c82, type: 2}
+  - {fileID: 11400000, guid: c73fbf394cc932b4a9d735fd41c5372e, type: 2}
+  - {fileID: 11400000, guid: afd10424356dc91489c4d896edc23aa3, type: 2}
+  - {fileID: 11400000, guid: f4b68603d481ee441be31371e966f656, type: 2}
+  - {fileID: 11400000, guid: c1db3e7b0c1a54c4eb613f1d992b622f, type: 2}
+  - {fileID: 11400000, guid: 2ff919275689039409ca55cd7969a234, type: 2}
+  - {fileID: 11400000, guid: d6a787b876d67ac41a0e3578b54fb902, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: 28969d467d5ebed429cc0f0f335b97af, type: 2}
+  - {fileID: 11400000, guid: 402b1766c7921b34f9e0966f528be166, type: 2}
+  - {fileID: 11400000, guid: a6e4883947dd9a14e9fdf126918cca32, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 4625a5ebd5f956a4d90ddc2f0b7e16e1, type: 3}
+  - {fileID: 5745295521531094116, guid: c7241b50dff15224b85eeca77052c2eb, type: 3}
+  - {fileID: 5745295521531094116, guid: ddb1d4b47d35f4b4090441750a31c816, type: 3}
+  - {fileID: 5745295521531094116, guid: 88430228ab8dddb4aa481373354c322c, type: 3}
+  - {fileID: 5745295521531094116, guid: 61f401cc22d04ed43b804d144b2074d1, type: 3}
+  - {fileID: 5745295521531094116, guid: 745cefaa81e720345948e4aee0ce354a, type: 3}
+  - {fileID: 5745295521531094116, guid: b1f42e6f3ef6b2947bec1854c1960a02, type: 3}
+  aniSecondsToWait: 0.2
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: fd4b8e7a0d2fafb428c211b1b1dd0b28, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 60
+  challengeStarReq: 0
