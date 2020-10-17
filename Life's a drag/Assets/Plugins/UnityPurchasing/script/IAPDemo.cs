@@ -363,6 +363,11 @@ public class IAPDemo : MonoBehaviour, IStoreListener
         // deduplicating transactions across app reinstallations because this relies upon the on-device, deletable
         // TransactionLog database.
         builder.Configure<IGooglePlayConfiguration>().aggressivelyRecoverLostPurchases = true;
+        // Use purchaseToken instead of orderId for all transactions to avoid non-unique transactionIDs for a
+        // single purchase; two ProcessPurchase calls for one purchase, differing only by which field of the receipt
+        // is used for the Product.transactionID. Automatically true if aggressivelyRecoverLostPurchases is enabled
+        // and this API is not called at all.
+        builder.Configure<IGooglePlayConfiguration>().UsePurchaseTokenForTransactionId(true);
 #endif
 
         // Define our products.
