@@ -111,7 +111,7 @@ public class Button_Level_Info : MonoBehaviour
         else
         {
             //If(player has enough stars in the theme) , do dialouge box. Else, print message that they don't have it.
-            if(themeStarsTotal < numChallengeStarsReq)
+            if (themeStarsTotal < numChallengeStarsReq || !themePop.GetComponent<Populate_Level_Buttons>().allChallengeComp)
             {
                 challengeLockedMessage();
             }

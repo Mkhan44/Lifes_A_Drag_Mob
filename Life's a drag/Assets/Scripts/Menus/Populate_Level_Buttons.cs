@@ -14,11 +14,15 @@ public class Populate_Level_Buttons : MonoBehaviour
     public TextMeshProUGUI errorMessageText;
     public TextMeshProUGUI titleText;
 
+    public bool allChallengeComp;
+    string diff;
+
     Coroutine animateRoutine;
 
     public void Start()
     {
         errorMessageText.enabled = false;
+        allChallengeComp = false;
     }
 
     void OnEnable()
@@ -152,6 +156,9 @@ public class Populate_Level_Buttons : MonoBehaviour
         //This string is now in the format of "difficulty_theme_"
         diffTheme = levelSelectManager.getDiffAndTheme();
 
+        //Make a temp list to check whether or not each challenge level is completed.
+         List<bool> completeListCheck = new List<bool>();
+
         for (int i = 0; i < numButtons.Count; i++)
         {
             numButtons[i].GetComponent<Button_Level_Info>().setNum(i + 1);
@@ -174,13 +181,59 @@ public class Populate_Level_Buttons : MonoBehaviour
             completeKey = fullLevName + "_Completed";
 
             completeCheck = PlayerPrefs.GetInt(completeKey);
-            
+
+            //THIS CHECK ONLY NEEDS TO HAPPEN ON MEDIUM OR HIGHER DIFFICULTIES.
+            if(diff != "Easy")
+            {
+                if (completeCheck == 0)
+                {
+                    bool tempBool = false;
+                    completeListCheck.Add(tempBool);
+                }
+                else
+                {
+                    //It's cleared!
+                }
+               
+            }
+            //THIS CHECK ONLY NEEDS TO HAPPEN ON MEDIUM OR HIGHER DIFFICULTIES.
+
             //Pass to buttonInfo button the value.
             numButtons[i].GetComponent<Button_Level_Info>().challengeClearCheck(completeCheck);
 
             //If it's cleared, then we need to set the clear image.
-
         }
+
+
+        //THIS CHECK ONLY NEEDS TO HAPPEN ON MEDIUM OR HIGHER DIFFICULTIES.
+        if (diff != "Easy")
+        {
+            for (int j = 0; j < completeListCheck.Count; j++)
+            {
+                if (!completeListCheck[j])
+                {
+                    allChallengeComp = false;
+                    break;
+                }
+
+                //If it gets this far: We know all levels have been cleared.
+                if (j == completeListCheck.Count)
+                {
+                    allChallengeComp = true;
+                    break;
+                }
+            }
+        }
+        //THIS CHECK ONLY NEEDS TO HAPPEN ON MEDIUM OR HIGHER DIFFICULTIES.
+
+        else
+        {
+            Debug.Log("The difficulty is Easy! No checking the clear conditions, just star conditions.");
+            allChallengeComp = true;
+        }
+     
+       
+
     }
 
     //When a button is clicked, this function is called.
@@ -215,11 +268,25 @@ public class Populate_Level_Buttons : MonoBehaviour
         //setTheme();
         if (errorMessageText != null)
         {
-            errorMessageText.enabled = true;
-            errorMessageText.text = "You don't have enough " + theme + " stars to play these levels. You need " + neededStars + " more.";
-            errorMessageText.color = new Color32(255, 255, 255, 255);
-            animateRoutine = StartCoroutine(animateText());
-            //Play animation to fade out errorMessageText ...
+            //Play a different message based on what the player has not completed.
+            if (!allChallengeComp)
+            {
+                errorMessageText.enabled = true;
+                errorMessageText.text = "You need to complete all " + diff + " " + theme + " challenge levels to play this stage! ";
+                errorMessageText.color = new Color32(255, 255, 255, 255);
+                animateRoutine = StartCoroutine(animateText());
+                //Play animation to fade out errorMessageText ...
+            }
+            else
+            {
+                errorMessageText.enabled = true;
+                errorMessageText.text = "You don't have enough " + theme + " stars to play these levels. You need " + neededStars + " more.";
+                errorMessageText.color = new Color32(255, 255, 255, 255);
+                animateRoutine = StartCoroutine(animateText());
+                //Play animation to fade out errorMessageText ...
+            }
+
+           
         }
     }
 
@@ -229,6 +296,8 @@ public class Populate_Level_Buttons : MonoBehaviour
       
         yield return new WaitForSeconds(0.1f);
         string theTheme = levelSelectManager.getTheme();
+        diff = levelSelectManager.getDiff();
+
       //  Debug.Log("Theme in coroutine is: " + theTheme);
 
         checkNumThemeStars();
