@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1323071155147298066}
   - component: {fileID: 1242303585808903770}
   m_Layer: 8
-  m_Name: Written_Paper
+  m_Name: Bucket_Water
   m_TagString: RequiredItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,12 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: fd9bc27a5f0950e42951489ee6ccb060, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6359a62e2b134b04cb36c96072c5f46f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.66, y: 2.03}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -120,6 +120,9 @@ MonoBehaviour:
   initialPos: {x: 0, y: 0, z: 0}
   initialScale: {x: 0, y: 0, z: 0}
   shrinkScale: {x: 0, y: 0, z: 0}
+  shouldWeLerp: 0
+  inBox: 0
+  mouseOnMe: 0
 --- !u!61 &1242303585808903770
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -133,16 +136,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.09681094}
+  m_Offset: {x: 0, y: -0.004302293}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.29, y: 1.28}
-    newSize: {x: 7.66, y: 2.03}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.29, y: 0.54923344}
+  m_Size: {x: 1.29, y: 1.3157337}
   m_EdgeRadius: 0
