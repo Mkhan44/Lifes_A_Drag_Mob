@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Medium_House_1
+  m_EditorClassIdentifier: 
+  levelName: Porch Predicament!
+  levelTheme: House
+  levelDifficulty: Medium
+  levelNum: 1
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Get inside your house!
+  requiredItems:
+  - {fileID: 11400000, guid: bd8b974b8862e794da556756529ab7aa, type: 2}
+  - {fileID: 11400000, guid: be837a5a164f8c442a53271a23d3794a, type: 2}
+  - {fileID: 11400000, guid: 746ee6b8f97faa74ea44df43443a240f, type: 2}
+  - {fileID: 11400000, guid: 6ce1939615df09a468efd96ba9fa32ec, type: 2}
+  - {fileID: 11400000, guid: fb8137193db13c044bb8b7128330faaf, type: 2}
+  - {fileID: 11400000, guid: fcdf08a5be8b8c94a95b235c9453b117, type: 2}
+  - {fileID: 11400000, guid: 57a64bfcd00c2b94b990e3182dab2538, type: 2}
+  - {fileID: 11400000, guid: 0c56714f3358cd04988d8c39c25a676b, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: 969b527acd8dd2646b22acbc8198065b, type: 2}
+  - {fileID: 11400000, guid: a0aa786090297fe4d948465a460ed015, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 06ee6cd4b2131294ab8b014276e28260, type: 3}
+  - {fileID: 5745295521531094116, guid: ff23c41a1360c4e45aca167c54ad2477, type: 3}
+  - {fileID: 5745295521531094116, guid: 84e10ccfc2e08f04bad3db71be1c3fa1, type: 3}
+  - {fileID: 5745295521531094116, guid: bb298a85526bcf040b5bf984862b0ef9, type: 3}
+  - {fileID: 5745295521531094116, guid: cec56e667e8607e46a9af10270342a4b, type: 3}
+  - {fileID: 5745295521531094116, guid: b22983c7531888d49b374cca88bd4f9b, type: 3}
+  aniSecondsToWait: 0.15
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: 7a6377eb24c09d94d857a6bf8b108501, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 0
+  challengeStarReq: 0
