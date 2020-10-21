@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Medium_House_2
+  m_EditorClassIdentifier: 
+  levelName: Yardwork
+  levelTheme: House
+  levelDifficulty: Medium
+  levelNum: 2
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Do yardwork!
+  requiredItems:
+  - {fileID: 11400000, guid: c949a3752004d1045a8f990855ecc51d, type: 2}
+  - {fileID: 11400000, guid: 6ee46bd1c650eee4c854ccb6aae93498, type: 2}
+  - {fileID: 11400000, guid: 5c958b3312ad1b14e9128c370a6cc78f, type: 2}
+  - {fileID: 11400000, guid: b77e7e3843ae21341ab5e63aa7b5a307, type: 2}
+  - {fileID: 11400000, guid: 6ff7b31f8b5348e4ea040595f2e4bb4b, type: 2}
+  - {fileID: 11400000, guid: 3f4bc00368d7fbe4b8cc0da97f7ae5aa, type: 2}
+  - {fileID: 11400000, guid: daafd09ce0593b54d984277386335d5d, type: 2}
+  - {fileID: 11400000, guid: 331df4807495a834c8cb4b3b7188e5ef, type: 2}
+  - {fileID: 11400000, guid: 6df12287876cc2d4dadcf06ab45aa537, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: 6b56c5bd53040054c8a2bed022b5aaa0, type: 2}
+  - {fileID: 11400000, guid: 8ba6069265678e448b6b974539dae233, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 25c000fc682e065478d033b906547209, type: 3}
+  - {fileID: 5745295521531094116, guid: 65a2e5ddf6137c14cb6c5dbe2e7ff7d2, type: 3}
+  - {fileID: 5745295521531094116, guid: b6eb726cacef4c34e81803955653f7aa, type: 3}
+  - {fileID: 5745295521531094116, guid: c16a634fd90a614409704beeb6781e79, type: 3}
+  - {fileID: 5745295521531094116, guid: 473841b4d39d49845913ba55de19004d, type: 3}
+  - {fileID: 5745295521531094116, guid: 3762b481117e1934faa8d1528863eaa4, type: 3}
+  - {fileID: 5745295521531094116, guid: 3de5f16a6fbfd6e4384c9129f96ccc67, type: 3}
+  aniSecondsToWait: 0.15
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: 7a6377eb24c09d94d857a6bf8b108501, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 0
+  challengeStarReq: 0
