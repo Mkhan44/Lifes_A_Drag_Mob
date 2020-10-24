@@ -607,8 +607,12 @@ public class Current_level_manager : MonoBehaviour
             rate = (1.0f / timeFor3Stars) * 1.0f;
             while (i < 1.0f && !levelComplete)
             {
-                i += Time.deltaTime * rate;
-                star3.transform.localScale = Vector3.Lerp(star1.transform.localScale, new Vector3(0f, 0f, 1f), (i));
+                if(!isPaused)
+                {
+                    i += Time.deltaTime * rate;
+                    star3.transform.localScale = Vector3.Lerp(star1.transform.localScale, new Vector3(0f, 0f, 1f), (i));
+                }
+              
                 yield return null;
             }
         }
@@ -617,8 +621,13 @@ public class Current_level_manager : MonoBehaviour
             rate = (1.0f / (timeFor2Stars-timeFor3Stars)) * 1.0f;
             while (i < 1.0f && !levelComplete)
             {
-                i += Time.deltaTime * rate;
-                star2.transform.localScale = Vector3.Lerp(star1.transform.localScale, new Vector3(0f, 0f, 1f), (i));
+                if (!isPaused)
+                {
+                    i += Time.deltaTime * rate;
+                    star2.transform.localScale = Vector3.Lerp(star1.transform.localScale, new Vector3(0f, 0f, 1f), (i));
+                }
+
+             
                 yield return null;
             }
         }
