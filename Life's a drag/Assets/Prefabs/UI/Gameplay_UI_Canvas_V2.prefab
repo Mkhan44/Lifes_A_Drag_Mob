@@ -93,7 +93,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 55.5
+  m_fontSize: 63
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 38.1
+  m_fontSize: 42.6
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -630,7 +630,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 200
+  m_fontSize: 182.25
   m_fontSizeBase: 200
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 49.2
+  m_fontSize: 54.95
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1270,7 +1270,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 46.5
+  m_fontSize: 41.4
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1740,7 +1740,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 53.25
+  m_fontSize: 51.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1786,7 +1786,7 @@ MonoBehaviour:
     spaceCount: 2
     wordCount: 3
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -2228,7 +2228,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 38.3
+  m_fontSize: 42.8
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2385,7 +2385,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 45.25
+  m_fontSize: 40.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3119,7 +3119,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 49.3
+  m_fontSize: 55.1
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7205,7 +7205,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 56.4
+  m_fontSize: 63.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7616,7 +7616,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 61
+  m_fontSize: 52.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8550,7 +8550,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 46.45
+  m_fontSize: 43.1
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9642,6 +9642,7 @@ GameObject:
   - component: {fileID: 8000005556253711980}
   - component: {fileID: 8000005556253711982}
   - component: {fileID: 8000005556253711983}
+  - component: {fileID: 4621165973330672853}
   m_Layer: 5
   m_Name: Sprite_Holder
   m_TagString: Untagged
@@ -9706,6 +9707,20 @@ MonoBehaviour:
   m_Spacing: {x: 30, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 3
+--- !u!114 &4621165973330672853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000005556253711981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98d1e0caf7a2674688ed104811e9b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollArea: {fileID: 8000005556253711983}
+  theScene: 1
 --- !u!1 &8137296195939523011
 GameObject:
   m_ObjectHideFlags: 0
@@ -10963,7 +10978,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 53.3
+  m_fontSize: 56.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11009,7 +11024,7 @@ MonoBehaviour:
     spaceCount: 1
     wordCount: 2
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -11083,6 +11098,7 @@ GameObject:
   - component: {fileID: 8105110374063834159}
   - component: {fileID: 4745201194530113342}
   - component: {fileID: 5404263556297617822}
+  - component: {fileID: 5169213947660919486}
   m_Layer: 5
   m_Name: Sprite_Holder2
   m_TagString: Untagged
@@ -11147,6 +11163,20 @@ MonoBehaviour:
   m_Spacing: {x: 30, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 3
+--- !u!114 &5169213947660919486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8939442353246319319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98d1e0caf7a2674688ed104811e9b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollArea: {fileID: 5404263556297617822}
+  theScene: 1
 --- !u!1 &9042402232184261198
 GameObject:
   m_ObjectHideFlags: 0
@@ -11673,7 +11703,7 @@ PrefabInstance:
     - target: {fileID: 1824997604932649336, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
       propertyPath: m_fontSize
-      value: 55.2
+      value: 48.7
       objectReference: {fileID: 0}
     - target: {fileID: 1824997604932649336, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
@@ -11693,7 +11723,7 @@ PrefabInstance:
     - target: {fileID: 1851187433702160065, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
       propertyPath: m_fontSize
-      value: 55.15
+      value: 48.95
       objectReference: {fileID: 0}
     - target: {fileID: 1851187433702160065, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
@@ -11913,7 +11943,7 @@ PrefabInstance:
     - target: {fileID: 4931753385319766123, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
       propertyPath: m_fontSize
-      value: 40.9
+      value: 36.2
       objectReference: {fileID: 0}
     - target: {fileID: 4931753385319766123, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
