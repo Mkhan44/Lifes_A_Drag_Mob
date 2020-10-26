@@ -10,6 +10,11 @@ public class Button_Level_Info : MonoBehaviour
     //public bool hasRequirement;
     //public int requiredStars;
     public Level_Manager stageInfo;
+
+    public Level_Manager easyLevel;
+    public Level_Manager normalLevel;
+    public Level_Manager hardLevel;
+
     public GameObject levManager;
     public GameObject themePop;
 
@@ -34,11 +39,13 @@ public class Button_Level_Info : MonoBehaviour
     public void Start()
     {
         levManager = GameObject.Find("Level_Select_Manager");
+
+        /*
         if(stageInfo.starRequirement > 0)
         {
             starsRequired = stageInfo.starRequirement;
         }
-
+        
         setTheme();
         setDiff();
         string findStr = whatDiff + "_" + whatTheme + "_Levels";
@@ -51,7 +58,29 @@ public class Button_Level_Info : MonoBehaviour
         themeStarsTotalKey = stageInfo.levelTheme + themeStarsTotalKey;
         numChallengeStarsReq = stageInfo.challengeStarReq;
         themeStarsTotal = PlayerPrefs.GetInt(themeStarsTotalKey);
+        */
+    }
 
+    public void initializeButton()
+    {
+        if (stageInfo.starRequirement > 0)
+        {
+            starsRequired = stageInfo.starRequirement;
+        }
+
+        setTheme();
+        setDiff();
+     //   string findStr = whatDiff + "_" + whatTheme + "_Levels";
+        string findStr = whatTheme + "_Levels";
+        themePop = GameObject.Find(findStr);
+        if (themePop == null)
+        {
+            Debug.LogWarning("Hey, we didn't find the object for populate level button!");
+        }
+
+        themeStarsTotalKey = stageInfo.levelTheme + themeStarsTotalKey;
+        numChallengeStarsReq = stageInfo.challengeStarReq;
+        themeStarsTotal = PlayerPrefs.GetInt(themeStarsTotalKey);
     }
     /*
     public string getTheme()
@@ -155,6 +184,43 @@ public class Button_Level_Info : MonoBehaviour
         {
             Debug.Log("We cleared " + stageInfo.levelName + " !");
         }
+    }
+
+    //Tells the level select which difficulty to use.
+    public void assignLev(string difficulty)
+    {
+        switch(difficulty)
+        {
+            case "Easy":
+                {
+                    stageInfo = easyLevel;
+                    break;
+                }
+            case "Medium":
+                {
+                    stageInfo = normalLevel;
+                    break;
+                }
+            case "Hard":
+                {
+                    stageInfo = hardLevel;
+                    break;
+                }
+            default:
+                {
+                    stageInfo = easyLevel;
+                    Debug.LogWarning("The difficulty was invalid.");
+                    break;
+                }
+        }
+
+        if(stageInfo == null)
+        {
+            Debug.LogWarning("Stage info is Null! Something was not assigned.");
+            stageInfo = easyLevel;
+        }
+
+  
     }
     IEnumerator animateText()
     {
