@@ -55,8 +55,9 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
         GameObject currentBatchOfLevels;
         TimeSpan bestTimeFormat;
 
+        levNameTemp = levelMan.getTheme();
+        currentBatchOfLevels = GameObject.Find(levNameTemp + "_Levels");
         levNameTemp = levelMan.getDiffAndTheme();
-        currentBatchOfLevels = GameObject.Find(levNameTemp + "Levels");
 
         levelInfo = currentBatchOfLevels.GetComponent<Populate_Level_Buttons>();
 
@@ -95,8 +96,9 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
         GameObject currentBatchOfLevels;
         TimeSpan bestTimeFormat;
 
+        levNameTemp = levelMan.getTheme();
+        currentBatchOfLevels = GameObject.Find(levNameTemp + "_Levels");
         levNameTemp = levelMan.getDiffAndTheme();
-        currentBatchOfLevels = GameObject.Find(levNameTemp + "Levels");
 
         levelInfo = currentBatchOfLevels.GetComponent<Populate_Level_Buttons>();
 
@@ -142,6 +144,7 @@ public class Dialouge_Level_Select_Box : MonoBehaviour
 
         }
         string levelToLoad;
+        fullLevName = levelMan.getDiffAndTheme() + levelNumber;
         levelToLoad = fullLevName;
         levelMan.GetComponent<Load_Level>().LoadLevel(levelToLoad);
        // SceneManager.LoadScene(levelToLoad);

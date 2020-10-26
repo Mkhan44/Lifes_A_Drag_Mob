@@ -60,14 +60,16 @@ public class Populate_Level_Buttons : MonoBehaviour
         string starsKey;
         int starsObtained;
         int starReq;
-       
 
         //This string is now in the format of "difficulty_theme_"
         diffTheme = levelSelectManager.getDiffAndTheme();
 
         for(int i = 0; i < numButtons.Count; i++)
         {
+            numButtons[i].GetComponent<Button_Level_Info>().assignLev(diff);
+
             numButtons[i].GetComponent<Button_Level_Info>().setNum(i + 1);
+            numButtons[i].GetComponent<Button_Level_Info>().initializeButton();
 
             //This should be equivilant to the star image.
             starRight = numButtons[i].transform.GetChild(0).gameObject;
@@ -86,6 +88,8 @@ public class Populate_Level_Buttons : MonoBehaviour
 
             starsObtained = PlayerPrefs.GetInt(starsKey);
 
+
+            
             //Debug.Log("The starsKey is: " + starsKey);
             //Debug.Log("The stars obtained for stage " + (i + 1) + " are: " + starsObtained);
             starReq = numButtons[i].GetComponent<Button_Level_Info>().stageInfo.starRequirement;
@@ -161,7 +165,10 @@ public class Populate_Level_Buttons : MonoBehaviour
 
         for (int i = 0; i < numButtons.Count; i++)
         {
+            numButtons[i].GetComponent<Button_Level_Info>().assignLev(diff);
+
             numButtons[i].GetComponent<Button_Level_Info>().setNum(i + 1);
+            numButtons[i].GetComponent<Button_Level_Info>().initializeButton();
 
             //This should be equivilant to the star image.
             starRight = numButtons[i].transform.GetChild(0).gameObject;

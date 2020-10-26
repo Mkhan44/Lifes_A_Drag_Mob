@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Hard_Park_1
+  m_EditorClassIdentifier: 
+  levelName: Super fun Skating!
+  levelTheme: Park
+  levelDifficulty: Hard
+  levelNum: 1
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Get your skate gear!
+  requiredItems:
+  - {fileID: 11400000, guid: 31306570426b52446a21f7cd1dd96a97, type: 2}
+  - {fileID: 11400000, guid: 81d58b3561078e54faac96b52c3ec767, type: 2}
+  - {fileID: 11400000, guid: 4532b54aab4157f4d816ad4d5a909878, type: 2}
+  - {fileID: 11400000, guid: 8b3d9c61dd0ac87439906adee78904ab, type: 2}
+  - {fileID: 11400000, guid: 748f629b31a89004db7601a0918884a7, type: 2}
+  - {fileID: 11400000, guid: c2e8ab5597b1395488b75ec29c14dfda, type: 2}
+  - {fileID: 11400000, guid: a3652fe0413fc2540a0632d777fe6411, type: 2}
+  - {fileID: 11400000, guid: d1ad33ea9fac56c48b89597fa798829e, type: 2}
+  - {fileID: 11400000, guid: 7345da28f599abb4d900705ed2afbbf2, type: 2}
+  - {fileID: 11400000, guid: 3fe7537386c239342a31a0676adaf611, type: 2}
+  - {fileID: 11400000, guid: 916d1312a5433e64e8116f387e2c6cb7, type: 2}
+  - {fileID: 11400000, guid: d663a066146eb064bad7a94a3381d0aa, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: 34d973463f15e6e4989caa162e60e398, type: 2}
+  - {fileID: 11400000, guid: f753fa13ff656b8419ddb14b0c8c9eb0, type: 2}
+  - {fileID: 11400000, guid: 28b2538350a33d54eb169c334f92126a, type: 2}
+  - {fileID: 11400000, guid: 5aa56f0ea6b2af04da698486e282fd1e, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: cc3834ee3fc16f945bea0828d2f9d8d5, type: 3}
+  - {fileID: 5745295521531094116, guid: e5f7a922b6289df41aeca2e7467ff949, type: 3}
+  - {fileID: 5745295521531094116, guid: 9782e944e61cffa4b8c45e025595e7d0, type: 3}
+  - {fileID: 5745295521531094116, guid: 8f5fcc823bd7da5478a81bcee08da3ec, type: 3}
+  - {fileID: 5745295521531094116, guid: 97555b3b3c0a4994cb2b0c233101483f, type: 3}
+  - {fileID: 5745295521531094116, guid: b051755e5dfd1cf43bc1c02932ed3743, type: 3}
+  - {fileID: 5745295521531094116, guid: 870507263e9a4404c90765e4e5b1a863, type: 3}
+  - {fileID: 5745295521531094116, guid: 28fd55e811eb3334faf28fef6f568faf, type: 3}
+  aniSecondsToWait: 0.2
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: fd4b8e7a0d2fafb428c211b1b1dd0b28, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 60
+  challengeStarReq: 0
