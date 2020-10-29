@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Hard_Office_1
+  m_EditorClassIdentifier: 
+  levelName: Night shift swindle
+  levelTheme: Park
+  levelDifficulty: Office
+  levelNum: 1
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Snatch the supplies!
+  requiredItems:
+  - {fileID: 11400000, guid: fc302da4b2d41ec448bff079a631b38e, type: 2}
+  - {fileID: 11400000, guid: 7c9e7cf11c2a64a4a85def1e74cdb579, type: 2}
+  - {fileID: 11400000, guid: 540acc97820f3594b8e7de932339639f, type: 2}
+  - {fileID: 11400000, guid: 32c195583fe21fd46a4364b3102f696d, type: 2}
+  - {fileID: 11400000, guid: 5d124c439f7c3d74e92da05906ba4f0b, type: 2}
+  - {fileID: 11400000, guid: 4319a909e69342d4d849e5f97fea8a0e, type: 2}
+  - {fileID: 11400000, guid: 69cffce7ce1ba514c9c306220074c6a8, type: 2}
+  - {fileID: 11400000, guid: a88e522fa0f5ad14a9c5f35e0a24b541, type: 2}
+  - {fileID: 11400000, guid: 975b9a415f047144d8350eabb737bad6, type: 2}
+  - {fileID: 11400000, guid: a0dadcd10df19bb4ba7e25731843ffe2, type: 2}
+  - {fileID: 11400000, guid: 88569867feccb264881473d87be93611, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: 5cf9714d69d64a546ae09a6ecf09d822, type: 2}
+  - {fileID: 11400000, guid: 0b6038c51ec6ffe4b86f42b6306dd9d7, type: 2}
+  - {fileID: 11400000, guid: fcb04454c7bee3e4e8d8691a00a21d03, type: 2}
+  - {fileID: 11400000, guid: b7399141e289f2a4cb91ff76bd8ada9f, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 789efc011ac78de48b35b3a815959577, type: 3}
+  - {fileID: 5745295521531094116, guid: 7aaa01a84009bf1438fff39774fea923, type: 3}
+  - {fileID: 5745295521531094116, guid: 875d6614a8cd05740b215c1f36684736, type: 3}
+  - {fileID: 5745295521531094116, guid: e24af0c0a55d4dc46bdfc70f7c00cdd7, type: 3}
+  - {fileID: 5745295521531094116, guid: 0e540ce589c618f498857fa70d56fe80, type: 3}
+  - {fileID: 5745295521531094116, guid: dfa4148e8246ca747836e51dd7d0d34a, type: 3}
+  - {fileID: 5745295521531094116, guid: 4e6d364311be95a4db2140fbc88b83c6, type: 3}
+  aniSecondsToWait: 0.2
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: fd4b8e7a0d2fafb428c211b1b1dd0b28, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 60
+  challengeStarReq: 0
