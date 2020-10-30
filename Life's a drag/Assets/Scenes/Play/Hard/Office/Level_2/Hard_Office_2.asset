@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Hard_Office_2
+  m_EditorClassIdentifier: 
+  levelName: Cubicle Confusion
+  levelTheme: Park
+  levelDifficulty: Office
+  levelNum: 2
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Find out who messed with your cubicle!
+  requiredItems:
+  - {fileID: 11400000, guid: c304a05f77ef5d840ba0d07fc806ffb5, type: 2}
+  - {fileID: 11400000, guid: 793130f2992a1e24a94fd0897906bf30, type: 2}
+  - {fileID: 11400000, guid: 928baccfa7280754e8ce39f1455966ff, type: 2}
+  - {fileID: 11400000, guid: 876f5b2365cd37e4cbc956adf56b01b9, type: 2}
+  - {fileID: 11400000, guid: 2be3ca131de9e8e48b19aa47546bc255, type: 2}
+  - {fileID: 11400000, guid: eb2b7c91960ad0b4e81a2aa0bf7a1358, type: 2}
+  - {fileID: 11400000, guid: 2825ae92f23c86347b2d6f9c19247ee9, type: 2}
+  - {fileID: 11400000, guid: 73e4f18e3e973004fb6be38ed3c99073, type: 2}
+  - {fileID: 11400000, guid: 62dccc4140f6d2449a5fdf8e1cca0d9b, type: 2}
+  - {fileID: 11400000, guid: 93bba6231a127714dbaafdad4c578260, type: 2}
+  - {fileID: 11400000, guid: ac58caf5f2f59654ba976e52f82103d9, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: 354d37e9c00b28f49b428ee631f8f999, type: 2}
+  - {fileID: 11400000, guid: fbd0666a4de45e243976d9acbb7b44f0, type: 2}
+  - {fileID: 11400000, guid: 3a0085b6218a4f7439afb3485933571b, type: 2}
+  - {fileID: 11400000, guid: 39313c4fdf3090541b89b47c663a0eb4, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: f01b11d3617006441b039a3eaa4d37f5, type: 3}
+  - {fileID: 5745295521531094116, guid: 7ae50c6d1945bec4198a39221c176907, type: 3}
+  - {fileID: 5745295521531094116, guid: 1b75ce1e343d21f42973050f62e3787b, type: 3}
+  - {fileID: 5745295521531094116, guid: 53068c4d09a3f0449aaec78e3aa78181, type: 3}
+  - {fileID: 5745295521531094116, guid: be68f7aeff47f00458549a01c16bddf5, type: 3}
+  - {fileID: 5745295521531094116, guid: 4964ed798eb628943b2f36aad3f1194a, type: 3}
+  - {fileID: 5745295521531094116, guid: 726e14504c7012f46b9709f02500149f, type: 3}
+  aniSecondsToWait: 0.2
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: fd4b8e7a0d2fafb428c211b1b1dd0b28, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 60
+  challengeStarReq: 0
