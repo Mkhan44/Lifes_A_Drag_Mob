@@ -536,7 +536,11 @@ public class Current_level_manager : MonoBehaviour
                 tempIcon.transform.SetParent(bottomUIParent, false);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
-                tempColor.a = 0.65f;
+                //tempColor.a = 0.65f;
+
+                //Red color
+                tempColor = new Color32(243, 40, 0, 125);
+
                 tempImg.color = tempColor;
 
 
@@ -546,7 +550,11 @@ public class Current_level_manager : MonoBehaviour
                 tempIcon.transform.SetParent(zoomedUIParent, false);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
-                tempColor.a = 0.65f;
+                //tempColor.a = 0.65f;
+
+                //Red color
+                tempColor = new Color32(243, 40, 0, 125);
+
                 tempImg.color = tempColor;
              
                // Debug.Log(theLev.icons[l] + " " + tempIcon.name);
@@ -944,7 +952,12 @@ public class Current_level_manager : MonoBehaviour
                 iconInstance = GameObject.Find(iconInstanceName);
                 tempImg = iconInstance.GetComponent<Image>();
                 tempColor = tempImg.color;
-                tempColor.a = 1.0f;
+
+
+                //tempColor.a = 1.0f;
+                
+                //Green
+                tempColor = new Color32(91, 231, 84, 255);
                 tempImg.color = tempColor;
                 Instantiate(itemGotParticlePrefab, iconInstance.transform);
 
@@ -953,7 +966,11 @@ public class Current_level_manager : MonoBehaviour
                 iconInstance = GameObject.Find(iconInstanceName + "2");
                 tempImg = iconInstance.GetComponent<Image>();
                 tempColor = tempImg.color;
-                tempColor.a = 1.0f;
+
+                //tempColor.a = 1.0f;
+
+                //Green
+                tempColor = new Color32(91, 231, 84, 255);
                 tempImg.color = tempColor;
               //  Instantiate(itemGotParticlePrefab, iconInstance.transform);
 
@@ -1026,7 +1043,7 @@ public class Current_level_manager : MonoBehaviour
                 {
                     levelCompleted();
                 }
-                else if(currentState == stageType.challengeStage)
+                else if(currentState == stageType.challengeStage && !isPaused)
                 {
                     levelCompletedChallenge();
                 }
@@ -2037,7 +2054,10 @@ public class Current_level_manager : MonoBehaviour
                 tempIcon.transform.SetParent(bottomUIParent, false);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
-                tempColor.a = 0.65f;
+                //tempColor.a = 0.65f;
+
+                //Red color
+                tempColor = new Color32(243, 40, 0, 125);
                 tempImg.color = tempColor;
 
 
@@ -2047,7 +2067,10 @@ public class Current_level_manager : MonoBehaviour
                 tempIcon.transform.SetParent(zoomedUIParent, false);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
-                tempColor.a = 0.65f;
+                //tempColor.a = 0.65f;
+
+                //Red color
+                tempColor = new Color32(243, 40, 0, 125);
                 tempImg.color = tempColor;
 
                 // Debug.Log(theLev.icons[l] + " " + tempIcon.name);
@@ -2088,6 +2111,17 @@ public class Current_level_manager : MonoBehaviour
 
     public void gameOver()
     {
+        EazySoundManager.StopAllMusic();
+
+        //Destroy the gameobjects so that we don't accidently clear afterwards.
+
+        for (int j = 0; j < currentObsInPlay.Count; j++)
+        {
+            Destroy(currentObsInPlay[j]);
+            currentObsInPlay.Remove(currentObsInPlay[j]);
+            break;
+        }
+
         isPaused = true;
         expandButton.SetActive(false);
         pauseButton.interactable = false;
@@ -2096,6 +2130,8 @@ public class Current_level_manager : MonoBehaviour
 
         gameOverScreen.SetActive(true);
         gameOverScreen.GetComponent<PanelAnimator>().StartAnimIn();
+
+        
     }
 
     public void levelCompletedChallenge()
