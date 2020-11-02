@@ -3959,7 +3959,7 @@ PrefabInstance:
         type: 3}
       propertyPath: easyLevel
       value: 
-      objectReference: {fileID: 11400000, guid: a9d3f007b3c539a4396e79b8d449ca55,
+      objectReference: {fileID: 11400000, guid: c939f227ece820246a20a865c633925e,
         type: 2}
     - target: {fileID: 590974399133497020, guid: 9c4784b08b1c8184ba9f5fef632c5b87,
         type: 3}
@@ -4017,7 +4017,7 @@ PrefabInstance:
         type: 3}
       propertyPath: easyLevel
       value: 
-      objectReference: {fileID: 11400000, guid: f0a2cd0cd98bfbb4490c8bc2d7401ae7,
+      objectReference: {fileID: 11400000, guid: b5b72b159a76f7f48b27e0382ad2913f,
         type: 2}
     - target: {fileID: 590974399375036358, guid: 9c4784b08b1c8184ba9f5fef632c5b87,
         type: 3}
@@ -4045,7 +4045,7 @@ PrefabInstance:
         type: 3}
       propertyPath: easyLevel
       value: 
-      objectReference: {fileID: 11400000, guid: 5984ffa65e92e0048b61c71d3fa699e9,
+      objectReference: {fileID: 11400000, guid: 35f9acfa61351464d8d4c5bf1a4e5105,
         type: 2}
     - target: {fileID: 590974399436567201, guid: 9c4784b08b1c8184ba9f5fef632c5b87,
         type: 3}
@@ -4112,12 +4112,12 @@ PrefabInstance:
     - target: {fileID: 590974399737246227, guid: 9c4784b08b1c8184ba9f5fef632c5b87,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -820.4122
+      value: -821.7037
       objectReference: {fileID: 0}
     - target: {fileID: 590974399737246227, guid: 9c4784b08b1c8184ba9f5fef632c5b87,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -147.11008
+      value: -146.58871
       objectReference: {fileID: 0}
     - target: {fileID: 590974399840540612, guid: 9c4784b08b1c8184ba9f5fef632c5b87,
         type: 3}
@@ -9168,17 +9168,32 @@ PrefabInstance:
         type: 3}
       propertyPath: nextLoad
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 152933050}
     - target: {fileID: 5275369894312527401, guid: f194e3381b3d12248a896818ee162430,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275369894312527402, guid: f194e3381b3d12248a896818ee162430,
+        type: 3}
+      propertyPath: m_Name
+      value: Store_Button
       objectReference: {fileID: 0}
     - target: {fileID: 5275369894312527407, guid: f194e3381b3d12248a896818ee162430,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 555502836}
+    - target: {fileID: 5275369894312527407, guid: f194e3381b3d12248a896818ee162430,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275369894351696088, guid: f194e3381b3d12248a896818ee162430,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5275369894351696089, guid: f194e3381b3d12248a896818ee162430,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9193,6 +9208,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 4.3999023
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275369894351696090, guid: f194e3381b3d12248a896818ee162430,
+        type: 3}
+      propertyPath: m_Name
+      value: Store_Button_Groove
       objectReference: {fileID: 0}
     - target: {fileID: 5275369894408959304, guid: f194e3381b3d12248a896818ee162430,
         type: 3}
@@ -9218,7 +9238,7 @@ PrefabInstance:
         type: 3}
       propertyPath: nextLoad
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1447541576}
     - target: {fileID: 5275369894433372145, guid: f194e3381b3d12248a896818ee162430,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9382,7 +9402,7 @@ PrefabInstance:
     - target: {fileID: 5275369894852748833, guid: f194e3381b3d12248a896818ee162430,
         type: 3}
       propertyPath: m_Name
-      value: 'Challenge_Theme_Select_Easy_Slide '
+      value: 'Theme_Select_Slide_Easy_Slide '
       objectReference: {fileID: 0}
     - target: {fileID: 5275369894852748833, guid: f194e3381b3d12248a896818ee162430,
         type: 3}
@@ -9438,11 +9458,26 @@ PrefabInstance:
         type: 3}
       propertyPath: nextLoad
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2084745988}
     - target: {fileID: 5275369895545696336, guid: f194e3381b3d12248a896818ee162430,
         type: 3}
       propertyPath: m_fontSize
-      value: 36.7
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275369895545696336, guid: f194e3381b3d12248a896818ee162430,
+        type: 3}
+      propertyPath: m_text
+      value: Store
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275369895545696336, guid: f194e3381b3d12248a896818ee162430,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275369895545696336, guid: f194e3381b3d12248a896818ee162430,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5275369895545696337, guid: f194e3381b3d12248a896818ee162430,
         type: 3}
@@ -10519,7 +10554,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 129.95
+  m_fontSize: 171.05
   m_fontSizeBase: 200
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21707,6 +21742,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5275369894312527402, guid: f194e3381b3d12248a896818ee162430,
+        type: 3}
+      propertyPath: m_Name
+      value: Store_Button
+      objectReference: {fileID: 0}
     - target: {fileID: 5275369894312527407, guid: f194e3381b3d12248a896818ee162430,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -21741,6 +21781,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 4.4000244
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275369894351696090, guid: f194e3381b3d12248a896818ee162430,
+        type: 3}
+      propertyPath: m_Name
+      value: Store_Button_Groove
       objectReference: {fileID: 0}
     - target: {fileID: 5275369894408959304, guid: f194e3381b3d12248a896818ee162430,
         type: 3}
