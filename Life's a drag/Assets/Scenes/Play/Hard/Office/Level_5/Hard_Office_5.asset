@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Hard_Office_5
+  m_EditorClassIdentifier: 
+  levelName: HR Headquarters
+  levelTheme: Office
+  levelDifficulty: Hard
+  levelNum: 4
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Investigate!
+  requiredItems:
+  - {fileID: 11400000, guid: c0a6a92b5ff3eae44979e01c755407fc, type: 2}
+  - {fileID: 11400000, guid: 6f86e978a70c636428647456147ca2e5, type: 2}
+  - {fileID: 11400000, guid: d476024d0118c4d4aa4b1b0d517d0ccb, type: 2}
+  - {fileID: 11400000, guid: 754c28af5774339459de6fc5369baae7, type: 2}
+  - {fileID: 11400000, guid: 63ce70d8fa1fdc94abe5c7b60c2e1252, type: 2}
+  - {fileID: 11400000, guid: 87b233e0eacecd541a101077b7cb4c30, type: 2}
+  - {fileID: 11400000, guid: d9750337a979a67488d534e7614dc2d6, type: 2}
+  - {fileID: 11400000, guid: 2ce24423e093cb440940c2dded763f8c, type: 2}
+  - {fileID: 11400000, guid: f40f63021c56c4e438eaec48beced2b0, type: 2}
+  - {fileID: 11400000, guid: 2eee12241a659d34498e8244171cfef6, type: 2}
+  - {fileID: 11400000, guid: 2f993acc5ba9e9e4d870a75b7e2b2df7, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: ae74eced40f096f44b6c800a75ed0acc, type: 2}
+  - {fileID: 11400000, guid: d96216ff8f9821842ac6755b226c02d1, type: 2}
+  - {fileID: 11400000, guid: ea6044ca7b77f12448794da5c961db73, type: 2}
+  - {fileID: 11400000, guid: 819228293ccf4574aa249740565d2ed9, type: 2}
+  - {fileID: 11400000, guid: b85afb4957c560b4392bd5befa374dcd, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 7d264498055435c439f1df04a2b586e1, type: 3}
+  - {fileID: 5745295521531094116, guid: d194ffbdbc9aa824b9f5a5591b32f219, type: 3}
+  - {fileID: 5745295521531094116, guid: 23b4bd76ef9e440458b3e561dcf7bc08, type: 3}
+  - {fileID: 5745295521531094116, guid: 934fd16cd8d7e76418b64d9804b52864, type: 3}
+  - {fileID: 5745295521531094116, guid: f61eb7fbaad101c48af98476b6f32c2d, type: 3}
+  - {fileID: 5745295521531094116, guid: 3ff1e3ea4f0d9aa4dad0e0db5f5db348, type: 3}
+  aniSecondsToWait: 0.2
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: fd4b8e7a0d2fafb428c211b1b1dd0b28, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 60
+  challengeStarReq: 0
