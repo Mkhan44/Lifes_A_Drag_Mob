@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Hard_House_4
+  m_EditorClassIdentifier: 
+  levelName: Leisure room
+  levelTheme: House
+  levelDifficulty: Hard
+  levelNum: 4
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Enjoy some leisure time!
+  requiredItems:
+  - {fileID: 11400000, guid: 92fe2c4a75badf345a447c7a6b084bf4, type: 2}
+  - {fileID: 11400000, guid: 8dd47d4512f9763408861160e37c16f3, type: 2}
+  - {fileID: 11400000, guid: b07d7ae2339b9b74eaae80298b4e4b16, type: 2}
+  - {fileID: 11400000, guid: 32f7f6adc659b0c4f89d7377ae551fe9, type: 2}
+  - {fileID: 11400000, guid: 7b5397d850e8619418c4d65924b69e74, type: 2}
+  - {fileID: 11400000, guid: 9b4c7f7424f408d48810f817b8bcb7a3, type: 2}
+  - {fileID: 11400000, guid: 347cd2e39cf5a2e4d8dc81b9130ca09c, type: 2}
+  - {fileID: 11400000, guid: 46c3ac36283a8a640b4911d98666b75a, type: 2}
+  - {fileID: 11400000, guid: fda3eb07d780b3a4ca28e58b19f9b361, type: 2}
+  - {fileID: 11400000, guid: d9c03b75c6041b847ab94457ead6c2b6, type: 2}
+  - {fileID: 11400000, guid: 771a7bdd9e1c3f04b8b893086730fed3, type: 2}
+  - {fileID: 11400000, guid: b14f1f70dbebc9a4294b15380e1477ce, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: c0cc9f840b756624197c2d0dda1eb02d, type: 2}
+  - {fileID: 11400000, guid: d438a92a227e8dc4faabb4f52f89716b, type: 2}
+  - {fileID: 11400000, guid: 2da0a0b9dc5b9d94fa1283ab3faff43a, type: 2}
+  - {fileID: 11400000, guid: 5143e95c6b3f6544ba5413dc17825a97, type: 2}
+  - {fileID: 11400000, guid: 6e064bb6ac2dd6945921dad4be59f9bc, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 531fcb4c6849e9342ba4fcde7ee532f9, type: 3}
+  - {fileID: 5745295521531094116, guid: 5bd22114b0732364183ef6b2af013bd2, type: 3}
+  - {fileID: 5745295521531094116, guid: 7ec204f4ac7863f4f9277648efb754ad, type: 3}
+  - {fileID: 5745295521531094116, guid: 687cf41e4acf02d4fa1e8df3cc32c605, type: 3}
+  - {fileID: 5745295521531094116, guid: fc5ccdc38c4cc4d42b4a54c78656afc0, type: 3}
+  - {fileID: 5745295521531094116, guid: 3fdade60e708d894aa6fdad92d0e7790, type: 3}
+  - {fileID: 5745295521531094116, guid: f63cdedbb9a0c094aab3cd086e2f0e82, type: 3}
+  aniSecondsToWait: 0.2
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: fd4b8e7a0d2fafb428c211b1b1dd0b28, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 60
+  challengeStarReq: 0

@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Hard_House_2
+  m_EditorClassIdentifier: 
+  levelName: Study time
+  levelTheme: House
+  levelDifficulty: Hard
+  levelNum: 2
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Prepare to study!
+  requiredItems:
+  - {fileID: 11400000, guid: 10e25a892995e35498940dbc2d90667a, type: 2}
+  - {fileID: 11400000, guid: e273ac1e89ded284db6b9c7d4f8650cd, type: 2}
+  - {fileID: 11400000, guid: f2dbbbb7a4821bf4cb2767c34dbaf54c, type: 2}
+  - {fileID: 11400000, guid: f42ef18b9a7bda4499c559d799de3787, type: 2}
+  - {fileID: 11400000, guid: e9ffed7660b9a7b45b52872cee737786, type: 2}
+  - {fileID: 11400000, guid: 48a8e8815cf6afe4fbda5e2fcc889cd7, type: 2}
+  - {fileID: 11400000, guid: 6437398fff931524f9788d822a00575e, type: 2}
+  - {fileID: 11400000, guid: 1abe8b992d54e334393f328fa34f6ca1, type: 2}
+  - {fileID: 11400000, guid: e1e4e2f5572c881408851fcc320c6faa, type: 2}
+  - {fileID: 11400000, guid: ffea76bb692b9a846941e4f812d7968b, type: 2}
+  - {fileID: 11400000, guid: 856c84a52939e4a47a68bee9e4bac90c, type: 2}
+  - {fileID: 11400000, guid: b47d0c17b266b47468e6308c078edb8a, type: 2}
+  - {fileID: 11400000, guid: 82f0f2cf0b129ea48a1763618bcd1350, type: 2}
+  - {fileID: 11400000, guid: ba05dfa19862575489c12861cc9ba9f4, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: fabda106f73840d46bfbf296b5eac022, type: 2}
+  - {fileID: 11400000, guid: c9a9e9244ac589c4798809a0ab0e5ee5, type: 2}
+  - {fileID: 11400000, guid: 7cf6d910920d551429bb59c31aeb8db4, type: 2}
+  - {fileID: 11400000, guid: 85d4454d14747d0458f5cfe848fa15f2, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 6fba90529584f6c489adc8c4b5d1ce6c, type: 3}
+  - {fileID: 5745295521531094116, guid: bbb9aa733021e15439dd50ed849f609e, type: 3}
+  - {fileID: 5745295521531094116, guid: 8ec6dcec9c87c254e84f1a019c047781, type: 3}
+  - {fileID: 5745295521531094116, guid: b45812c4aac66a446a17412a1a66abb4, type: 3}
+  - {fileID: 5745295521531094116, guid: 250ce050401ee604085f286366e39004, type: 3}
+  - {fileID: 5745295521531094116, guid: 034be0a156a733241a53745365fb5fa4, type: 3}
+  - {fileID: 5745295521531094116, guid: dc25183f099413e499ef2f4afa87849b, type: 3}
+  - {fileID: 5745295521531094116, guid: 0eacd854fc9476548992e90e414eba80, type: 3}
+  - {fileID: 5745295521531094116, guid: 89b37c166c40c524a9e25fae694ea25a, type: 3}
+  - {fileID: 5745295521531094116, guid: 5850adaa8184d85488381b625f8e9a7e, type: 3}
+  aniSecondsToWait: 0.2
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: fd4b8e7a0d2fafb428c211b1b1dd0b28, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 60
+  challengeStarReq: 0
