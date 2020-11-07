@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Hard_House_5
+  m_EditorClassIdentifier: 
+  levelName: Home theatre
+  levelTheme: House
+  levelDifficulty: Hard
+  levelNum: 5
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Get ready for the movie!
+  requiredItems:
+  - {fileID: 11400000, guid: 1964e43a5690d6e49b8ba54cfd462648, type: 2}
+  - {fileID: 11400000, guid: b97b07dc7b506b64687d6456585b84f4, type: 2}
+  - {fileID: 11400000, guid: c4ea4e465bf3abb4cbc6eedfcc9489e8, type: 2}
+  - {fileID: 11400000, guid: cb00df2b10e31554c861011231b32e0a, type: 2}
+  - {fileID: 11400000, guid: cb26e170db91dc847b98d445b20ddde7, type: 2}
+  - {fileID: 11400000, guid: 3791dcdbfdf254340a221763e6af3741, type: 2}
+  - {fileID: 11400000, guid: 9c2d983cf9bb8774081eb08124aa2c49, type: 2}
+  - {fileID: 11400000, guid: 7988ecdf3437a3d47a5f61a63872cbcb, type: 2}
+  - {fileID: 11400000, guid: 6ac7a150c534a8349a2105a62749059a, type: 2}
+  - {fileID: 11400000, guid: e36d86824f659064e97e5662fa67b9a8, type: 2}
+  - {fileID: 11400000, guid: 28c70d709e2e23f45836901e05f800ec, type: 2}
+  - {fileID: 11400000, guid: 2540e3078b17c6943943b7534900597b, type: 2}
+  - {fileID: 11400000, guid: 5fd078f685537e4438d255fd66cb198b, type: 2}
+  - {fileID: 11400000, guid: 4b12ccd887ad113458b7e45e698f51d5, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: f5c31c47d80fa5949a6c636ebd86881d, type: 2}
+  - {fileID: 11400000, guid: 9e29d8d20bdfa3248a0b35c84e422c17, type: 2}
+  - {fileID: 11400000, guid: 618d5e3dc2cecb643bc745281967793c, type: 2}
+  - {fileID: 11400000, guid: 0930bfd3666163343ae2a9eb6d4d422f, type: 2}
+  - {fileID: 11400000, guid: 6e91d48b54ef1624a95c9505bf3e3226, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 5f405dacf10ef29409ccdfd490088f65, type: 3}
+  - {fileID: 5745295521531094116, guid: 926a17483a719ce4c81532d3efe3c475, type: 3}
+  - {fileID: 5745295521531094116, guid: cf143b19a8e512048adf1b5cda82d824, type: 3}
+  - {fileID: 5745295521531094116, guid: 18d2ac0d42629db4ea394fb38043523c, type: 3}
+  - {fileID: 5745295521531094116, guid: 3ddcc36f1c8974a458d035191e05f994, type: 3}
+  - {fileID: 5745295521531094116, guid: 75c2effe024e969458525d4ae9044d20, type: 3}
+  - {fileID: 5745295521531094116, guid: f3022429f10d3814ab2c467c168b8a8d, type: 3}
+  - {fileID: 5745295521531094116, guid: dd86bf3b04bd4e8418efc24af071e851, type: 3}
+  - {fileID: 5745295521531094116, guid: 8086750ae2ae6d24cad45096974b5d14, type: 3}
+  aniSecondsToWait: 0.2
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: fd4b8e7a0d2fafb428c211b1b1dd0b28, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 60
+  challengeStarReq: 0
