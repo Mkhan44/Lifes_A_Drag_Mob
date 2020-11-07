@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Hard_House_1
+  m_EditorClassIdentifier: 
+  levelName: Attic antics
+  levelTheme: House
+  levelDifficulty: Hard
+  levelNum: 1
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Find the antiques!
+  requiredItems:
+  - {fileID: 11400000, guid: c7678294974058840b60beecacf5ede4, type: 2}
+  - {fileID: 11400000, guid: bc2c1cc8b2294d64ea41b9f500b6ca1d, type: 2}
+  - {fileID: 11400000, guid: 8e1618c00e6f2f044b5d7b1f810e6498, type: 2}
+  - {fileID: 11400000, guid: 94aab5fe1a883e244be5bc5085dc6573, type: 2}
+  - {fileID: 11400000, guid: 94abdcc9a172d24409d84e652c163203, type: 2}
+  - {fileID: 11400000, guid: 5e9de8b9c0e9dc74d88b84b18eddc840, type: 2}
+  - {fileID: 11400000, guid: 54c8d6830a551b34d8d06b564cc6c944, type: 2}
+  - {fileID: 11400000, guid: 4748b7fcfec99fe4c8d1e5658ac6f259, type: 2}
+  - {fileID: 11400000, guid: 77cdcf6e9aa72e547a21baa2d041402e, type: 2}
+  - {fileID: 11400000, guid: bda50c19e2167414cbf554eb6bd02618, type: 2}
+  - {fileID: 11400000, guid: 71ea640606245d941b36c794d640fdae, type: 2}
+  - {fileID: 11400000, guid: d3e4b9055d1d84343822afe98a8e999c, type: 2}
+  - {fileID: 11400000, guid: 35232d30182c95f4898bebb9469014ee, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: 1ef621c4923c6b84b8f0e9198fdd4062, type: 2}
+  - {fileID: 11400000, guid: 2105acf587a061c4b9721a0c70987666, type: 2}
+  - {fileID: 11400000, guid: 7a787bbf44b775b47a5dbf31820e1559, type: 2}
+  - {fileID: 11400000, guid: a80f797a088df0f4a85f1b12d8b27bdd, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: 6f3401d6c4d62e640b7c3e1d0fb8aa18, type: 3}
+  - {fileID: 5745295521531094116, guid: 7a1ab3d5d04303a4fb527acfe017a37e, type: 3}
+  - {fileID: 5745295521531094116, guid: 043398a737e559244ae3c69e3d9f5c52, type: 3}
+  - {fileID: 5745295521531094116, guid: 683f6cd3280f3944cb5c6dc069066cdf, type: 3}
+  - {fileID: 5745295521531094116, guid: d97c426895b18574aa99d419baaaec38, type: 3}
+  - {fileID: 5745295521531094116, guid: 3d6c87d91660c464a8b6c9556050c7a7, type: 3}
+  - {fileID: 5745295521531094116, guid: e00c0d043aa6b844dbd8b9f47280a981, type: 3}
+  - {fileID: 5745295521531094116, guid: 866dc324104c834408742b6dfe26df0f, type: 3}
+  - {fileID: 5745295521531094116, guid: 0d285d9a9190cad44b6f8124d9821df0, type: 3}
+  aniSecondsToWait: 0.2
+  starRequirement: 0
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: fd4b8e7a0d2fafb428c211b1b1dd0b28, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 60
+  challengeStarReq: 0

@@ -73,11 +73,12 @@ public class Level_Select_Manager : MonoBehaviour
 
         Input.multiTouchEnabled = false;
 
+        /*
         if(totalStarsVal == 27 && demoMsgVal == 0)
         {
             demoPanel.SetActive(true);
         }
-
+        */
     }
     public void setDiff(string diff)
     {
