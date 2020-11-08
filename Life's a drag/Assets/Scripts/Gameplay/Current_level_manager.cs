@@ -90,6 +90,7 @@ public class Current_level_manager : MonoBehaviour
     public GameObject shrinkButton;
     public GameObject expandButton;
     public GameObject itemRequiredArea;
+    public GameObject bottomAreaZoomed;
     public bool isZoomed;
 
      [Header("PlayerPrefs related")]
@@ -257,6 +258,9 @@ public class Current_level_manager : MonoBehaviour
             initializeTutorial();
             challengeUIHolder.SetActive(false);
         }
+
+
+        setZoomScale();
 
        // Time.timeScale = 100;
 
@@ -672,6 +676,39 @@ public class Current_level_manager : MonoBehaviour
         //Zoom in is not active.
          */
         isZoomed = false;
+    }
+
+    //Set the scale for the UI scrolling.
+    void setZoomScale()
+    {
+        //Scaling the zoomed box.
+        float screenWidth = (float)Screen.currentResolution.width;
+        float scaleX = 0;
+        float scaleY = 0;
+        if (bottomAreaZoomed != null)
+        {
+            if (screenWidth == 1440f)
+            {
+                scaleX = 2.3f;
+                scaleY = 2.3f;
+            }
+            else if (screenWidth == 720f)
+            {
+                scaleX = 1.35f;
+                scaleY = 1.35f;
+            }
+            else
+            {
+                scaleX = 2.0f;
+                scaleY = 2.0f;
+            }
+
+            Vector3 scaleChange = new Vector3(scaleX, scaleY, 1f);
+            bottomAreaZoomed.transform.localScale = (scaleChange);
+
+        }
+
+        Debug.Log("Yay, set the screen size!");
     }
 
   

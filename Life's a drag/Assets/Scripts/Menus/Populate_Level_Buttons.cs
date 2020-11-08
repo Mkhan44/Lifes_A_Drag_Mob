@@ -13,6 +13,7 @@ public class Populate_Level_Buttons : MonoBehaviour
     public int numThemeStars;
     public TextMeshProUGUI errorMessageText;
     public TextMeshProUGUI titleText;
+    public TextMeshProUGUI themeStarText;
 
     public bool allChallengeComp;
     string diff;
@@ -42,6 +43,8 @@ public class Populate_Level_Buttons : MonoBehaviour
         themeStarsKey = theme + "_Stars_Obtained";
 
         numThemeStars = PlayerPrefs.GetInt(themeStarsKey);
+
+        themeStarText.text = "Total theme stars obtained: " + numThemeStars + "/45";
 
     }
 
@@ -105,6 +108,9 @@ public class Populate_Level_Buttons : MonoBehaviour
                             {
                                 //numButtons[i].GetComponent<Button>().interactable = false;
                                 lockImg.SetActive(true);
+                                starRight.SetActive(false);
+                                starMid.SetActive(false);
+                                starLeft.SetActive(false);
                                 numButtons[i].GetComponent<Button_Level_Info>().calculateStarsLeft(starReq - numThemeStars);
                             }
                             else
@@ -230,6 +236,8 @@ public class Populate_Level_Buttons : MonoBehaviour
                     break;
                 }
             }
+
+            
         }
         //THIS CHECK ONLY NEEDS TO HAPPEN ON MEDIUM OR HIGHER DIFFICULTIES.
 
@@ -268,6 +276,8 @@ public class Populate_Level_Buttons : MonoBehaviour
     {
         int neededStars = ChallengeNumThemeStarsReq - themeStarsTotal;
 
+       // Debug.Log("You have: " + themeStarsTotal + " stars in this theme");
+
         if (animateRoutine != null)
         {
             StopCoroutine(animateRoutine);
@@ -279,7 +289,7 @@ public class Populate_Level_Buttons : MonoBehaviour
             if (!allChallengeComp)
             {
                 errorMessageText.enabled = true;
-                errorMessageText.text = "You need to complete all " + diff + " " + theme + " challenge levels to play this stage! ";
+                errorMessageText.text = "You need to complete all " + diff + " " + theme + " challenge levels to play this stage. ";
                 errorMessageText.color = new Color32(255, 255, 255, 255);
                 animateRoutine = StartCoroutine(animateText());
                 //Play animation to fade out errorMessageText ...

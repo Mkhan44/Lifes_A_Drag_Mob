@@ -63,6 +63,8 @@ public class Button_Level_Info : MonoBehaviour
 
     public void initializeButton()
     {
+        themeStarsTotalKey = "_Stars_Obtained";
+
         if (stageInfo.starRequirement > 0)
         {
             starsRequired = stageInfo.starRequirement;
@@ -79,6 +81,7 @@ public class Button_Level_Info : MonoBehaviour
         }
 
         themeStarsTotalKey = stageInfo.levelTheme + themeStarsTotalKey;
+        //Debug.Log("The key is: " + themeStarsTotalKey);
         numChallengeStarsReq = stageInfo.challengeStarReq;
         themeStarsTotal = PlayerPrefs.GetInt(themeStarsTotalKey);
     }
@@ -168,6 +171,8 @@ public class Button_Level_Info : MonoBehaviour
 
     public void challengeLockedMessage()
     {
+        themeStarsTotal = PlayerPrefs.GetInt(themeStarsTotalKey);
+
         //Call the function.
         themePop.GetComponent<Populate_Level_Buttons>().displayChallengeErrorText(numChallengeStarsReq, whatTheme, themeStarsTotal);
     }

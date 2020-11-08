@@ -42,7 +42,7 @@ public class GridLayoutModifier : MonoBehaviour
     //Adjusts the constraint based on the screen resolution.
     void adjustScroll()
     {
-       screenWidth = (float)Screen.currentResolution.width;
+        setWidth();
 
        // screenWidth = 1440f;
         Debug.Log("The screen width is: " + screenWidth);
@@ -103,4 +103,11 @@ public class GridLayoutModifier : MonoBehaviour
         scrollArea.constraintCount = numColumns;
 
     }
+
+
+    public void setWidth()
+    {
+        screenWidth = (float)Screen.currentResolution.width;
+    }
+
 }
