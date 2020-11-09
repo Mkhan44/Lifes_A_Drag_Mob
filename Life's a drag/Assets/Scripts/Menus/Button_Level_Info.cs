@@ -194,6 +194,7 @@ public class Button_Level_Info : MonoBehaviour
     //Tells the level select which difficulty to use.
     public void assignLev(string difficulty)
     {
+       
         switch(difficulty)
         {
             case "Easy":
@@ -224,6 +225,10 @@ public class Button_Level_Info : MonoBehaviour
             Debug.LogWarning("Stage info is Null! Something was not assigned.");
             stageInfo = easyLevel;
         }
+
+        starsRequired = stageInfo.starRequirement;
+        starsNeeded = starsRequired;
+        Debug.Log("Assigned difficulty is: " + stageInfo.levelDifficulty);
 
   
     }
