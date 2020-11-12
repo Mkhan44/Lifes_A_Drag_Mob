@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
+  m_Name: Hard_Store_1
+  m_EditorClassIdentifier: 
+  levelName: Tool tampering
+  levelTheme: Store
+  levelDifficulty: Hard
+  levelNum: 1
+  bestTime: 0
+  timeForThreeStars: 50
+  timeForTwoStars: 70
+  objective: Gather tools for home improvement!
+  requiredItems:
+  - {fileID: 11400000, guid: ce904bd92973c9e42b1c0caae94a9dbd, type: 2}
+  - {fileID: 11400000, guid: 5e12ca2b152f2fe4b97c031283dd54de, type: 2}
+  - {fileID: 11400000, guid: 414c0b0df82bdaa4bb8d3425cc0e76fe, type: 2}
+  - {fileID: 11400000, guid: 19f5627a13518c842af64b49231f573d, type: 2}
+  - {fileID: 11400000, guid: 5fee6ee47fceb0344bffc5190c19e8b2, type: 2}
+  - {fileID: 11400000, guid: 434451dd1e14d0647a13d8eb5538846a, type: 2}
+  - {fileID: 11400000, guid: 0b6ef13c47df3e84dbc4aa801bb6192f, type: 2}
+  - {fileID: 11400000, guid: c03de4908205c224c9997d5fb5aeac7c, type: 2}
+  - {fileID: 11400000, guid: 70be83dee0eaa114387346b8fbed8262, type: 2}
+  - {fileID: 11400000, guid: 63534afbede959f4f90a6f257dabf6c4, type: 2}
+  - {fileID: 11400000, guid: 77a240b7fa05a9448ae553e0bb819adb, type: 2}
+  - {fileID: 11400000, guid: 107c4afea9b6d5d4499d3a75d58e2038, type: 2}
+  comboItemsNeeded:
+  - {fileID: 11400000, guid: 801bd41adc62da8418e6c54437ba68e0, type: 2}
+  - {fileID: 11400000, guid: c536caf0a44fcbc43be6f23daf4902c3, type: 2}
+  - {fileID: 11400000, guid: d5d1d1d0ed1067648928939e6236dc3c, type: 2}
+  - {fileID: 11400000, guid: 7901e2b52a16a104ebbd62c3912b688b, type: 2}
+  icons:
+  - {fileID: 5745295521531094116, guid: c88b0c3197c2f664c945016b148f783a, type: 3}
+  - {fileID: 5745295521531094116, guid: bd0e6f623a33a9b4f98b94fbe9c889bd, type: 3}
+  - {fileID: 5745295521531094116, guid: 7f02825d11fb23c4797e45dc55089379, type: 3}
+  - {fileID: 5745295521531094116, guid: bd7d613778281344798237792369d2fc, type: 3}
+  - {fileID: 5745295521531094116, guid: b429fddb27167bd43add2258f11deae9, type: 3}
+  - {fileID: 5745295521531094116, guid: 8aaf6fde387d7e94888ff30d0943ce6d, type: 3}
+  - {fileID: 5745295521531094116, guid: 251c12b9678771d4fac61ed049015eb2, type: 3}
+  - {fileID: 5745295521531094116, guid: c1771287f51baab4d9bb070b0560c7d1, type: 3}
+  aniSecondsToWait: 0.2
+  starRequirement: 20
+  levelMusic: {fileID: 8300000, guid: 4491769faa4482841a27134f41771c47, type: 3}
+  musicVolume: 0.3
+  levelAniSound: {fileID: 8300000, guid: fd4b8e7a0d2fafb428c211b1b1dd0b28, type: 3}
+  sfxVolume: 0.5
+  dontStopSFXEarly: 1
+  challengeTimeLimit: 60
+  challengeStarReq: 0
