@@ -227,7 +227,7 @@ public class Button_Level_Info : MonoBehaviour
         }
 
         starsRequired = stageInfo.starRequirement;
-        starsNeeded = starsRequired;
+      //  starsNeeded = starsRequired;
         Debug.Log("Assigned difficulty is: " + stageInfo.levelDifficulty);
 
   
