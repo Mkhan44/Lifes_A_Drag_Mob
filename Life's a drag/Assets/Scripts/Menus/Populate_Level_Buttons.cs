@@ -90,17 +90,22 @@ public class Populate_Level_Buttons : MonoBehaviour
             starsKey = fullLevName + "_Best_Stars";
 
             starsObtained = PlayerPrefs.GetInt(starsKey);
-
+           // Debug.Log("We called the displayLevels function");
 
             
             //Debug.Log("The starsKey is: " + starsKey);
             //Debug.Log("The stars obtained for stage " + (i + 1) + " are: " + starsObtained);
             starReq = numButtons[i].GetComponent<Button_Level_Info>().stageInfo.starRequirement;
+
+            Debug.Log("Star req for level " + (i+1) + " Is: " + starReq);
             //Swap the image.
             switch(starsObtained)
             {
+                    //0 meaning if you have obtained 0 stars on that level so far.
                 case 0:
                     {
+
+                      
                         //Testing if the level needs to be locked.
                         if(starReq > 0)
                         {
@@ -113,14 +118,32 @@ public class Populate_Level_Buttons : MonoBehaviour
                                 starLeft.SetActive(false);
                                 numButtons[i].GetComponent<Button_Level_Info>().calculateStarsLeft(starReq - numThemeStars);
                             }
+                                //This is for if it's medium/hard. The star requirement is more than 0, but if you have enough theme stars and HAVEN'T played the level yet. That is what this code is for displaying.
                             else
                             {
                                 //numButtons[i].GetComponent<Button>().interactable = true;
+                                starRight.SetActive(true);
+                                starMid.SetActive(true);
+                                starLeft.SetActive(true);
+
+                                starLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarLeftBlack");
+                                starRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarRightBlack");
+                                starMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarMidBlack");
+                                Debug.Log("THIS IS A TEST FOR MEDIUM OFFICE 1!");
+                                //numButtons[i].GetComponent<Button>().interactable = true;
+
                                 lockImg.SetActive(false);
+                               
                             }
                         }
                         else
                         {
+                            //Stars left are none because we have enough.
+                            numButtons[i].GetComponent<Button_Level_Info>().calculateStarsLeft(0);
+
+                            starRight.SetActive(true);
+                            starMid.SetActive(true);
+                            starLeft.SetActive(true);
                             //numButtons[i].GetComponent<Button>().interactable = true;
                             lockImg.SetActive(false);
                         }
@@ -129,12 +152,16 @@ public class Populate_Level_Buttons : MonoBehaviour
                 case 1:
                     {
                         starLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarLeft");
+                        lockImg.SetActive(false);
+                        numButtons[i].GetComponent<Button_Level_Info>().calculateStarsLeft(0);
                         break;
                     }
                 case 2:
                     {
                         starLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarLeft");
                         starRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarRight");
+                        lockImg.SetActive(false);
+                        numButtons[i].GetComponent<Button_Level_Info>().calculateStarsLeft(0);
                         break;
                     }
                 case 3:
@@ -142,6 +169,8 @@ public class Populate_Level_Buttons : MonoBehaviour
                         starLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarLeft");
                         starRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarRight");
                         starMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarMid");
+                        lockImg.SetActive(false);
+                        numButtons[i].GetComponent<Button_Level_Info>().calculateStarsLeft(0);
                         break;
                     }
             }
