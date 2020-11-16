@@ -14,6 +14,7 @@ public class Level_Select_Manager : MonoBehaviour
     public Button noAdsButton;
     public GameObject titleScreen;
     public GameObject mainMenuScreen;
+    
 
     public static bool firstTimeInMenu;
 
@@ -120,6 +121,8 @@ public class Level_Select_Manager : MonoBehaviour
     public void loadTut()
     {
         Time.timeScale = 1f;
+        levelTypeSelectorInstance.GetComponent<LevelTypeSelector>().setLevelType("Tutorial");
+
         GetComponent<Load_Level>().LoadLevel("Tutorial");
     }
 

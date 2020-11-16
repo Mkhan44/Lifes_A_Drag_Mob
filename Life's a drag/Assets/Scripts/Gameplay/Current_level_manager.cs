@@ -241,6 +241,7 @@ public class Current_level_manager : MonoBehaviour
         }
 
         //Debug.Log("Theme volume is: " + themeVolume);
+     
 
         if (currentState == stageType.normalStage)
         {
@@ -259,8 +260,8 @@ public class Current_level_manager : MonoBehaviour
             challengeUIHolder.SetActive(false);
         }
 
-
         setZoomScale();
+       
 
        // Time.timeScale = 100;
 
@@ -707,6 +708,8 @@ public class Current_level_manager : MonoBehaviour
             bottomAreaZoomed.transform.localScale = (scaleChange);
 
         }
+
+        
 
         Debug.Log("Yay, set the screen size!");
     }
