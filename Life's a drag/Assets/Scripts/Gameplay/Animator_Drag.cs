@@ -114,6 +114,9 @@ public class Animator_Drag : MonoBehaviour
        
 
         levelManager.GetComponent<Current_level_manager>().turnOn();
+
+        //Get rid of collider so that way item won't get stuck.
+        Destroy(gameObject.GetComponent<BoxCollider2D>());
     }
 
 }

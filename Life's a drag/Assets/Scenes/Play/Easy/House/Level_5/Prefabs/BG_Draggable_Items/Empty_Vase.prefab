@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: f892fb89b37dff6418130644d2781745, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,6 +120,9 @@ MonoBehaviour:
   initialPos: {x: 0, y: 0, z: 0}
   initialScale: {x: 0, y: 0, z: 0}
   shrinkScale: {x: 0, y: 0, z: 0}
+  shouldWeLerp: 0
+  inBox: 0
+  mouseOnMe: 0
 --- !u!61 &1242303585808903770
 BoxCollider2D:
   m_ObjectHideFlags: 0
