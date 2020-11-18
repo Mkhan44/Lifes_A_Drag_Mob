@@ -16,6 +16,7 @@ public class Draggable_Item : MonoBehaviour
     GameObject levelMan;
     GameObject hintArrow;
 
+    int sortingLayer;
     enum typeOfObject
     {
         requiredItem,
@@ -36,7 +37,7 @@ public class Draggable_Item : MonoBehaviour
     {
         //May want to change this later considering this is hardcoded essentially.
         levelMan = GameObject.Find("LevelManager");
-        
+        sortingLayer = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
         /*
         Vector3 tempVec = new Vector3(0f,0f,0f);
 
@@ -92,7 +93,7 @@ public class Draggable_Item : MonoBehaviour
         if(hintArrow != null)
         {
             hintArrow.SetActive(false);
-            Debug.Log("Set the arrow to false!");
+           // Debug.Log("Set the arrow to false!");
         }
         //if(!levelMan.GetComponent<Current_level_manager>().isPaused)
         
@@ -112,6 +113,9 @@ public class Draggable_Item : MonoBehaviour
            
             screenPoint = Camera.main.WorldToScreenPoint(transform.position);
             offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+
+            //Change sorting order to be in front of everything.
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 99;
 
             //Literally using the same code atm, may have to switch this up.
             switch (thisItemIs)
@@ -248,6 +252,8 @@ public class Draggable_Item : MonoBehaviour
 
             }
         }
+
+        gameObject.GetComponent<SpriteRenderer>().sortingOrder = sortingLayer;
        
     }
 
