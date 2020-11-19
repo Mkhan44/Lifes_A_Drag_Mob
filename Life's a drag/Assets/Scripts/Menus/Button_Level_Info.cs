@@ -74,6 +74,8 @@ public class Button_Level_Info : MonoBehaviour
         setDiff();
      //   string findStr = whatDiff + "_" + whatTheme + "_Levels";
         string findStr = whatTheme + "_Levels";
+
+        Debug.Log(findStr);
         themePop = GameObject.Find(findStr);
         if (themePop == null)
         {

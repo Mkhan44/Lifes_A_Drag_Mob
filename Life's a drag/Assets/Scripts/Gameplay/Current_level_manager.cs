@@ -2186,7 +2186,6 @@ public class Current_level_manager : MonoBehaviour
         }
         float finishTime;
 
-        //might want to floor this..? Not sure yet.
         finishTime = timeLeft;
 
         //Just using this to make it so background objects can't be moved.
@@ -2205,7 +2204,18 @@ public class Current_level_manager : MonoBehaviour
 
         challengeCompleteHolder.SetActive(true);
         challengeCompleteHolder.GetComponent<PanelAnimator>().StartAnimIn();
-        GameObject BGChild = levelCompleteHolder.transform.GetChild(0).gameObject;
+        GameObject BGChild = challengeCompleteHolder.transform.GetChild(0).gameObject;
+        
+
+        //Get the next level button so we can test if the next scene exists.
+        GameObject nextLevButton = BGChild.transform.GetChild(2).gameObject;
+
+        if(nextLev == null)
+        {
+            Debug.Log("This IS THE LAST LEVEL!");
+            nextLevButton.SetActive(false);
+        }
+
 
         currentTime = TimeSpan.FromSeconds((timeLeft+1));
         string timeLeftStr = "Time Left: " + currentTime.ToString("mm':'ss");

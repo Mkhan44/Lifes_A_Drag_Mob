@@ -187,6 +187,7 @@ public class Populate_Level_Buttons : MonoBehaviour
         GameObject lockImg;
 
         string diffTheme;
+        string theme;
         string fullLevName;
         string completeKey;
         int completeCheck;
@@ -195,6 +196,17 @@ public class Populate_Level_Buttons : MonoBehaviour
         //This string is now in the format of "difficulty_theme_"
         diffTheme = levelSelectManager.getDiffAndTheme();
 
+        //Returns "theme" no underscores.
+        theme = levelSelectManager.getTheme();
+
+        if(diff == "Medium")
+        {
+            diffTheme = "Easy_" + theme + "_";
+        }
+        else if(diff == "Hard")
+        {
+            diffTheme = "Medium_" + theme + "_";
+        }
         //Make a temp list to check whether or not each challenge level is completed.
          List<bool> completeListCheck = new List<bool>();
 
@@ -317,8 +329,18 @@ public class Populate_Level_Buttons : MonoBehaviour
             //Play a different message based on what the player has not completed.
             if (!allChallengeComp)
             {
+                string tempDiff;
+                if(diff == "Medium")
+                {
+                    tempDiff = "Easy";
+                }
+                else
+                {
+                    tempDiff = "Medium";
+                }
+
                 errorMessageText.enabled = true;
-                errorMessageText.text = "You need to complete all " + diff + " " + theme + " challenge levels to play this stage. ";
+                errorMessageText.text = "You need to complete all " + tempDiff + " " + theme + " challenge levels to play this stage. ";
                 errorMessageText.color = new Color32(255, 255, 255, 255);
                 animateRoutine = StartCoroutine(animateText());
                 //Play animation to fade out errorMessageText ...
