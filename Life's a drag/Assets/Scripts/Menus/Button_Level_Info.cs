@@ -185,11 +185,11 @@ public class Button_Level_Info : MonoBehaviour
         clearCheck = theCheck;
         if(clearCheck == 0)
         {
-            Debug.Log("We didn't clear " + stageInfo.levelName + ".");
+           // Debug.Log("We didn't clear " + stageInfo.levelName + ".");
         }
         else
         {
-            Debug.Log("We cleared " + stageInfo.levelName + " !");
+            // Debug.Log("We cleared " + stageInfo.levelName + " !");
         }
     }
 

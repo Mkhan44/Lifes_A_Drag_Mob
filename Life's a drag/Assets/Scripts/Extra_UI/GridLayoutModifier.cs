@@ -103,14 +103,20 @@ public class GridLayoutModifier : MonoBehaviour
         scrollArea.constraintCount = numColumns;
         
         //Decrease the area apart of each item so they don't get cut off.
-        if(numColumns >= 5)
+        //ONLY DO THIS IN LEVELS, NOT IN THE MENU BECAUSE IT WILL BE TOO SCRUNCHED UP!
+
+        if(theScene == sceneType.level)
         {
-            Vector2 tempSpacing = scrollArea.spacing;
+            if (numColumns >= 5)
+            {
+                Vector2 tempSpacing = scrollArea.spacing;
 
-            float xSpace = 15f;
+                float xSpace = 15f;
 
-            scrollArea.spacing = new Vector2(xSpace, tempSpacing.y);
+                scrollArea.spacing = new Vector2(xSpace, tempSpacing.y);
+            }
         }
+       
 
     }
 

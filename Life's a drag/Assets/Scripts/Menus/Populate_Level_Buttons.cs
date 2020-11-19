@@ -202,10 +202,12 @@ public class Populate_Level_Buttons : MonoBehaviour
         if(diff == "Medium")
         {
             diffTheme = "Easy_" + theme + "_";
+            Debug.Log("Difficulty is set to Medium, so we're using " + diffTheme);
         }
         else if(diff == "Hard")
         {
             diffTheme = "Medium_" + theme + "_";
+            Debug.Log("Difficulty is set to Hard, so we're using " + diffTheme);
         }
         //Make a temp list to check whether or not each challenge level is completed.
          List<bool> completeListCheck = new List<bool>();
@@ -231,7 +233,7 @@ public class Populate_Level_Buttons : MonoBehaviour
             //Get the name of the level, we'll use this + star key to get the amt of stars.
             fullLevName = diffTheme + (i + 1).ToString();
 
-            // Debug.Log("The level name is: " + fullLevName);
+           // Debug.Log("The level name is: " + fullLevName);
             completeKey = fullLevName + "_Completed";
 
             completeCheck = PlayerPrefs.GetInt(completeKey);
@@ -239,15 +241,19 @@ public class Populate_Level_Buttons : MonoBehaviour
             //THIS CHECK ONLY NEEDS TO HAPPEN ON MEDIUM OR HIGHER DIFFICULTIES.
             if(diff != "Easy")
             {
+                bool tempBool;
                 if (completeCheck == 0)
                 {
-                    bool tempBool = false;
-                    completeListCheck.Add(tempBool);
+                    tempBool = false;
+                   
                 }
                 else
                 {
                     //It's cleared!
+                    tempBool = true;
                 }
+
+                completeListCheck.Add(tempBool);
                
             }
             //THIS CHECK ONLY NEEDS TO HAPPEN ON MEDIUM OR HIGHER DIFFICULTIES.
@@ -262,17 +268,21 @@ public class Populate_Level_Buttons : MonoBehaviour
         //THIS CHECK ONLY NEEDS TO HAPPEN ON MEDIUM OR HIGHER DIFFICULTIES.
         if (diff != "Easy")
         {
+            Debug.Log(completeListCheck.Count);
             for (int j = 0; j < completeListCheck.Count; j++)
             {
                 if (!completeListCheck[j])
                 {
+                 //   Debug.Log("The " + j + " position in the list is not filled, breaking loop.");
                     allChallengeComp = false;
                     break;
                 }
+              //  Debug.Log("The " + j + " position in the list is filled, continuing loop.");
 
                 //If it gets this far: We know all levels have been cleared.
-                if (j == completeListCheck.Count)
+                if (j == (completeListCheck.Count -1))
                 {
+                    Debug.Log("You cleared all previous difficulty challenge levels! Hopefully you have enough stars to play these.");
                     allChallengeComp = true;
                     break;
                 }
