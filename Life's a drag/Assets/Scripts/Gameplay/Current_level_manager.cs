@@ -1880,7 +1880,7 @@ public class Current_level_manager : MonoBehaviour
         gameOverActive = false;
         control = true;
 
-        objectiveTextMesh.text = "Objective: " + theLev.objective;
+        objectiveTextMesh.text = "Complete the level within the time limit!";
 
         //No hints in challenge mode.
         numHintsRemaining = 0;
