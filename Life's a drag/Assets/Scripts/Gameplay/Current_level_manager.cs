@@ -996,8 +996,30 @@ public class Current_level_manager : MonoBehaviour
 
                 //tempColor.a = 1.0f;
                 
+
+                //If it's low in the list, scroll down. High in the list, scroll up.
+                string iconInstanceTempName;
+                iconInstanceTempName = theName + "_Icon";
+                for (int k = 0; k < theLev.icons.Count; k++ )
+                {
+                    if(iconInstanceTempName == theLev.icons[k].gameObject.name)
+                    {
+                        //1 less than what we want since it starts at 0.
+                        if(k < 5)
+                        {
+                            ScrollToTop();
+                            break;
+                        }
+                        else
+                        {
+                            ScrollToBottom();
+                            break;
+                        }
+                    }
+                }
+
                 //Green
-                tempColor = new Color32(91, 231, 84, 255);
+                tempColor = new Color32(215, 255, 203, 255);
                 tempImg.color = tempColor;
                 Instantiate(itemGotParticlePrefab, iconInstance.transform);
 
@@ -1010,7 +1032,7 @@ public class Current_level_manager : MonoBehaviour
                 //tempColor.a = 1.0f;
 
                 //Green
-                tempColor = new Color32(91, 231, 84, 255);
+                tempColor = new Color32(215, 255, 203, 255);
                 tempImg.color = tempColor;
               //  Instantiate(itemGotParticlePrefab, iconInstance.transform);
 
@@ -1680,8 +1702,12 @@ public class Current_level_manager : MonoBehaviour
     }
     public void ScrollToBottom()
     {
-        botScrollArea.normalizedPosition = new Vector2(0, 0);
-        ZoomedScrollArea.normalizedPosition = new Vector2(0, 0);
+        //actual scroll to bottom code.
+        //botScrollArea.normalizedPosition = new Vector2(0, 0);
+        //ZoomedScrollArea.normalizedPosition = new Vector2(0, 0);
+
+        botScrollArea.normalizedPosition = new Vector2(0, 0.3f);
+        ZoomedScrollArea.normalizedPosition = new Vector2(0, 0.3f);
     }
 
 
