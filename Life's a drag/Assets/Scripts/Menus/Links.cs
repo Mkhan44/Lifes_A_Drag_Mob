@@ -46,4 +46,9 @@ public class Links : MonoBehaviour
 
         }
     }
+
+    public void loadLicenses()
+    {
+        Application.OpenURL("Something");
+    }
 }
