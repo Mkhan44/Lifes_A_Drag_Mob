@@ -48,6 +48,9 @@ public class Current_level_manager : MonoBehaviour
     public TextMeshProUGUI bestTimeTextMesh;
     public TextMeshProUGUI timeForStarsTextMesh;
     public TextMeshProUGUI numItemsLeftTextMesh;
+    public TextMeshProUGUI levelNumTextMesh;
+    public TextMeshProUGUI levelNameTextMesh;
+
 
     //Top UI stars
     public GameObject star1;
@@ -260,6 +263,9 @@ public class Current_level_manager : MonoBehaviour
             challengeUIHolder.SetActive(false);
         }
 
+
+        levelNumTextMesh.text = "Level: " + theLev.levelNum;
+        levelNameTextMesh.text = theLev.levelName;
         setZoomScale();
        
 
