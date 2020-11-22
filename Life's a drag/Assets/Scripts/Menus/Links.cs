@@ -33,9 +33,9 @@ public class Links : MonoBehaviour
                     Application.OpenURL("https://www.instagram.com/bukugames/");
                     break;
                 }
-            case "YoutTube":
+            case "YouTube":
                 {
-                    Application.OpenURL("https://www.facebook.com/Bukugames");
+                    Application.OpenURL("https://www.youtube.com/channel/UCVMp9BDVF6Bh7R8jG2R9Wqg?");
                     break;
                 }
             default:

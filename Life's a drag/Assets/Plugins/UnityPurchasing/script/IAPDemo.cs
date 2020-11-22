@@ -10,7 +10,7 @@
 //#define USE_PAYOUTS // Enables use of PayoutDefinitions to specify what the player should receive when a product is purchased
 //#define INTERCEPT_PROMOTIONAL_PURCHASES // Enables intercepting promotional purchases that come directly from the Apple App Store
 //#define SUBSCRIPTION_MANAGER //Enables subscription product manager for AppleStore and GooglePlay store
-//#define AGGRESSIVE_INTERRUPT_RECOVERY_GOOGLEPLAY // Enables also using AIDL getPurchaseHistory to recover from purchase interruptions, assuming developer is deduplicating to protect against "duplicate on cancel" flow
+//#define AGGRESSIVE_INTERRUPT_RECOVERY_GOOGLEPLAY // Enables also using getPurchaseHistory to recover from purchase interruptions, assuming developer is deduplicating to protect against "duplicate on cancel" flow
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -74,7 +74,6 @@ public class IAPDemo : MonoBehaviour, IStoreListener
         //Dictionary<string, string> google_play_store_product_SKUDetails_json = m_GooglePlayStoreExtensions.GetProductJSONDictionary();
         // Sample code for manually finish a transaction (consume a product on GooglePlay store)
         //m_GooglePlayStoreExtensions.FinishAdditionalTransaction(productId, transactionId);
-        m_GooglePlayStoreExtensions.SetLogLevel(0); // 0 == debug, info, warning, error. 1 == warning, error only.
 
         InitUI(controller.products.all);
 

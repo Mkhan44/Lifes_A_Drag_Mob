@@ -16,6 +16,7 @@ public class Populate_Level_Buttons : MonoBehaviour
     public TextMeshProUGUI themeStarText;
 
     public bool allChallengeComp;
+    bool enoughCStars;
     string diff;
 
     Coroutine animateRoutine;
@@ -57,6 +58,7 @@ public class Populate_Level_Buttons : MonoBehaviour
         GameObject starMid;
         GameObject starRight;
         GameObject lockImg;
+        GameObject clearImg;
        
         string diffTheme;
         string fullLevName;
@@ -82,7 +84,12 @@ public class Populate_Level_Buttons : MonoBehaviour
             starLeft = numButtons[i].transform.GetChild(2).gameObject;
             starLeft.SetActive(true);
             lockImg = numButtons[i].transform.GetChild(4).gameObject;
+            clearImg = numButtons[i].transform.GetChild(5).gameObject;
 
+
+            //Not challenge mode, so don't have "Clear image" loaded in.
+
+            clearImg.SetActive(false);
             //Get the name of the level, we'll use this + star key to get the amt of stars.
             fullLevName = diffTheme + (i + 1).ToString();
 
@@ -185,6 +192,7 @@ public class Populate_Level_Buttons : MonoBehaviour
         GameObject starMid;
         GameObject starRight;
         GameObject lockImg;
+        GameObject clearImg;
 
         string diffTheme;
         string theme;
@@ -192,9 +200,16 @@ public class Populate_Level_Buttons : MonoBehaviour
         string completeKey;
         int completeCheck;
 
+        string medHardCompKey;
+        string fullLevMedHard;
+        string diffThemeMedHard;
+        int compCheckMedHard;
+
+        int checkNum = 0;
 
         //This string is now in the format of "difficulty_theme_"
         diffTheme = levelSelectManager.getDiffAndTheme();
+        diffThemeMedHard = diffTheme;
 
         //Returns "theme" no underscores.
         theme = levelSelectManager.getTheme();
@@ -227,44 +242,100 @@ public class Populate_Level_Buttons : MonoBehaviour
             starLeft = numButtons[i].transform.GetChild(2).gameObject;
             starLeft.SetActive(false);
             lockImg = numButtons[i].transform.GetChild(4).gameObject;
+            clearImg = numButtons[i].transform.GetChild(5).gameObject;
 
-            //Probably gonna be GetChild(5) for the 'Clear' image.
+            clearImg.SetActive(true);
+       
 
             //Get the name of the level, we'll use this + star key to get the amt of stars.
             fullLevName = diffTheme + (i + 1).ToString();
+            fullLevMedHard = diffThemeMedHard + (i + 1).ToString();
 
            // Debug.Log("The level name is: " + fullLevName);
-            completeKey = fullLevName + "_Completed";
 
+            //Complete key for previous levels if this is medium/hard.
+            completeKey = fullLevName + "_Completed";
             completeCheck = PlayerPrefs.GetInt(completeKey);
 
+            medHardCompKey = fullLevMedHard + "_Completed";
+            compCheckMedHard = PlayerPrefs.GetInt(medHardCompKey);
+
+           
+
             //THIS CHECK ONLY NEEDS TO HAPPEN ON MEDIUM OR HIGHER DIFFICULTIES.
-            if(diff != "Easy")
+            if (diff != "Easy")
             {
                 bool tempBool;
-                if (completeCheck == 0)
+                if (compCheckMedHard == 0)
                 {
+                    completeCheck = 0;
                     tempBool = false;
-                   
+                    allChallengeComp = false;
                 }
                 else
                 {
                     //It's cleared!
                     tempBool = true;
+                    checkNum += 1;
+                    //Use checkNum to see if we have cleared all levels. If we have not, then lockImg needs to be displayed.
+                    if (checkNum == (numButtons.Count - 1))
+                    {
+                        allChallengeComp = true;
+                    }
+
                 }
 
-                completeListCheck.Add(tempBool);
-               
+               // completeListCheck.Add(tempBool);
+
             }
             //THIS CHECK ONLY NEEDS TO HAPPEN ON MEDIUM OR HIGHER DIFFICULTIES.
 
-            //Pass to buttonInfo button the value.
-            numButtons[i].GetComponent<Button_Level_Info>().challengeClearCheck(completeCheck);
+            //Easy mode, so allChallengeComp DOESN'T need to be checked.
+            else
+            {
+                allChallengeComp = true;
 
-            //If it's cleared, then we need to set the clear image.
+                //Check the star Req and match it to our total stars.
+                int numChallengeStarReq;
+
+                numChallengeStarReq = numButtons[i].GetComponent<Button_Level_Info>().stageInfo.challengeStarReq;
+                if(numThemeStars < numChallengeStarReq)
+                {
+                    enoughCStars = false;
+                }
+                else
+                {
+                    enoughCStars = true;
+                }
+
+            }
+
+            //Checking if the level has been cleared...
+            if (completeCheck == 0)
+            {
+                //Check if we can even play the level yet.
+                Debug.Log("All challenge is: " + allChallengeComp + " And enoughCstars for level " + (i+1) + " is: " + enoughCStars);
+               if(!allChallengeComp || !enoughCStars)
+               {
+                   clearImg.SetActive(false);
+                   lockImg.SetActive(true);
+               } 
+               else
+               {
+                   lockImg.SetActive(false);
+                   clearImg.SetActive(true);
+                   clearImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/ClearOutline");
+               }
+            }
+            else
+            {
+                clearImg.SetActive(true);
+                lockImg.SetActive(false);
+                clearImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/Clear");
+            }
         }
 
-
+        /*
         //THIS CHECK ONLY NEEDS TO HAPPEN ON MEDIUM OR HIGHER DIFFICULTIES.
         if (diff != "Easy")
         {
@@ -297,6 +368,8 @@ public class Populate_Level_Buttons : MonoBehaviour
             Debug.Log("The difficulty is Easy! No checking the clear conditions, just star conditions.");
             allChallengeComp = true;
         }
+
+        */
      
        
 
