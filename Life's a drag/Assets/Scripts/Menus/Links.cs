@@ -49,6 +49,6 @@ public class Links : MonoBehaviour
 
     public void loadLicenses()
     {
-        Application.OpenURL("Something");
+        Application.OpenURL("https://github.com/Mkhan44/Lifes_A_Drag_Mob/blob/master/Licenses_LAD.txt");
     }
 }

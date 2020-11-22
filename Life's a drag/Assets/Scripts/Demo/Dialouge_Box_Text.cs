@@ -7,6 +7,8 @@ using TMPro;
 public class Dialouge_Box_Text : MonoBehaviour
 {
     public TextMeshProUGUI theText;
+
+    [TextArea(3,10)]
     public List<string> phrases = new List<string>();
     public TextMeshProUGUI buttonText;
     int currentTextNum;
@@ -14,13 +16,13 @@ public class Dialouge_Box_Text : MonoBehaviour
     public GameObject thePanel;
     string numHintsKey = "remainingHints";
     int numHintsLeft;
-    string demoMessageDispKey = "demoMessage";
+   
 
     // Start is called before the first frame update
     void Start()
     {
         currentTextNum = 0;
-        numHintsLeft = PlayerPrefs.GetInt(numHintsKey);
+      
         numPhrases = (phrases.Count - 1);
         
     }
@@ -51,30 +53,18 @@ public class Dialouge_Box_Text : MonoBehaviour
        
         theText.text = phrases[currentTextNum];
 
-        switch(currentTextNum)
-        {
-            case 1:
-                {
-                    if(numHintsLeft > 0)
-                    {
-                        PlayerPrefs.SetInt(numHintsKey, 999);
-                    }
-                    else
-                    {
-                        PlayerPrefs.SetInt(numHintsKey, numHintsLeft+999);
-                    }
-                    break;
-                }
-            default:
-                {
-                    break;
-                }
-        }
+       
     }
 
     public void closePanel()
     {
-        PlayerPrefs.SetInt(demoMessageDispKey, 1);
         thePanel.SetActive(false);
+    }
+
+    public void resetText()
+    {
+        theText.text = phrases[0];
+        buttonText.text = "Next";
+        currentTextNum = 0;
     }
 }
