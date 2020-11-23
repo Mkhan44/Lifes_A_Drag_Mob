@@ -14,10 +14,17 @@ public class Level_Select_Manager : MonoBehaviour
     public Button noAdsButton;
     public GameObject titleScreen;
     public GameObject mainMenuScreen;
-    
+
+
+    string numHintsKey = "remainingHints";
+    int easterCount;
+    private string logoEasterKey = "logoEasterKey";
+
+
+    public GameObject logoEasterPanel;
+    public GameObject logoEasterButton;
 
     public static bool firstTimeInMenu;
-
     private string noAdsKey = "noAdsKey";
 
     string totalStarsKey = "Total_Stars_Obtained";
@@ -142,6 +149,36 @@ public class Level_Select_Manager : MonoBehaviour
             Debug.LogWarning("Level type selector is null!!!");
         }
         
+    }
+
+    public void easterEggCheck()
+    {
+        easterCount += 1;
+        Debug.Log("You pressed the button: " + easterCount + " times.");
+
+        if(easterCount == 44)
+        {
+            logoEasterButton.GetComponent<Button>().interactable = false;
+
+            //Check if player already found this easter egg.
+            int gotYet;
+            gotYet = PlayerPrefs.GetInt(logoEasterKey);
+
+            if(gotYet == 1)
+            {
+                //You already got the easter egg, nothing happens.
+            }
+            else
+            {
+                PlayerPrefs.SetInt(logoEasterKey, 1);
+                int currentHints = PlayerPrefs.GetInt(numHintsKey);
+                
+                //Give the player 25 hints cause why not lol.
+                PlayerPrefs.SetInt(numHintsKey, (currentHints + 25));
+                logoEasterPanel.SetActive(true);
+            }
+        }
+
     }
 
 

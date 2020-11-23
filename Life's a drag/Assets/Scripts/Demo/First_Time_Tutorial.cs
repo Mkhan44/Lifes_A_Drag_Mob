@@ -7,6 +7,9 @@ public class First_Time_Tutorial : MonoBehaviour
 {
     string firstTimeKey = "firstTimeKey";
     public GameObject firstTimeTut;
+
+    string numHintsKey = "remainingHints";
+    int numHintsRemaining;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,10 @@ public class First_Time_Tutorial : MonoBehaviour
             Debug.Log("Hey, first time playing!");
             firstTimeTut.SetActive(true);
             PlayerPrefs.SetInt(firstTimeKey, 1);
+
+            numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
+            PlayerPrefs.SetInt(numHintsKey, (numHintsRemaining + 10));
+
         }
         else
         {
