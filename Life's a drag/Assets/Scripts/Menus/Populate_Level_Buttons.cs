@@ -324,7 +324,7 @@ public class Populate_Level_Buttons : MonoBehaviour
                {
                    lockImg.SetActive(false);
                    clearImg.SetActive(true);
-                   clearImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/ClearOutline");
+                   clearImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/ClearEmpty");
                }
             }
             else

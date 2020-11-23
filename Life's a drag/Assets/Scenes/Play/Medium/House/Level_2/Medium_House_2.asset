@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c97fd989706c74d88eaf07a4a0bbc7, type: 3}
   m_Name: Medium_House_2
   m_EditorClassIdentifier: 
-  levelName: Yardwork
+  levelName: 'Yearly Yardwork '
   levelTheme: House
   levelDifficulty: Medium
   levelNum: 2
   bestTime: 0
-  timeForThreeStars: 50
-  timeForTwoStars: 70
-  objective: Do yardwork!
+  timeForThreeStars: 40
+  timeForTwoStars: 75
+  objective: Clean up the yard!
   requiredItems:
   - {fileID: 11400000, guid: c949a3752004d1045a8f990855ecc51d, type: 2}
   - {fileID: 11400000, guid: 6ee46bd1c650eee4c854ccb6aae93498, type: 2}
@@ -48,5 +48,5 @@ MonoBehaviour:
   levelAniSound: {fileID: 8300000, guid: 7a6377eb24c09d94d857a6bf8b108501, type: 3}
   sfxVolume: 0.5
   dontStopSFXEarly: 1
-  challengeTimeLimit: 60
-  challengeStarReq: 15
+  challengeTimeLimit: 45
+  challengeStarReq: 16

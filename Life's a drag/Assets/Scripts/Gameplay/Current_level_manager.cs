@@ -75,6 +75,7 @@ public class Current_level_manager : MonoBehaviour
     public GameObject gameOverScreen;
     public TextMeshProUGUI challengeTimeLeftText;
     bool gameOverActive;
+    public GameObject clearEndImg;
 
      [Header("Pause Menu")]
     //Pause menu
@@ -550,7 +551,7 @@ public class Current_level_manager : MonoBehaviour
                 //tempColor.a = 0.65f;
 
                 //Red color
-                tempColor = new Color32(243, 40, 0, 125);
+                tempColor = new Color32(243, 40, 0, 160);
 
                 tempImg.color = tempColor;
 
@@ -564,7 +565,7 @@ public class Current_level_manager : MonoBehaviour
                 //tempColor.a = 0.65f;
 
                 //Red color
-                tempColor = new Color32(243, 40, 0, 125);
+                tempColor = new Color32(243, 40, 0, 160);
 
                 tempImg.color = tempColor;
              
@@ -2129,7 +2130,7 @@ public class Current_level_manager : MonoBehaviour
                 //tempColor.a = 0.65f;
 
                 //Red color
-                tempColor = new Color32(243, 40, 0, 125);
+                tempColor = new Color32(243, 40, 0, 160);
                 tempImg.color = tempColor;
 
 
@@ -2142,7 +2143,7 @@ public class Current_level_manager : MonoBehaviour
                 //tempColor.a = 0.65f;
 
                 //Red color
-                tempColor = new Color32(243, 40, 0, 125);
+                tempColor = new Color32(243, 40, 0, 160);
                 tempImg.color = tempColor;
 
                 // Debug.Log(theLev.icons[l] + " " + tempIcon.name);
@@ -2240,13 +2241,15 @@ public class Current_level_manager : MonoBehaviour
         
 
         //Get the next level button so we can test if the next scene exists.
+        GameObject menuButton = BGChild.transform.GetChild(0).gameObject;
+        GameObject retryEndButton = BGChild.transform.GetChild(1).gameObject;
         GameObject nextLevButton = BGChild.transform.GetChild(2).gameObject;
+        GameObject shareButton = BGChild.transform.GetChild(3).gameObject;
 
-        if(nextLev == null)
-        {
-            Debug.Log("This IS THE LAST LEVEL!");
-            nextLevButton.SetActive(false);
-        }
+        menuButton.GetComponent<Button>().interactable = false;
+        retryEndButton.GetComponent<Button>().interactable = false;
+        nextLevButton.GetComponent<Button>().interactable = false;
+        shareButton.GetComponent<Button>().interactable = false;
 
 
         currentTime = TimeSpan.FromSeconds((timeLeft+1));
@@ -2289,7 +2292,8 @@ public class Current_level_manager : MonoBehaviour
         {
             Debug.Log("Hey you already beat this level!");
         }
-        
+
+        StartCoroutine(challengeAnimate(menuButton, retryEndButton, nextLevButton, shareButton));
 
 
         /*
@@ -2300,6 +2304,33 @@ public class Current_level_manager : MonoBehaviour
          */
 
 
+    }
+
+    IEnumerator challengeAnimate(GameObject menuButton, GameObject retryEndButton, GameObject nextLevButton, GameObject shareButton)
+    {
+
+
+        yield return new WaitForSeconds(0.8f);
+        clearEndImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/Clear");
+        EazySoundManager.PlaySound(star1Sound, 0.6f);
+
+        yield return new WaitForSeconds(0.5f);
+        menuButton.GetComponent<Button>().interactable = true;
+        retryEndButton.GetComponent<Button>().interactable = true;
+        shareButton.GetComponent<Button>().interactable = true;
+        if (nextLev == null)
+        {
+            Debug.Log("This IS THE LAST LEVEL!");
+            nextLevButton.SetActive(false);
+        }
+        else
+        {
+            nextLevButton.GetComponent<Button>().interactable = true;
+        }
+      
+      
+
+      
     }
 
 
