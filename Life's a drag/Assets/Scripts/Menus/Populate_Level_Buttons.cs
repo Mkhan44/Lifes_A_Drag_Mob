@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿//Code written by Mohamed Riaz Khan of Bukugames.
+//All code is written by me (Above name) unless otherwise stated via comments below.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -33,6 +36,11 @@ public class Populate_Level_Buttons : MonoBehaviour
         //Debug.Log("Called coroutine!");
     }
     
+    //Way to call the function.
+    public void callingWait()
+    {
+        StartCoroutine(waitTime());
+    }
 
     //Function to display the number of total stars the player has for this theme.
     void checkNumThemeStars()
@@ -59,7 +67,13 @@ public class Populate_Level_Buttons : MonoBehaviour
         GameObject starRight;
         GameObject lockImg;
         GameObject clearImg;
-       
+
+        //White
+        Color32 newColor = new Color32(237, 237, 237, 255);
+        titleText.color = newColor;
+        errorMessageText.color = newColor;
+        themeStarText.color = newColor;
+
         string diffTheme;
         string fullLevName;
         string starsKey;
@@ -159,6 +173,9 @@ public class Populate_Level_Buttons : MonoBehaviour
                 case 1:
                     {
                         starLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarLeft");
+                        //Mid and right both are blank here.
+                        starRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarRightBlack");
+                        starMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarMidBlack");
                         lockImg.SetActive(false);
                         numButtons[i].GetComponent<Button_Level_Info>().calculateStarsLeft(0);
                         break;
@@ -167,6 +184,8 @@ public class Populate_Level_Buttons : MonoBehaviour
                     {
                         starLeft.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarLeft");
                         starRight.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarRight");
+                        //Mid should be blank here.
+                        starMid.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/StarMidBlack");
                         lockImg.SetActive(false);
                         numButtons[i].GetComponent<Button_Level_Info>().calculateStarsLeft(0);
                         break;
@@ -193,6 +212,11 @@ public class Populate_Level_Buttons : MonoBehaviour
         GameObject starRight;
         GameObject lockImg;
         GameObject clearImg;
+
+        //Black
+        Color32 newColor = new Color32(0, 0, 0, 255);
+        titleText.color = newColor;
+        themeStarText.color = newColor;
 
         string diffTheme;
         string theme;
@@ -266,9 +290,9 @@ public class Populate_Level_Buttons : MonoBehaviour
             if (diff != "Easy")
             {
                 bool tempBool;
-                if (compCheckMedHard == 0)
+                if (completeCheck == 0)
                 {
-                    completeCheck = 0;
+                   // completeCheck = 0;
                     tempBool = false;
                     allChallengeComp = false;
                 }
@@ -319,6 +343,7 @@ public class Populate_Level_Buttons : MonoBehaviour
                {
                    clearImg.SetActive(false);
                    lockImg.SetActive(true);
+                   allChallengeComp = false;
                } 
                else
                {
@@ -329,9 +354,51 @@ public class Populate_Level_Buttons : MonoBehaviour
             }
             else
             {
-                clearImg.SetActive(true);
-                lockImg.SetActive(false);
-                clearImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/Clear");
+                if(diff != "Easy" && compCheckMedHard == 0)
+                {
+                    bool clearedAllPrev = false;
+                    int prevLevClearCheck;
+                    for (int k = 0; k < numButtons.Count; k++ )
+                    {
+                        fullLevName = diffTheme + (k + 1).ToString();
+                        completeKey = fullLevName + "_Completed";
+                        prevLevClearCheck = PlayerPrefs.GetInt(completeKey);
+
+                        if(prevLevClearCheck == 0)
+                        {
+                            clearedAllPrev = false;
+                            break;
+                        }
+                        else
+                        {
+                            clearedAllPrev = true;
+                        }
+                        
+
+                    }
+                    if(clearedAllPrev)
+                    {
+                        clearImg.SetActive(true);
+                        lockImg.SetActive(false);
+                        clearImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/ClearEmpty");
+                    }
+                    else
+                    {
+                        clearImg.SetActive(false);
+                        lockImg.SetActive(true);
+                        allChallengeComp = false;
+                    }
+                    
+      
+                   
+                }
+                else
+                {
+                    clearImg.SetActive(true);
+                    lockImg.SetActive(false);
+                    clearImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/Clear");
+                }
+               
             }
         }
 

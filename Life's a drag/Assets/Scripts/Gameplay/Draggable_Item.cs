@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿//Code written by Mohamed Riaz Khan of Bukugames.
+//All code is written by me (Above name) unless otherwise stated via comments below.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -67,6 +70,8 @@ public class Draggable_Item : MonoBehaviour
         {
             initialPos = gameObject.transform.position;
         }
+
+        gameObject.GetComponent<Rigidbody2D>().sleepMode = RigidbodySleepMode2D.NeverSleep;
        
     }
     void Update()
@@ -87,6 +92,13 @@ public class Draggable_Item : MonoBehaviour
             //canWeDrag = DragStatus.canDrag;
         }
 
+        /*
+        
+        if(gameObject.GetComponent<Rigidbody2D>().IsSleeping())
+        {
+            gameObject.GetComponent<Rigidbody2D>().WakeUp();
+        }
+        */
     }
     void OnMouseDown()
     {

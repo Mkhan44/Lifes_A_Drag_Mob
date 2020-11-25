@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿//Code written by Mohamed Riaz Khan of Bukugames.
+//All code is written by me (Above name) unless otherwise stated via comments below.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,6 +53,7 @@ public class Current_level_manager : MonoBehaviour
     public TextMeshProUGUI numItemsLeftTextMesh;
     public TextMeshProUGUI levelNumTextMesh;
     public TextMeshProUGUI levelNameTextMesh;
+    public TextMeshProUGUI levelDiffTextMesh;
 
 
     //Top UI stars
@@ -172,6 +176,11 @@ public class Current_level_manager : MonoBehaviour
     public TextMeshProUGUI hintPanelText;
     public GameObject hintPanel;
 
+    [Header("Retry related")]
+    //Retry button related stuff.
+    public TextMeshProUGUI retryText;
+
+    [Header("Camera-Scale related")]
     //For scaling camera.
     public GameObject cameraView;
     public GameObject backgroundImage;
@@ -266,6 +275,7 @@ public class Current_level_manager : MonoBehaviour
 
 
         levelNumTextMesh.text = "Level: " + theLev.levelNum;
+        levelDiffTextMesh.text = "Diff: " + theLev.levelDifficulty;
         levelNameTextMesh.text = theLev.levelName;
         setZoomScale();
        
@@ -357,8 +367,9 @@ public class Current_level_manager : MonoBehaviour
         //Debug statement for testing hints.
          //PlayerPrefs.SetInt(numHintsKey,99);
 
+        retryText.text = "If you retry the stage: You won't retain any hints that were used. Are you sure you want to retry?";
 
-         numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
+        numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
 
         control = true;
 
@@ -1509,15 +1520,12 @@ public class Current_level_manager : MonoBehaviour
            //Kick player back to main menu...This should never happen but failsafe.
            GetComponent<Load_Level>().LoadLevel(tempLoad);
        }
-       
-
-        //Use this code for the real game.
-       //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        //SceneManager.LoadScene(nextSceneName);
+      
     }
 
    /// <summary>
    /// Returns true if the scene 'name' exists and is in your Build settings, false otherwise
+   /// CODE NOT BY ME, FREE TO USE FROM ONLINE RESOURCE.
    /// </summary>
    public static bool DoesSceneExist(string name)
    {
@@ -1918,6 +1926,8 @@ public class Current_level_manager : MonoBehaviour
         //No hints in challenge mode.
         numHintsRemaining = 0;
         hintsLeftText.text = "N/A";
+
+        retryText.text = "Are you sure you want to retry?";
         
         //Time limit related stuff.
         timeLimit = theLev.challengeTimeLimit;
