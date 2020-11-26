@@ -8657,6 +8657,7 @@ MonoBehaviour:
   hintPanelText: {fileID: 3429626319813476905}
   hintPanel: {fileID: 3436191500684275556}
   retryText: {fileID: 4022026667829237364}
+  retryPanel: {fileID: 7597831535553400047}
   cameraView: {fileID: 0}
   backgroundImage: {fileID: 0}
 --- !u!114 &7668050654743605883
@@ -10751,6 +10752,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 568700693194880006}
+        m_MethodName: isPauseDeactivate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &7678168588645216352
 GameObject:
   m_ObjectHideFlags: 0
@@ -11801,6 +11813,17 @@ MonoBehaviour:
       - m_Target: {fileID: 6747620113531208479}
         m_MethodName: set_interactable
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 568700693194880006}
+        m_MethodName: isPauseActivate
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13529,7 +13552,7 @@ PrefabInstance:
     - target: {fileID: 3930541949405922539, guid: 011403cc097a85940a0926d33cdbada4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.6663818
+      value: 1.6662598
       objectReference: {fileID: 0}
     - target: {fileID: 3930541949405922539, guid: 011403cc097a85940a0926d33cdbada4,
         type: 3}
@@ -13589,7 +13612,7 @@ PrefabInstance:
     - target: {fileID: 499679192210519453, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.62298584
+      value: 0.6230469
       objectReference: {fileID: 0}
     - target: {fileID: 626270779921981384, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}

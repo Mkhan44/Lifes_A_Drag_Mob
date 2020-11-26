@@ -179,6 +179,7 @@ public class Current_level_manager : MonoBehaviour
     [Header("Retry related")]
     //Retry button related stuff.
     public TextMeshProUGUI retryText;
+    public GameObject retryPanel;
 
     [Header("Camera-Scale related")]
     //For scaling camera.
@@ -1606,6 +1607,16 @@ public class Current_level_manager : MonoBehaviour
         //Debug.Log("Game paused.");
     }
 
+    public void isPauseActivate()
+    {
+        isPaused = true;
+    }
+
+    public void isPauseDeactivate()
+    {
+        isPaused = false;
+    }
+
     public void hint()
     {
 
@@ -2210,6 +2221,8 @@ public class Current_level_manager : MonoBehaviour
         pauseButton.interactable = false;
         retryButton.interactable = false;
         hintButton.interactable = false;
+        retryPanel.SetActive(false);
+
 
         gameOverScreen.SetActive(true);
         gameOverScreen.GetComponent<PanelAnimator>().StartAnimIn();
@@ -2230,6 +2243,8 @@ public class Current_level_manager : MonoBehaviour
         float finishTime;
 
         finishTime = timeLeft;
+
+        finishTime = Mathf.Ceil(finishTime);
 
         //Just using this to make it so background objects can't be moved.
         isPaused = true;
@@ -2280,10 +2295,10 @@ public class Current_level_manager : MonoBehaviour
       
 
         //You got a better record. Set it!
-        if(timeLeft > bestFinishTime)
+        if(finishTime > bestFinishTime)
         {
-            PlayerPrefs.SetFloat(bestFinishTimeKey, timeLeft);
-            //Debug.Log("You got a better time! the time left was: " + timeLeft + " and your other record was: " + bestFinishTime);
+            PlayerPrefs.SetFloat(bestFinishTimeKey, finishTime);
+            Debug.Log("You got a better time! the time left was: " + finishTime + " and your other record was: " + bestFinishTime);
         }
 
         string completedChallengeAlreadyKey = theLev.name + "_Completed";

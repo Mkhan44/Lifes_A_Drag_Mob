@@ -378,9 +378,18 @@ public class Populate_Level_Buttons : MonoBehaviour
                     }
                     if(clearedAllPrev)
                     {
-                        clearImg.SetActive(true);
-                        lockImg.SetActive(false);
-                        clearImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/ClearEmpty");
+                        if(numThemeStars < numButtons[i].GetComponent<Button_Level_Info>().stageInfo.challengeStarReq)
+                        {
+                            clearImg.SetActive(false);
+                            lockImg.SetActive(true);
+                        }
+                        else
+                        {
+                            clearImg.SetActive(true);
+                            lockImg.SetActive(false);
+                            clearImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/ClearEmpty");
+                        }
+                        
                     }
                     else
                     {
@@ -396,6 +405,7 @@ public class Populate_Level_Buttons : MonoBehaviour
                 {
                     clearImg.SetActive(true);
                     lockImg.SetActive(false);
+                    allChallengeComp = true;
                     clearImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI_Updated/Clear");
                 }
                
@@ -477,6 +487,11 @@ public class Populate_Level_Buttons : MonoBehaviour
         if (errorMessageText != null)
         {
             //Play a different message based on what the player has not completed.
+            if(diff == "Easy")
+            {
+                allChallengeComp = true;
+            }
+
             if (!allChallengeComp)
             {
                 string tempDiff;

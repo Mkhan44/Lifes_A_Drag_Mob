@@ -320,7 +320,11 @@ public class Draggable_Item : MonoBehaviour
     public IEnumerator waitPause()
    {
        yield return new WaitForSeconds(0.3f);
-       levelMan.GetComponent<Current_level_manager>().pauseButton.interactable = true;
+       if(!levelMan.GetComponent<Current_level_manager>().isPaused)
+       {
+           levelMan.GetComponent<Current_level_manager>().pauseButton.interactable = true;
+       }
+      
 
    }
 }
