@@ -1,3 +1,15 @@
+## [2.2.2] - 2020-11-20
+
+### Fixed
+- Mac App Store - Support for Apple Silicon, `arm64` slice added to binary
+- GooglePlay - ProductMetadata.localizedPrice no longer floors fractions, e.g. "$19.99" was "$19.00"
+- GooglePlay - Fix several purchasing-flow issues
+   - OnPurchaseFailed not called after canceled purchase
+   - Exceptions shown in logcat after normal purchase
+   - Purchases of consumables left incomplete, resulting in "product already owned" errors
+- GooglePlay - Fix initialization when [Android] "Player Settings > Publishing Settings > Minification: Proguard" is enabled. "AndroidJavaException: java.lang.ClassNotFoundException: com.android.billingclient.api.PurchasesUpdatedListener"
+
+
 ## [2.2.1] - 2020-11-13
 
 ### Fixed
