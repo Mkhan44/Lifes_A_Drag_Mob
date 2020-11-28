@@ -6,10 +6,21 @@ using System.IO;
 public class Share_Button : MonoBehaviour
 {
     private string shareMessage;
+    public Current_level_manager levelType;
 
     public void clickShareButton(string time, string levelName)
     {
-        shareMessage = "Check it out, I got " + time + " on " + levelName + " in Life's a drag!";
+        if(levelType.currentState == Current_level_manager.stageType.normalStage)
+        {
+            shareMessage = "Check it out, I got " + time + " on " + levelName + " in Life's a Drag! \n download on Google Play: https://play.google.com/store/apps/details?id=com.Bukugames.Lifesadrag";
+            Debug.Log("Regular mode message: " + shareMessage);
+        }
+        else
+        {
+            shareMessage = "Check it out, I had " + time + " seconds left on " + levelName + " in Challenge Mode in Life's a Drag! \n download on Google Play: https://play.google.com/store/apps/details?id=com.Bukugames.Lifesadrag";
+            Debug.Log("Challenge mode message: " + shareMessage);
+        }
+        
 
         StartCoroutine(TakeScreenshotAndShare());
     }

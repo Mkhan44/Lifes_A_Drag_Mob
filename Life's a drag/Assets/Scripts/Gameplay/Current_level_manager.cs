@@ -1483,11 +1483,21 @@ public class Current_level_manager : MonoBehaviour
         Debug.Log("Share button clicked.");
         currentTime = TimeSpan.FromSeconds(elapsedTime);
         string finishTimestr = currentTime.ToString("mm':'ss");
+        float challengeTime = Mathf.Ceil(timeLeft);
+        string challengeTimestr = "00:" + challengeTime;
 
         if(shareButton != null)
         {
-            shareButton.GetComponent<Share_Button>().clickShareButton(finishTimestr, theLev.levelName);
-            Debug.Log("Share test");
+            if(currentState == stageType.normalStage)
+            {
+                shareButton.GetComponent<Share_Button>().clickShareButton(finishTimestr, theLev.levelName);
+            }
+            else
+            {
+                shareButton.GetComponent<Share_Button>().clickShareButton(challengeTimestr, theLev.levelName);
+            }
+            
+           // Debug.Log("Share test");
         }
         else
         {
