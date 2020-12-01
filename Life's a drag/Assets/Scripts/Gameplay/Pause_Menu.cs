@@ -61,6 +61,7 @@ public class Pause_Menu : MonoBehaviour
         Time.timeScale = 1f;
         if (noAdsNumPause == 0 && currentLevelMan.GetComponent<Current_level_manager>().adsManager != null)
         {
+           currentLevelMan.GetComponent<Current_level_manager>().adsManager.GetComponent<Banner_Ads>().setPos();
            currentLevelMan.GetComponent<Current_level_manager>().adsManager.GetComponent<Banner_Ads>().showBanner();
         }
         currentLevelMan.GetComponent<Load_Level>().LoadLevel("Main_Menu");

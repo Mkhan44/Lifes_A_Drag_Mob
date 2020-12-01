@@ -72,4 +72,9 @@ public class Banner_Ads : MonoBehaviour
     {
         
     }
+
+    public void setPos()
+    {
+        Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+    }
 }

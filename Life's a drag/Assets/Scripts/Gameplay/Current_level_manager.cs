@@ -261,6 +261,14 @@ public class Current_level_manager : MonoBehaviour
         {
             initializeLevel();
             challengeUIHolder.SetActive(false);
+
+            //Max hints are 99. 
+            numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
+            if(numHintsRemaining >= 99)
+            {
+                numHintsRemaining = 99;
+                PlayerPrefs.SetInt(numHintsKey, 99);
+            }
         }
         else if(currentState == stageType.challengeStage)
         {
@@ -306,6 +314,7 @@ public class Current_level_manager : MonoBehaviour
         {
             //BAD CODE, RE-REFACTOR THIS...
             numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
+
             // Debug.Log(numHintsRemaining);
             hintsLeftText.text = "X " + numHintsRemaining.ToString();
         }
@@ -1466,6 +1475,7 @@ public class Current_level_manager : MonoBehaviour
         //If noAds has not been purchased.
         if (noAdsNum == 0 && adsManager != null)
         {
+            adsManager.GetComponent<Banner_Ads>().setPos();
             adsManager.GetComponent<Banner_Ads>().showBanner();
         }
         
