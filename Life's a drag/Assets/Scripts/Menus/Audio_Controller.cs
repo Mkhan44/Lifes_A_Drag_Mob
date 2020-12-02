@@ -63,4 +63,42 @@ public class Audio_Controller : MonoBehaviour
         PlayerPrefs.SetFloat(SFXVolumeKey, EazySoundManager.GlobalSoundsVolume);
 
     }
+
+    public void mute(string type)
+    {
+        if(type == "global")
+        {
+            globalVolumeSlider.value = 0;
+            EazySoundManager.GlobalVolume = globalVolumeSlider.value;
+        }
+        else if(type == "music")
+        {
+            globalMusicVolumeSlider.value = 0;
+            EazySoundManager.GlobalMusicVolume = globalMusicVolumeSlider.value;
+        }
+        else if(type == "sfx")
+        {
+            globalSFXVolumeSlider.value = 0;
+            EazySoundManager.GlobalSoundsVolume = globalSFXVolumeSlider.value;
+        }
+    }
+
+    public void max(string type)
+    {
+        if (type == "global")
+        {
+            globalVolumeSlider.value = 1;
+            EazySoundManager.GlobalVolume = globalVolumeSlider.value;
+        }
+        else if (type == "music")
+        {
+            globalMusicVolumeSlider.value = 1;
+            EazySoundManager.GlobalMusicVolume = globalMusicVolumeSlider.value;
+        }
+        else if (type == "sfx")
+        {
+            globalSFXVolumeSlider.value = 1;
+            EazySoundManager.GlobalSoundsVolume = globalSFXVolumeSlider.value;
+        }
+    }
 }
