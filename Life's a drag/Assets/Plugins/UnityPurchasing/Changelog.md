@@ -1,3 +1,11 @@
+## [2.2.3] - 2020-12-01
+
+### Fixed
+- GooglePlay - `IStoreListener.OnInitialized` is now called after all purchases have been fetched from the store.
+- GooglePlay - `IStoreListener.OnPurchaseFailed` would not be called in projects where the purchased product's ID differed from its Store Specific ID.
+- GooglePlay - All receipts were corrupt after a purchase of a Consumable, until the next Android `Activity.onResume` lifecycle event, if the user had previously bought a Subscription.
+- GooglePlay - Fix `MissingMethodException` seen in projects using `com.unity.purchasing@2.0.3` through `2.2.0` when a user launches their game after having previously purchased a Product.
+
 ## [2.2.2] - 2020-11-20
 
 ### Fixed
