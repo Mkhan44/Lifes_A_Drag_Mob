@@ -409,13 +409,13 @@ private void _configTimerSettings()
 	{
         numHintsLeft = PlayerPrefs.GetInt(numHintsKey);
         //Do randomization with x
-        //between 3 and x-1 ...In the current case x = 11 so between 3-10.
-        int randomNum = Random.Range(3, x);
+        //between 1 and x-1 ...In the current case x = 4 so between 1-3.
+        int randomNum = Random.Range(1, x);
 
         PlayerPrefs.SetInt(numHintsKey, (numHintsLeft + randomNum));
 
 		Debug.Log ("You got: "+ randomNum +" Hints!");
-        rewardsNumTextMesh.text = "Congratulations! You just got x" + randomNum + " hints!"; 
+        rewardsNumTextMesh.text = "Congratulations! You just got x" + randomNum + " hint(s)!"; 
 
 
 	}
