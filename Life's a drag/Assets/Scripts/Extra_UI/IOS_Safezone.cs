@@ -18,6 +18,9 @@ public class IOS_Safezone : MonoBehaviour
     [SerializeField]
     private bool isIphone;
 
+    [SerializeField]
+    private bool isStage;
+
     private void Start()
     {
         parentRectTransform = this.GetComponentInParent<RectTransform>();
@@ -27,12 +30,21 @@ public class IOS_Safezone : MonoBehaviour
     {
         if(isIphone)
         {
-            if (lastSafeArea != Screen.safeArea)
+            if(!isStage)
             {
-                ApplySafeArea();
+                if (lastSafeArea != Screen.safeArea)
+                {
+                    ApplySafeArea();
+                }
             }
+            
         }
        
+    }
+
+    public bool getSystemType()
+    {
+        return isIphone;
     }
 
     private void ApplySafeArea()

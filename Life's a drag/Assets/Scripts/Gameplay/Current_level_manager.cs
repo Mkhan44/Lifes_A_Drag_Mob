@@ -186,6 +186,9 @@ public class Current_level_manager : MonoBehaviour
     public GameObject cameraView;
     public GameObject backgroundImage;
 
+    [SerializeField]
+    IOS_Safezone safeZoneCheck;
+
     public void Awake()
     {
         GameObject levelSelector =  GameObject.Find("LevelTypeSelector");
@@ -716,21 +719,33 @@ public class Current_level_manager : MonoBehaviour
         float scaleY = 0;
         if (bottomAreaZoomed != null)
         {
-            if (screenWidth == 1440f)
+            if(!safeZoneCheck.getSystemType())
             {
-                scaleX = 2.3f;
-                scaleY = 2.3f;
+                if (screenWidth == 1440f)
+                {
+                    scaleX = 2.3f;
+                    scaleY = 2.3f;
+                }
+                else if (screenWidth == 720f)
+                {
+                    scaleX = 1.35f;
+                    scaleY = 1.35f;
+                }
+                else
+                {
+                    scaleX = 2.0f;
+                    scaleY = 2.0f;
+                }
             }
-            else if (screenWidth == 720f)
-            {
-                scaleX = 1.35f;
-                scaleY = 1.35f;
-            }
+
+            //For now on IOS we'll use these values.
             else
             {
-                scaleX = 2.0f;
-                scaleY = 2.0f;
+                scaleX = 1.50f;
+                scaleY = 1.50f;
             }
+
+           
 
             Vector3 scaleChange = new Vector3(scaleX, scaleY, 1f);
             bottomAreaZoomed.transform.localScale = (scaleChange);
