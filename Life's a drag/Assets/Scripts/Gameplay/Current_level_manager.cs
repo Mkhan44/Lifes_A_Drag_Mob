@@ -741,8 +741,8 @@ public class Current_level_manager : MonoBehaviour
             //For now on IOS we'll use these values.
             else
             {
-                scaleX = 1.50f;
-                scaleY = 1.50f;
+                scaleX = 1.40f;
+                scaleY = 1.40f;
             }
 
            

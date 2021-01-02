@@ -13,6 +13,8 @@ public class GridLayoutModifier : MonoBehaviour
     [SerializeField]
     IOS_Safezone safeZoneCheck;
 
+    public ScrollRect levelSelector;
+
     //make ios boolean...if true ignore other layout changes.
 
     public enum sceneType
@@ -23,15 +25,16 @@ public class GridLayoutModifier : MonoBehaviour
 
     public sceneType theScene;
     
-    /*
-    void OnEnable()
-    {
-        adjustScroll();
-    }
-    */
     void Start()
     {
         adjustScroll();
+
+       
+    }
+
+    private void OnEnable()
+    {
+       
     }
 
     //COMMENT OUT THIS FUNCTION AFTER TESTING IS OVER WITH.
@@ -156,6 +159,17 @@ public class GridLayoutModifier : MonoBehaviour
     public void setWidth()
     {
         screenWidth = (float)Screen.currentResolution.width;
+    }
+
+    public void ScrollToTop()
+    {
+
+        if (levelSelector != null)
+        {
+            levelSelector.normalizedPosition = new Vector2(0, 0.75f);
+        }
+        
+        //ZoomedScrollArea.normalizedPosition = new Vector2(0, 1);
     }
 
 }

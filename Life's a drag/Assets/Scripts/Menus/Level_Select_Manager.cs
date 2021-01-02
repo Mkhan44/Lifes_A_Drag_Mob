@@ -17,6 +17,7 @@ public class Level_Select_Manager : MonoBehaviour
     public Button noAdsButton;
     public GameObject titleScreen;
     public GameObject mainMenuScreen;
+    public IOS_Safezone iosChecker;
 
 
     string numHintsKey = "remainingHints";
@@ -40,6 +41,13 @@ public class Level_Select_Manager : MonoBehaviour
     public GameObject levelTypeSelectorInstance;
     void Awake()
     {
+        //If we're on IOS.
+        if(iosChecker.getSystemType())
+        {
+            Application.targetFrameRate = 60;
+           // Debug.Log("Changed FPS to 60 limit!");
+        }
+
         levelTypeSelectorInstance = GameObject.Find("LevelTypeSelector");
         //firstTimeInMenu = true;
         
