@@ -12,13 +12,35 @@ public class Share_Button : MonoBehaviour
     {
         if(levelType.currentState == Current_level_manager.stageType.normalStage)
         {
-            shareMessage = "Check it out, I got " + time + " on " + levelName + " in Life's a Drag! \n download on Google Play: https://play.google.com/store/apps/details?id=com.Bukugames.Lifesadrag";
-            Debug.Log("Regular mode message: " + shareMessage);
+            //Android
+            if(!levelType.safeZoneCheck.getSystemType())
+            {
+                shareMessage = "Check it out, I got " + time + " on " + levelName + " in Life's a Drag! \n download on Google Play: https://play.google.com/store/apps/details?id=com.Bukugames.Lifesadrag";
+                Debug.Log("Regular mode message Android: " + shareMessage);
+            }
+            //IOS
+            else
+            {
+                shareMessage = "Check it out, I got " + time + " on " + levelName + " in Life's a Drag! \n download on the App Store: ";
+                Debug.Log("Regular mode message IOS: " + shareMessage);
+            }
+           
         }
         else
         {
-            shareMessage = "Check it out, I had " + time + " seconds left on " + levelName + " in Challenge Mode in Life's a Drag! \n download on Google Play: https://play.google.com/store/apps/details?id=com.Bukugames.Lifesadrag";
-            Debug.Log("Challenge mode message: " + shareMessage);
+            //Android
+            if (!levelType.safeZoneCheck.getSystemType())
+            {
+                shareMessage = "Check it out, I had " + time + " seconds left on " + levelName + " in Challenge Mode in Life's a Drag! \n download on Google Play: https://play.google.com/store/apps/details?id=com.Bukugames.Lifesadrag";
+                Debug.Log("Challenge mode message Android: " + shareMessage);
+            }
+            //IOS
+            else
+            {
+                shareMessage = "Check it out, I had " + time + " seconds left on " + levelName + " in Challenge Mode in Life's a Drag! \n download on App Store: ";
+                Debug.Log("Challenge mode message IOS:  " + shareMessage);
+            }
+            
         }
         
 

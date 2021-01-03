@@ -186,11 +186,18 @@ public class Current_level_manager : MonoBehaviour
     public GameObject cameraView;
     public GameObject backgroundImage;
 
-    [SerializeField]
-    IOS_Safezone safeZoneCheck;
+  
+    public IOS_Safezone safeZoneCheck;
 
     public void Awake()
     {
+        //We are on IOS so change to 60 FPS instead of default 30.
+        if (safeZoneCheck.getSystemType())
+        {
+            Application.targetFrameRate = 60;
+            // Debug.Log("Changed FPS to 60 limit!");
+        }
+
         GameObject levelSelector =  GameObject.Find("LevelTypeSelector");
         if (levelSelector != null)
         {
