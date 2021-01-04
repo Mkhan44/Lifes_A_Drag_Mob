@@ -553,6 +553,7 @@ public class Populate_Level_Buttons : MonoBehaviour
         if (levelSelectScroll.levelSelector != null)
         {
             levelSelectScroll.ScrollToTop();
+            levelSelectScroll.scaleIcons(numButtons);
         }
 
     }

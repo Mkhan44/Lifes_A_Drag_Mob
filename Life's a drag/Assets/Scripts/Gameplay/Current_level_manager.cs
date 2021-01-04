@@ -577,6 +577,7 @@ public class Current_level_manager : MonoBehaviour
             {
                 tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
                 tempIcon.transform.SetParent(bottomUIParent, false);
+                tempIcon.transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
                 //tempColor.a = 0.65f;
@@ -591,6 +592,7 @@ public class Current_level_manager : MonoBehaviour
                 tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
                 tempIcon.name = tempIcon.name + "2";
                 tempIcon.transform.SetParent(zoomedUIParent, false);
+                tempIcon.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
                 //tempColor.a = 0.65f;
