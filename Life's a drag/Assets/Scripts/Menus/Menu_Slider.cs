@@ -37,6 +37,12 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         yClampMax = yClampMin;
         xInitial = initialPos.x;
         Debug.Log(xInitial);
+
+        //Check the screen size. Make sure to adjust the xEnd accordingly so it clamps correctly.
+
+        //NEED TO IMPLEMENT THAT.
+
+
        if(xEnd == 0)
        {
            xEnd = 220f;

@@ -137,6 +137,10 @@ public class GridLayoutModifier : MonoBehaviour
         //We're on IOS.
         else
         {
+            //DEBUGGING:
+          //  screenWidth = 1284f;
+            //DEBUGGING:
+
             //Iphone 7 , Iphone 6, Iphone 8
             if (screenWidth == 750f)
             {
@@ -206,35 +210,131 @@ public class GridLayoutModifier : MonoBehaviour
             //Iphone 11.
             else if (screenWidth == 828f)
             {
+                Debug.Log("ScreenWidth is 828!");
+                switch (theScene)
                 {
-                    Debug.Log("ScreenWidth is 828!");
-                    switch (theScene)
-                    {
-                        case sceneType.menu:
-                            {
-                                numColumns = 5;
-                                GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
-                                thisLayout.padding.top = 50;
-                                thisLayout.padding.bottom = 25;
-                                thisLayout.padding.right = 0;
+                    case sceneType.menu:
+                        {
+                            numColumns = 5;
+                            GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
+                            thisLayout.padding.top = 50;
+                            thisLayout.padding.bottom = 25;
+                            thisLayout.padding.right = 0;
 
-                                Vector2 newSpacing = thisLayout.spacing;
-                                newSpacing = new Vector2(0, thisLayout.spacing.y);
+                            Vector2 newSpacing = thisLayout.spacing;
+                            newSpacing = new Vector2(0, thisLayout.spacing.y);
 
-                                thisLayout.spacing = newSpacing;
-                                break;
-                            }
-                        case sceneType.level:
-                            {
-                                numColumns = 4;
-                                GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
+                            thisLayout.spacing = newSpacing;
+                            break;
+                        }
+                    case sceneType.level:
+                        {
+                            numColumns = 4;
+                            GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
 
-                                Vector2 newSpacing = thisLayout.spacing;
-                                newSpacing = new Vector2(0, thisLayout.spacing.y);
-                                thisLayout.spacing = newSpacing;
-                                break;
-                            }
-                    }
+                            Vector2 newSpacing = thisLayout.spacing;
+                            newSpacing = new Vector2(0, thisLayout.spacing.y);
+                            thisLayout.spacing = newSpacing;
+                            break;
+                        }
+                }
+            }
+            //Iphone 12 Pro Max
+            else if (screenWidth == 1284f)
+            {
+                Debug.Log("ScreenWidth is 1284!");
+                switch (theScene)
+                {
+                    case sceneType.menu:
+                        {
+                            numColumns = 5;
+                            GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
+                            thisLayout.padding.top = 50;
+                            thisLayout.padding.bottom = 25;
+                            thisLayout.padding.right = 0;
+
+                            Vector2 newSpacing = thisLayout.spacing;
+                            newSpacing = new Vector2(55, thisLayout.spacing.y);
+
+                            thisLayout.spacing = newSpacing;
+                            break;
+                        }
+                    case sceneType.level:
+                        {
+                            numColumns = 5;
+                            GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
+
+                            Vector2 newSpacing = thisLayout.spacing;
+                            newSpacing = new Vector2(10, thisLayout.spacing.y);
+                            thisLayout.spacing = newSpacing;
+                            break;
+                        }
+                }
+            }
+
+            //Iphone 12/ 12Pro
+            else if(screenWidth == 1170f)
+            {
+                Debug.Log("ScreenWidth is 1170!");
+                switch (theScene)
+                {
+                    case sceneType.menu:
+                        {
+                            numColumns = 5;
+                            GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
+                            thisLayout.padding.top = 50;
+                            thisLayout.padding.bottom = 25;
+                            thisLayout.padding.right = 0;
+
+                            Vector2 newSpacing = thisLayout.spacing;
+                            newSpacing = new Vector2(55, thisLayout.spacing.y);
+
+                            thisLayout.spacing = newSpacing;
+                            break;
+                        }
+                    case sceneType.level:
+                        {
+                            numColumns = 5;
+                            GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
+
+                            Vector2 newSpacing = thisLayout.spacing;
+                            newSpacing = new Vector2(10, thisLayout.spacing.y);
+                            thisLayout.spacing = newSpacing;
+                            break;
+                        }
+                }
+            }
+
+            //Iphone 12 Mini
+            else if (screenWidth == 1080f)
+            {
+                Debug.Log("ScreenWidth is 1080f!");
+                switch (theScene)
+                {
+                    case sceneType.menu:
+                        {
+                            numColumns = 5;
+                            GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
+                            thisLayout.padding.top = 50;
+                            thisLayout.padding.bottom = 25;
+                            thisLayout.padding.right = 0;
+
+                            Vector2 newSpacing = thisLayout.spacing;
+                            newSpacing = new Vector2(35, thisLayout.spacing.y);
+
+                            thisLayout.spacing = newSpacing;
+                            break;
+                        }
+                    case sceneType.level:
+                        {
+                            numColumns = 5;
+                            GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
+
+                            Vector2 newSpacing = thisLayout.spacing;
+                            newSpacing = new Vector2(0, thisLayout.spacing.y);
+                            thisLayout.spacing = newSpacing;
+                            break;
+                        }
                 }
             }
 
@@ -320,6 +420,21 @@ public class GridLayoutModifier : MonoBehaviour
             else if (screenWidth == 828f)
             {
                 itemsToScale[i].GetComponent<RectTransform>().localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            }
+            //Iphone 12/12 Pro
+            else if(screenWidth == 1170f)
+            {
+                itemsToScale[i].GetComponent<RectTransform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            }
+            //Iphone 12 Mini
+            else if (screenWidth == 1080f)
+            {
+                itemsToScale[i].GetComponent<RectTransform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            }
+            //Iphone 12 pro max
+            else if(screenWidth == 1284f)
+            {
+                itemsToScale[i].GetComponent<RectTransform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
             }
             //Iphone XR.
             else
