@@ -755,10 +755,22 @@ public class Current_level_manager : MonoBehaviour
                 //screenWidth = 1284f;
                 //DEBUGGING:
                 //Iphone 12/ Pro max
-                if (screenWidth == 1170f || screenWidth == 1284f)
+                if (screenWidth == 1170f || screenWidth == 1284f || screenWidth == 1242f)
                 {
                     scaleX = 2.2f;
                     scaleY = 2.2f;
+                }
+                //Iphone XS
+                else if(screenWidth == 1125f)
+                {
+                    scaleX = 2.0f;
+                    scaleY = 2.0f;
+                }
+                //Lower res ipod touch (6th and 7th gen)
+                else if (screenWidth == 640f)
+                {
+                    scaleX = 1.2f;
+                    scaleY = 1.2f;
                 }
                 else
                 {

@@ -175,6 +175,39 @@ public class GridLayoutModifier : MonoBehaviour
 
             }
 
+            //Ipod touch 6th and 7th gen.
+            else if(screenWidth == 640f)
+            {
+                Debug.Log("ScreenWidth is 640!");
+                switch (theScene)
+                {
+                    case sceneType.menu:
+                        {
+                            numColumns = 5;
+                            GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
+                            thisLayout.padding.top = 50;
+                            thisLayout.padding.bottom = 25;
+                            thisLayout.padding.right = 0;
+
+                            Vector2 newSpacing = thisLayout.spacing;
+                            newSpacing = new Vector2(-40, thisLayout.spacing.y);
+
+                            thisLayout.spacing = newSpacing;
+                            break;
+                        }
+                    case sceneType.level:
+                        {
+                            numColumns = 4;
+                            GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
+
+                            Vector2 newSpacing = thisLayout.spacing;
+                            newSpacing = new Vector2(0, thisLayout.spacing.y);
+                            thisLayout.spacing = newSpacing;
+                            break;
+                        }
+                }
+            }
+
             //Iphone X.
             else if (screenWidth == 1125f)
             {
@@ -207,7 +240,39 @@ public class GridLayoutModifier : MonoBehaviour
                         }
                 }
             }
-            //Iphone 11.
+            //Iphone XS Max.
+            else if (screenWidth == 1242f)
+            {
+                Debug.Log("ScreenWidth is 1242!");
+                switch (theScene)
+                {
+                    case sceneType.menu:
+                        {
+                            numColumns = 5;
+                            GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
+                            thisLayout.padding.top = 50;
+                            thisLayout.padding.bottom = 25;
+                            thisLayout.padding.right = 0;
+
+                            Vector2 newSpacing = thisLayout.spacing;
+                            newSpacing = new Vector2(65, thisLayout.spacing.y);
+
+                            thisLayout.spacing = newSpacing;
+                            break;
+                        }
+                    case sceneType.level:
+                        {
+                            numColumns = 4;
+                            GridLayoutGroup thisLayout = gameObject.GetComponent<GridLayoutGroup>();
+
+                            Vector2 newSpacing = thisLayout.spacing;
+                            newSpacing = new Vector2(5, thisLayout.spacing.y);
+                            thisLayout.spacing = newSpacing;
+                            break;
+                        }
+                }
+            }
+            //Iphone 11 & XR
             else if (screenWidth == 828f)
             {
                 Debug.Log("ScreenWidth is 828!");
@@ -338,7 +403,7 @@ public class GridLayoutModifier : MonoBehaviour
                 }
             }
 
-            //XR
+            
             else
             {
                 switch (theScene)
@@ -411,8 +476,18 @@ public class GridLayoutModifier : MonoBehaviour
             {
                 itemsToScale[i].GetComponent<RectTransform>().localScale = new Vector3(0.7f, 0.7f, 1.0f);
             }
+            //Ipod touch 6th and 7th gen.
+            else if (screenWidth == 640f)
+            {
+                itemsToScale[i].GetComponent<RectTransform>().localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            }
             //Iphone X.
             else if (screenWidth == 1125f)
+            {
+                itemsToScale[i].GetComponent<RectTransform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            }
+            //Iphone XS Max.
+            else if (screenWidth == 1242f)
             {
                 itemsToScale[i].GetComponent<RectTransform>().localScale = new Vector3(1.0f, 1.0f, 1.0f);
             }
