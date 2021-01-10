@@ -179,4 +179,9 @@ public class IAPManager : MonoBehaviour, IStoreListener
     {
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
     }
+
+    void ReInt()
+    {
+        InitializePurchasing();
+    }
 }
