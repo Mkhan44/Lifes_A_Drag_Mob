@@ -93,7 +93,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 77.85
+  m_fontSize: 86.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.55
+  m_fontSize: 56.95
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1092,7 +1092,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 61.4
+  m_fontSize: 55.6
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1749,7 +1749,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 69.8
+  m_fontSize: 68.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2241,6 +2241,7 @@ MonoBehaviour:
   nextLoad: {fileID: 0}
   menuSlider: {fileID: 0}
   slideSound: {fileID: 0}
+  isLevelSelect: 0
   xEnd: 158.7
   pauseRef: {fileID: 5079167736241708998}
   levelRef: {fileID: 0}
@@ -2340,7 +2341,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.75
+  m_fontSize: 56.35
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2475,7 +2476,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.1
+  m_fontSize: 45.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4155,6 +4156,7 @@ MonoBehaviour:
   nextLoad: {fileID: 0}
   menuSlider: {fileID: 1767864069694906820}
   slideSound: {fileID: 8300000, guid: b1b3abb399661ff469bcdf654c9ddbcb, type: 3}
+  isLevelSelect: 0
   xEnd: 183.1
   pauseRef: {fileID: 5079167736241708998}
   levelRef: {fileID: 0}
@@ -4643,7 +4645,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.05
+  m_fontSize: 50
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5281,6 +5283,7 @@ MonoBehaviour:
   nextLoad: {fileID: 6572791560328002135}
   menuSlider: {fileID: 1767864069694906820}
   slideSound: {fileID: 8300000, guid: 103344dcbfc2dce458de3d1653060a18, type: 3}
+  isLevelSelect: 0
   xEnd: 183.1
   pauseRef: {fileID: 5079167736241708998}
   levelRef: {fileID: 0}
@@ -6069,7 +6072,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.35
+  m_fontSize: 56
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7866,7 +7869,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 78.9
+  m_fontSize: 87.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8265,7 +8268,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 85.45
+  m_fontSize: 75.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9140,7 +9143,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
+  m_fontSize: 57.25
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10594,6 +10597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollArea: {fileID: 8000005556253711983}
   safeZoneCheck: {fileID: 870252650810632014}
+  levelSelector: {fileID: 0}
   theScene: 1
 --- !u!1 &8417317129696715283
 GameObject:
@@ -10689,7 +10693,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
+  m_fontSize: 57.45
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11981,7 +11985,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 69.85
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -12158,6 +12162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollArea: {fileID: 5404263556297617822}
   safeZoneCheck: {fileID: 870252650810632014}
+  levelSelector: {fileID: 0}
   theScene: 1
 --- !u!1 &9042402232184261198
 GameObject:
@@ -12457,7 +12462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f779bb65ffec74ba150c58d6ccfc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isIphone: 1
+  isIphone: 0
   isStage: 1
 --- !u!1 &9183165837000148525
 GameObject:
@@ -12927,7 +12932,7 @@ PrefabInstance:
     - target: {fileID: 939635398365084939, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
       propertyPath: m_fontSize
-      value: 88.05
+      value: 83.3
       objectReference: {fileID: 0}
     - target: {fileID: 939635398365084939, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
@@ -12952,7 +12957,7 @@ PrefabInstance:
     - target: {fileID: 1824997604932649336, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 67
       objectReference: {fileID: 0}
     - target: {fileID: 1824997604932649336, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
@@ -12992,7 +12997,7 @@ PrefabInstance:
     - target: {fileID: 1851187433702160065, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 66.45
       objectReference: {fileID: 0}
     - target: {fileID: 1851187433702160065, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
@@ -13307,7 +13312,7 @@ PrefabInstance:
     - target: {fileID: 4931753385319766123, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
       propertyPath: m_fontSize
-      value: 67.55
+      value: 60.75
       objectReference: {fileID: 0}
     - target: {fileID: 4931753385319766123, guid: 659dcb0777bdbf949997c93a1ede3740,
         type: 3}
