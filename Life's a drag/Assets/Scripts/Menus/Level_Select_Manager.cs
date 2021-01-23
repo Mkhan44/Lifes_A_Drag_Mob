@@ -17,6 +17,7 @@ public class Level_Select_Manager : MonoBehaviour
     public Button noAdsButton;
     public GameObject titleScreen;
     public GameObject mainMenuScreen;
+    public IOS_Safezone iosChecker;
 
 
     string numHintsKey = "remainingHints";
@@ -38,8 +39,23 @@ public class Level_Select_Manager : MonoBehaviour
     public GameObject demoPanel;
 
     public GameObject levelTypeSelectorInstance;
+
+    public GameObject restorePurchasesButton;
     void Awake()
     {
+        //If we're on IOS.
+        if(iosChecker.getSystemType())
+        {
+            Application.targetFrameRate = 60;
+            // Debug.Log("Changed FPS to 60 limit!");
+            restorePurchasesButton.SetActive(true);
+            
+        }
+        else
+        {
+            restorePurchasesButton.SetActive(false);
+        }
+
         levelTypeSelectorInstance = GameObject.Find("LevelTypeSelector");
         //firstTimeInMenu = true;
         
@@ -47,6 +63,10 @@ public class Level_Select_Manager : MonoBehaviour
         if(PlayerPrefs.GetInt(noAdsKey) > 0)
         {
             noAdsButton.interactable = false;
+            
+            restorePurchasesButton.GetComponent<Button>().interactable = false;
+            
+           
             Debug.Log("You have purchased no ads!");
         }
         else

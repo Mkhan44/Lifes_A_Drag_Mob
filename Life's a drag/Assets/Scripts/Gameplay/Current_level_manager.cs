@@ -186,8 +186,18 @@ public class Current_level_manager : MonoBehaviour
     public GameObject cameraView;
     public GameObject backgroundImage;
 
+  
+    public IOS_Safezone safeZoneCheck;
+
     public void Awake()
     {
+        //We are on IOS so change to 60 FPS instead of default 30.
+        if (safeZoneCheck.getSystemType())
+        {
+            Application.targetFrameRate = 60;
+            // Debug.Log("Changed FPS to 60 limit!");
+        }
+
         GameObject levelSelector =  GameObject.Find("LevelTypeSelector");
         if (levelSelector != null)
         {
@@ -567,6 +577,7 @@ public class Current_level_manager : MonoBehaviour
             {
                 tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
                 tempIcon.transform.SetParent(bottomUIParent, false);
+                tempIcon.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
                 //tempColor.a = 0.65f;
@@ -581,6 +592,7 @@ public class Current_level_manager : MonoBehaviour
                 tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
                 tempIcon.name = tempIcon.name + "2";
                 tempIcon.transform.SetParent(zoomedUIParent, false);
+                tempIcon.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
                 //tempColor.a = 0.65f;
@@ -716,21 +728,59 @@ public class Current_level_manager : MonoBehaviour
         float scaleY = 0;
         if (bottomAreaZoomed != null)
         {
-            if (screenWidth == 1440f)
+            //Android.
+            if(!safeZoneCheck.getSystemType())
             {
-                scaleX = 2.3f;
-                scaleY = 2.3f;
+                if (screenWidth == 1440f)
+                {
+                    scaleX = 2.3f;
+                    scaleY = 2.3f;
+                }
+                else if (screenWidth == 720f)
+                {
+                    scaleX = 1.35f;
+                    scaleY = 1.35f;
+                }
+                else
+                {
+                    scaleX = 2.0f;
+                    scaleY = 2.0f;
+                }
             }
-            else if (screenWidth == 720f)
-            {
-                scaleX = 1.35f;
-                scaleY = 1.35f;
-            }
+
+            //For now on IOS we'll use these values.
             else
             {
-                scaleX = 2.0f;
-                scaleY = 2.0f;
+                //DEBUGGING:
+                //screenWidth = 1284f;
+                //DEBUGGING:
+                //Iphone 12/ Pro max
+                if (screenWidth == 1170f || screenWidth == 1284f || screenWidth == 1242f)
+                {
+                    scaleX = 2.2f;
+                    scaleY = 2.2f;
+                }
+                //Iphone XS
+                else if(screenWidth == 1125f)
+                {
+                    scaleX = 2.0f;
+                    scaleY = 2.0f;
+                }
+                //Lower res ipod touch (6th and 7th gen)
+                else if (screenWidth == 640f)
+                {
+                    scaleX = 1.2f;
+                    scaleY = 1.2f;
+                }
+                else
+                {
+                    scaleX = 1.40f;
+                    scaleY = 1.40f;
+                }
+              
             }
+
+           
 
             Vector3 scaleChange = new Vector3(scaleX, scaleY, 1f);
             bottomAreaZoomed.transform.localScale = (scaleChange);
@@ -1866,6 +1916,7 @@ public class Current_level_manager : MonoBehaviour
             {
                 tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
                 tempIcon.transform.SetParent(bottomUIParent, false);
+                tempIcon.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
                 tempColor.a = 0.5f;
@@ -1876,6 +1927,7 @@ public class Current_level_manager : MonoBehaviour
                 tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
                 tempIcon.name = tempIcon.name + "2";
                 tempIcon.transform.SetParent(zoomedUIParent, false);
+                tempIcon.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
                 tempColor.a = 0.5f;
@@ -2166,6 +2218,7 @@ public class Current_level_manager : MonoBehaviour
             {
                 tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
                 tempIcon.transform.SetParent(bottomUIParent, false);
+                tempIcon.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
                 //tempColor.a = 0.65f;
@@ -2179,6 +2232,7 @@ public class Current_level_manager : MonoBehaviour
                 tempIcon = Instantiate(theLev.icons[l], transform.position, transform.rotation);
                 tempIcon.name = tempIcon.name + "2";
                 tempIcon.transform.SetParent(zoomedUIParent, false);
+                tempIcon.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 tempImg = tempIcon.GetComponent<Image>();
                 tempColor = tempImg.color;
                 //tempColor.a = 0.65f;

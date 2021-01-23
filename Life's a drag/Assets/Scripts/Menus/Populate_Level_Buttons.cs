@@ -22,6 +22,8 @@ public class Populate_Level_Buttons : MonoBehaviour
     bool enoughCStars;
     string diff;
 
+    public GridLayoutModifier levelSelectScroll;
+
     Coroutine animateRoutine;
 
     public void Start()
@@ -539,6 +541,7 @@ public class Populate_Level_Buttons : MonoBehaviour
         {
             titleText.text = theTheme + ": " + "\n" + "Level select";
             displayLevels();
+          
         }
         else
         {
@@ -546,7 +549,13 @@ public class Populate_Level_Buttons : MonoBehaviour
             displayLevelsChallenge();
             //Do a function that makes stars invisible.
         }
-        
+
+        if (levelSelectScroll.levelSelector != null)
+        {
+            levelSelectScroll.ScrollToTop();
+            levelSelectScroll.scaleIcons(numButtons);
+        }
+
     }
 
     IEnumerator animateText()

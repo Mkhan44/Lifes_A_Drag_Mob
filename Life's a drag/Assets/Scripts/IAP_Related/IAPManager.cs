@@ -16,6 +16,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
 
     public GameObject noAdsButton;
+    public GameObject restorePurchasesButton;
     //Step 1 create your products
     private string removeAds = "remove_ads_lifesadrag";
 
@@ -59,6 +60,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
             if(noAdsButton != null)
             {
                 noAdsButton.GetComponent<Button>().interactable = false;
+
             }
             else
             {
@@ -66,6 +68,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
                 if (noAdsButton != null)
                 {
                     noAdsButton.GetComponent<Button>().interactable = false;
+                    restorePurchasesButton.GetComponent<Button>().interactable = false;
                 }
                 else
                 {
@@ -73,6 +76,9 @@ public class IAPManager : MonoBehaviour, IStoreListener
                 }
                 
             }
+
+            
+            
             GameObject tempBannerAds = GameObject.Find("AdsManager");
             tempBannerAds.GetComponent<Banner_Ads>().hideBanner();
 
@@ -172,5 +178,10 @@ public class IAPManager : MonoBehaviour, IStoreListener
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
     {
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
+    }
+
+    void ReInt()
+    {
+        InitializePurchasing();
     }
 }

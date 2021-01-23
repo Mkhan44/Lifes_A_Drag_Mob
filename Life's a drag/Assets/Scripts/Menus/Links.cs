@@ -38,6 +38,11 @@ public class Links : MonoBehaviour
                     Application.OpenURL("https://www.youtube.com/channel/UCVMp9BDVF6Bh7R8jG2R9Wqg?");
                     break;
                 }
+            case "Merch Store":
+                {
+                    Application.OpenURL("https://merch.streamelements.com/bukugames");
+                    break;
+                }
             default:
                 {
                     Debug.LogWarning("Invalid string!");

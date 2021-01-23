@@ -54,6 +54,8 @@ public class Event_Notice : MonoBehaviour
                 eventNum = PlayerPrefs.GetInt(eventPopupKey);
                 if (eventNum == 0)
                 {
+                    /*
+
                     //Display it cause we didn't see it yet.
                     currentEvent.SetActive(true);
                     numHintsRemaining = PlayerPrefs.GetInt(numHintsKey);
@@ -61,6 +63,8 @@ public class Event_Notice : MonoBehaviour
                     //CURRENT EVENT IS TO GIVE 20 HINTS...CHANGE THIS FOR FUTURE EVENTS!!!!
                     PlayerPrefs.SetInt(numHintsKey, (numHintsRemaining + 20));
                     PlayerPrefs.SetInt(eventPopupKey, 1);
+
+                    */
                 }
                 else
                 {

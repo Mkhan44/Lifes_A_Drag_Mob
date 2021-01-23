@@ -81,8 +81,12 @@ public class First_Tutorial : MonoBehaviour
     //User tapped the button. Advance to the next message.
  public void tapMessage()
     {
-       
-         currentInstruction += 1;
+        if(tapButton.image.enabled == false)
+        {
+            tapButton.image.enabled = true;
+        }
+      
+        currentInstruction += 1;
          Debug.Log(currentInstruction);
          if (currentInstruction > numInstructions)
          {
@@ -124,8 +128,13 @@ public class First_Tutorial : MonoBehaviour
      if (currentInstruction == 3)
      {
          requiredBoxCursor.enabled = true;
+        
      }
-     if (currentInstruction == 5)
+     if (currentInstruction == 4)
+     {
+         tapButton.image.enabled = false;
+     }
+        if (currentInstruction == 5)
      {
          requiredBoxCursor.enabled = false;
      }
@@ -141,12 +150,13 @@ public class First_Tutorial : MonoBehaviour
          expandButonCursor.enabled = true;
          levManager.GetComponent<Current_level_manager>().expandButton.SetActive(true);
          levManager.GetComponent<Current_level_manager>().expandButton.GetComponent<Button>().interactable = false;
+         
      }
 
      if(currentInstruction == 14)
      {
          expandButonCursor.enabled = false;
-         
+         tapButton.image.enabled = false;
      }
 
      if(currentInstruction == 15)
@@ -154,13 +164,12 @@ public class First_Tutorial : MonoBehaviour
         levManager.GetComponent<Current_level_manager>().expandButton.GetComponent<Button>().interactable = false;
         comboBox1Cursor.enabled = false;
         comboBox2Cursor.enabled = false;
-     
      }
 
      if (currentInstruction == 16)
      {
          timerCursor.enabled = true;
-
+         
      }
 
      if(currentInstruction == 18)

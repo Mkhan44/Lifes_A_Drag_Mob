@@ -140,7 +140,7 @@ public class DayChecker : MonoBehaviour
 
         Debug.Log("Hints we are giving to the player is: " + hintsToGive);
 
-        dialougeText.text = "Congratulations! You just earned: X" + hintsToGive + " Hints! Come back tomorrow for another reward!"; 
+        dialougeText.text = "Congratulations! You just earned: X" + hintsToGive + " Hint(s)! Come back tomorrow for another reward!"; 
 
         PlayerPrefs.SetInt(numHintsKey, (numHintsRemaining + hintsToGive));
 

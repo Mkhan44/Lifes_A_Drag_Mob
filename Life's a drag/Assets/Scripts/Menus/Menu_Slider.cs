@@ -26,6 +26,8 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     protected bool canDrag = true;
 
+    public bool isLevelSelect;
+
     //This will be the variable that determines how far this button can be dragged so we can make different sizes.
     public float xEnd;
    protected virtual void Start()
@@ -37,11 +39,43 @@ public class Menu_Slider : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         yClampMax = yClampMin;
         xInitial = initialPos.x;
         Debug.Log(xInitial);
-       if(xEnd == 0)
-       {
-           xEnd = 220f;
-       }
-       if(this.GetComponent<Button>().interactable == false)
+
+        if (xEnd == 0)
+        {
+            xEnd = 220f;
+        }
+
+        //If it's the level select ones then their aspect ratio is the fitted correctly. Therefore we don't need to adjust.
+        if(!isLevelSelect)
+        {
+            //Check the screen size. Make sure to adjust the xEnd accordingly so it clamps correctly.
+            float screenWidth;
+
+            screenWidth = (float)Screen.currentResolution.width;
+
+            //IOS CHECKS!!!
+            // Iphone 6/6S/7/8 
+            if (screenWidth == 750f)
+            {
+                xEnd = xEnd - 50f;
+            }
+            //Ipod touch 6th & 7th gen.
+            else if(screenWidth == 640f)
+            {
+                xEnd = xEnd - 65f;
+            }
+            //Iphone XR/ 11
+            else if (screenWidth == 828f)
+            {
+                xEnd = xEnd - 30f;
+            }
+            //IOS CHECKS!!!
+        }
+
+
+
+
+        if (this.GetComponent<Button>().interactable == false)
        {
            canDrag = false;
        }
