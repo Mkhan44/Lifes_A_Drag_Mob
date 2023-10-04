@@ -2,7 +2,7 @@
 using UnityEngine.Advertisements;
 using Hellmade.Sound;
 
-public class AdsManager : MonoBehaviour , IUnityAdsListener
+public class AdsManager : MonoBehaviour , IUnityAdsLoadListener, IUnityAdsShowListener, IUnityAdsInitializationListener
 {
     private string noAdsKey = "noAdsKey";
     public int adsPurchasedCheck;
@@ -50,8 +50,7 @@ public class AdsManager : MonoBehaviour , IUnityAdsListener
     }
     void Start()
     {
-       
-        Advertisement.AddListener(this);
+       // Advertisement.AddListener(this);
         initializeAds();
 
         globalVolumePref = PlayerPrefs.GetFloat(globalVolumeKey);
@@ -63,40 +62,44 @@ public class AdsManager : MonoBehaviour , IUnityAdsListener
     {
         if(isTargetPlayStore)
         {
-            Advertisement.Initialize(playStoreID, isTestAd);
+            Advertisement.Initialize(playStoreID, isTestAd, this);
             return;
         }
         else
         {
-            Advertisement.Initialize(appStoreID, isTestAd);
+            Advertisement.Initialize(appStoreID, isTestAd, this);
         }
     }
 
     public void playInterstitialAd()
     {
-        if(!Advertisement.IsReady(interstitialAd))
-        {
+        Advertisement.Load(interstitialAd, this);
+
+        //if(!Advertisement.IsReady(interstitialAd))
+        //{
            
-            return;
-        }
-        else
-        {
-            Advertisement.Show(interstitialAd);
-        }
+        //    return;
+        //}
+        //else
+        //{
+        //    Advertisement.Show(interstitialAd);
+        //}
     }
 
     public void playRewardedVideoAd()
     {
         numHintsLeft = PlayerPrefs.GetInt(numHintsKey);
-        if (!Advertisement.IsReady(rewardedVideoAd))
-        {
+        Advertisement.Load(rewardedVideoAd, this);
 
-            return;
-        }
-        else
-        {
-            Advertisement.Show(rewardedVideoAd);
-        }
+        //if (!Advertisement.IsReady(rewardedVideoAd))
+        //{
+
+        //    return;
+        //}
+        //else
+        //{
+        //    Advertisement.Show(rewardedVideoAd);
+        //}
     }
 
     public void OnUnityAdsDidError(string message)
@@ -149,4 +152,72 @@ public class AdsManager : MonoBehaviour , IUnityAdsListener
     //    throw new System.NotImplementedException();
     }
 
+    public void OnUnityAdsAdLoaded(string placementId)
+    {
+        EazySoundManager.GlobalVolume = 0f;
+        Advertisement.Show(placementId, this);
+    }
+
+    public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
+    {
+        
+    }
+
+    public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
+    {
+        
+    }
+
+    public void OnUnityAdsShowStart(string placementId)
+    {
+        EazySoundManager.GlobalVolume = 0f;
+    }
+
+    public void OnUnityAdsShowClick(string placementId)
+    {
+        
+    }
+
+    public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
+    {
+        switch (showCompletionState)
+        {
+            case UnityAdsShowCompletionState.UNKNOWN:
+                {
+                    break;
+                }
+            case UnityAdsShowCompletionState.SKIPPED:
+                {
+                    break;
+                }
+            case UnityAdsShowCompletionState.COMPLETED:
+                {
+                    //User watched rewarded video, give them something.
+                    if (placementId == rewardedVideoAd)
+                    {
+                        Debug.Log("Rewarded video!");
+
+                        PlayerPrefs.SetInt(numHintsKey, (numHintsLeft + 1));
+                    }
+                    else if (placementId == interstitialAd)
+                    {
+                        Debug.Log("Interstitial video!");
+                    }
+                    break;
+                }
+        }
+
+        globalVolumePref = PlayerPrefs.GetFloat(globalVolumeKey);
+        EazySoundManager.GlobalVolume = globalVolumePref;
+    }
+
+    public void OnInitializationComplete()
+    {
+        
+    }
+
+    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+    {
+        
+    }
 }
