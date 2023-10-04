@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Advertisements;
 using Hellmade.Sound;
 
-public class Banner_Ads : MonoBehaviour
+public class Banner_Ads : MonoBehaviour , IUnityAdsInitializationListener
 {
 
     private string playStoreID = "3633238";
@@ -26,6 +26,8 @@ public class Banner_Ads : MonoBehaviour
     private string noAdsKey = "noAdsKey";
     int adsPurchasedCheck;
 
+    BannerLoadOptions bannerLoadOptions;
+
     void Awake()
     {
         adsPurchasedCheck = PlayerPrefs.GetInt(noAdsKey);
@@ -33,28 +35,30 @@ public class Banner_Ads : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-
+        yield return null;
         if (isTargetPlayStore)
         {
-            Advertisement.Initialize(playStoreID, isTestAd);
+            Advertisement.Initialize(playStoreID, isTestAd, this);
         }
         else
         {
-            Advertisement.Initialize(appStoreID, isTestAd);
+            Advertisement.Initialize(appStoreID, isTestAd, this);
         }
 
-        while(!Advertisement.IsReady(banner))
+
+
+        //while(!Advertisement.IsReady(banner))
+        //{
+        //    yield return null;
+        //}
+
+        BannerLoadOptions options = new BannerLoadOptions
         {
-            yield return null;
-        }
+            loadCallback = OnBannerLoaded,
+            errorCallback = OnBannerError
+        };
 
-        if(adsPurchasedCheck == 0)
-        {
-            Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
-            Advertisement.Banner.Show(banner);
-        }
-       
-
+        Advertisement.Banner.Load(banner, options);       
         
     }
 
@@ -76,5 +80,31 @@ public class Banner_Ads : MonoBehaviour
     public void setPos()
     {
         Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+    }
+
+    void OnBannerLoaded()
+    {
+        if (adsPurchasedCheck == 0)
+        {
+            Advertisement.Banner.Hide(true);
+            Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+            Advertisement.Banner.Show(banner);
+        }
+    }
+
+    void OnBannerError(string message)
+    {
+        Debug.Log($"Banner Error: {message}");
+        // Optionally execute additional code, such as attempting to load another ad.
+    }
+
+    public void OnInitializationComplete()
+    {
+        
+    }
+
+    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+    {
+        
     }
 }

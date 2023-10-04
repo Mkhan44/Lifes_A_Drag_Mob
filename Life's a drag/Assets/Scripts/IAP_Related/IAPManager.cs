@@ -184,4 +184,9 @@ public class IAPManager : MonoBehaviour, IStoreListener
     {
         InitializePurchasing();
     }
+
+    public void OnInitializeFailed(InitializationFailureReason error, string message)
+    {
+        
+    }
 }
