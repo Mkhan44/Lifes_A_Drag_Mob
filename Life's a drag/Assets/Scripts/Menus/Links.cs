@@ -40,7 +40,7 @@ public class Links : MonoBehaviour
                 }
             case "Merch Store":
                 {
-                    Application.OpenURL("https://merch.streamelements.com/bukugames");
+                    Application.OpenURL("https://buku-games.com/merch");
                     break;
                 }
             default:
